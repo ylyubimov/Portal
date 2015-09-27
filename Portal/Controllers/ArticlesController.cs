@@ -6,19 +6,20 @@ using System.Web.Mvc;
 
 namespace Portal.Controllers
 {
+    // TODO вынести в Models
+    public class Article
+    {
+        public int id = 0;
+        public String author = "author";
+        public String text = "text";
+
+        public Article(int _id)
+        {
+            id = _id;
+        }
+    }
     public class ArticlesController : Controller
     {
-        public class Article
-        {
-            public int id = 0;
-            public String author = "author";
-            public String text = "text";
-
-            public Article(int _id)
-            {
-                id = _id;
-            }
-        }
         // GET: Articles
         public ActionResult Index(int? id)
         {

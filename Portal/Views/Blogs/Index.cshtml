@@ -1,0 +1,13 @@
+﻿@model Portal.Controllers.Blog[]
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blogs</h2>
+
+<ul>
+    @foreach (Portal.Controllers.Blog blog in Model) {
+        <li>@Html.ActionLink(blog.id.ToString(), "blog", new { @id = blog.id }) </li>
+    }
+</ul>
+
