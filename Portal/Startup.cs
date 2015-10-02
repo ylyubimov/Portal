@@ -1,7 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
-
-[assembly: OwinStartupAttribute(typeof(Portal.Startup))]
+using Portal.Models;
 namespace Portal
 {
     public partial class Startup
@@ -9,6 +8,9 @@ namespace Portal
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ApplicationDbContext context = new ApplicationDbContext();
+            context.Pictures.Add(new Picture { Name = "Ghoha", URL = "url.ru" });
+            context.SaveChanges();
         }
     }
 }
