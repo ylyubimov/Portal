@@ -177,7 +177,6 @@
     <Compile Include="Models\ContentModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Initializer.cs" />
     <Compile Include="Models\PeopleModels.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\StudyHierarchyModels.cs" />

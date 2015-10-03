@@ -12,7 +12,6 @@ namespace Portal.Models
         public int Dislikes_count { get; set; }
         public string Name { get; set; }
         public int Rating { get; set; }
-        // Авторы
         public virtual ICollection<Person> Authors { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
     }

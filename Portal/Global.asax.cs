@@ -13,7 +13,13 @@ namespace Portal
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new PortalDataBaseInitializer());
+            //// Инициализация для создания базы
+            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            using (var db = new ApplicationDbContext())
+            {
+                db.Database.Initialize(false);
+            }
+            ////
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

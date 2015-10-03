@@ -13,27 +13,19 @@ namespace Portal.Models
         public string SecondName { get; set; }
         public string MiddleName { get; set; }
         public string Phone { get; set; }
-        //фотография
-        //public int PictueID { get; set; }
         public DateTime Registration_Date { get; set; }
         public DateTime Last_Date_Was_Online { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
         public virtual Picture Picture { get; set; }
        
     }
 
     public class Student : Person
     {
-        //public int FacultyID { get; set; }
         public int GradeNumber { get; set; }
         public string GradeName { get; set; }
-        //public int GroupID { get; set; }
-        //public int Base_CompanyID { get; set; }
-        //public int Base_PartID { get; set; }
         public int Year_of_Graduating { get; set; }
-
         public virtual Faculty Faculty { get; set; }
         public virtual Group Group { get; set; }
         public virtual Base_Company Base_Company { get; set; }

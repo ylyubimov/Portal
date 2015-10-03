@@ -15,7 +15,7 @@ namespace Portal.Models
         public string Text { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }
         // Авторы
-        public virtual ICollection<Person> Persons { get; set; }
+        public virtual ICollection<Person> Authors { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Video>  Videos { get; set; }
     }
