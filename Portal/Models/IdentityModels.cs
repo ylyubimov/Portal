@@ -32,21 +32,21 @@ namespace Portal.Models
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<Video> Videos { get; set; }
-        public DbSet<Presentation> Presentations { get; set; }
-        public DbSet<Article> Articles { get; set; }
-        public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Program> Programs { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Faculty> Faculties{ get; set; }
-        public DbSet<Base_Company> Base_Companies { get; set; }
-        public DbSet<Base_Part> Base_Parts { get; set; }
+        public DbSet<Picture> Picture { get; set; }
+        public DbSet<Video> Video { get; set; }
+        public DbSet<Presentation> Presentation { get; set; }
+        public DbSet<Article> Article { get; set; }
+        public DbSet<Blog> Blog { get; set; }
+        public DbSet<Comment> Comment { get; set; }
+        public DbSet<Course> Course { get; set; }
+        public DbSet<Person> Person { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Teacher> Teacher { get; set; }
+        public DbSet<Program> Program { get; set; }
+        public DbSet<Group> Group { get; set; }
+        public DbSet<Faculty> Faculty{ get; set; }
+        public DbSet<Base_Company> Base_Company { get; set; }
+        public DbSet<Base_Part> Base_Part { get; set; }
 
     }
 }

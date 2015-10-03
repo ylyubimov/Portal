@@ -10,7 +10,7 @@ namespace Portal.Models
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            context.Pictures.Add(new Picture { ID = 1, Name = "Ghoha", URL = "url.ru" } );
+            context.Picture.Add(new Picture { Name = "Ghoha", URL = "url.ru" } );
             context.SaveChanges();
 
         }

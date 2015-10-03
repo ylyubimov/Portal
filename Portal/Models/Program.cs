@@ -9,7 +9,7 @@ namespace Portal.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int GradeId { get; set; }
+        public int Grade { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<Person> Subscribers { get; set; }

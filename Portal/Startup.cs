@@ -8,9 +8,6 @@ namespace Portal
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            ApplicationDbContext context = new ApplicationDbContext();
-            context.Pictures.Add(new Picture { Name = "Ghoha", URL = "url.ru" });
-            context.SaveChanges();
         }
     }
 }

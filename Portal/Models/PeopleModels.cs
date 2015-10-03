@@ -14,7 +14,7 @@ namespace Portal.Models
         public string MiddleName { get; set; }
         public string Phone { get; set; }
         //фотография
-        public int PictueID { get; set; }
+        //public int PictueID { get; set; }
         public DateTime Registration_Date { get; set; }
         public DateTime Last_Date_Was_Online { get; set; }
         public string Email { get; set; }
@@ -26,12 +26,12 @@ namespace Portal.Models
 
     public class Student : Person
     {
-        public int FacultyID { get; set; }
+        //public int FacultyID { get; set; }
         public int GradeNumber { get; set; }
         public string GradeName { get; set; }
-        public int GroupID { get; set; }
-        public int Base_CompanyID { get; set; }
-        public int Base_PartID { get; set; }
+        //public int GroupID { get; set; }
+        //public int Base_CompanyID { get; set; }
+        //public int Base_PartID { get; set; }
         public int Year_of_Graduating { get; set; }
 
         public virtual Faculty Faculty { get; set; }
@@ -46,6 +46,6 @@ namespace Portal.Models
         public string Company { get; set; }
         public string Working_Place { get; set; }
 
-        public virtual Course Courses { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }
