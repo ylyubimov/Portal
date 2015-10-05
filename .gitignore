@@ -1,7 +1,11 @@
-/*.suo
+*.suo
 /Portal/*.user
 /Portal/bin
 /packages
 /Portal/obj
+<<<<<<< HEAD
 /Portal/App_Data/*.mdf
 /Portal/App_Data/*.ldf
+=======
+/.vs
+>>>>>>> 3a80968d49bf419034ed69f63aa5b4a05a08ea5e

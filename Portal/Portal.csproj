@@ -235,6 +235,8 @@
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Blogs\Blog.cshtml" />
+    <Content Include="Views\Home\_ArticlePreView.cshtml" />
+    <Content Include="Views\Home\_ArticlePreViewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
