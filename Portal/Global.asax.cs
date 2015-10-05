@@ -17,7 +17,10 @@ namespace Portal
             Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
             using (var db = new ApplicationDbContext())
             {
-                db.Database.Initialize(false);
+                if (!db.Database.Exists())
+                {
+                    db.Database.Initialize(false);
+                }
             }
             ////
             AreaRegistration.RegisterAllAreas();

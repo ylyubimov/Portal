@@ -18,6 +18,7 @@ namespace Portal.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public virtual Picture Picture { get; set; }
+        public virtual ICollection<Course> SubscribedCourses { get; set; }
        
     }
 
@@ -30,6 +31,7 @@ namespace Portal.Models
         public virtual Group Group { get; set; }
         public virtual Base_Company Base_Company { get; set; }
         public virtual Base_Part Base_Part { get; set; }
+        public virtual ICollection<Course> NecessaryCourses { get; set; }
 
     }
     public class Teacher : Person
@@ -38,6 +40,6 @@ namespace Portal.Models
         public string Company { get; set; }
         public string Working_Place { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Course> TeachingCourses { get; set; }
     }
 }

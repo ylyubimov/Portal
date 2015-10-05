@@ -3,3 +3,5 @@
 /Portal/bin
 /packages
 /Portal/obj
+/Portal/App_Data/*.mdf
+/Portal/App_Data/*.ldf
