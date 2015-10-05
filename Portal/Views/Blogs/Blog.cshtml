@@ -6,10 +6,21 @@
 
 <h2>Blog @Model.id</h2>
 
-<ul>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Author</td>
+            <td>Date</td>
+        </tr>
+    </thead>
     @foreach (Portal.Controllers.Article article in Model.articles) {
-        <li>@Html.ActionLink(article.id.ToString(), "index", "articles", new { @id=article.id }, null)</li>
+        <tr>
+            <td>@Html.ActionLink(article.id.ToString(), "index", "articles", new { @id = article.id }, null)</td>
+            <td>qwerty</td>
+            <td>21.12.2012</td>
+        </tr>
     }
     
-</ul>
+</table>
 
