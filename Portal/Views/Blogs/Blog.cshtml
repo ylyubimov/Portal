@@ -1,24 +1,26 @@
-﻿@model Portal.Controllers.Blog
+﻿@model Portal.Models.Blog
 
 @{
     ViewBag.Title = "Blog";
 }
 
-<h2>Blog @Model.id</h2>
+<h2>@Model.Name</h2>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <td>Name</td>
-            <td>Author</td>
-            <td>Date</td>
+            <th>Название</th>
+            <th>Дата создания</th>
+            <th>Количество плюсов</th>
+            <th>Количество минусов</th>
         </tr>
     </thead>
-    @foreach (Portal.Controllers.Article article in Model.articles) {
+    @foreach (Portal.Models.Article article in Model.Articles) {
         <tr>
-            <td>@Html.ActionLink(article.id.ToString(), "index", "articles", new { @id = article.id }, null)</td>
-            <td>qwerty</td>
-            <td>21.12.2012</td>
+            <td>@Html.ActionLink(article.Name, "index", "articles", new { @id = article.ID }, null)</td>
+            <td>@article.Date_of_creation</td>
+            <td>@article.Likes_count</td>
+            <td>@article.Dislikes_count</td>
         </tr>
     }
     
