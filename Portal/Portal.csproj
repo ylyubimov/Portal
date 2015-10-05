@@ -164,7 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
-    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LectorsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,10 +237,12 @@
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Views\Home\_ArticlePreView.cshtml" />
     <Content Include="Views\Home\_ArticlePreViewList.cshtml" />
+    <Content Include="Views\Programs\Program.cshtml" />
+    <Content Include="Views\Programs\Index.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Courses\" />
     <Folder Include="Views\Lectors\" />
   </ItemGroup>
   <ItemGroup>

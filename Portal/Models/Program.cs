@@ -14,5 +14,12 @@ namespace Portal.Models
         public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<Person> Subscribers { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
+
+        //test
+        public Program(int _id)
+        {
+            ID = _id;
+            Courses = new Course[3];
+        }
     }
 }

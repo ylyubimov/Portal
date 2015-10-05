@@ -1,0 +1,16 @@
+﻿@model Portal.Models.Program
+
+@{
+    ViewBag.Title = "Program";
+}
+
+<h2>Blog @Model.ID</h2>
+
+<ul>
+    @foreach (Portal.Models.Course course in Model.Courses)
+    {
+        <li>@Html.ActionLink(course.ID.ToString(), "index", "courses", new { @id = course.ID }, null)</li>
+    }
+
+</ul>
+
