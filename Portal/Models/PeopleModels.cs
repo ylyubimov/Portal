@@ -19,7 +19,7 @@ namespace Portal.Models
         public string Password { get; set; }
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Course> SubscribedCourses { get; set; }
-       
+        public virtual ICollection<Article> WrittenArticles { get; set; }
     }
 
     public class Student : Person
