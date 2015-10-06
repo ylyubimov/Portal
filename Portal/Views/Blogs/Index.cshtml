@@ -1,13 +1,29 @@
-﻿@model Portal.Controllers.Blog[]
+﻿@model Portal.Models.Blog[]
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Blogs";
 }
 
 <h2>Blogs</h2>
 
-<ul>
-    @foreach (Portal.Controllers.Blog blog in Model) {
-        <li>@Html.ActionLink(blog.id.ToString(), "blog", new { @id = blog.id }) </li>
-    }
-</ul>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Рейтинг</th>
+            <th>Количество плюсов</th>
+            <th>Количество минусов</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Portal.Models.Blog blog in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(blog.Name, "blog", new { @id = blog.ID })</td>
+                <td>@blog.Rating</td>
+                <td>@blog.Likes_count</td>
+                <td>@blog.Dislikes_count</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
