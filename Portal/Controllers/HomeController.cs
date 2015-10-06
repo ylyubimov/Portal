@@ -10,7 +10,9 @@ namespace Portal.Controllers
     {
         public ActionResult Index()
         {
-            /* пока нет базы данных, потом надо будет брать из бд*/
+            var db = new Models.ApplicationDbContext();
+            var ArticleList = db.Article.ToArray();
+            /* пока нет базы данных, потом надо будет брать из бд
             Portal.Models.Article[] ArticleList = new Portal.Models.Article[2] { new Portal.Models.Article(),new Portal.Models.Article() };
             ArticleList[0].Name = "Title1";
             ArticleList[0].Text = "Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;";
