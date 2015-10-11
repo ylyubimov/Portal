@@ -10,10 +10,13 @@ namespace Portal.Models
 {
     public class Comment
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Text { get; set; }
-        public DateTime Create_time { get; set; }
-        public DateTime Update_time { get; set; }
-        public virtual Person Person { get; set; }
+        public DateTime? Create_Time { get; set; }
+        public DateTime? Update_Time { get; set; }
+        [Required]
+        public virtual Person Author { get; set; }
     }
 }
