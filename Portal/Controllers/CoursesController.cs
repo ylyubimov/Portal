@@ -14,7 +14,7 @@ namespace Portal.Controllers
         // GET: /Courses/
         public ActionResult Index()
         {
-            var courses = db.Course.OrderBy(t => t.Report_date).ToArray();
+            var courses = db.Course.OrderBy(t => t.Report_Date).ToArray();
             return View(courses);
         }
         public ActionResult Course(int? id)
