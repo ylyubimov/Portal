@@ -237,10 +237,12 @@
     <Content Include="Views\Blogs\Blog.cshtml" />
     <Content Include="Views\Home\_ArticlePreView.cshtml" />
     <Content Include="Views\Home\_ArticlePreViewList.cshtml" />
+    <Content Include="Views\Courses\index.cshtml" />
+    <Content Include="Views\Courses\_CoursePreViewList.cshtml" />
+    <Content Include="Views\Courses\_CoursePreView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Courses\" />
     <Folder Include="Views\Lectors\" />
   </ItemGroup>
   <ItemGroup>

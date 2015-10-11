@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Курсы</h2>
+@Html.Partial("_CoursePreViewList",(Portal.Models.Course[])Model)
+

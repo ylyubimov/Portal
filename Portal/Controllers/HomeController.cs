@@ -10,13 +10,8 @@ namespace Portal.Controllers
     {
         public ActionResult Index()
         {
-            /* пока нет базы данных, потом надо будет брать из бд*/
-            Portal.Models.Article[] ArticleList = new Portal.Models.Article[2] { new Portal.Models.Article(),new Portal.Models.Article() };
-            ArticleList[0].Name = "Title1";
-            ArticleList[0].Text = "Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;";
-            ArticleList[1].Name = "Title2";
-            ArticleList[1].Text = "Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;";
-            /*****************************************************/
+            var db = new Models.ApplicationDbContext();
+            var ArticleList = db.Article.OrderBy(x => x.Date_of_creation).Take(5).ToArray();
             return View(ArticleList);
         }
 
