@@ -19,7 +19,7 @@ namespace Portal.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-
+            Database.SetInitializer<ApplicationDbContext>(new Initializer());
         }
 
         public static ApplicationDbContext Create()

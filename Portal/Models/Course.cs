@@ -8,16 +8,19 @@ namespace Portal.Models
 {
     public class Course
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Present { get; set; }
-        public DateTime Date_and_time { get; set; }
+        public DateTime? Date_and_Time { get; set; }
         public string Report_type { get; set; }
         public string Place { get; set; }
         public string Description { get; set; }
-        public DateTime Report_date { get; set; }
+        public DateTime? Report_Date { get; set; }
         public virtual ICollection<Person> Subscribers { get; set; }
         public virtual ICollection<Student> Students { get; set; }
+        [Required]
         public virtual ICollection<Teacher> Teachers { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Program> Programs { get; set; }

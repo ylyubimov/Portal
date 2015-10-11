@@ -2,26 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.ComponentModel.DataAnnotations;
 namespace Portal.Models
 {
     public class Presentation
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string URL { get; set; }
 
     }
     public class Picture
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string URL { get; set; }
     }
     public class Video
     {
+        [Key]
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string URL { get; set; }
     }
 }

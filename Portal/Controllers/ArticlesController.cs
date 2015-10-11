@@ -3,33 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Portal.Models;
 
 namespace Portal.Controllers
 {
-    // TODO вынести в Models
-    public class Article
-    {
-        public int id = 0;
-        public String author = "author";
-        public String text = "text";
-
-        public Article(int _id)
-        {
-            id = _id;
-        }
-    }
     public class ArticlesController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         // GET: Articles
         public ActionResult Index(int? id)
         {
             if (id != null)
             {
-                return View(new Article((int)id));
+                Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+                if (article != null)
+                {
+                    return View(article);
+                } else
+                {
+                    return View("Error");
+                }
             }
             else
             {
-                return View(new Article(-1));
+                return View("Error");
             }
         }
     }
