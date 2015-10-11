@@ -11,7 +11,7 @@ namespace Portal.Controllers
         public ActionResult Index()
         {
             var db = new Models.ApplicationDbContext();
-            var ArticleList = db.Article.OrderBy(x => x.Date_of_creation ).Take(5).ToArray();
+            var ArticleList = db.Article.OrderBy(x => x.Date_of_Creation ).Take(5).ToArray();
             /* пока нет базы данных, потом надо будет брать из бд
             Portal.Models.Article[] ArticleList = new Portal.Models.Article[2] { new Portal.Models.Article(),new Portal.Models.Article() };
             ArticleList[0].Name = "Title1";
