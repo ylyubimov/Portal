@@ -18,9 +18,9 @@
     @foreach (Portal.Models.Article article in Model.Articles) {
         <tr>
             <td>@Html.ActionLink(article.Name, "index", "articles", new { @id = article.ID }, null)</td>
-            <td>@article.Date_of_creation</td>
-            <td>@article.Likes_count</td>
-            <td>@article.Dislikes_count</td>
+            <td>@article.Date_of_Creation</td>
+            <td>@article.Likes_Count</td>
+            <td>@article.Dislikes_Count</td>
         </tr>
     }
     

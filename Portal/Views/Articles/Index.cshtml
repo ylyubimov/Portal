@@ -5,6 +5,13 @@
 }
 
 <h2>@Model.Name</h2>
-<h3>@Model.Date_of_creation</h3>
+<h3>@Model.Date_of_Creation</h3>
 <p>@Model.Text</p>
 
+<h3>Авторы:</h3>
+<ul>
+    @foreach (Portal.Models.Person person in Model.Authors)
+    {
+        <li>@person.First_Name @person.Middle_Name @person.Second_Name</li>
+    }
+</ul>
