@@ -1,0 +1,24 @@
+﻿@model Portal.Models.Person
+
+@{
+    ViewBag.Title = "Person";
+}
+
+<h3>@Model.First_Name</h3>
+<h5>@Model.Second_Name</h5>
+<h5>@Model.Phone</h5>
+@{
+    if (Model.GetType() == typeof(Portal.Models.Teacher))
+    {
+        foreach (Portal.Models.Course c in ((Portal.Models.Teacher)@Model).Taught_Courses)
+        {
+            <h5>c.Name</h5>
+        }
+        <h5>Здесь скоро будет список курсов, которые ведет этот человек</h5>
+    }
+    else
+    {
+        <h5>Здесь скоро будет список курсов, которые посещает этот человек</h5>
+    }
+}
+<p><img src="http://beta.inosmi.ru/images/19989/45/199894535.jpg"/></p>
