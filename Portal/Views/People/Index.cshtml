@@ -1,0 +1,25 @@
+﻿@model Portal.Models.Person[]
+@{
+    ViewBag.Title = "People";
+}
+
+<h2>People</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Тип</th>
+            <th>Имя</th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Portal.Models.Person p in Model)
+        {
+            <tr>
+                <td>@p.Person_Type</td>
+                <td>@p.First_Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -168,7 +168,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LectorsController.cs" />
+    <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,7 +180,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Initializer.cs" />
-    <Compile Include="Models\PeopleModels.cs" />
+    <Compile Include="Models\PersonModels.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\StudyHierarchyModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,6 +207,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Persons\1.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -242,10 +243,13 @@
     <Content Include="Views\Courses\_CoursePreViewList.cshtml" />
     <Content Include="Views\Courses\_CoursePreView.cshtml" />
     <Content Include="Views\Courses\Course.cshtml" />
+    <Content Include="Views\Persons\Index.cshtml" />
+    <Content Include="Views\Persons\Person.cshtml" />
+    <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
+    <Content Include="Views\Persons\_PersonsPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Lectors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
