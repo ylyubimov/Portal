@@ -1,0 +1,33 @@
+﻿@model Portal.Models.Course
+
+@{
+    ViewBag.Title = "Course";
+}
+
+<h2>@Model.Name <small>@Model.Faculty</small></h2>
+<h3>Преподаватели:</h3>
+<ul>
+    @foreach(Portal.Models.Teacher teacher in Model.Teachers)
+    {
+        <li>@teacher.First_Name @teacher.Middle_Name @teacher.Second_Name</li>
+    }
+</ul>
+<h3>Описание:</h3>
+@Model.Description
+
+<h3>Программы курса</h3>
+<ul>
+    @foreach(Portal.Models.Program program in Model.Programs)
+    {
+        <li>@program.Name</li>
+    }
+</ul>
+
+<h3>Блоги курса:</h3>
+<ul>
+    @foreach (Portal.Models.Blog blog in Model.Blogs)
+    {
+        <li>@Html.ActionLink(blog.Name, "Index", "Blogs", new { @id = blog.Name })</li>
+    }
+</ul>
+

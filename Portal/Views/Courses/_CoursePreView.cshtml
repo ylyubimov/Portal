@@ -2,6 +2,13 @@
 <div class="col-md-8">
     <h2>@Model.Name</h2>
     <p>@Model.Description</p>
-    <p><a class="btn btn-default" href="">Читать далее &raquo;</a></p>
+    <h3>Преподаватели:</h3>
+    <ul>
+        @foreach (Portal.Models.Teacher teacher in Model.Teachers)
+        {
+            <li>@teacher.First_Name @teacher.Middle_Name @teacher.Second_Name</li>
+        }
+    </ul>
+    <p>@Html.ActionLink("Читать далее", "Course", new { @id = Model.ID }, new { @class = "btn btn-default" })</p>
 </div>
 
