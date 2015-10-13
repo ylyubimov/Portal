@@ -2,6 +2,6 @@
 <div class="col-md-8">
     <h2>@Model.Name</h2>
     <p>@Model.Text.Substring(0, (Model.Text.Length > 500) ? 500 : Model.Text.Length)...</p>
-    <p><a class="btn btn-default" >Читать далее &raquo;</a></p>
+    <p>@Html.ActionLink("Читать далее", "Index", "Articles", new { @id = Model.ID }, new { @class = "btn btn-default"})</p>
 </div>
 
