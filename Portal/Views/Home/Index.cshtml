@@ -1,6 +1,10 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Html.Partial("_Search")
 
+<div class="container body-content">
+    @Html.Partial("_ArticlePreViewList", (Portal.Models.Article[])Model)
 
-@Html.Partial("_ArticlePreViewList", (Portal.Models.Article[])Model)
+</div>
+

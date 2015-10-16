@@ -30,18 +30,11 @@
             </div>
         </div>
     </div>
-    <div class="search-bar">
-        <input class="search-input">
-        <a class="btn">Search</a>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Студенческий портал</p>
-        </footer>
-    </div>
-
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Студенческий портал</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
