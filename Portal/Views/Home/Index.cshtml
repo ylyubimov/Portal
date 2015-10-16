@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Html.Partial("_Search")
 
-<div class="jumbotron">
-    <h1>Студенческий портал</h1>
-    <p class="lead">Самый лучший портал в мире!</p>
+<div class="container body-content">
+    @Html.Partial("_ArticlePreViewList", (Portal.Models.Article[])Model)
+
 </div>
 
-@Html.Partial("_ArticlePreViewList", (Portal.Models.Article[])Model)
