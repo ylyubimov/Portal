@@ -2,16 +2,32 @@
 
 @{
     ViewBag.Title = "Article";
+    @Styles.Render("~/Content/BlogStyles.css")
 }
 
-<h2>@Model.Name</h2>
-<h3>@Model.Date_of_Creation</h3>
-<p>@Model.Text</p>
-
-<h3>Авторы:</h3>
-<ul>
-    @foreach (Portal.Models.Person person in Model.Authors)
-    {
-        <li>@person.First_Name @person.Middle_Name @person.Second_Name</li>
-    }
-</ul>
+<div class="container-fluid">
+    <div class="container article-wrap">
+        <div class="article">
+            <div class="article-header">
+                <div class="author"><img class="img-circle" src="~/images/1.jpg"/>
+                @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name</div>
+                <div class="date">@Model.Date_of_Creation</div>
+                <div class="article-actions">
+                    <div class="rating">
+                        <div><span>+</span> @Model.Likes_Count</div>
+                        <div><span>-</span> @Model.Dislikes_Count</div>
+                    </div>
+                    <div class="article-settings dropdown">
+                        <div class="btn" data-toggle="dropdown">Settings</div>
+                        <ul class="dropdown-menu">
+                            <li>Delete</li>
+                            <li>Edit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h2>@Model.Name</h2>
+            <p>@Model.Text</p>
+        </div>
+    </div>
+</div>
