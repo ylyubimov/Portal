@@ -108,8 +108,8 @@ input[type="checkbox"].input-validation-error {
 
 @media(min-width: 767px) {
 .navbar-right {
+    padding: 5px;
     width: 200px;
-    padding: 10px;
     margin: 0;
 }
 .navbar-right > li {
