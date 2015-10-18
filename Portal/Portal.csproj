@@ -187,6 +187,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\BlogStyles.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -248,6 +249,7 @@
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Persons\_PersonsPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Articles\_ArticlePreView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
