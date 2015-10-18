@@ -30,6 +30,19 @@ namespace Portal.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<Person>()
+            .Map(m =>
+            {
+                m.Requires("Person_Type").HasValue("Person");
+            })
+            .Map<Student>(m =>
+            {
+                m.Requires("Person_Type").HasValue("Student");
+            })
+            .Map<Teacher>(m =>
+            {
+                m.Requires("Person_Type").HasValue("Teacher");
+            });
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Picture> Picture { get; set; }

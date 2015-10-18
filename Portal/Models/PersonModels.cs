@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Portal.Models
 {
@@ -19,12 +20,14 @@ namespace Portal.Models
         public DateTime? Last_Date_Was_Online { get; set; }
         [Required]
         public string Email { get; set; }
+        //public string Person_Type { get; protected set; } 
         [Required]
         public string Password { get; set; }
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Course> Subscribed_Courses { get; set; }
         public virtual ICollection<Article> Written_Articles { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
+
     }
 
     public class Student : Person
