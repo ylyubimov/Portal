@@ -47,7 +47,7 @@ namespace Portal.Models
             {
                 new Student { Email = "qr@yandex.ru", Password = "qwerty", First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015, Picture = p1  },
                 new Student { Email = "qrd@yandex.ru", Password = "qwerty", First_Name = "Grisha", Second_Name ="Yakovlev", Middle_Name = "Sergeevich1", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy2 , Picture = p2 },
-                new Student { Email = "qra@yandex.ru", Password = "qwerty", First_Name = "Dmitriy", Second_Name ="Kozhoma", Middle_Name = "", Group = group2, Faculty = fupm, Base_Company = basefupm, Picture = p3 },
+                new Student { Email = "qra@yandex.ru", Password = "qwerty", First_Name = "Dmitriy", Second_Name ="Kozhoma", Middle_Name = "Vasilevich", Group = group2, Faculty = fupm, Base_Company = basefupm, Picture = p3 },
             };
             foreach (Student s in students)
                 db.Student.Add(s);
@@ -113,6 +113,10 @@ namespace Portal.Models
                     Likes_Count = 0, Dislikes_Count = 0, Authors = authors, Date_of_Creation = DateTime.Parse("2015-09-10") },
                 new Article { Name = "Ножницы", Text = "Ножницы - это инcтрумент для ручного разрезания материи. Самые древние ножницы, найденные археологами на современной территории Древнего Рима, имеют возраст 3-4 тысяч лет и были предназначены для стрижки овец. Эти ножницы больше походили на небольшой пинцет с двумя тупыми лезвиями на обоих концах. Конструкция просуществовала более двух тысяч лет без принципиальных изменений. Рычаг в ножницах стал использоваться около тысячи лет назад.",
                     Likes_Count = 0, Dislikes_Count = 0, Authors = authors, Date_of_Creation = DateTime.Parse("2015-09-10") },
+                new Article { Name = "Клюква", Text = "Клюква – название растения из семейства брусничных и его плодов.Клюква представляет собой вечнозелёное растение, кустарник с тонкими и невысокими побегами. Длина побегов в среднем около 30 см, ягоды дикой клюквы красные, шаровидные, 8-12 мм в диаметре. Некоторые специально выведенные сорта имеют ягоды до 2 см в диаметре. Цветёт клюква в июне, сбор ягод начинается в сентябре и продолжается всю осень. Плантационные ягоды созревают на 1-2 недели раньше диких. Ягоды клюквы легко могут сохраняться до весны.Клюкву употребляют в пищу как в свежем, так и в замороженном, моченном или сушеном виде, из нее готовят соки, морсы, желе, варенья, кисели, коктейли и клюквенный квас, или добавляют в салаты, пироги и другие блюда. Клюква, растёт во многих странах, если позволяют условия, любит болотистую лесную почву, осоко-сфагновые болота, тундровые и моховые болота. Только в Карелии растёт около 22 сортов клюквы, среди которых встречаются крупноплодные сорта с диаметром ягод до 2 см. Сегодня клюкву можно встретить на всей территории России, включая Дальний Восток. Богаты клюквой Украина, большая часть Европы, Север США, Канада и Аляска. Американцы считают родиной клюквы Северную Америку. Индейцы-делавэры считали, что ягоды росли на земле, где пролилась кровь воинов, погибших в битве с великанами.",
+                    Likes_Count = 0, Dislikes_Count = 0, Authors = authors, Date_of_Creation = DateTime.Parse("2015-07-10") },
+                new Article { Name = "Витамин A",  Text = "Антиинфекционный витамин, антиксерофтальмический витамин, ретинол, дегидроретинол Витамин А включает значительное число жирорастворимых соединений, важнейшими среди которых являются ретинол, ретиналь, ретиноевая кислота и эфиры ретинола. Витамин А выполняет множество функций в организме: способствует росту и регенерации тканей, обеспечивает эластичность кожи и волос.Оказывает антиоксидантное действие, повышает иммунитет, усиливает сопротивляемость организма к инфекциям. Витамин А нормализует деятельность половых желез, необходим для образования спермы и развития яйцеклетки. Одна из важных функций витамина А -предотвращение куриной слепоты -гемералопатия(нарушение сумеречного зрения).",
+                     Likes_Count = 0, Dislikes_Count = 0, Authors = authors, Date_of_Creation = DateTime.Parse("2015-05-10") }
             };
             foreach (Article a in articles)
                 db.Article.Add(a);
@@ -125,32 +129,27 @@ namespace Portal.Models
             foreach (Article a in db.Article)
                 NewArticles.Add(a);
             ////
-            
+
+            // Добавление блогов
+            Blog b1 = db.Blog.Add(new Blog { Name = "PPS_Blog", Articles = NewArticles, Authors = authors });
+            Blog b2 = db.Blog.Add(new Blog { Name = "Funkan_Blog", Articles = NewArticles, Authors = authors });
+            db.SaveChanges();
+
+
             // Добавление курсов
             List<Course> courses = new List<Course>
             {
-                new Course { Name = "PPS", Teachers = NewTeachers, Students = NewStudents },
-                new Course { Name = "Funkan", Teachers = NewTeachers, Students = NewStudents }
+                new Course { Name = "PPS", Teachers = NewTeachers, Students = NewStudents, Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48 },
+                new Course { Name = "Funkan", Teachers = NewTeachers, Students = NewStudents, Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16  },
             };
             List<Course> NewCourses = new List<Course>();
             foreach (Course c in courses)
                 NewCourses.Add(db.Course.Add(c) );
-            
             db.SaveChanges();
             ////
 
             // Добавление программы
             db.Program.Add(new Program { Name = "PMF", Courses = NewCourses });
-            ////    
-
-            // Добавление блогов
-            db.Blog.Add(new Blog { Name = "PPS_Blog", Articles = NewArticles, Authors = authors });
-            
-            
-            db.Blog.Add(new Blog { Name = "Funkan_Blog", Articles = NewArticles, Authors = authors });
-            db.SaveChanges();
-
-            ////
             base.Seed(db);
 
         }

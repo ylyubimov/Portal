@@ -18,6 +18,8 @@ namespace Portal.Models
         public string Place { get; set; }
         public string Description { get; set; }
         public DateTime? Report_Date { get; set; }
+        public int? Number_of_Hours { get; set; }
+        public int? Number_of_Classes { get; set; }
         public virtual ICollection<Person> Subscribers { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         [Required]
