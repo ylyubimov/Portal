@@ -1,15 +1,7 @@
 ﻿body {
     background-color: #F0F0F0;
-    padding-top: 0px;
-    padding-bottom: 20px;
+    margin-top: 52px;
 }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -42,116 +34,9 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.navbar{
-    height: 84px;
-    background-color: #E40000;
-    border: none;
-    color: #FE8C8B;
-    margin:0;
-    border-radius: 0;
-}
-
-.navbar-header{
-    height: 100%;
-}
-
 .container {
     padding: 0;
     max-width: none;
-}
-
-.navbar-collapse.collapse {
-    height: 100% !important;
-}
-
-.navbar-inverse .navbar-brand {
-    color: #FE8C8B;
-    height: 100%;
-    font-size: 40px;
-    line-height: 50px;
-}
-
-@media(max-width: 1000px) {
-    .navbar-brand {
-        display: none;
-    }
-}
-
-.navbar-inverse .navbar-brand:hover {
-    color: #FFFFFF;
-}
-
-
-
-.navbar-nav  > li{
-    min-width:78px;
-    width: 30%;
-    margin-left: 2px;
-    margin-right: 2px;
-    height: 100%;
-    font-size: 28px;
-    line-height: 54px;
-    background-color: #E40000;
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    color: #FE8C8B;
-    line-height: inherit;
-}
-.nav{
-    height: 100%;
-    max-width: 450px;
-    min-width: 245px;
-    width: 40%;
-}
-
-
-@media(min-width: 767px) {
-.navbar-right {
-    padding: 5px;
-    width: 200px;
-    margin: 0;
-}
-.navbar-right > li {
-    float: right;
-    width: 200px;
-    text-align: right;
-    display: inline-grid;
-    margin: 0;
-    padding: 0;
-    line-height: 0.1;
-    font-size: 17px;
-}   
-}
-
-
-.navbar-inverse .navbar-toggle{
-    border-color: #FE8C8B;
-}
-
-.navbar-inverse .navbar-toggle .icon-bar {
-    background-color: #FE8C8B;
-}
-
-.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #101010;
-    background-color: #E40000;
-    width: 100%;
-}
-
-.row {
-    margin-right: -15px;
-    margin-left: -15px;
-    margin: auto;
-    width: 90%;
-    max-width: 1170px;
-}
-
-.col-md-8 {
-    width: 100%;
-    background-color: white;
-    margin-top: 40px;
-    border-radius:2px;
 }
 
 .search-bar{
@@ -162,6 +47,15 @@ input[type="checkbox"].input-validation-error {
     box-shadow: 0px 4px 4px #AAAAAA;
     margin: 0;
     margin-bottom: 4px;
+}
+
+.portal-navbar {
+     position: fixed;
+     top: 0; 
+     left: 0; 
+     width: 100%; 
+     border-radius: 0; 
+     z-index: 10;
 }
 
 
