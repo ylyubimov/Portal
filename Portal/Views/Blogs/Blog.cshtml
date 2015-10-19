@@ -4,25 +4,15 @@
     ViewBag.Title = "Blog";
 }
 
-<h2>@Model.Name</h2>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Название</th>
-            <th>Дата создания</th>
-            <th>Количество плюсов</th>
-            <th>Количество минусов</th>
-        </tr>
-    </thead>
-    @foreach (Portal.Models.Article article in Model.Articles) {
-        <tr>
-            <td>@Html.ActionLink(article.Name, "index", "articles", new { @id = article.ID }, null)</td>
-            <td>@article.Date_of_Creation</td>
-            <td>@article.Likes_Count</td>
-            <td>@article.Dislikes_Count</td>
-        </tr>
-    }
-    
-</table>
-
+<div class="container-fluid">
+    <div class="container blog-wrap">
+        <div class="blog-header">
+            <div class="author">
+                <img class="img-circle" src="~/images/1.jpg" />
+                @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
+            </div>  
+            <h3>@Model.Name</h3>
+        </div>
+    </div>
+    @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
+</div>

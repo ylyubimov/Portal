@@ -238,8 +238,8 @@
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <Content Include="Views\Blogs\Blog.cshtml" />
-    <Content Include="Views\Home\_ArticlePreView.cshtml" />
-    <Content Include="Views\Home\_ArticlePreViewList.cshtml" />
+    <Content Include="Views\Articles\_ArticlePreView.cshtml" />
+    <Content Include="Views\Articles\_ArticlePreViewList.cshtml" />
     <Content Include="Views\Courses\index.cshtml" />
     <Content Include="Views\Courses\_CoursePreViewList.cshtml" />
     <Content Include="Views\Courses\_CoursePreView.cshtml" />
@@ -249,7 +249,6 @@
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Persons\_PersonsPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
-    <Content Include="Views\Articles\_ArticlePreView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

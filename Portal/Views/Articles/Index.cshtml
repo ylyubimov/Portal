@@ -29,5 +29,26 @@
             <h2>@Model.Name</h2>
             <p>@Model.Text</p>
         </div>
+        
+        <div class="comment">
+            <div class="comment-header">
+                <div class="author">
+                    <img class="img-circle" src="~/images/1.jpg" />
+                    @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
+                </div>
+                <div class="date">commented on @Model.Date_of_Creation</div>
+            </div>
+            <p>@Model.Text</p>
+        </div>
+        <div class="comment">
+            <div class="comment-header">
+                <div class="author">
+                    <img class="img-circle" src="~/images/1.jpg" />
+                    @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
+                </div>
+                <div class="date">commented on @Model.Date_of_Creation</div>
+            </div>
+            <p>@Model.Text</p>
+        </div>
     </div>
 </div>
