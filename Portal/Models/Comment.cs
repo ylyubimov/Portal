@@ -18,5 +18,6 @@ namespace Portal.Models
         public DateTime? Update_Time { get; set; }
         [Required]
         public virtual Person Author { get; set; }
+        public virtual Article Article { get; set; }
     }
 }
