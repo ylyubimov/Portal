@@ -30,16 +30,18 @@
             <p>@Model.Text</p>
         </div>
         
-        <div class="comment">
-            <div class="comment-header">
-                <div class="author">
-                    <img class="img-circle" src="~/images/1.jpg" />
-                    @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
+        @foreach (Portal.Models.Comment comment in Model.Comments) {
+            <div class="comment">
+                <div class="comment-header">
+                    <div class="author">
+                        <img class="img-circle" src="~/images/1.jpg" />
+                        @comment.Author.First_Name @comment.Author.Second_Name
+                    </div>
+                    <div class="date">commented on @comment.Create_Time</div>
                 </div>
-                <div class="date">commented on @Model.Date_of_Creation</div>
+                <p>@comment.Text</p>
             </div>
-            <p>@Model.Text</p>
-        </div>
+        }
         <div class="comment">
             <div class="comment-header">
                 <div class="author">
