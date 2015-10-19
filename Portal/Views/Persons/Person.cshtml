@@ -8,13 +8,13 @@
 <h5>@Model.Second_Name</h5>
 <h5>@Model.Phone</h5>
 @{
-    if (Model.GetType() == typeof(Portal.Models.Teacher))
+    if (Model is Portal.Models.Teacher)
     {
-        foreach (Portal.Models.Course c in ((Portal.Models.Teacher)@Model).Taught_Courses)
+        <h5>Список преподаваемых курсов</h5>
+        foreach (Portal.Models.Course c in ((Portal.Models.Teacher)Model).Taught_Courses)
         {
-            <h5>c.Name</h5>
+            <h5>@c.Name</h5>
         }
-        <h5>Здесь скоро будет список курсов, которые ведет этот человек</h5>
     }
     else
     {
