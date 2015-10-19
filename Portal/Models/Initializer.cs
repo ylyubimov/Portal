@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace Portal.Models
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
@@ -157,6 +157,7 @@ namespace Portal.Models
             // Добавление программы
             db.Program.Add(new Program { Name = "PMF", Courses = NewCourses });
             db.Comment.Add(new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-09-06") });
+            db.Comment.Add(new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-05-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse("2015-09-16") });
             base.Seed(db);
 
