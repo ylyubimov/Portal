@@ -25,6 +25,7 @@
 
 <h3>Блоги курса:</h3>
 <ul>
+    <a href="~/Views/Courses/Course.cshtml">~/Views/Courses/Course.cshtml</a>
     @foreach (Portal.Models.Blog blog in Model.Blogs)
     {
         <li>@Html.ActionLink(blog.Name, "Index", "Blogs", new { @id = blog.Name })</li>
