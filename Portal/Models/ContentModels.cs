@@ -13,6 +13,8 @@ namespace Portal.Models
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
 
     }
     public class Picture
@@ -23,6 +25,9 @@ namespace Portal.Models
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+
     }
     public class Video
     {
@@ -32,5 +37,7 @@ namespace Portal.Models
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }
