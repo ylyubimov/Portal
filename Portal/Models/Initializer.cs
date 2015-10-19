@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace Portal.Models
 {
-    public class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
