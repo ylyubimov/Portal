@@ -8,7 +8,7 @@
     <div class="article-preview">
         <div class="article-header">
             <div class="author">
-                <img class="img-circle" src="~/images/1.jpg" />
+                <img class="img-circle" src=@Model.Authors.FirstOrDefault().Picture.URL />
                 @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
             </div>
             <div class="date">@Model.Date_of_Creation</div>

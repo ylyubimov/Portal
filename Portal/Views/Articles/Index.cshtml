@@ -9,7 +9,7 @@
     <div class="container article-wrap">
         <div class="article">
             <div class="article-header">
-                <div class="author"><img class="img-circle" src="~/images/1.jpg"/>
+                <div class="author"><img class="img-circle" src=@Model.Authors.FirstOrDefault().Picture.URL />
                 @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name</div>
                 <div class="date">@Model.Date_of_Creation</div>
                 <div class="article-actions">
@@ -34,7 +34,7 @@
             <div class="comment">
                 <div class="comment-header">
                     <div class="author">
-                        <img class="img-circle" src="~/images/1.jpg" />
+                        <img class="img-circle" src=@comment.Author.Picture.URL />
                         @comment.Author.First_Name @comment.Author.Second_Name
                     </div>
                     <div class="date">commented on @comment.Create_Time</div>
@@ -46,7 +46,7 @@
         <div class="add-comment comment">
             <div class="comment-header">
                 <div class="author">
-                    <img class="img-circle" src="~/images/1.jpg" />
+                    <img class="img-circle" src=@Model.Authors.FirstOrDefault().Picture.URL />
                     @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
                 </div>
             </div>

@@ -8,7 +8,7 @@
     <div class="container blog-wrap">
         <div class="blog-header">
             <div class="author">
-                <img class="img-circle" src="~/images/1.jpg" />
+                <img class="img-circle" src=@Model.Authors.FirstOrDefault().Picture.URL />
                 @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
             </div>
             <h3>@Model.Name</h3>
