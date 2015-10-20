@@ -15,11 +15,11 @@
 .article-settings {
     display: inline-block;
     vertical-align: middle;
-    background: #9B9B9B;
+    background: white;
 }
 
 .article-settings ul {
-    background: #9B9B9B;
+    background: white;
     padding: 5px;
     border: none;
     border-radius: 0;
@@ -54,10 +54,7 @@
     vertical-align: middle;
     font-size: 12px;
     margin-left: 30px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 120px;
+    position: static;
 }
 
 .rating {
@@ -69,17 +66,21 @@
 .rating div {
     display: inline-block;
     vertical-align: middle;
+    cursor: pointer;
 }
 
+.rating-plus {
+    color: #7ED321;
+}
+
+.rating-minus {
+    color: #FF0F0F;
+}
 .author {
-    float: left;
     display: inline-block;
     vertical-align: middle;
     padding-right: 5px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
+    position: static;
 }
 
 .author img {
@@ -98,6 +99,8 @@
 .comment-header {
     position: relative;
     min-height: 50px;
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 .article-preview {
@@ -121,13 +124,19 @@
     margin-top: 15px;
     position: relative;
     text-align: center;
-    padding: 15px;
+    padding:  15px 25px;
+}
+
+.blog-header .author {
+    float: left;
 }
 
 .blog-header h3 {
     display: inline-block;
     vertical-align: middle;
+    position: static;
     margin: 10px;
+    transform: translateX(-50%);
 }
 
 .blog-articles-length {
@@ -139,9 +148,32 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 15px;
+    right: 25px;
 }
 
 .blog-header .author {
     left: 25px;
+}
+
+.add-comment-input {
+    width: 100%;
+    border: none;
+}
+
+.add-comment-input:focus {
+    border: none;
+    outline: none;
+}
+
+.add-comment-button {
+    margin-top: 20px;
+    display: block;
+    color: #FF8D8D;
+    background: #FF0F0F;
+    border-radius: 30px;
+    padding: 0 15px;
+}
+
+.add-comment-button:hover {
+    color: white;
 }

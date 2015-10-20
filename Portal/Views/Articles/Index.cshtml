@@ -14,11 +14,11 @@
                 <div class="date">@Model.Date_of_Creation</div>
                 <div class="article-actions">
                     <div class="rating">
-                        <div><span>+</span> @Model.Likes_Count</div>
-                        <div><span>-</span> @Model.Dislikes_Count</div>
+                        <div class="rating-plus"><img class="icon" src="~/images/icons/plusIcon.png" />@Model.Likes_Count</div>
+                        <div class="rating-minus"><img class="icon" src="~/images/icons/minusIcon.png" />@Model.Dislikes_Count</div>
                     </div>
                     <div class="article-settings dropdown">
-                        <div class="btn" data-toggle="dropdown">Settings</div>
+                        <div class="btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png"/>Settings</div>
                         <ul class="dropdown-menu">
                             <li>Delete</li>
                             <li>Edit</li>
@@ -42,15 +42,17 @@
                 <p>@comment.Text</p>
             </div>
         }
-        <div class="comment">
+
+        <div class="add-comment comment">
             <div class="comment-header">
                 <div class="author">
                     <img class="img-circle" src="~/images/1.jpg" />
                     @Model.Authors.FirstOrDefault().First_Name @Model.Authors.FirstOrDefault().Second_Name
                 </div>
-                <div class="date">commented on @Model.Date_of_Creation</div>
             </div>
-            <p>@Model.Text</p>
+
+            <input class="add-comment-input" type="text" placeholder="Leave your comment..."/>
+            <button class="btn add-comment-button">Send</button>
         </div>
     </div>
 </div>
