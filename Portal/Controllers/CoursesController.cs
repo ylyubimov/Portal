@@ -14,6 +14,7 @@ namespace Portal.Controllers
         // GET: /Courses/
         public ActionResult Index()
         {
+            ViewBag.Title = "Courses";
             var courses = db.Course.OrderBy(t => t.Report_Date).ToArray();
             return View(courses);
         }
@@ -35,6 +36,15 @@ namespace Portal.Controllers
             {
                 return View("Index");
             }
+        }
+
+
+        [HttpPost]
+        public ActionResult Index(string SearchFor)
+        {
+            ViewBag.Title = "Search for " + SearchFor;
+            var CourseList = db.Course.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
+            return View(CourseList);
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿@model Portal.Models.Person[]
-@{
-    ViewBag.Title = "People";
-}
 
-<h2>Persons</h2>
+@Html.Partial("_Search", @"Persons")
+<h2>@ViewBag.Title</h2>
 
 <table class="table table-hover">
     <thead>

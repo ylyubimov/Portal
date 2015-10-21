@@ -8,40 +8,20 @@ namespace Portal.Controllers
 {
     public class HomeController : Controller
     {
+        Models.ApplicationDbContext db = new Models.ApplicationDbContext();
         public ActionResult Index()
         {
-            
-            var db = new Models.ApplicationDbContext();
+            ViewBag.Title = "Home Page";
             var ArticleList = db.Article.OrderBy(x => x.Date_of_Creation ).Take(5).ToArray();
-            // пока нет базы данных, потом надо будет брать из бд
-            /*
-            Portal.Models.Article[] ArticleList = new Portal.Models.Article[2] { new Portal.Models.Article(),new Portal.Models.Article() };
-            ArticleList[0].Name = "Title1";
-            ArticleList[0].Text = "Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;Article1 Text;";
-            ArticleList[1].Name = "Title2";
-            ArticleList[1].Text = "Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;Article2 Text;";
-            /*****************************************************/
             return View(ArticleList);
         }
-
-        public ActionResult About()
+            
+        [HttpPost]
+        public ActionResult Index(string SearchFor)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Search()
-        {
-            ViewBag.Message = "Your search page.";
-
-            return View();
+            ViewBag.Title = "Search for "+ SearchFor;
+            var ArticleList = db.Article.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
+            return View(ArticleList);
         }
 
     }
