@@ -1,5 +1,5 @@
 ﻿
-<div class="search-bar">
+<form action="~/@Model/Index" method="post" class="search-bar">
     <div class="container">
         <table style="width: 100%">
             <tr style="height: 84px;">
@@ -17,15 +17,15 @@
                 </td>
                 <td>
                     <section>
-                        <input class="search-input"  placeholder="Search">
+                        <input class="search-input"  placeholder="Search" name="SearchFor">
                     </section>
                 </td>
                 <td class="cell-right">
                     <section>
-                        <a class="btn" style="padding-right">Search</a>
+                        <input type="submit"  value="Search"  class="btn"/>
                     </section>
                 </td>
             </tr>
         </table>
     </div>
-</div>
+</form>

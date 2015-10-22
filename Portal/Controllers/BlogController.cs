@@ -13,6 +13,7 @@ namespace Portal.Controllers
         // GET: Blog
         public ActionResult Index()
         {
+            ViewBag.Title = "Blogs";
             Blog[] blogs = db.Blog.Where(p => true).ToArray();
             return View(blogs);
         }
@@ -35,5 +36,14 @@ namespace Portal.Controllers
                 return View("Index");
             }
         }
+
+        [HttpPost]
+        public ActionResult Index(string SearchFor)
+        {
+            ViewBag.Title = "Search for " + SearchFor;
+            var BlogList = db.Blog.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
+            return View(BlogList);
+        }
+
     }
 }
