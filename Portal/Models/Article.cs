@@ -18,7 +18,7 @@ namespace Portal.Models
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }
         [Required]
-        public virtual ICollection<Person> Authors { get; set; }
+        public virtual Person Author { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Video>  Videos { get; set; }
         public virtual ICollection<Presentation> Presentations { get; set; }

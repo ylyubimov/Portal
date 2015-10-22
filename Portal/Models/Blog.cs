@@ -16,7 +16,7 @@ namespace Portal.Models
         public string Name { get; set; }
         public int? Rating { get; set; }
         [Required]
-        public virtual ICollection<Person> Authors { get; set; }
+        public virtual Person Author { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

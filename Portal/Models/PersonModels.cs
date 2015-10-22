@@ -46,7 +46,6 @@ namespace Portal.Models
     {
         public string Position { get; set; }
         public string Working_Place { get; set; }
-
         public virtual Base_Company Base_Company { get; set; }
         public virtual ICollection<Course> Taught_Courses { get; set; }
     }
