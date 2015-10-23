@@ -18,6 +18,7 @@ namespace Portal.Controllers
             var courses = db.Course.OrderBy(t => t.Report_Date).ToArray();
             return View(courses);
         }
+
         public ActionResult Course(int? id)
         {
             if (id != null)
@@ -38,6 +39,23 @@ namespace Portal.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var course = db.Course.Where(p => id == p.ID).FirstOrDefault();
+            if (course == null)
+            {
+                return View("Error");
+            };
+            return View(course);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(Course course)
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Index(string SearchFor)

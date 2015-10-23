@@ -174,7 +174,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleEdit.cs" />
     <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\CourseEditModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\ContentModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -250,6 +252,7 @@
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Persons\_PersonsPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

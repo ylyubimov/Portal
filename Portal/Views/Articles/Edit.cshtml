@@ -1,0 +1,15 @@
+﻿@using Portal.Models
+@model ArticleEdit
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+<form action="~/Course/Edit" method="post">
+    @Html.EditorFor(m => m.Name) @Html.ValidationMessageFor(m => m.Name)<br />
+    @Html.EditorFor(m => m.Text)<br />
+    <input type="submit" value="Submit" />
+</form>
+
+

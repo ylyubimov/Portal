@@ -15,7 +15,7 @@
         @foreach (Portal.Models.Person p in Model)
         {
             <tr>
-                <td>@Html.ActionLink(p.Second_Name, "person", "persons", new { @id = p.ID }, null)</td>
+                <td>@Html.ActionLink(p.Second_Name, "person", "persons", new { @id = p.Id }, null)</td>
                 <td>@p.First_Name</td>
                 <td>@p.Phone</td>
             </tr>

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Portal.Models
 {
-    public class Person
+    public class Person : IdentityUser
     {
-        [Key]
-        public int ID { get; set; }
-        [Required]
         public string First_Name { get; set; }
         public string Second_Name { get; set; }
         public string Middle_Name { get; set; }
@@ -21,8 +21,6 @@ namespace Portal.Models
         [Required]
         public string Email { get; set; }
         //public string Person_Type { get; protected set; } 
-        [Required]
-        public string Password { get; set; }
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Course> Subscribed_Courses { get; set; }
         public virtual ICollection<Article> Written_Articles { get; set; }

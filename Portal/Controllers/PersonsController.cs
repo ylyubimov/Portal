@@ -41,11 +41,11 @@ namespace Portal.Controllers
             Person[] persons = db.Person.ToArray();
             return View(persons);
         }
-        public ActionResult Person(int? id)
+        public ActionResult Person(string id)
         {
-            if (id != null)
+            if (id  != "")
             {
-                Person person = db.Person.Where(p => id == p.ID).FirstOrDefault();
+                Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
                 if (person != null)
                 {
                     return View(person);
