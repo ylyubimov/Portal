@@ -78,7 +78,15 @@ namespace Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Person() { UserName = model.UserName };
+                var user = new Person() { UserName = model.UserName,
+                                          Email = model.Email,
+                                          First_Name = model.First_Name,
+                                          Second_Name = model.Second_Name,
+                                          Middle_Name = model.Middle_Name,
+                                          Registration_Date = DateTime.Now,
+                                          Last_Date_Was_Online = DateTime.Now,
+                                          
+                                          Phone = model.Phone };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

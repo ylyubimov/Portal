@@ -59,5 +59,18 @@ namespace Portal.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Имя")]
+        public string First_Name { get; set; }
+        [Display(Name = "Фамилия")]
+        public string Second_Name { get; set; }
+        [Display(Name = "Отчество")]
+        public string Middle_Name { get; set; }
+        public string Phone { get; set; }
+        [Required(ErrorMessage ="введите e-mail")]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+        //public string Person_Type { get; protected set; } 
+        public virtual Picture Picture { get; set; }
     }
 }
