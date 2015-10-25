@@ -1,31 +1,11 @@
-﻿
-<form action="~/@Model/Index" method="post" class="search-bar">
+﻿<form action="~/@Model/Index" method="post" class="search-bar">
     <div class="container">
-        <table style="width: 100%">
-            <tr style="height: 84px;">
-                <td style="width:45px;">
-                    <section class="btn" style="
-                                            border-bottom-right-radius: 0;
-                                            border-top-right-radius: 0;
-                                            margin-left: 10px;
-                                            float: left;
-                                            padding-right: 2px;
-                                            padding-left: 8px;
-                                            display: block !important;">
-                        <img src="~/images/icons/searchIcon.png" style="margin-top:3px;margin-bottom:5px;" />
-                    </section>
-                </td>
-                <td>
-                    <section>
-                        <input class="search-input"  placeholder="Search" name="SearchFor">
-                    </section>
-                </td>
-                <td class="cell-right">
-                    <section>
-                        <input type="submit"  value="Search"  class="btn"/>
-                    </section>
-                </td>
-            </tr>
-        </table>
+        <div class="container search-wrap">
+            <div class="input-group search-input">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input class="form-control" placeholder="Search" type="text" name="SearchFor">
+            </div>
+            <input class="search-bar-button btn" type="submit" value="Search" />
+        </div>
     </div>
 </form>

@@ -160,11 +160,6 @@
     border: none;
 }
 
-.add-comment-input:focus {
-    border: none;
-    outline: none;
-}
-
 .add-comment-button {
     margin-top: 20px;
     display: block;

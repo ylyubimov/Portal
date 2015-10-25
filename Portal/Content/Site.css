@@ -1,12 +1,12 @@
 ﻿body {
     background-color: #F0F0F0;
     margin-top: 52px;
+    width: 100%;
 }
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+input:focus {
+    border: none;
+    outline: none;
 }
 
 /* styles for validation helpers */
@@ -22,10 +22,6 @@ input.input-validation-error {
     border: 1px solid #b94a48;
 }
 
-input[type="checkbox"].input-validation-error {
-    border: 0 none;
-}
-
 .validation-summary-errors {
     color: #b94a48;
 }
@@ -34,19 +30,11 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.container {
-    padding: 0;
-    max-width: none;
-}
 
 .search-bar{
-    height: 84px;
+    height: 50px;
     background-color: #FF0F0F;
-    display: block;
     width: 100%;
-    box-shadow: 0px 4px 4px #AAAAAA;
-    margin: 0;
-    margin-bottom: 4px;
 }
 
 .portal-navbar {
@@ -58,58 +46,55 @@ input[type="checkbox"].input-validation-error {
      z-index: 10;
 }
 
+.search-wrap {
+    width: 60%;
+    min-width: 600px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-.search-bar .search-input{
-    max-width: none;
-    font-size: 24px;
-    color: #FF0F0F;
+
+.search-input {
+    width: 80%;
+}
+
+.search-input .input-group-addon {
+    background: #ffffff;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
     border: none;
-    float:left;
-    margin-left: -2px;
-    height: 40px;
-    display: table-cell;
+}
+
+.search-input input {
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
-    outline:none;
-    width:100%;
+    border: none;
+    box-shadow: none;
 }
 
-
-.search-bar .container{
-    margin: auto;
-    max-width: 1170px;
-}
-.search-bar .cell-right{
-    width:150px;
-    padding-right: 8px;
+.search-input input:focus {
+    box-shadow: none;
 }
 
-.search-bar .btn {
+.search-bar-button {
     background-color: #ffffff;
-    float:right;
-    margin:0;
-    padding-top: 2px;
-    padding-right:25px;
-    padding-left:25px;
-    height: 40px;
     color: #FF0F0F;
-    font-size: 24px;
     border-radius: 20px;
-    display: table-cell;
+    display: table;
+    position: absolute;
+    top: 0;
+    right: 15px;
+    width: 15%;
 }
 
+.search-bar-button:active {
+    border: none;
+    outline: none;
+}
 
-@media(max-width: 767px) {
-
-    .search-bar .cell-right{
-     width:0;
-    }
-    .search-bar .btn {
-        display: none;
-    }
-    .search-bar .container {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+.search-bar-button:focus {
+    border: none;
+    outline: none;
 }
 
