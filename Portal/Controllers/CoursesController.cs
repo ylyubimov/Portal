@@ -7,39 +7,35 @@ using System.Web.Mvc;
 
 namespace Portal.Controllers
 {
+    [RoutePrefix("course")]
     public class CoursesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         //
         // GET: /Courses/
+        [Route("")]
         public ActionResult Index()
         {
             ViewBag.Title = "Courses";
+            ViewBag.Action = "/course";
             var courses = db.Course.OrderBy(t => t.Report_Date).ToArray();
             return View(courses);
         }
 
-        public ActionResult Course(int? id)
+        [Route("{id:int}")]
+        public ActionResult Course(int id)
         {
-            if (id != null)
+            Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
+            if (course == null)
             {
-                Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
-                if (course != null)
-                {
-                    return View(course);
-                }
-                else
-                {
-                    return View("Error");
-                }
+                return HttpNotFound();
             }
-            else
-            {
-                return View("Index");
-            }
+            return View(course);
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("{id:int}/edit")]
         public ActionResult Edit(int id)
         {
             var course = db.Course.Where(p => id == p.ID).FirstOrDefault();
@@ -52,12 +48,14 @@ namespace Portal.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("{id:int}/edit")]
         public ActionResult Edit(Course course)
         {
             return View();
         }
 
         [HttpPost]
+        [Route("")]
         public ActionResult Index(string SearchFor)
         {
             ViewBag.Title = "Search for " + SearchFor;
