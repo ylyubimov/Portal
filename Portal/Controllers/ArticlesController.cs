@@ -7,33 +7,29 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
+    [RoutePrefix("articles")]
     public class ArticlesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Articles
 
         [Authorize]
-        public ActionResult Index(int? id)
+        [Route("{id:int}")]
+        public ActionResult Index(int id)
         {
-            if (id != null)
+            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if (article == null)
             {
-                Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
-                if (article != null)
-                {
-                    return View(article);
-                } else
-                {
-                    return View("Error");
-                }
+                return HttpNotFound();
             }
-            else
-            {
-                return View("Error");
-            }
+             
+            return View(article);
         }
 
 
         [Authorize]
+        [HttpGet]
+        [Route("{id:int}/edit")]
         public ActionResult Edit(int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
@@ -49,6 +45,7 @@ namespace Portal.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("{id:int}/edit")]
         public ActionResult Edit(ArticleEdit articleEdit)
         {
             if (articleEdit.ID != null)

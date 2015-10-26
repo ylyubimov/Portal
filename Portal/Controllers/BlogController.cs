@@ -7,43 +7,38 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
+    [RoutePrefix("blog")]
     public class BlogsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Blog
+        [Route("")]
         public ActionResult Index()
         {
             ViewBag.Title = "Blogs";
+            ViewBag.Action = "/blog";
             Blog[] blogs = db.Blog.Where(p => true).ToArray();
             return View(blogs);
         }
 
-        public ActionResult Blog(int? id)
+        [Route("{id:int}")]
+        public ActionResult Blog(int id)
         {
-            if (id != null)
+            Blog blog = db.Blog.Where(p => id == p.ID).FirstOrDefault();
+            if (blog == null)
             {
-                Blog blog = db.Blog.Where(p => id == p.ID).FirstOrDefault();
-                if (blog != null)
-                {
-                    return View(blog);
-                } else
-                {
-                    return View("Error");
-                }
+                return HttpNotFound();
             }
-            else
-            {
-                return View("Index");
-            }
+            return View(blog);
         }
 
         [HttpPost]
+        [Route("")]
         public ActionResult Index(string SearchFor)
         {
             ViewBag.Title = "Search for " + SearchFor;
             var BlogList = db.Blog.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
             return View(BlogList);
         }
-
     }
 }
