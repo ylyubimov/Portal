@@ -30,7 +30,7 @@ namespace Portal.Models
         public virtual ICollection<Presentation> Presentations { get; set; }
         public virtual ICollection<Video> Videos { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }
-        
+        public virtual ICollection<Document> Documents { get; set; }
 
     }
 }
