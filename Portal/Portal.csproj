@@ -192,6 +192,7 @@
     <Content Include="Content\BlogStyles.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CourseStyles.css" />
     <Content Include="Content\Icons.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
