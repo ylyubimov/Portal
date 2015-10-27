@@ -7,7 +7,7 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
-    [RoutePrefix("blog")]
+    [RoutePrefix("persons")]
     public class PersonsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -16,7 +16,7 @@ namespace Portal.Controllers
         [Route("")]
         public ActionResult Index()
         {
-            ViewBag.Title = "People";
+            ViewBag.Title = "Person";
             Person[] persons = db.Person.ToArray();
             return View(persons);
         }
