@@ -21,7 +21,7 @@ namespace Portal.Controllers
             return View(persons);
         }
 
-        [Route("{id:int}")]
+        [Route("{id}")]
         public ActionResult Person(string id)
         {
             if (id  != "")
