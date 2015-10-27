@@ -7,40 +7,21 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
+    [RoutePrefix("persons")]
     public class PersonsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        Person person1 = new Person
-        {
-            Second_Name = "Ivanov",
-            First_Name = "Ivan"
-
-        };
-        Person person2 = new Person
-        {
-            Second_Name  = "Petrov",
-            First_Name = "Petr"
-
-        };
-        Person person3 = new Person
-        {
-            Second_Name = "Lenova",
-            First_Name = "Lena"
-
-        };
-
 
         // GET: Articles
+        [Route("")]
         public ActionResult Index()
         {
-            //db.Person.Add(person1);
-            //db.Person.Add(person2);
-            //db.Person.Add(person3);
-            //db.SaveChanges();
-            ViewBag.Title = "People";
+            ViewBag.Title = "Person";
             Person[] persons = db.Person.ToArray();
             return View(persons);
         }
+
+        [Route("{id:int}")]
         public ActionResult Person(string id)
         {
             if (id  != "")
@@ -62,6 +43,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
+        [Route("")]
         public ActionResult Index(string SearchFor)
         {
             ViewBag.Title = "Search for " + SearchFor;
