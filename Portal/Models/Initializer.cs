@@ -12,7 +12,7 @@ using Portal.Models;
 
 namespace Portal.Models
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
