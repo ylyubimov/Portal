@@ -1,8 +1,6 @@
 ﻿
-<div class="row">
-    @foreach (var i in Model)
-    {
-        @Html.Partial("_CoursePreView", (Portal.Models.Course)i)
-    }
-</div>
+@foreach (Portal.Models.Course course in Model)
+{
+    @Html.Partial("_CoursePreView", course)
+}
 

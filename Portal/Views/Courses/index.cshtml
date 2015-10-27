@@ -1,5 +1,8 @@
-﻿
+﻿@{
+    
+    @Styles.Render("~/Content/CourseStyles.css")
+}
+
 @Html.Partial("_Search", @"Courses")
-<h2>@ViewBag.Title</h2>
 @Html.Partial("_CoursePreViewList",(Portal.Models.Course[])Model)
 

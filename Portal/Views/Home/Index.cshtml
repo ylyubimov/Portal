@@ -1,8 +1,4 @@
 ﻿
 @Html.Partial("_Search",@"Home")
-
-<div class="container body-content">
-    @Html.Partial("../Articles/_ArticlePreViewList", (Portal.Models.Article[])Model)
-
-</div>
+@Html.Partial("../Articles/_ArticlePreViewList", (Portal.Models.Article[])Model)
 

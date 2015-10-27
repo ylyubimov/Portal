@@ -1,14 +1,25 @@
-﻿@model Portal.Models.Course
-<div class="col-md-8">
-    <h2>@Model.Name</h2>
-    <p>@Model.Description</p>
-    <h3>Преподаватели:</h3>
-    <ul>
-        @foreach (Portal.Models.Teacher teacher in Model.Teachers)
-        {
-            <li>@teacher.First_Name @teacher.Middle_Name @teacher.Second_Name</li>
-        }
-    </ul>
-    <p>@Html.ActionLink("Читать далее", "Course", new { @id = Model.ID }, new { @class = "btn btn-default" })</p>
-</div>
+﻿@using Portal.Models
+@model Portal.Models.Course
+
+    <div class="container course-wrap">
+        <div class="course-preview">
+            <div class="course-description">
+                <h2>@Model.Name</h2>
+                <p>@Model.Description.Substring(0, (Model.Description.Length > 500) ? 500 : Model.Description.Length)...</p>
+                <a>@Html.ActionLink("Read more...", "Index", "Articles", new { @id = Model.ID }, new { @class = "" })</a>
+            </div>
+            <h4>Teachers:</h4>
+            <div class="course-teachers">
+                @foreach (Teacher teacher in Model.Teachers)
+                {
+                    <div class="course-teacher">
+                        <img src=@teacher.Picture.URL />
+                        <div>@teacher.First_Name @teacher.Second_Name</div>
+                    </div>
+                }
+            </div>
+            <h4>Duration:</h4>
+            <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hourse</div>
+        </div>
+    </div>
 
