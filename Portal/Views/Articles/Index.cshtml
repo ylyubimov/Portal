@@ -50,11 +50,9 @@
                     @User.Identity.Name
                 </div>
             </div>
-            @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post))
-            {
-                <input class="add-comment-input" type="text" placeholder="Leave your comment..." name="comment"/>
-                <input class="btn add-comment-button" type="submit" value="Send"/>
-            }
+
+            <input class="add-comment-input" type="text" placeholder="Leave your comment..."/>
+            <button class="btn add-comment-button">Send</button>
         </div>
     </div>
 </div>

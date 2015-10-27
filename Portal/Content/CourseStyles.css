@@ -1,0 +1,38 @@
+﻿.course-wrap {
+    width: 60%;
+    min-width: 600px;
+    
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.course {
+    background-color: white;
+    text-align: left;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.course-description {
+    margin-bottom: 10px;
+}
+
+.course-teachers {
+    text-align: center;
+}
+
+.course-teacher {
+    display: inline-block;
+    margin: 10px;
+}
+
+.course-teacher img {
+    height: 45px;
+    width: 45px;
+
+    border-radius: 50%;
+}
+
+.course-duration {
+    text-align: center;
+}
