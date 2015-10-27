@@ -43,6 +43,7 @@ namespace Portal.Models
             Picture p4 = new Picture { Name = "ava1", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg" };
             Picture p5 = new Picture { Name = "ava2", URL = "http://fs00.infourok.ru/images/doc/148/171148/hello_html_33f0bc3e.jpg" };
             Picture p6 = new Picture { Name = "ava3", URL = "http://www.yaom.ru/wp-content/uploads/will-smith.jpeg" };
+            Picture def = new Picture { Name = "DefaultPicture", URL = "/images/genel.jpg"  };
 
             p1 = db.Picture.Add(p1);
             p2 = db.Picture.Add(p2);
@@ -50,6 +51,7 @@ namespace Portal.Models
             p4 = db.Picture.Add(p4);
             p5 = db.Picture.Add(p5);
             p6 = db.Picture.Add(p6);
+            db.Picture.Add(def);
             db.SaveChanges();
             //доавление юзеров 
             var userS = new UserManager<Student>(new UserStore<Student>(db));

@@ -72,22 +72,5 @@ namespace Portal.Controllers
                 return View(article);
             }
         }
-
-        [Authorize]
-        [HttpPost]
-        public ActionResult AddComment(string comment, int id)
-        {
-            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
-            Comment c = new Comment();
-            c.ID = article.Comments.Count();
-            c.Text = comment;
-            c.Article = article;
-            
-            article.Comments.Add(c);
-            db.Article.Add(article);
-            db.SaveChanges();
-
-            return RedirectToAction("index", id);
-        }
     }
 }
