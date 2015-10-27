@@ -9,7 +9,7 @@
 .course {
     background-color: white;
     text-align: left;
-    padding: 20px;
+    padding: 10px 20px 50px 20px;
     margin-bottom: 25px;
 }
 
@@ -34,5 +34,9 @@
 }
 
 .course-duration {
+    text-align: center;
+}
+
+.course-materials {
     text-align: center;
 }

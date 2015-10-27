@@ -26,6 +26,17 @@
             <h4>Duration:</h4>
             <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hourse</div>
             <h4>Materials:</h4>
+            <div class="course-materials">
+                @foreach(Blog blog in Model.Blogs)
+                {
+                    <div>Blog @Html.ActionLink(blog.Name, "blog", "blogs", null, null)</div>
+                }
+
+                @foreach(Video video in Model.Videos)
+                {
+                    <div>Video <a href=@video.URL>@video.Name</a></div>
+                }
+            </div>
         </div>
     </div>
 </div>
