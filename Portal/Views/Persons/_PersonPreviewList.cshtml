@@ -1,6 +1,4 @@
-﻿<div class="row">
-    @foreach (var i in Model)
-    {
-        @Html.Partial("_PersonPreview", (Portal.Models.Person)i)
-    }
-</div>
+﻿@foreach (var i in Model)
+{
+    @Html.Partial("_PersonPreView", (Portal.Models.Person)i)
+}

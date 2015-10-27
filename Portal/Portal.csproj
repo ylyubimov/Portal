@@ -254,6 +254,8 @@
     <Content Include="Views\Persons\_PersonsPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
+    <Content Include="Views\Blogs\_BlogPreview.cshtml" />
+    <Content Include="Views\Blogs\_BlogPreviewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

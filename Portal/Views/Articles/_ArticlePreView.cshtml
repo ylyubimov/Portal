@@ -1,9 +1,5 @@
 ﻿@model Portal.Models.Article
 
-@{
-    @Styles.Render("~/Content/BlogStyles.css")
-}
-
 <div class="container article-wrap">
     <div class="article-preview">
         <div class="article-header">
@@ -18,8 +14,8 @@
                     <div class="rating-minus"><img class="icon" src="~/images/icons/minusIcon.png" />@Model.Dislikes_Count</div>
                 </div>
                 <div class="article-settings dropdown">
-                    <div class="btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Settings</div>
-                    <ul class="dropdown-menu">
+                    <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Settings</div>
+                    <ul class="dropdown-menu article-settings-menu">
                         <li>Delete</li>
                         <li>Edit</li>
                     </ul>

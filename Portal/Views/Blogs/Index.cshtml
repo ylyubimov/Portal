@@ -1,27 +1,5 @@
 ﻿@model Portal.Models.Blog[]
 
 @Html.Partial("_Search", @"Blogs")
-<h2>@ViewBag.Title</h2>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Название</th>
-            <th>Рейтинг</th>
-            <th>Количество плюсов</th>
-            <th>Количество минусов</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Portal.Models.Blog blog in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(blog.Name, "blog", new { @id = blog.ID })</td>
-                <td>@blog.Rating</td>
-                <td>@blog.Likes_Count</td>
-                <td>@blog.Dislikes_Count</td>
-            </tr>
-        }
-    </tbody>
-</table>
+@Html.Partial("_BlogPreviewList", @Model);
 

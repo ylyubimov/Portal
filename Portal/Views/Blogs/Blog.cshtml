@@ -1,17 +1,13 @@
 ﻿@model Portal.Models.Blog
 
-@{
-    ViewBag.Title = "Blog";
-}
-
 <div class="container-fluid">
     <div class="container blog-wrap">
         <div class="blog-header">
-            <div class="author">
+            <div class="author blog-author">
                 <img class="img-circle" src=@Model.Author.Picture.URL />
                 @Model.Author.First_Name @Model.Author.Second_Name
             </div>
-            <h3>@Model.Name</h3>
+            <h3 class="blog-title">@Model.Name</h3>
             <div class="blog-articles-length">@Model.Articles.ToArray().Length articles</div>
         </div>
     </div>

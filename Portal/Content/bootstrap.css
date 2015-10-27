@@ -3586,7 +3586,7 @@ tbody.collapse.in {
   min-width: 160px;
   padding: 5px 0;
   margin: 2px 0 0;
-  list-style: none;
+  list-style: none; 
   font-size: 14px;
   text-align: left;
   background-color: #ffffff;
