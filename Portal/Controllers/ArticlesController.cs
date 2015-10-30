@@ -81,7 +81,6 @@ namespace Portal.Controllers
 
             Person authorComment = db.Person.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
             //TODO: delete this line
-            authorComment.Picture = article.Author.Picture;
 
             Comment c = new Comment();
             
