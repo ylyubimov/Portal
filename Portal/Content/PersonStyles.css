@@ -5,11 +5,11 @@
 
 .person-part-name {
     padding: 15px 15px 5px;
-    font-size: 18px;
+    font-size: 20px;
     color: #9B9B9B;
 }
 
-.person {
+.person-preview {
     background: white;
     display: inline-block;
     width: 30%;
@@ -20,7 +20,7 @@
     color: #9B9B9B;
 }
 
-.person img {
+.person-preview img {
     height: 150px;
     width: 150px;
     border-radius: 50%;
@@ -45,17 +45,73 @@
     padding-top: 5px;
 }
 
-.person-info a {
+.person {
+    background: white;
+    margin-top: 30px;
+    padding: 35px;
+}
+
+.person-general-info {
+    border-bottom: solid 1px #9B9B9B;
+    padding-bottom: 20px;
+}
+
+.person-general-info img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.person-info-text {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 50px;
+}
+
+.person-info-text .person-contacts {
+   margin-top: 35px;
+}
+
+.person-contacts {
+    font-size: 14px;
+}
+
+.person-contacts a {
     color: #9B9B9B;
     text-decoration: none;
     display: block;
+    vertical-align: middle;
 }
 
-.person-info a::before {
-    color: white;
+.person-contacts a::before {
+    color: transparent;
     content: "|";
 }
 
-.person-info a:hover {
+.person-contacts a:hover {
     color: #9B9B9B;
+}
+
+.person-type {
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
+.person-blogs {
+    border-bottom: solid 1px #9B9B9B;
+    padding-bottom: 15px;
+}
+
+.person-blogs a {
+    color: #9B9B9B;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+}
+
+.person-courses a {
+    color: #9B9B9B;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
 }

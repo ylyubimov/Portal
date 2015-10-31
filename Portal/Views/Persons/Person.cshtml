@@ -1,26 +1,50 @@
-﻿@model Portal.Models.Person
+﻿@using Portal.Models
+@model Person
 
-@{
-    ViewBag.Title = "Person";
-}
-
-<h3>@Model.First_Name</h3>
-<h5>@Model.Second_Name</h5>
-<h5>@Model.Phone</h5>
-@{
-    if (Model is Portal.Models.Teacher)
-    {
-        <h5>Список преподаваемых курсов</h5>
-        foreach (Portal.Models.Course c in ((Portal.Models.Teacher)Model).Taught_Courses)
-        {
-            <h5>@c.Name</h5>
-        }
-    }
-    else
-    {
-        <h5>Здесь скоро будет список курсов, которые посещает этот человек</h5>
-    }
-}
-<p><img src=@Model.Picture.URL height="150" /></p>
-
+<div class="container person-wrap">
+    <div class="person">
+        <div class="person-general-info">
+            <img src=@Model.Picture.URL />
+            <div class="person-info-text">
+                <div class="person-name">@Model.First_Name @Model.Second_Name</div>
+                    @if (Model is Teacher)
+                    {
+                        <div class="person-type">Teacher</div>
+                    }
+                    else
+                    {
+                        <div class="person-type">Student</div>
+                    }
+                <div class="person-contacts">
+                    <a href="tel:@Model.Phone">@Model.Phone</a>
+                    <a href="mailto:@Model.Email">@Model.Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="person-blogs">
+            <h4>Most popular blogs</h4>
+            @foreach(Blog blog in Model.Blogs)
+            {
+                @Html.ActionLink(blog.Name, "blog", "blog", new { @id = blog.ID }, null)
+            }
+        </div>
+        <div class="person-courses">
+            @if (Model is Teacher)
+            {
+                <h4>Taught courses</h4>
+                foreach (Course course in ((Teacher)Model).Taught_Courses)
+                {
+                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                }
+            } else
+            {
+                <h4>Subscribed courses</h4>
+                foreach (Course course in ((Student)Model).Subscribed_Courses)
+                {
+                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                }
+            }
+        </div>
+    </div>
+</div>
 
