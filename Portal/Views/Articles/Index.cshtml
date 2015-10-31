@@ -40,13 +40,16 @@
         <div class="add-comment comment">
             <div class="comment-header">
                 <div class="author">
-                    <img class="img-circle" src=@Model.Author.Picture.URL />
+                    <img class="img-circle" src=@Portal.Models.ApplicationDbContext.Create().Person.Where(p => p.UserName == User.Identity.Name).FirstOrDefault().Picture.URL />
                     @User.Identity.Name
                 </div>
             </div>
 
-            <input class="add-comment-input" type="text" placeholder="Leave your comment..."/>
-            <button class="btn add-comment-button">Send</button>
+            @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post))
+            {
+                <input class="add-comment-input" type="text" placeholder="Leave your comment..." name="comment"/>
+                <input class="btn add-comment-button" type="submit" value="Send"/>
+            }
         </div>
     </div>
 </div>

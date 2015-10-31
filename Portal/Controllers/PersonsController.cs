@@ -7,6 +7,7 @@ using Portal.Models;
 
 namespace Portal.Controllers
 {
+    [RoutePrefix("persons")]
     public class PersonsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -22,6 +23,7 @@ namespace Portal.Controllers
         }
 
         // GET: Articles
+        [Route("")]
         public ActionResult Index()
         {
             ViewBag.Title = "People";
@@ -30,6 +32,7 @@ namespace Portal.Controllers
             return View(persons);
         }
 
+        [Route("{id}")]
         public ActionResult Person(string id)
         {
             if (id  != "")
@@ -51,6 +54,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
+        [Route("")]
         public ActionResult Index(string SearchFor)
         {
             ViewBag.Title = "Search for " + SearchFor;

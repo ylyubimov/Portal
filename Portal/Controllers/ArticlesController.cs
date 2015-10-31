@@ -72,5 +72,27 @@ namespace Portal.Controllers
                 return View(article);
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddComment(string comment, int id)
+        {
+            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+
+            Person authorComment = db.Person.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+            //TODO: delete this line
+
+            Comment c = new Comment();
+            
+            c.Text = comment;
+            c.Article = article;
+            c.Author = authorComment;
+            c.Create_Time = DateTime.Now;
+
+            article.Comments.Add(c);
+
+            db.SaveChanges();                        
+            return RedirectToAction("index", id);
+        }
     }
 }
