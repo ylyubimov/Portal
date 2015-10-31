@@ -10,37 +10,26 @@ namespace Portal.Controllers
     public class PersonsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        Person person1 = new Person
+
+        private Person[] getTeachers(Person[] persons)
         {
-            Second_Name = "Ivanov",
-            First_Name = "Ivan"
+            return persons.Where(p => p is Teacher).ToArray();
+        }
 
-        };
-        Person person2 = new Person
+        private Person[] getStudents(Person[] persons)
         {
-            Second_Name  = "Petrov",
-            First_Name = "Petr"
-
-        };
-        Person person3 = new Person
-        {
-            Second_Name = "Lenova",
-            First_Name = "Lena"
-
-        };
-
+            return persons.Where(p => p is Student).ToArray();
+        }
 
         // GET: Articles
         public ActionResult Index()
         {
-            //db.Person.Add(person1);
-            //db.Person.Add(person2);
-            //db.Person.Add(person3);
-            //db.SaveChanges();
             ViewBag.Title = "People";
-            Person[] persons = db.Person.ToArray();
+            Person[] AllPersons = db.Person.ToArray();
+            Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
             return View(persons);
         }
+
         public ActionResult Person(string id)
         {
             if (id  != "")
@@ -68,7 +57,8 @@ namespace Portal.Controllers
             var PersonList = db.Person.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
                                                    ).Take(50).ToArray();
-            return View(PersonList);
+            Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
+            return View(persons);
         }
     }
 }

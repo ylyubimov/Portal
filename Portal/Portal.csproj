@@ -194,6 +194,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CourseStyles.css" />
     <Content Include="Content\Icons.css" />
+    <Content Include="Content\PersonStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -251,7 +252,7 @@
     <Content Include="Views\Persons\Index.cshtml" />
     <Content Include="Views\Persons\Person.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
-    <Content Include="Views\Persons\_PersonsPreview.cshtml" />
+    <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Blogs\_BlogPreview.cshtml" />

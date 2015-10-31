@@ -1,0 +1,61 @@
+﻿.person-wrap {
+    width: 60%;
+    min-width: 600px;
+}
+
+.person-part-name {
+    padding: 15px 15px 5px;
+    font-size: 18px;
+    color: #9B9B9B;
+}
+
+.person {
+    background: white;
+    display: inline-block;
+    width: 30%;
+    min-width: 200px;
+    text-align: center;
+    padding: 20px;
+    margin: 1%;
+    color: #9B9B9B;
+}
+
+.person img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.person-name {
+    color: black;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.person-name:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.person-info {
+    border-top: solid 1px;
+    margin: 15px 0;
+    text-align: left;    
+    padding-top: 5px;
+}
+
+.person-info a {
+    color: #9B9B9B;
+    text-decoration: none;
+    display: block;
+}
+
+.person-info a::before {
+    color: white;
+    content: "|";
+}
+
+.person-info a:hover {
+    color: #9B9B9B;
+}

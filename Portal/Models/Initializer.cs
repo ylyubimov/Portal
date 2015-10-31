@@ -57,8 +57,8 @@ namespace Portal.Models
             var userS = new UserManager<Student>(new UserStore<Student>(db));
             List<Student> students = new List<Student>
             {
-                new Student{ UserName = "Gosha", Email = "qr@yandex.ru",First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015, Picture = p1  },
-                new Student{ UserName = "Grisha",Email = "qrd@yandex.ru", First_Name = "Grisha", Second_Name ="Yakovlev", Middle_Name = "Sergeevich1", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy2 , Picture = p2  },
+                new Student{ UserName = "Gosha", Email = "qr@yandex.ru", Phone="+7(912)2345678", First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015, Picture = p1  },
+                new Student{ UserName = "Grisha",Email = "qrd@yandex.ru", Phone="+7(912)2342678", First_Name = "Grisha", Second_Name ="Yakovlev", Middle_Name = "Sergeevich1", Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy2 , Picture = p2  },
                 new Student{ UserName = "Dmitriy", Email = "qra@yandex.ru", First_Name = "Dmitriy", Second_Name ="Kozhoma", Middle_Name = "Vasilevich", Group = group2, Faculty = fupm, Base_Company = basefupm, Picture = p3 }
             };
             foreach(Student u in students)
@@ -68,8 +68,8 @@ namespace Portal.Models
             var userT = new UserManager<Teacher>(new UserStore<Teacher>(db));
             List<Teacher> teachers= new List<Teacher>
             { 
-                new Teacher{ UserName = "Uriy", Email = "qrad@yandex.ru", First_Name = "Uriy", Second_Name = "Lushkov", Middle_Name = "Urevich", Base_Company = basefivt, Picture = p4  },
-                new Teacher{ UserName = "Sergey",  Email = "qrasd@yandex.ru",First_Name = "Sergey", Second_Name = "Lavrov", Middle_Name = "Michailovich", Base_Company = basefupm, Picture = p4 },
+                new Teacher{ UserName = "Uriy", Email = "qrad@yandex.ru", Phone="+7(912)2322678", First_Name = "Uriy", Second_Name = "Lushkov", Middle_Name = "Urevich", Base_Company = basefivt, Picture = p4  },
+                new Teacher{ UserName = "Sergey",  Email = "qrasd@yandex.ru", Phone="+7(912)2342678",First_Name = "Sergey", Second_Name = "Lavrov", Middle_Name = "Michailovich", Base_Company = basefupm, Picture = p4 },
                 new Teacher{ UserName = "Konstantin", Email = "qradz@yandex.ru", First_Name = "Konstantin", Second_Name = "Kobalt", Middle_Name = "Borisovich", Base_Company = basefivt, Picture = p6 }
             };
 

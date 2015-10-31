@@ -1,4 +1,12 @@
-﻿@foreach (var i in Model)
-{
-    @Html.Partial("_PersonPreView", (Portal.Models.Person)i)
-}
+﻿<div class=" container person-wrap">
+    <div class="person-part-name">Teachers</div>
+    @foreach (Portal.Models.Person person in Model[0])
+    {
+        @Html.Partial("_PersonPreview", person)
+    }
+    <div class="person-part-name">Students</div>
+    @foreach (Portal.Models.Person person in Model[1])
+    {
+        @Html.Partial("_PersonPreview", person)
+    }
+</div>

@@ -1,4 +1,12 @@
-﻿body {
+﻿/*$dark_red='#E40000';
+$light_red='#FF8D8D';
+$bright_red='#FF0F0F';
+$dark_grey='#4C4C4C';
+$light_grey='#9B9B9B';
+$facebook_blue='#3B5998';
+$vk_blue='#45668E';*/
+
+body {
     background-color: #F0F0F0;
     margin-top: 52px;
     width: 100%;
