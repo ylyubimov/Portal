@@ -17,6 +17,11 @@ input:focus {
     outline: none;
 }
 
+select:focus {
+    border: none;
+    outline: none;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -62,7 +67,6 @@ input.input-validation-error {
     padding: 5px;
 }
 
-
 .search-input {
     width: 80%;
 }
@@ -91,8 +95,8 @@ input.input-validation-error {
     border-radius: 20px;
     display: table;
     position: absolute;
-    top: 5px;
-    right: 15px;
+    top: 0px;
+    right: 5px;
     width: 15%;
 }
 
@@ -104,5 +108,60 @@ input.input-validation-error {
 .search-bar-button:focus {
     border: none;
     outline: none;
+}
+
+.search-grid-radio {
+    background: white;
+    min-height: 20px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 23px;
+    padding: 0 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.search-general {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.search-additional {
+    display: inline-block;
+    position: absolute;
+    right: -20px;
+    vertical-align: middle;
+}
+
+.search-additional a {
+    color: black;
+    text-decoration: none;
+}
+
+.search-additional a:hover {
+    text-decoration: none;
+}
+
+.search-grid-radio .checked {
+    color: red;
+}
+
+.search-person-select {
+    background: white;
+    border-radius: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 15px;
+    width: 50%;
+}
+
+.search-person-select select {
+    border: none;
+    height: 34px;
+    border-radius: 20px;
+    text-indent: 25px;
+    width: 90%;
 }
 

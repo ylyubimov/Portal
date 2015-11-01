@@ -1,4 +1,11 @@
 ﻿@model Portal.Models.Person[][]
 
 @Html.Partial("_Search", @"Persons")
-@Html.Partial("_PersonPreviewList", Model)
+@if (ViewBag.View == "grid")
+{
+    @Html.Partial("_PersonGridPreviewList", Model)
+}
+else
+{
+    @Html.Partial("_PersonPreviewList", Model)
+}

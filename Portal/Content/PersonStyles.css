@@ -9,7 +9,7 @@
     color: #9B9B9B;
 }
 
-.person-preview {
+.person-grid-preview {
     background: white;
     display: inline-block;
     width: 30%;
@@ -20,7 +20,7 @@
     color: #9B9B9B;
 }
 
-.person-preview img {
+.person-grid-preview img {
     height: 150px;
     width: 150px;
     border-radius: 50%;
@@ -31,6 +31,7 @@
     color: black;
     font-size: 18px;
     margin-top: 10px;
+    display: block;
 }
 
 .person-name:hover {
@@ -114,4 +115,52 @@
     text-decoration: none;
     display: block;
     padding: 10px 0;
+}
+
+.person-preview {
+    background: white;
+    padding: 15px;
+    margin: 15px;
+    position: relative;
+}
+
+.person-preview img {
+    height: 60px; 
+    width: 60px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.person-preview .person-info-text {
+    margin-left: 20px;
+}
+
+.person-preview-phone {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 45%;
+    display: inline-block;
+    vertical-align: middle;
+    color: black;
+}
+
+.person-preview-phone:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.person-preview-mail {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    color: black;
+}
+
+.person-preview-mail:hover {
+    text-decoration: none;
+    color: black;
 }

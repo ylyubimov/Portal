@@ -23,12 +23,19 @@ namespace Portal.Controllers
         }
 
         // GET: Articles
+        [HttpGet]
         [Route("")]
-        public ActionResult Index()
+        public ActionResult Index(string view, string type)
         {
             ViewBag.Title = "People";
+            ViewBag.ExtendType = "person";
             Person[] AllPersons = db.Person.ToArray();
             Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
+            ViewBag.Type = type;
+            if (view != null && view == "grid")
+            {
+                ViewBag.View = "grid";
+            }
             return View(persons);
         }
 
@@ -62,7 +69,7 @@ namespace Portal.Controllers
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
                                                    ).Take(50).ToArray();
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
-            return View(persons);
+            return View("IndexGrid", persons);
         }
     }
 }

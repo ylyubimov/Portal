@@ -251,12 +251,15 @@
     <Content Include="Views\Courses\Course.cshtml" />
     <Content Include="Views\Persons\Index.cshtml" />
     <Content Include="Views\Persons\Person.cshtml" />
-    <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
-    <Content Include="Views\Persons\_PersonPreview.cshtml" />
+    <Content Include="Views\Persons\_PersonGridPreviewList.cshtml" />
+    <Content Include="Views\Persons\_PersonGridPreview.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Blogs\_BlogPreview.cshtml" />
     <Content Include="Views\Blogs\_BlogPreviewList.cshtml" />
+    <Content Include="Views\Persons\IndexGrid.cshtml" />
+    <Content Include="Views\Persons\_PersonPreview.cshtml" />
+    <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,21 @@
+﻿@using Portal.Models
+@model Person
+
+<div class="person-grid-preview">
+    <a href=@Url.Action("person", new { @id=Model.Id })><img src=@Model.Picture.URL /></a>
+    @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
+    @if (Model is Teacher)
+    {
+        <div class="person-type">Teacher</div>
+    }
+    else
+    {
+        <div class="person-type">Student</div>
+    }
+    <div class="person-info">
+        <div class="person-contacts">
+            <a href="tel:@Model.Phone">@Model.Phone</a>
+            <a href="mailto:@Model.Email">@Model.Email</a>
+        </div>
+    </div>
+</div>
