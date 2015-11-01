@@ -53,6 +53,11 @@ namespace Portal.Models
             p6 = db.Picture.Add(p6);
             db.Picture.Add(def);
             db.SaveChanges();
+            // добавление ролей
+            db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(){  Name = "admin" });
+            db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() { Name = "teacher" });
+            db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() { Name = "student" });
+            db.SaveChanges();
             //доавление юзеров 
             var userS = new UserManager<Student>(new UserStore<Student>(db));
             List<Student> students = new List<Student>

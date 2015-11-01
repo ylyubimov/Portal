@@ -13,13 +13,16 @@
                     <div class="rating-plus"><img class="icon" src="~/images/icons/plusIcon.png" />@Model.Likes_Count</div>
                     <div class="rating-minus"><img class="icon" src="~/images/icons/minusIcon.png" />@Model.Dislikes_Count</div>
                 </div>
+                @if (User.Identity.Name == Model.Author.UserName)
+                {
                 <div class="article-settings dropdown">
                     <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Settings</div>
                     <ul class="dropdown-menu article-settings-menu">
                         <li>Delete</li>
-                        <li>Edit</li>
+                        <li>@Html.ActionLink("Edit", "Edit", "Articles", new { @id = Model.ID }, new { @class = "" })</li>
                     </ul>
                 </div>
+                }
             </div>
         </div>
         <h3>@Model.Name</h3>
