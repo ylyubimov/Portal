@@ -57,8 +57,7 @@ namespace Portal.Controllers
         [Route("{id:int}/edit")]
         public ActionResult Edit(int id, string[] Blogs,Article articleEdit)
         {
-            if (!ModelState.IsValid)
-                return View("Error");
+            
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
             if (article != null)
             {
@@ -66,8 +65,9 @@ namespace Portal.Controllers
                 {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
-                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name) ).ToArray();
-                    db.Entry(article).State = EntityState.Modified;
+                    article.Blogs.Clear();
+                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name) ).ToList() ;
+                    //db.Entry(article).State = EntityState.Modified;
 
                     db.SaveChanges();
                     return RedirectToAction( "Index", "articles", article.ID);
@@ -109,14 +109,13 @@ namespace Portal.Controllers
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
             articleEdit.Dislikes_Count = 0;
-            if (!ModelState.IsValid)
+           /* if (!ModelState.IsValid)
             {
                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
                 return View("Error " + errors);
-            };
-            db.Article.Add(articleEdit);
+            };*/
+            var article = db.Article.Add(articleEdit);
             db.SaveChanges();
-            var article = db.Article.Where(m => m.Date_of_Creation == articleEdit.Date_of_Creation).FirstOrDefault();
             if (article == null)
                 return View("Error");
             return RedirectToAction("Index", "articles", article.ID);
