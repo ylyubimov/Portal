@@ -66,7 +66,7 @@ namespace Portal.Controllers
                 {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
-                    //article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name) ).ToArray();
+                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name) ).ToArray();
                     db.Entry(article).State = EntityState.Modified;
 
                     db.SaveChanges();
@@ -109,11 +109,11 @@ namespace Portal.Controllers
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
             articleEdit.Dislikes_Count = 0;
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
                 return View("Error " + errors);
-            };*/
+            };
             db.Article.Add(articleEdit);
             db.SaveChanges();
             var article = db.Article.Where(m => m.Date_of_Creation == articleEdit.Date_of_Creation).FirstOrDefault();
