@@ -70,7 +70,9 @@ namespace Portal.Models
         [Required(ErrorMessage ="введите e-mail")]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
-        //public string Person_Type { get; protected set; } 
+        [Required]
+        [Display(Name = "Выберите ваше положение")]
+        public string Person_Type { get; set; } 
         public virtual Picture Picture { get; set; }
     }
 }

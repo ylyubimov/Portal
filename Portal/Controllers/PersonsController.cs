@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Portal.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Portal.Controllers
 {
@@ -27,11 +29,14 @@ namespace Portal.Controllers
         [Route("")]
         public ActionResult Index(string view, string type)
         {
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr =>  new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = list;
             ViewBag.Title = "People";
             ViewBag.ExtendType = "person";
             Person[] AllPersons = db.Person.ToArray();
             Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
             ViewBag.Type = type;
+            
             if (view != null && view == "grid")
             {
                 ViewBag.View = "grid";
@@ -70,6 +75,21 @@ namespace Portal.Controllers
                                                    ).Take(50).ToArray();
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
             return View("IndexGrid", persons);
+        }
+        [HttpGet]
+        public ActionResult ChangeRole(string id,string role)
+        {
+            var um = new UserManager<Person>(new UserStore<Person>(db));
+            if (!User.IsInRole("admin"))
+                return View("Error: you are not admin");
+            var person = um.FindById(id);
+            if(person == null)
+                return View("Error");
+            foreach (var i in person.Roles.ToArray())
+                um.RemoveFromRole(id, i.Role.Name);
+            um.AddToRole(id,role);
+
+            return RedirectToAction("index");
         }
     }
 }
