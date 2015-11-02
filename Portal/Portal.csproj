@@ -261,6 +261,7 @@
     <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Persons\admin.cshtml" />
+    <Content Include="Views\Articles\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
