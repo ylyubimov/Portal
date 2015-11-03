@@ -36,7 +36,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeRole(string id, string role)
+        public ActionResult Change(string id)
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
             if (person is Student)
