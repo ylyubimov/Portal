@@ -1,0 +1,33 @@
+﻿@model Portal.Models.Person[]
+
+@Html.Partial("_Search", @"Persons")
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-hover">
+    <tbody>
+        @foreach (Portal.Models.Person p in Model)
+        {
+            <tr>
+                <td>@p.First_Name @p.Second_Name</td>
+                @if (p is Portal.Models.Teacher)
+                {
+                    <td>Teacher</td>
+                }
+                else
+                {
+                    <td>Student</td>
+                }
+                
+                @using (Html.BeginForm("Change", "Admin", new { id = p.Id }, FormMethod.Post))
+                {
+                    <td><input class="change-button" type="submit" value="Change" /></td>
+                }
+                @using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
+                {
+                    <td><input class="delete-button" type="submit" value="Delete" /></td>
+                }
+                
+            </tr>
+        }
+    </tbody>
+</table>

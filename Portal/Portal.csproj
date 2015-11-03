@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -261,6 +262,7 @@
     <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Admin\AdminTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
