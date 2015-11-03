@@ -89,7 +89,8 @@ namespace Portal.Controllers
                         Middle_Name = model.Middle_Name,
                         Registration_Date = DateTime.Now,
                         Last_Date_Was_Online = DateTime.Now,
-                        Phone = model.Phone
+                        Phone = model.Phone,
+                        Exists = true
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
@@ -118,7 +119,8 @@ namespace Portal.Controllers
                         Middle_Name = model.Middle_Name,
                         Registration_Date = DateTime.Now,
                         Last_Date_Was_Online = DateTime.Now,
-                        Phone = model.Phone
+                        Phone = model.Phone,
+                        Exists = true
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);

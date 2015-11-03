@@ -5,14 +5,6 @@
     <a href=@Url.Action("person", new { @id=Model.Id })><img src=@Model.Picture.URL /></a>
     <div class="person-info-text">
         @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
-        @if (User.IsInRole("admin"))
-        {
-            using (Html.BeginForm("ChangeRole", "Persons", new { id = Model.Id }, FormMethod.Post))
-            {
-                @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select Role...")
-                <input class="btn add-comment-button" type="submit" value="Change role" />
-            }
-        }
         @if (Model is Teacher)
         {
             <div class="person-type">Teacher</div>

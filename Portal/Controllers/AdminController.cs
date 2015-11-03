@@ -36,7 +36,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Change(string id)
+        public ActionResult ChangeRole(string id, string role)
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
             if (person is Student)
@@ -55,11 +55,11 @@ namespace Portal.Controllers
                 p.Written_Articles = person.Written_Articles;
                 p.Blogs = person.Blogs;
 
-                db.Person.Remove(person);
+                db.Person.Remove((Student)person);
 
                 db.Person.Add(p);
 
-                //db.SaveChanges();
+                ////db.SaveChanges();
             }
             else
             {

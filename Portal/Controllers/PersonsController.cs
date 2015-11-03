@@ -76,20 +76,6 @@ namespace Portal.Controllers
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
             return View("IndexGrid", persons);
         }
-        [HttpGet]
-        public ActionResult ChangeRole(string id,string role)
-        {
-            var um = new UserManager<Person>(new UserStore<Person>(db));
-            if (!User.IsInRole("admin"))
-                return View("Error: you are not admin");
-            var person = um.FindById(id);
-            if(person == null)
-                return View("Error");
-            foreach (var i in person.Roles.ToArray())
-                um.RemoveFromRole(id, i.Role.Name);
-            um.AddToRole(id,role);
-
-            return RedirectToAction("index");
-        }
+      
     }
 }

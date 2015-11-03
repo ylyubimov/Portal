@@ -19,8 +19,9 @@ namespace Portal.Models
         public DateTime? Registration_Date { get; set; }
         public DateTime? Last_Date_Was_Online { get; set; }
         [Required]
+        public bool Exists { get; set; }
+        [Required]
         public string Email { get; set; }
-        //public string Person_Type { get; protected set; } 
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Course> Subscribed_Courses { get; set; }
         public virtual ICollection<Article> Written_Articles { get; set; }
