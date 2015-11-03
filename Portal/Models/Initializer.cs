@@ -54,7 +54,7 @@ namespace Portal.Models
             db.Picture.Add(def);
             db.SaveChanges();
             // добавление ролей
-            db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(){  Name = "admin" });
+            db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() { Name = "admin" });
             db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() { Name = "editor" });
             db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() { Name = "user" });
             db.SaveChanges();

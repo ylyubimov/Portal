@@ -99,6 +99,8 @@ namespace Portal.Controllers
                         ApplicationDbContext db = new ApplicationDbContext();
                         Person pers = db.Person.Where(p => p.Email == model.Email).FirstOrDefault();
                         pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
+                        var userM = new UserManager<Teacher>(new UserStore<Teacher>(db));
+                        userM.AddToRole(pers.Id, "user");
                         db.SaveChanges();
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "Home");
@@ -129,6 +131,8 @@ namespace Portal.Controllers
                         ApplicationDbContext db = new ApplicationDbContext();
                         Person pers = db.Person.Where(p => p.Email == model.Email).FirstOrDefault();
                         pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
+                        var userM = new UserManager<Student>(new UserStore<Student>(db));
+                        userM.AddToRole(pers.Id, "user");
                         db.SaveChanges();
                         await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "Home");

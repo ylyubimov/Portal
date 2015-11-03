@@ -28,7 +28,7 @@ namespace Portal.Controllers
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
 
-            db.Person.Remove(person);
+            person.Exists = false;
 
             //db.SaveChanges();
 
