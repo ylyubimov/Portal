@@ -8,8 +8,12 @@
                 <div class="date">@Model.Date_of_Creation</div>
                 <div class="article-actions">
                     <div class="rating">
-                        <div class="rating-plus"><img class="icon" src="~/images/icons/plusIcon.png" />@Model.Likes_Count</div>
-                        <div class="rating-minus"><img class="icon" src="~/images/icons/minusIcon.png" />@Model.Dislikes_Count</div>
+                        <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')">
+                            <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                        </div>
+                        <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')">
+                            <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                        </div>
                     </div>
                     <div class="article-settings dropdown">
                         <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png"/>Actions</div>
@@ -45,7 +49,7 @@
                 </div>
             </div>
 
-            @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post, ))
+            @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post))
             {
                 <input class="add-comment-input" type="text" placeholder="Leave your comment..." name="comment"/>
                 <input class="btn add-comment-button" type="submit" value="Send"/>

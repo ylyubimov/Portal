@@ -30,7 +30,10 @@
                     <li>@Html.ActionLink("Блоги", "index", "blogs")</li>
                     <li>@Html.ActionLink("Курсы", "index", "Courses")</li>
                     <li>@Html.ActionLink("Люди", "index", "persons")</li>
-                    <li>@Html.ActionLink("Администратор", "adminTable", "admin")</li>
+                    @if(User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Администратор", "adminTable", "admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
