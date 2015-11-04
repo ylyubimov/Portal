@@ -1,4 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Portal.Models
+
+@{ 
+    Person currentUser = ApplicationDbContext.Create().Person.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+}
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,9 +12,10 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(currentUser.Email, "person", "persons", routeValues: new { id = currentUser.Id }, htmlAttributes: new { title = "Manage", @class = "login-user-info" })
+            <a class="login-user-info" href="javascript:document.getElementById('logoutForm').submit()">Sign out</a>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a class="login-user-img-link" href=@Url.Action("person", "persons", new { id = currentUser.Id })><img src=@currentUser.Picture.URL /></a></li>
     </ul>
     }
 }

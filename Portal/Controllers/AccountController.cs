@@ -15,6 +15,12 @@ namespace Portal.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public AccountController()
             : this(new UserManager<Person>(new UserStore<Person>(new ApplicationDbContext())))
         {

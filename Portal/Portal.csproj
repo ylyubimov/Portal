@@ -194,6 +194,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CourseStyles.css" />
     <Content Include="Content\Icons.css" />
+    <Content Include="Content\LoginStyles.css" />
     <Content Include="Content\PersonStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -260,6 +261,7 @@
     <Content Include="Views\Persons\IndexGrid.cshtml" />
     <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

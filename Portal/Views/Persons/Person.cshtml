@@ -41,7 +41,7 @@
                 <h4>Subscribed courses</h4>
                 foreach (Course course in ((Student)Model).Subscribed_Courses)
                 {
-                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null);
                 }
             }
         </div>
