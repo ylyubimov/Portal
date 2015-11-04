@@ -23,7 +23,8 @@
 
 .login-form-wrap {
     width: 40%;
-    height: 50%;
+    min-width: 500px;
+    height: 30%;
     max-height: 500px;
     position: absolute;
     top: 0;
@@ -56,7 +57,7 @@
 .login-text-input:-moz-placeholder           {color:#FF8D8D;}/* Firefox 18- */
 .login-text-input:-ms-input-placeholder      {color:#FF8D8D;}
 
-.login-text-input:focus {
+.login-text-input:focus, .login-text-input:active {
     border: none;
     border-bottom: 1px solid;
 }
@@ -64,10 +65,10 @@
 .login-form-button {
     background: white;
     border-radius: 30px;
-    padding: 0 15px;
     border: 1px solid black;
     min-height: 30px;
     margin: 20px 10px;
+    vertical-align: middle;
 }
 
 .login-sign-in-button {
@@ -98,4 +99,53 @@
     border-radius: 30px;
     border: 1px solid black;
     outline: none;
+}
+
+.register-page-wrap {
+    height: 100%;
+    position: relative;
+
+    text-align: center;
+}
+
+.register-form-wrap {
+    width: 40%;
+    min-width: 500px;
+    height: 60%;
+    max-height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.register-text-input {
+    border: none;
+    border-bottom: 1px solid;
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+    color: #4C4C4C;
+}
+
+.register-select-input {
+    display: inline-block;
+    height: 40px;
+    border: none;
+    color: #FF8D8D;
+}
+
+.register-select-input option {
+    color: #FF8D8D;
+}
+
+.register-text-input::-webkit-input-placeholder {color:#FF8D8D;}
+.register-text-input::-moz-placeholder          {color:#FF8D8D;}/* Firefox 19+ */
+.register-text-input:-moz-placeholder           {color:#FF8D8D;}/* Firefox 18- */
+.register-text-input:-ms-input-placeholder      {color:#FF8D8D;}
+
+.register-text-input:focus, .register-text-input:active {
+    border-bottom: 1px solid;
 }

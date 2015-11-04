@@ -4,7 +4,7 @@
 @{ 
     Person currentUser = ApplicationDbContext.Create().Person.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
 }
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && currentUser != null)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {

@@ -54,7 +54,8 @@ namespace Portal.Controllers
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    //TODO вернуть флаг запонмить
+                    await SignInAsync(user, true);
                     return RedirectToLocal(returnUrl);
                 }
                 else

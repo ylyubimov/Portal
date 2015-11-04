@@ -38,7 +38,7 @@ namespace Portal.Controllers
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
             if(article.Author.UserName != User.Identity.Name)
-                return View("You are not the author of this article");
+                return HttpNotFound();
             if (article != null)
             {
                 var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
@@ -48,7 +48,7 @@ namespace Portal.Controllers
             }
             else
             {
-                return View("Error");
+                return HttpNotFound();
             }
         }
 
@@ -74,12 +74,12 @@ namespace Portal.Controllers
                 }
                 else
                 {
-                    return View("Error");
+                    return HttpNotFound();
                 }
             }
             else
             {
-                return View("Error");
+                return HttpNotFound();
             }
         }
 
