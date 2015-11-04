@@ -14,6 +14,7 @@ namespace Portal.Models
         public DateTime? Date_of_Creation { get; set; }
         public int? Likes_Count { get; set; }
         public int? Dislikes_Count { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Text { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }

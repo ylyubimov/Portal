@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Portal.Models;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 
 namespace Portal.Controllers
 {
@@ -33,8 +37,13 @@ namespace Portal.Controllers
         public ActionResult Edit(int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if(article.Author.UserName != User.Identity.Name)
+                return View("You are not the author of this article");
             if (article != null)
             {
+                var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
+                    new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name, Selected = article.Blogs.Contains(rr) }).ToList();
+                ViewBag.Blogs = Blogs;
                 return View(article);
             }
             else
@@ -46,18 +55,22 @@ namespace Portal.Controllers
         [Authorize]
         [HttpPost]
         [Route("{id:int}/edit")]
-        public ActionResult Edit(ArticleEdit articleEdit)
+        public ActionResult Edit(int id, string[] Blogs,Article articleEdit)
         {
-            if (articleEdit.ID != null)
+            
+            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if (article != null)
             {
-                Article article = db.Article.Where(p => articleEdit.ID == p.ID).FirstOrDefault();
-                if (article != null)
+                if(article.Author.UserName == User.Identity.Name)
                 {
                     article.Text = articleEdit.Text;
-                    article.Name = articleEdit.Text;
-                    db.Article.Add(article);
+                    article.Name = articleEdit.Name;
+                    article.Blogs.Clear();
+                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name) ).ToList() ;
+                    //db.Entry(article).State = EntityState.Modified;
+
                     db.SaveChanges();
-                    return View(article);
+                    return RedirectToAction( "Index", "articles", article.ID);
                 }
                 else
                 {
@@ -66,11 +79,46 @@ namespace Portal.Controllers
             }
             else
             {
-                Article article = new Article() { Text = articleEdit.Text, Name = articleEdit.Name, Date_of_Creation = DateTime.Now, Author = db.Person.Where( u => u.UserName == User.Identity.Name).FirstOrDefault()  };
-                db.Article.Add(article);
-                db.SaveChanges();
-                return View(article);
+                return View("Error");
             }
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        [Route("Create")]
+        public ActionResult Create()
+        {
+            var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
+                      new SelectListItem { Value = rr.Name, Text = rr.Name, Selected = false }).ToList();
+            ViewBag.Blogs = Blogs;
+            return View(new Article() { Name = "Name", Text = "Text" });           
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("Create")]
+        public ActionResult Create( string[] Blogs, Article articleEdit)
+        {
+            articleEdit.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToArray();
+            var um = new UserManager<Person>(new UserStore<Person>(db));
+            var author = um.FindByName(User.Identity.Name);
+            if (author == null)
+                return View("Can't find your account in persons");
+            articleEdit.Author = author;
+            articleEdit.Date_of_Creation = DateTime.Now;
+            articleEdit.Likes_Count = 0;
+            articleEdit.Dislikes_Count = 0;
+           /* if (!ModelState.IsValid)
+            {
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                return View("Error " + errors);
+            };*/
+            var article = db.Article.Add(articleEdit);
+            db.SaveChanges();
+            if (article == null)
+                return View("Error");
+            return RedirectToAction("Index", "articles", article.ID);
         }
 
         [Authorize]

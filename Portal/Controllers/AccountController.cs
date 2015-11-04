@@ -84,27 +84,69 @@ namespace Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Person() { UserName = model.UserName,
-                    Email = model.Email,
-                    First_Name = model.First_Name,
-                    Second_Name = model.Second_Name,
-                    Middle_Name = model.Middle_Name,
-                    Registration_Date = DateTime.Now,
-                    Last_Date_Was_Online = DateTime.Now,
-                    Phone = model.Phone };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (model.Person_Type == "Teacher")
                 {
-                    ApplicationDbContext db = new ApplicationDbContext();
-                    Person pers = db.Person.Where(p => p.Email == model.Email).FirstOrDefault();
-                    pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
-                    db.SaveChanges();
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    var user = new Teacher()
+                    {
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        First_Name = model.First_Name,
+                        Second_Name = model.Second_Name,
+                        Middle_Name = model.Middle_Name,
+                        Registration_Date = DateTime.Now,
+                        Last_Date_Was_Online = DateTime.Now,
+                        Phone = model.Phone,
+                        Exists = true
+                    };
+
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        ApplicationDbContext db = new ApplicationDbContext();
+                        Person pers = db.Person.Where(p => p.Email == model.Email).FirstOrDefault();
+                        pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
+                        var userM = new UserManager<Teacher>(new UserStore<Teacher>(db));
+                        userM.AddToRole(pers.Id, "user");
+                        db.SaveChanges();
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
                 else
                 {
-                    AddErrors(result);
+                    var user = new Student()
+                    {
+                        UserName = model.UserName,
+                        Email = model.Email,
+                        First_Name = model.First_Name,
+                        Second_Name = model.Second_Name,
+                        Middle_Name = model.Middle_Name,
+                        Registration_Date = DateTime.Now,
+                        Last_Date_Was_Online = DateTime.Now,
+                        Phone = model.Phone,
+                        Exists = true
+                    };
+
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        ApplicationDbContext db = new ApplicationDbContext();
+                        Person pers = db.Person.Where(p => p.Email == model.Email).FirstOrDefault();
+                        pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
+                        var userM = new UserManager<Student>(new UserStore<Student>(db));
+                        userM.AddToRole(pers.Id, "user");
+                        db.SaveChanges();
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
                 }
             }
 
