@@ -19,8 +19,8 @@
 }
 
 .article-settings-menu {
-    min-width: 95px;
-    width: 95px;
+    min-width: 90px;
+    width: 90px;
 }
 
 .article-settings-btn {
@@ -37,6 +37,7 @@
     border: none;
     border-radius: 0;
     margin-top: -1px;
+    box-shadow: none;
 }
 
 .open ul li {
@@ -46,6 +47,17 @@
     margin-top: -1px;
 
     padding: 5px 5px 5px 40px;
+}
+
+.open ul li a {
+    padding: 0;
+}
+
+.open ul li a:hover {
+    padding: 0;
+    border-bottom: 1px dotted;
+    display:inline-block;
+    background: #F0F0F0;
 }
 
 .article-header {
@@ -187,12 +199,12 @@
 .add-comment-button {
     margin-top: 20px;
     display: block;
-    color: #FF8D8D;
+    color: white;
     background: #FF0F0F;
     border-radius: 30px;
     padding: 0 15px;
 }
 
 .add-comment-button:hover {
-    color: white;
+    color: #FF8D8D;
 }
