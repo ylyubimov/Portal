@@ -6,7 +6,13 @@ $light_grey='#9B9B9B';
 $facebook_blue='#3B5998';
 $vk_blue='#45668E';*/
 
+@font-face {
+    font-family: SF-UI;
+    src: url(/fonts/SF-UI-Text-Regular.otf) format("opentype");
+}
+
 body {
+    font-family: SF-UI;
     background-color: #F0F0F0;
     margin-top: 52px;
     width: 100%;
@@ -176,3 +182,8 @@ input.input-validation-error {
     width: 90%;
 }
 
+.no-link-attributes, .no-link-attributes:focus, .no-link-attributes:active, .no-link-attributes:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}

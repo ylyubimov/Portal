@@ -16,10 +16,10 @@
             <div class="course-teachers">
                 @foreach(Teacher teacher in Model.Teachers)
                 {
-                    <div class="course-teacher">
+                    <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = teacher.Id })>
                         <img src=@teacher.Picture.URL />
                         <div>@teacher.First_Name @teacher.Second_Name</div>
-                    </div>
+                    </a>
                 }
             </div>
             <h4>Duration:</h4>
