@@ -196,6 +196,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CourseStyles.css" />
     <Content Include="Content\Icons.css" />
+    <Content Include="Content\LoginStyles.css" />
     <Content Include="Content\PersonStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -203,6 +204,27 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\SF-UI-Display-Black.otf" />
+    <Content Include="fonts\SF-UI-Display-Bold.otf" />
+    <Content Include="fonts\SF-UI-Display-Heavy.otf" />
+    <Content Include="fonts\SF-UI-Display-Light.otf" />
+    <Content Include="fonts\SF-UI-Display-Medium.otf" />
+    <Content Include="fonts\SF-UI-Display-Regular.otf" />
+    <Content Include="fonts\SF-UI-Display-Semibold.otf" />
+    <Content Include="fonts\SF-UI-Display-Thin.otf" />
+    <Content Include="fonts\SF-UI-Display-Ultralight.otf" />
+    <Content Include="fonts\SF-UI-Text-Bold.otf" />
+    <Content Include="fonts\SF-UI-Text-BoldItalic.otf" />
+    <Content Include="fonts\SF-UI-Text-Heavy.otf" />
+    <Content Include="fonts\SF-UI-Text-HeavyItalic.otf" />
+    <Content Include="fonts\SF-UI-Text-Italic.otf" />
+    <Content Include="fonts\SF-UI-Text-Light.otf" />
+    <Content Include="fonts\SF-UI-Text-LightItalic.otf" />
+    <Content Include="fonts\SF-UI-Text-Medium.otf" />
+    <Content Include="fonts\SF-UI-Text-MediumItalic.otf" />
+    <Content Include="fonts\SF-UI-Text-Regular.otf" />
+    <Content Include="fonts\SF-UI-Text-Semibold.otf" />
+    <Content Include="fonts\SF-UI-Text-SemiboldItalic.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -212,6 +234,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\ratingClick.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -262,6 +285,7 @@
     <Content Include="Views\Persons\IndexGrid.cshtml" />
     <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Admin\AdminTable.cshtml" />
   </ItemGroup>

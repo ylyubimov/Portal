@@ -1,0 +1,151 @@
+﻿.login-user-info {
+    padding: 5px !important;
+    height: 18px;
+}
+
+.login-user-img-link {
+    padding: 5px 15px !important;
+}
+
+.login-user-img-link img {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+}
+
+.login-page-wrap {
+    height: 100%;
+    position: relative;
+
+    text-align: center;
+}
+
+.login-form-wrap {
+    width: 40%;
+    min-width: 500px;
+    height: 30%;
+    max-height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.login-form {
+    background: white;
+    padding: 30px
+}
+
+.login-form h2 {
+    padding: 20px;
+}
+
+.login-text-input {
+    border: none;
+    border-bottom: 1px solid;
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+    color: #4C4C4C;
+}
+
+.login-text-input::-webkit-input-placeholder {color:#FF8D8D;}
+.login-text-input::-moz-placeholder          {color:#FF8D8D;}/* Firefox 19+ */
+.login-text-input:-moz-placeholder           {color:#FF8D8D;}/* Firefox 18- */
+.login-text-input:-ms-input-placeholder      {color:#FF8D8D;}
+
+.login-text-input:focus, .login-text-input:active {
+    border: none;
+    border-bottom: 1px solid;
+}
+
+.login-form-button {
+    background: white;
+    border-radius: 30px;
+    border: 1px solid black;
+    min-height: 30px;
+    margin: 20px 10px;
+    vertical-align: middle;
+}
+
+.login-sign-in-button {
+    color: black;
+}
+
+.login-sign-in-button:hover {
+    color: #FF8D8D;
+}
+
+.login-sign-in-button:focus, .login-sign-in-button:active, .login-sign-in-button:active:focus {
+    color: black;
+    border-radius: 30px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.login-sign-up-button {
+    color: #FF8D8D;
+}
+
+.login-sign-up-button:hover {
+    color: black;
+}
+
+.login-sign-up-button:focus, .login-sign-up-button:active, .login-sign-up-button:active:focus {
+    color: black;
+    border-radius: 30px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.register-page-wrap {
+    height: 100%;
+    position: relative;
+
+    text-align: center;
+}
+
+.register-form-wrap {
+    width: 40%;
+    min-width: 500px;
+    height: 60%;
+    max-height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.register-text-input {
+    border: none;
+    border-bottom: 1px solid;
+    width: 100%;
+    text-align: center;
+    min-height: 40px;
+    color: #4C4C4C;
+}
+
+.register-select-input {
+    display: inline-block;
+    height: 40px;
+    border: none;
+    color: #FF8D8D;
+}
+
+.register-select-input option {
+    color: #FF8D8D;
+}
+
+.register-text-input::-webkit-input-placeholder {color:#FF8D8D;}
+.register-text-input::-moz-placeholder          {color:#FF8D8D;}/* Firefox 19+ */
+.register-text-input:-moz-placeholder           {color:#FF8D8D;}/* Firefox 18- */
+.register-text-input:-ms-input-placeholder      {color:#FF8D8D;}
+
+.register-text-input:focus, .register-text-input:active {
+    border-bottom: 1px solid;
+}

@@ -15,6 +15,12 @@ namespace Portal.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public AccountController()
             : this(new ApplicationUserManager(new UserStore<Person>(new ApplicationDbContext())))
         {
@@ -50,7 +56,8 @@ namespace Portal.Controllers
                 var user = await userManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
-                    await SignInAsync(user, model.RememberMe);
+                    //TODO вернуть флаг запонмить
+                    await SignInAsync(user, true);
                     return RedirectToLocal(returnUrl);
                 }
                 else

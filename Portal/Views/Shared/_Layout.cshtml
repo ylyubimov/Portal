@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/BlogStyles.css")
     @Styles.Render("~/Content/CourseStyles.css")
     @Styles.Render("~/Content/PersonStyles.css")
+    @Styles.Render("~/Content/LoginStyles.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -29,7 +30,10 @@
                     <li>@Html.ActionLink("Блоги", "index", "blogs")</li>
                     <li>@Html.ActionLink("Курсы", "index", "Courses")</li>
                     <li>@Html.ActionLink("Люди", "index", "persons")</li>
-                    <li>@Html.ActionLink("Администратор", "adminTable", "admin")</li>
+                    @if(User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("Администратор", "adminTable", "admin")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -37,11 +41,9 @@
     </div>
     @RenderBody()
     <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Студенческий портал</p>
-    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/ratingClick.js")
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

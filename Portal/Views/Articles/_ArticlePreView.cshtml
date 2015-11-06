@@ -3,22 +3,26 @@
 <div class="container article-wrap">
     <div class="article-preview">
         <div class="article-header">
-            <div class="author">
+            <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id}) >
                 <img class="img-circle" src=@Model.Author.Picture.URL />
                 @Model.Author.First_Name @Model.Author.Second_Name
-            </div>
+            </a>
             <div class="date">@Model.Date_of_Creation</div>
             <div class="article-actions">
                 <div class="rating">
-                    <div class="rating-plus"><img class="icon" src="~/images/icons/plusIcon.png" />@Model.Likes_Count</div>
-                    <div class="rating-minus"><img class="icon" src="~/images/icons/minusIcon.png" />@Model.Dislikes_Count</div>
+                    <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" >
+                    <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                    </div>
+                    <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" >
+                    <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                    </div>
                 </div>
                 @if (User.Identity.Name == Model.Author.UserName)
                 {
                 <div class="article-settings dropdown">
-                    <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Settings</div>
+                    <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Actions</div>
                     <ul class="dropdown-menu article-settings-menu">
-                        <li>Delete</li>
+                        <li>@Html.ActionLink("Delete", "Delete", "Articles", new { @id = Model.ID }, new { @class = "" })</li>
                         <li>@Html.ActionLink("Edit", "Edit", "Articles", new { @id = Model.ID }, new { @class = "" })</li>
                     </ul>
                 </div>
