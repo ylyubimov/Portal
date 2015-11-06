@@ -16,12 +16,12 @@ namespace Portal.Controllers
 
         private Person[] getTeachers(Person[] persons)
         {
-            return persons.Where(p => p is Teacher).ToArray();
+            return persons.Where(p => p.Person_Type == "Teacher").ToArray();
         }
 
         private Person[] getStudents(Person[] persons)
         {
-            return persons.Where(p => p is Student).ToArray();
+            return persons.Where(p => p.Person_Type == "Student").ToArray();
         }
 
         // GET: Articles

@@ -9,7 +9,7 @@
         {
             <tr>
                 <td>@p.First_Name @p.Second_Name</td>
-                @if (p is Portal.Models.Teacher)
+                @if (p.Person_Type == "Teacher")
                 {
                     <td>Teacher</td>
                 }

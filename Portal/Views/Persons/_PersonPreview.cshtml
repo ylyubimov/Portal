@@ -5,7 +5,7 @@
     <a href=@Url.Action("person", new { @id=Model.Id })><img src=@Model.Picture.URL /></a>
     <div class="person-info-text">
         @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
-        @if (Model is Teacher)
+        @if (Model.Person_Type == "Teacher")
         {
             <div class="person-type">Teacher</div>
         }
@@ -15,5 +15,5 @@
         }
     </div>
     <a class="person-preview-phone" href="tel:@Model.Phone">@Model.Phone</a>
-    <a class="person-preview-mail" href="mailto:@Model.Email">@Model.Email</a>
+    <a class="person-preview-mail" href="mailto:@Model.UserName">@Model.UserName</a>
 </div>

@@ -13,8 +13,7 @@ namespace Portal
     {
         protected void Application_Start()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            db.Database.Initialize(false);
+            DbConfig.ConfigDataBase();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

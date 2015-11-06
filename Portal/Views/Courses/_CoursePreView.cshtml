@@ -10,7 +10,7 @@
         </div>
         <h4>Teachers:</h4>
         <div class="course-teachers">
-            @foreach (Teacher teacher in Model.Teachers)
+            @foreach (Person teacher in Model.Teachers)
             {
                 <div class="course-teacher">
                     <img src=@teacher.Picture.URL />

@@ -39,6 +39,7 @@ namespace Portal.Controllers
         public ActionResult Change(string id)
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            /*
             if (person is Student)
             {
                 Teacher p = new Teacher() { };
@@ -83,7 +84,7 @@ namespace Portal.Controllers
 
                 //db.SaveChanges();
             }
-
+            */
             return RedirectToAction("AdminTable");
         }
     }

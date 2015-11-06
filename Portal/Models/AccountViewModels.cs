@@ -5,7 +5,7 @@ namespace Portal.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
     }
 
@@ -31,7 +31,7 @@ namespace Portal.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -46,7 +46,7 @@ namespace Portal.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -67,11 +67,8 @@ namespace Portal.Models
         [Display(Name = "Отчество")]
         public string Middle_Name { get; set; }
         public string Phone { get; set; }
-        [Required(ErrorMessage ="введите e-mail")]
-        [Display(Name = "E-mail")]
-        public string Email { get; set; }
         [Required]
-        [Display(Name = "Выберите ваше положение")]
+        [Display(Name = "Ваш Статус")]
         public string Person_Type { get; set; } 
         public virtual Picture Picture { get; set; }
     }

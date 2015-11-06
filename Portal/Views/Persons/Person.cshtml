@@ -7,7 +7,7 @@
             <img src=@Model.Picture.URL />
             <div class="person-info-text">
                 <div class="person-name">@Model.First_Name @Model.Second_Name</div>
-                    @if (Model is Teacher)
+                    @if (Model.Person_Type == "Teacher")
                     {
                         <div class="person-type">Teacher</div>
                     }
@@ -29,17 +29,17 @@
             }
         </div>
         <div class="person-courses">
-            @if (Model is Teacher)
+            @if (Model.Person_Type == "Teacher")
             {
                 <h4>Taught courses</h4>
-                foreach (Course course in ((Teacher)Model).Taught_Courses)
+                foreach (Course course in Model.Taught_Courses)
                 {
                     @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
                 }
             } else
             {
                 <h4>Subscribed courses</h4>
-                foreach (Course course in ((Student)Model).Subscribed_Courses)
+                foreach (Course course in Model.Subscribed_Courses)
                 {
                     @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
                 }

@@ -16,10 +16,9 @@ namespace Portal.Models
         public string Description { get; set; }
         public int? Number_of_Hours { get; set; }
         public int? Number_of_Classes { get; set; }
-        public virtual ICollection<Person> Subscribers { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Person> Students { get; set; }
         [Required]
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<Person> Teachers { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
         public virtual Faculty Faculty { get; set; }

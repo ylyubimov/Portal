@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DbConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -177,7 +178,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleEdit.cs" />
     <Compile Include="Models\Blog.cs" />
-    <Compile Include="Models\CourseEditModel.cs" />
+    <Compile Include="Models\CourseEdit.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\ContentModels.cs" />
     <Compile Include="Models\Course.cs" />

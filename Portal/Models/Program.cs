@@ -12,9 +12,8 @@ namespace Portal.Models
         [Required]
         public string Name { get; set; }
         public int Grade { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
-        public virtual ICollection<Teacher> Teachers { get; set; }
-        public virtual ICollection<Person> Subscribers { get; set; }
+        public virtual ICollection<Person> Students { get; set; }
+        public virtual ICollection<Person> Teachers { get; set; }
         [Required]
         public virtual ICollection<Course> Courses { get; set; }
     }
