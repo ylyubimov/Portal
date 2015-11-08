@@ -39,7 +39,7 @@ namespace Portal.Controllers
         public ActionResult Edit(int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
-            if (article.Author.UserName != User.Identity.Name)
+            if (article.Author.UserName != User.Identity.Name && !User.IsInRole("admin"))
                 return HttpNotFound();
             if (article != null)
             {
@@ -63,7 +63,7 @@ namespace Portal.Controllers
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
             if (article != null)
             {
-                if (article.Author.UserName == User.Identity.Name)
+                if (article.Author.UserName != User.Identity.Name && !User.IsInRole("admin"))
                 {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
