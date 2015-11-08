@@ -29,7 +29,8 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li>@Html.ActionLink("Блоги", "index", "blogs")</li>
                     <li>@Html.ActionLink("Курсы", "index", "Courses")</li>
-                    <li>@Html.ActionLink("Люди", "index", "persons")</li>
+                    <li>@Html.ActionLink("Люди", "index", "persons")</li><li>
+                    <li>@Html.ActionLink("Программы", "index", "programs")</li>
                     @if(User.IsInRole("admin"))
                     {
                         <li>@Html.ActionLink("Администратор", "adminTable", "admin")</li>
