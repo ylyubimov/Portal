@@ -13,7 +13,7 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true)
 
-                @Html.TextBoxFor(m => m.UserName, new { @class = "login-text-input", placeholder = "username" })
+                @Html.TextBoxFor(m => m.UserName, new { @class = "login-text-input", placeholder = "email" })
                 @Html.ValidationMessageFor(m => m.UserName)
 
                 @Html.PasswordFor(m => m.Password, new { @class = "login-text-input", placeholder = "password" })
