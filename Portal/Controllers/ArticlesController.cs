@@ -145,43 +145,65 @@ namespace Portal.Controllers
             return RedirectToAction("index", id);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("{id:int}/like")]
         public JsonResult LikeArticle(HttpRequestMessage request, int id)
         {
             Article article = db.Article.Include(a => a.Author).Where(p => p.ID == id).FirstOrDefault();
+            var um = new UserManager<Person>(new UserStore<Person>(db));
+            var usr = um.FindByName(User.Identity.Name);
             int? likesCount = article.Likes_Count;
             if (likesCount == null)
             {
-                likesCount = 1;
+                likesCount = 0;
             }
-            else
+            if (!article.Dislikes_Authors.Contains(usr))
             {
-                ++likesCount;
-            }
-            article.Likes_Count = likesCount;
-
-            db.SaveChanges();   
+                if (article.Likes_Authors.Contains(usr))
+                {
+                    --likesCount;
+                    article.Likes_Authors.Remove(usr);
+                }
+                else
+                {
+                    ++likesCount;
+                    article.Likes_Authors.Add(usr);
+                }
+                article.Likes_Count = likesCount;
+                db.SaveChanges();
+            };
             return Json(new { likesCount = likesCount });
         }
 
+        [Authorize]
         [HttpPost]
         [Route("{id:int}/dislike")]
         public JsonResult DislikeArticle(HttpRequestMessage request, int id)
         {
             Article article = db.Article.Include(a => a.Author).Where(p => p.ID == id).FirstOrDefault();
+            var um = new UserManager<Person>(new UserStore<Person>(db));
+            var usr = um.FindByName(User.Identity.Name);
             int? dislikesCount = article.Dislikes_Count;
             if (dislikesCount == null)
             {
-                dislikesCount = 1;
+                dislikesCount = 0;
             }
-            else
+            if (!article.Likes_Authors.Contains(usr))
             {
-                ++dislikesCount;
-            }
-            article.Dislikes_Count = dislikesCount;
-
-            db.SaveChanges();
+                if (article.Dislikes_Authors.Contains(usr))
+                {
+                    --dislikesCount;
+                    article.Dislikes_Authors.Remove(usr);
+                }
+                else
+                {
+                    ++dislikesCount;
+                    article.Dislikes_Authors.Add(usr);
+                }
+                article.Dislikes_Count = dislikesCount;
+                db.SaveChanges();
+            };
             return Json(new { dislikesCount = dislikesCount });
         }
     }

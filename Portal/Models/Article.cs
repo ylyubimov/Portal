@@ -20,5 +20,7 @@ namespace Portal.Models
         [Required]
         public virtual Person Author { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Person> Likes_Authors { get; set; }
+        public virtual ICollection<Person> Dislikes_Authors { get; set; }
     }
 }
