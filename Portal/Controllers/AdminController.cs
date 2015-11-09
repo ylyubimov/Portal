@@ -15,10 +15,11 @@ namespace Portal.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Articles
+        [Route("")]
         [HttpGet]
         public ActionResult AdminTable()
         {
-            Person[] allPersons = db.Person.ToArray();
+            Person[] allPersons = db.Person.Where(p => true == p.Exists).ToArray();
             ViewBag.Title = "People";
             return View(allPersons);
         }
@@ -27,11 +28,8 @@ namespace Portal.Controllers
         public ActionResult Delete(string id)
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
-
             person.Exists = false;
-
-            //db.SaveChanges();
-
+            db.SaveChanges();
             return RedirectToAction("AdminTable");
         }
 
@@ -39,52 +37,14 @@ namespace Portal.Controllers
         public ActionResult Change(string id)
         {
             Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
-            /*
-            if (person is Student)
+            if (person.Person_Type == "Student")
             {
-                Teacher p = new Teacher() { };
-
-                p.First_Name = person.First_Name;
-                p.Second_Name = person.Second_Name;
-                p.Middle_Name = person.Middle_Name;
-                p.Phone = person.Phone;
-                p.Registration_Date = person.Registration_Date;
-                p.Last_Date_Was_Online = person.Last_Date_Was_Online;
-                p.Email = person.Email;
-                p.Picture = person.Picture;
-                p.Subscribed_Courses = person.Subscribed_Courses;
-                p.Written_Articles = person.Written_Articles;
-                p.Blogs = person.Blogs;
-
-                db.Person.Remove((Student)person);
-
-                db.Person.Add(p);
-
-                ////db.SaveChanges();
-            }
-            else
+                person.Person_Type = "Teacher";
+            } else
             {
-                Student p = new Student() { };
-
-                p.First_Name = person.First_Name;
-                p.Second_Name = person.Second_Name;
-                p.Middle_Name = person.Middle_Name;
-                p.Phone = person.Phone;
-                p.Registration_Date = person.Registration_Date;
-                p.Last_Date_Was_Online = person.Last_Date_Was_Online;
-                p.Email = person.Email;
-                p.Picture = person.Picture;
-                p.Subscribed_Courses = person.Subscribed_Courses;
-                p.Written_Articles = person.Written_Articles;
-                p.Blogs = person.Blogs;
-
-                db.Person.Remove(person);
-
-                db.Person.Add(p);
-
-                //db.SaveChanges();
+                person.Person_Type = "Student";
             }
-            */
+            db.SaveChanges();
             return RedirectToAction("AdminTable");
         }
     }
