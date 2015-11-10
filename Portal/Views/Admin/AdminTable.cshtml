@@ -6,9 +6,16 @@
 <table class="table table-hover">
     <tbody>
         @foreach (Portal.Models.Person p in Model)
-        {
+        { 
             <tr>
-                <td>@p.First_Name @p.Second_Name</td>
+                @if (p.Person_Type == "Student")
+                {
+                    <td>@Html.ActionLink(p.First_Name + ' ' + p.Second_Name, "index", "admin", new { @id = p.Id }, null)</td>
+                } else
+                {
+                    <td>@p.First_Name @p.Second_Name</td>
+                }
+
                 @if (p.Person_Type == "Teacher")
                 {
                     <td>Teacher</td>

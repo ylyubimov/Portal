@@ -9,6 +9,12 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Portal.Controllers
 {
+    public class MyViewModel
+    {
+        public Course[] courses { get; set; }
+        public HashSet<int> checkedIds { get; set; }
+        public string personId { get; set; }
+    }
     [RoutePrefix("admin")]
     public class AdminController : Controller
     {
@@ -24,6 +30,48 @@ namespace Portal.Controllers
             return View(allPersons);
         }
 
+        [HttpPost]
+        public ActionResult Save(string id , string[] checkedCourses)
+        {
+            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            person.Subscribed_Courses.Clear();
+            if (checkedCourses != null)
+            {
+                foreach (string name in checkedCourses)
+                {
+                    person.Subscribed_Courses.Add(db.Course.Where(c => name == c.Name).FirstOrDefault());
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("AdminTable");
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public ActionResult Index(string id)
+        {
+            Course[] allCourses = db.Course.ToArray();
+            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            Course[] studentCourses = person.Subscribed_Courses.ToArray();
+            HashSet<int> idCoursesSet = new HashSet<int>();
+            if (studentCourses != null)
+            {
+                foreach (Course c in studentCourses)
+                {
+                    idCoursesSet.Add(c.ID);
+                }
+            }
+            var viewModel = new MyViewModel
+            {
+                courses = allCourses,
+                checkedIds = idCoursesSet,
+                personId = id
+            };
+            
+            return View(viewModel);
+        }
+
+        
         [HttpPost]
         public ActionResult Delete(string id)
         {
