@@ -1,5 +1,9 @@
 ﻿@model Portal.Models.Blog
 
+@{
+    ViewBag.Title = Model.Name;
+}
+
 <div class="container-fluid">
     <div class="container blog-wrap">
         <div class="blog-header">
@@ -18,4 +22,8 @@
         </div>
     </div>
     @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
+    @using (Html.BeginForm("Create", "Articles", null, FormMethod.Get))
+    {
+        <input type="submit" class="add-article-button" value="+" />
+    }
 </div>
