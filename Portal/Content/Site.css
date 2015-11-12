@@ -71,7 +71,7 @@ input.input-validation-error {
 
 .search-wrap {
     width: 60%;
-    min-width: 600px;
+    min-width: 660px;
     position: relative;
     padding: 5px;
 }
@@ -107,6 +107,7 @@ input.input-validation-error {
     top: 0px;
     right: 5px;
     width: 15%;
+    min-width: 72px;
 }
 
 .search-bar-button:active {
@@ -128,6 +129,8 @@ input.input-validation-error {
     display: inline-block;
     vertical-align: middle;
     min-height: 34px;
+    width: 40%;
+    min-width: 105px;
 }
 
 .search-grid-radio a {
@@ -149,6 +152,7 @@ input.input-validation-error {
     position: absolute;
     right: -20px;
     vertical-align: middle;
+    min-width: 255px;
 }
 
 .search-additional a {
@@ -160,18 +164,14 @@ input.input-validation-error {
     text-decoration: none;
 }
 
-.search-grid-radio .checked {
-    color: black;
-}
-
 .search-person-select {
     background: white;
     border-radius: 20px;
     display: inline-block;
     vertical-align: middle;
     text-align: center;
-    margin: 0 25px;
-    width: 50%;
+    margin: 0 20px;
+    width: 40%;
 }
 
 .search-person-select select {

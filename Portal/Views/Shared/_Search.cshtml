@@ -1,16 +1,16 @@
 ﻿<form action=@ViewBag.Action method="post" class="search-bar">
     <div class="container search-wrap">
-        <div class="search-general" style=@(ViewBag.ExtendType == "person" ? "width:65%" : "")>
+        <div class="search-general" style=@(ViewBag.ExtendType == "person" ? "width:60%" : "")>
             <div class="input-group search-input">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                 <input class="form-control" placeholder="Search" type="text" name="SearchFor">
             </div>
             <input class="search-bar-button btn" type="submit" value="Search" />
         </div>
-        <div class="search-additional" style=@(ViewBag.ExtendType == "person" ? "width:35%" : "display:none")>
+        <div class="search-additional" style=@(ViewBag.ExtendType == "person" ? "width:40%" : "display:none")>
             <div class="search-grid-radio">
-                <a href=@Url.Action("index", "persons", new { view = "grid", type = ViewBag.Type }) class=@((ViewBag.View == "grid") ? "checked" : " ")><span class="glyphicon glyphicon-th-large" /></a>
-                <a href=@Url.Action("index", "persons", new { view = "normal", type = ViewBag.Type }) class=@((ViewBag.View != "grid") ? "checked" : " ")><span class="glyphicon glyphicon-th-list" /></a>
+                <a href=@Url.Action("index", "persons", new { view = "grid", type = ViewBag.Type })><img class="icon icon-person" src="@((ViewBag.View == "grid") ? "/images/icons/gridOnIcon.png" : "/images/icons/gridOffIcon.png")" /></a>
+                <a href=@Url.Action("index", "persons", new { view = "normal", type = ViewBag.Type })><img class="icon icon-person" src="@((ViewBag.View != "grid") ? "/images/icons/listOnIcon.png" : "/images/icons/listOffIcon.png")" /></a>
             </div>
             <div class="search-person-select">
                 <select onchange="location = this.options[this.selectedIndex].value;">

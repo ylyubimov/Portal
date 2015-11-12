@@ -5,3 +5,9 @@
      display: inline-block;
 }
 
+.icon-person {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
