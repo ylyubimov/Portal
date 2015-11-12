@@ -16,11 +16,12 @@
     display: inline-block;
     vertical-align: middle;
     background: white;
+    cursor: pointer;
 }
 
 .article-settings-menu {
-    min-width: 94px;
-    width: 94px;
+    min-width: 93px;
+    width: 93px;
 }
 
 .article-settings-btn {
@@ -46,11 +47,12 @@
     border-radius: 0;
     margin-top: -1px;
 
-    padding: 5px 5px 5px 40px;
+    padding: 0 5px;
 }
 
 .open ul li a {
     padding: 0;
+    display: inline-block;
 }
 
 .open ul li a:hover {

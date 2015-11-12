@@ -7,22 +7,6 @@ body {
     min-height: 100vh; 
 }
 
-.login-user-info {
-    padding: 5px !important;
-    height: 18px;
-}
-
-.login-user-img-link {
-    padding: 5px 15px !important;
-}
-
-.login-user-img-link img {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-}
-
 .login-page-wrap {
     height: 100%;
     position: relative;
