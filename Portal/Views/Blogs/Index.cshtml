@@ -3,3 +3,10 @@
 @Html.Partial("_Search", @"Blogs")
 @Html.Partial("_BlogPreviewList", @Model);
 
+@if (User.IsInRole("editor"))
+{
+    using (Html.BeginForm("Create", "Blogs", null, FormMethod.Get))
+    {
+        <input type="submit" class="add-blog-button" value="+" />
+    }
+}

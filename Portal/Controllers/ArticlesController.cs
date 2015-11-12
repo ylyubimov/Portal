@@ -120,7 +120,7 @@ namespace Portal.Controllers
             db.SaveChanges();
             if (article == null)
                 return View("Error");
-            return RedirectToAction("Index", "articles", article.ID);
+            return RedirectToAction("Index", "articles", new { id = article.ID });
         }
 
         [Authorize]

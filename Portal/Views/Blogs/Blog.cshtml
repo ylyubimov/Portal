@@ -22,8 +22,11 @@
         </div>
     </div>
     @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
-    @using (Html.BeginForm("Create", "Articles", null, FormMethod.Get))
+    @if (User.Identity.Name == Model.Author.UserName)
     {
-        <input type="submit" class="add-article-button" value="+" />
+        using (Html.BeginForm("Create", "Articles", null, FormMethod.Get))
+        {
+            <input type="submit" class="add-article-button" value="+" />
+        }
     }
 </div>

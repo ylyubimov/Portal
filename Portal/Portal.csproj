@@ -294,6 +294,7 @@
     <Content Include="Views\Programs\index.cshtml" />
     <Content Include="Views\Programs\_ProgramPreView.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Blogs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
