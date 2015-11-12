@@ -1,17 +1,10 @@
-﻿.login-user-info {
-    padding: 5px !important;
-    height: 18px;
-}
+﻿/*Добавлять непосредственно во view*/
 
-.login-user-img-link {
-    padding: 5px 15px !important;
-}
-
-.login-user-img-link img {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
+body {
+    margin-top: 0;
+    background: url(/images/PortalSignInUpBackground.JPG) no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh; 
 }
 
 .login-page-wrap {

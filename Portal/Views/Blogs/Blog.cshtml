@@ -1,11 +1,29 @@
 ﻿@model Portal.Models.Blog
 
+@{
+    ViewBag.Title = Model.Name;
+}
+
 <div class="container-fluid">
     <div class="container blog-wrap">
         <div class="blog-header">
+            <div class="blog-articles-length">@Model.Articles.ToArray().Length articles</div>
             <h3 class="blog-title">@Model.Name</h3>
-            @*<div class="blog-articles-length">@Model.Articles.ToArray().Length articles</div>*@
+            @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
+            {
+                <div class="blog-settings dropdown">
+                    <div class="blog-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Actions</div>
+                    <ul class="dropdown-menu blog-settings-menu">
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Delete", "Delete", "Blogs", new { @id = Model.ID }, new { @class = "" })</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Edit", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "" })</li>
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
+    @using (Html.BeginForm("Create", "Articles", null, FormMethod.Get))
+    {
+        <input type="submit" class="add-article-button" value="+" />
+    }
 </div>

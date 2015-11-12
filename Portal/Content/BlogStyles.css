@@ -16,11 +16,12 @@
     display: inline-block;
     vertical-align: middle;
     background: white;
+    cursor: pointer;
 }
 
 .article-settings-menu {
-    min-width: 94px;
-    width: 94px;
+    min-width: 93px;
+    width: 93px;
 }
 
 .article-settings-btn {
@@ -46,11 +47,12 @@
     border-radius: 0;
     margin-top: -1px;
 
-    padding: 5px 5px 5px 40px;
+    padding: 0 5px;
 }
 
 .open ul li a {
     padding: 0;
+    display: inline-block;
 }
 
 .open ul li a:hover {
@@ -143,13 +145,13 @@
 .blog-header {
     display: inline-block;
     background: white;
-    min-height: 60px;
+    min-height: 50px;
     width: 100%;
     border-radius: 35px;
     margin-top: 15px;
     position: relative;
     text-align: center;
-    padding:  15px 25px;
+    padding:  10px 25px;
 }
 
 .blog-preview {
@@ -175,7 +177,7 @@
     margin: 10px;
 }
 
-.blog-articles-length {
+.blog-articles-preview-length {
     color: #9B9B9B;
     display: inline-block;
     vertical-align: middle;
@@ -187,7 +189,14 @@
     right: 25px;
 }
 
-.blog-header .author {
+.blog-articles-length {
+    color: #9B9B9B;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     left: 25px;
 }
 
@@ -207,4 +216,49 @@
 
 .add-comment-button:hover {
     color: #FF8D8D;
+}
+
+.blog-settings {
+    display: inline-block;
+    vertical-align: middle;
+    background: white;
+    cursor: pointer;
+    right: 25px;
+    position: absolute;
+}
+
+.blog-settings-menu {
+    min-width: 93px;
+    width: 93px;
+}
+
+.blog-settings-btn {
+    padding: 5px;
+}
+
+.open > .blog-settings-btn {
+    background: #F0F0F0;
+}
+
+.blog-settings ul {
+    background: white;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    margin-top: -1px;
+    box-shadow: none;
+}
+
+.add-article-button {
+    background: #FF0F0F;
+    color: white;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
 }
