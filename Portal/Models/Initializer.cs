@@ -148,7 +148,7 @@ namespace Portal.Models
             // Добавление курсов
             List<Course> courses = new List<Course>
             {
-                new Course { Name = "PPS", Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48 },
+                new Course { Name = "PPS", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48 },
                 new Course { Name = "Funkan",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16  },
             };
             List<Course> NewCourses = new List<Course>();
@@ -158,7 +158,10 @@ namespace Portal.Models
             ////
 
             // Добавление программы
-            db.Program.Add(new Program { Name = "PMF", Courses = NewCourses });
+            db.Program.Add(new Program { Name = "3 курс", Courses = NewCourses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
+            db.Program.Add(new Program { Name = "4 курс", Courses = NewCourses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
+            db.Program.Add(new Program { Name = "5 курс", Courses = NewCourses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
+            db.Program.Add(new Program { Name = "6 курс", Courses = NewCourses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
             db.Comment.Add(new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-09-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-05-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse("2015-09-16") });
