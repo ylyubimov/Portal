@@ -283,10 +283,8 @@
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Blogs\_BlogPreview.cshtml" />
     <Content Include="Views\Blogs\_BlogPreviewList.cshtml" />
-    <Content Include="Views\Persons\IndexGrid.cshtml" />
     <Content Include="Views\Persons\_PersonPreview.cshtml" />
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Admin\AdminTable.cshtml" />
     <Content Include="Views\Programs\Edit.cshtml" />

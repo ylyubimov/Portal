@@ -1,4 +1,13 @@
-﻿.login-user-info {
+﻿/*Добавлять непосредственно во view*/
+
+body {
+    margin-top: 0;
+    background: url(/images/PortalSignInUpBackground.JPG) no-repeat center center fixed; 
+    background-size: cover;
+    min-height: 100vh; 
+}
+
+.login-user-info {
     padding: 5px !important;
     height: 18px;
 }
