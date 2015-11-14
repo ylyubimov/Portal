@@ -33,7 +33,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        [Route("")]
+        [Route("{search:int}")]
         public ActionResult Index(string SearchFor)
         {
             ViewBag.SearchValue = SearchFor;
