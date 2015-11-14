@@ -3,7 +3,14 @@
         <div class="search-general" style=@(ViewBag.ExtendType == "person" ? "width:60%" : "")>
             <div class="input-group search-input">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                <input class="form-control" placeholder="Search" type="text" name="SearchFor">
+                @if (ViewBag.SearchValue != null)
+                {
+                    <input class="form-control" value="@ViewBag.SearchValue" type="text" name="SearchFor">
+                }
+                else
+                {
+                    <input class="form-control" placeholder="Search" type="text" name="SearchFor">
+                }
             </div>
             <input class="search-bar-button btn" type="submit" value="Search" />
         </div>
