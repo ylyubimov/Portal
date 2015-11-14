@@ -69,7 +69,7 @@ namespace Portal.Controllers
         [Route("")]
         public ActionResult Index(string SearchFor)
         {
-            ViewBag.Title = "Peopl1e";
+            ViewBag.Title = "People";
             ViewBag.SearchValue = SearchFor;
             var PersonList = db.Person.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
