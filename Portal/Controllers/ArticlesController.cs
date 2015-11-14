@@ -94,7 +94,11 @@ namespace Portal.Controllers
             var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
                       new SelectListItem { Value = rr.Name, Text = rr.Name, Selected = false }).ToList();
             ViewBag.Blogs = Blogs;
-            return View(new Article() { Name = "Name", Text = "Text" });
+            var um = new UserManager<Person>(new UserStore<Person>(db));
+            var author = um.FindByName(User.Identity.Name);
+            if (author == null)
+                return View("Can't find your account in persons");
+            return View(new Article() { Name = "Name", Text = "Text", Author = author });
         }
 
         [Authorize]
