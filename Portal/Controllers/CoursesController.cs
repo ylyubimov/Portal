@@ -58,7 +58,8 @@ namespace Portal.Controllers
         [Route("")]
         public ActionResult Index(string SearchFor)
         {
-            ViewBag.Title = "Search for " + SearchFor;
+            ViewBag.Title = "Courses";
+            ViewBag.SearchValue = SearchFor;
             var CourseList = db.Course.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
             return View(CourseList);
         }
