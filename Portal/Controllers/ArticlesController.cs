@@ -124,6 +124,30 @@ namespace Portal.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("Delete/{id:int}")]
+        public ActionResult Delete(int id)
+        {
+            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            Person author = article.Author;
+            author.Written_Articles.Remove(article);
+            Blog[] blogs = article.Blogs.ToArray();
+            foreach (Blog blog in blogs)
+            { 
+                blog.Articles.Remove(article);
+            }
+            Comment[] comments = db.Comment.Where(p => p.Article.ID == article.ID).ToArray();
+            foreach (Comment comment in comments)
+            {
+                db.Comment.Remove(comment);
+            }
+            db.SaveChanges();
+            db.Article.Remove(article);
+            db.SaveChanges();
+            return RedirectToAction("index", "home"); 
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult AddComment(string comment, int id)
         {

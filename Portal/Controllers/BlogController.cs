@@ -57,7 +57,7 @@ namespace Portal.Controllers
         {
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
-            if (author != null)
+            if (author == null)
                 return View("Error");
             newBlog.Author = author;
             newBlog.Likes_Count = 0;
