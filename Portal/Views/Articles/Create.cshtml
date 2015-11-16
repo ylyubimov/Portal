@@ -5,12 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-<form action="~/Articles/Create" method="post">
-    @Html.EditorFor(m => m.Name) @Html.ValidationMessageFor(m => m.Name)<br />
-    @Html.EditorFor(m => m.Text)<br />
-    @Html.DropDownList("Blogs", (IEnumerable<SelectListItem>)ViewBag.Blogs)<br />
-    <input type="submit" value="Create" />
-</form>
-
-
+<div class="container-fluid">
+    <div class="container article-wrap">
+        <div class="article">
+            <div class="article-header">
+                <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id })>
+                    <img class="img-circle" src=@Model.Author.Picture.URL />
+                    @Model.Author.First_Name @Model.Author.Second_Name
+                </a>
+                <div class="date">@DateTime.Now</div>
+                <div class="article-actions">
+                    <div class="rating">
+                        <div class="rating-plus">
+                            <img class="icon" src="~/images/icons/plusIcon.png" /><span>0</span>
+                        </div>
+                        <div class="rating-minus">
+                            <img class="icon" src="~/images/icons/minusIcon.png" /><span>0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form action="~/Articles/Create" method="post">
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input" } }) @Html.ValidationMessageFor(m => m.Name)<br />
+                @Html.EditorFor(m => m.Text, new { htmlAttributes = new { @class = "add-comment-input", @style = "height: 300px" } })<br />
+                @Html.DropDownList("Blogs", (IEnumerable<SelectListItem>)ViewBag.Blogs, new { htmlAttributes = new { @class = "add-comment-input" } })<br />
+                <input class="btn add-comment-button" type="submit" value="Create" />
+            </form>
+        </div>
+    </div>
+</div>

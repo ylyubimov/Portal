@@ -19,7 +19,8 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Index(string SearchFor)
         {
-            ViewBag.Title = "Search for "+ SearchFor;
+            ViewBag.Title = "Home Page";
+            ViewBag.SearchValue = SearchFor;
             var ArticleList = db.Article.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
             return View(ArticleList);
         }

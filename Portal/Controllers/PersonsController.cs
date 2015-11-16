@@ -69,12 +69,13 @@ namespace Portal.Controllers
         [Route("")]
         public ActionResult Index(string SearchFor)
         {
-            ViewBag.Title = "Search for " + SearchFor;
+            ViewBag.Title = "People";
+            ViewBag.SearchValue = SearchFor;
             var PersonList = db.Person.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
                                                    ).Take(50).ToArray();
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
-            return View("IndexGrid", persons);
+            return View( persons);
         }
       
     }

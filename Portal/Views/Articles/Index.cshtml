@@ -17,6 +17,8 @@
                             <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                         </div>
                     </div>
+                    @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
+                    {
                     <div class="article-settings dropdown">
                         <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png"/>Actions</div>
                         <ul class="dropdown-menu article-settings-menu">
@@ -24,6 +26,7 @@
                             <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Edit", "Edit", "Articles", new { @id = Model.ID }, new { @class = "" })</li>
                         </ul>
                     </div>
+                    }
                 </div>
             </div>
             <h2>@Model.Name</h2>
