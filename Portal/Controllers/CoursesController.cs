@@ -63,5 +63,19 @@ namespace Portal.Controllers
             var CourseList = db.Course.Where(x => x.Name.ToUpper().IndexOf(SearchFor.ToUpper()) >= 0).Take(50).ToArray();
             return View(CourseList);
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddLesson(string Name, string Description, string Links, int id)
+        {
+            Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
+            Person author = db.Person.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+            if(!course.Teachers.Contains(author))
+                return View("Error");
+            var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
+            course.Lessons.Add(lesson);
+            db.SaveChanges();
+            return RedirectToAction("Course", id);
+        }
     }
 }

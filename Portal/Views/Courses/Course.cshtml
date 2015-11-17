@@ -32,5 +32,32 @@
                 }
             </div>
         </div>
+        @foreach (Portal.Models.Lesson lesson in Model.Lessons)
+        {
+            <div class="comment">
+                <div class="comment-header">
+                    <a class="author no-link-attributes">
+                        @lesson.Name
+                    </a>
+                </div>
+                <p>@lesson.Description</p>
+            </div>
+        }
+
+        @using (Html.BeginForm("AddLesson", "Courses", new { @id = Model.ID }, FormMethod.Post))
+        { 
+        <div class="add-comment comment">
+            <div class="comment-header">
+                <div class="author">
+                    <input class="add-comment-input" type="text" placeholder="Name" name="Name" />
+                </div>
+            </div>
+                <input class="add-comment-input" type="text" placeholder="Description" name="Description" />
+                <input class="add-comment-input" type="text" placeholder="Links" name="Links" />
+                <input class="btn add-comment-button" type="submit" value="Create" />
+            
+        </div>
+        }
     </div>
 </div>
+

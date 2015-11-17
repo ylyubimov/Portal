@@ -27,5 +27,6 @@ namespace Portal.Models
         public virtual ICollection<Program> Programs { get; set; }
         public virtual Faculty Faculty { get; set; }
         bool deleted = false;
+        public virtual ICollection<Lesson> Lessons { get; set; }
     }
 }

@@ -44,9 +44,12 @@ namespace Portal.Controllers
             if (article != null)
             {
                 var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
-                BlogsList.Remove(article.Blogs.FirstOrDefault());
-                BlogsList.Add(article.Blogs.FirstOrDefault());
-                BlogsList.Reverse();
+                if (article.Blogs.FirstOrDefault() != null)
+                {
+                    BlogsList.Remove(article.Blogs.FirstOrDefault());
+                    BlogsList.Add(article.Blogs.FirstOrDefault());
+                    BlogsList.Reverse();
+                }
                 var Blogs =  BlogsList.Select(rr =>
                     new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name, Selected = article.Blogs.Contains(rr) }).ToList();
                 ViewBag.Blogs = Blogs;
