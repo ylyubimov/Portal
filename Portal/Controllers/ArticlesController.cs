@@ -85,10 +85,10 @@ namespace Portal.Controllers
             }
         }
 
-
-        [Authorize]
+        
         [HttpGet]
         [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Create()
         {
             var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
@@ -100,10 +100,10 @@ namespace Portal.Controllers
                 return View("Can't find your account in persons");
             return View(new Article() { Name = "Name", Text = "Text", Author = author });
         }
-
-        [Authorize]
+        
         [HttpPost]
         [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Create(string[] Blogs, Article articleEdit)
         {
             articleEdit.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToArray();

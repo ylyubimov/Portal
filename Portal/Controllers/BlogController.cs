@@ -46,14 +46,15 @@ namespace Portal.Controllers
 
         [HttpGet]
         [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Create()
         {
             return View(new Blog() { Name = "Name" });
         }
-
-        [Authorize]
+        
         [HttpPost]
         [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Create( Blog newBlog )
         {
             var um = new UserManager<Person>(new UserStore<Person>(db));

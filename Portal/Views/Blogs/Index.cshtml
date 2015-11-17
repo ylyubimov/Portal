@@ -3,7 +3,7 @@
 @Html.Partial("_Search", @"Blogs")
 @Html.Partial("_BlogPreviewList", @Model);
 
-@if (User.IsInRole("editor"))
+@if (User.IsInRole("editor") || User.IsInRole("admin"))
 {
     using (Html.BeginForm("Create", "Blogs", null, FormMethod.Get))
     {

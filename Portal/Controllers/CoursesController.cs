@@ -32,10 +32,10 @@ namespace Portal.Controllers
             }
             return View(course);
         }
-
-        [Authorize]
+        
         [HttpGet]
         [Route("{id:int}/edit")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Edit(int id)
         {
             var course = db.Course.Where(p => id == p.ID).FirstOrDefault();
@@ -45,10 +45,10 @@ namespace Portal.Controllers
             };
             return View(course);
         }
-
-        [Authorize]
+        
         [HttpPost]
         [Route("{id:int}/edit")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Edit(Course course)
         {
             return View();

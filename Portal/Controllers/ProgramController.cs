@@ -45,6 +45,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpGet]
         [Route("{id:int}/edit")]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             Program program = db.Program.Where(p => id == p.ID).FirstOrDefault();
@@ -66,6 +67,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpPost]
         [Route("{id:int}/edit")]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id, string[] Courses, Program programEdit)
         {
 
@@ -95,6 +97,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpGet]
         [Route("Create")]
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             if (!User.IsInRole("admin"))
@@ -108,6 +111,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpPost]
         [Route("Create")]
+        [Authorize(Roles = "admin")]
         public ActionResult Create(string[] Courses, Program programEdit)
         {
             programEdit.Courses = db.Course.Where(p => Courses.Contains(p.Name)).ToArray();
