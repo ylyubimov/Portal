@@ -43,7 +43,11 @@ namespace Portal.Controllers
                 return HttpNotFound();
             if (article != null)
             {
-                var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
+                var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
+                BlogsList.Remove(article.Blogs.FirstOrDefault());
+                BlogsList.Add(article.Blogs.FirstOrDefault());
+                BlogsList.Reverse();
+                var Blogs =  BlogsList.Select(rr =>
                     new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name, Selected = article.Blogs.Contains(rr) }).ToList();
                 ViewBag.Blogs = Blogs;
                 return View(article);
@@ -87,12 +91,20 @@ namespace Portal.Controllers
 
         
         [HttpGet]
-        [Route("Create")]
+        [Route("{blogId:int}/Create")]
         [Authorize(Roles = "editor, admin")]
-        public ActionResult Create()
+        public ActionResult Create(int blogId)
         {
-            var Blogs = db.Blog.OrderBy(r => r.Name).ToList().Select(rr =>
-                      new SelectListItem { Value = rr.Name, Text = rr.Name, Selected = false }).ToList();
+            var blog = db.Blog.Where(b => b.ID == blogId).FirstOrDefault();
+            var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
+            if (blog != null)
+            {
+                BlogsList.Remove(blog);
+                BlogsList.Add(blog);
+                BlogsList.Reverse();
+            };
+            var Blogs = BlogsList.Select(rr =>
+               new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Blogs = Blogs;
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
@@ -104,6 +116,7 @@ namespace Portal.Controllers
         [HttpPost]
         [Route("Create")]
         [Authorize(Roles = "editor, admin")]
+        [Route("{blogId:int}/Create")]
         public ActionResult Create(string[] Blogs, Article articleEdit)
         {
             articleEdit.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToArray();

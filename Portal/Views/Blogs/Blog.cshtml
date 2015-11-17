@@ -24,7 +24,7 @@
     @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
     @if (User.Identity.Name == Model.Author.UserName)
     {
-        using (Html.BeginForm("Create", "Articles", null, FormMethod.Get))
+        using (Html.BeginForm(Model.ID.ToString()+"/Create", "Articles", FormMethod.Get))
         {
             <input type="submit" class="add-article-button" value="+" />
         }
