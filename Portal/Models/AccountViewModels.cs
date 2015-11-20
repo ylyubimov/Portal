@@ -66,7 +66,7 @@ namespace Portal.Models
         public string Second_Name { get; set; }
         [Display(Name = "Отчество")]
         public string Middle_Name { get; set; }
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
         [Required]
         [Display(Name = "Ваш Статус")]
         public string Person_Type { get; set; } 

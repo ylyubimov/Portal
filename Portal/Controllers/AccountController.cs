@@ -96,7 +96,7 @@ namespace Portal.Controllers
                     Middle_Name = model.Middle_Name,
                     Registration_Date = DateTime.Now,
                     Last_Date_Was_Online = DateTime.Now,
-                    PhoneNumber = model.Phone,
+                    PhoneNumber = model.PhoneNumber,
                     Exists = true,
                     Person_Type = model.Person_Type
                 };   

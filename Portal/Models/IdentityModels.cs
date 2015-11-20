@@ -105,6 +105,7 @@ namespace Portal.Models
         public DbSet<Faculty> Faculty{ get; set; }
         public DbSet<Base_Company> Base_Company { get; set; }
         public DbSet<Base_Part> Base_Part { get; set; }
+        public DbSet<Lesson> Lesson { get; set; }
     }
 }
 
