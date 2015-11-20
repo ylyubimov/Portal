@@ -25,7 +25,7 @@ namespace Portal.Controllers
         [HttpGet]
         public ActionResult AdminTable()
         {
-            Person[] allPersons = db.Person.Where(p => true == p.Exists).ToArray();
+            Person[] allPersons = db.Users.Where(p => true == p.Exists).ToArray();
             ViewBag.Title = "People";
             return View(allPersons);
         }
@@ -33,7 +33,7 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Save(string id , string[] checkedCourses)
         {
-            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
             person.Subscribed_Courses.Clear();
             if (checkedCourses != null)
             {
@@ -51,7 +51,7 @@ namespace Portal.Controllers
         public ActionResult Index(string id)
         {
             Course[] allCourses = db.Course.ToArray();
-            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
             Course[] studentCourses = person.Subscribed_Courses.ToArray();
             HashSet<int> idCoursesSet = new HashSet<int>();
             if (studentCourses != null)
@@ -75,7 +75,7 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
             person.Exists = false;
             db.SaveChanges();
             return RedirectToAction("AdminTable");
@@ -84,7 +84,7 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Change(string id)
         {
-            Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
             if (person.Person_Type == "Student")
             {
                 person.Person_Type = "Teacher";

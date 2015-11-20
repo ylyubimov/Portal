@@ -16,9 +16,7 @@ using Microsoft.Owin;
 namespace Portal.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
-    {
-    }
+
 
     public class ApplicationUserManager : UserManager<Person>
     {
@@ -31,7 +29,7 @@ namespace Portal.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<Person>
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -102,7 +100,6 @@ namespace Portal.Models
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Course> Course { get; set; }
-        public DbSet<Person> Person { get; set; }
         public DbSet<Program> Program { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<Faculty> Faculty{ get; set; }

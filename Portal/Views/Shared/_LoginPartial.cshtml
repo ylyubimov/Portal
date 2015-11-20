@@ -2,7 +2,7 @@
 @using Portal.Models
 
 @{ 
-    Person currentUser = ApplicationDbContext.Create().Person.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+    Person currentUser = ApplicationDbContext.Create().Users.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
 }
 @if (Request.IsAuthenticated && currentUser != null)
 {

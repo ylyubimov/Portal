@@ -69,7 +69,7 @@ namespace Portal.Controllers
         public ActionResult AddLesson(string Name, string Description, string Links, int id)
         {
             Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
-            Person author = db.Person.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+            Person author = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
             if(!course.Teachers.Contains(author))
                 return View("Error");
             var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };

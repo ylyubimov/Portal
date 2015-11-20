@@ -33,7 +33,7 @@ namespace Portal.Controllers
             ViewBag.Roles = list;
             ViewBag.Title = "People";
             ViewBag.ExtendType = "person";
-            Person[] AllPersons = db.Person.ToArray();
+            Person[] AllPersons = db.Users.ToArray();
             Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
             ViewBag.Type = type;
             
@@ -49,7 +49,7 @@ namespace Portal.Controllers
         {
             if (id  != "")
             {
-                Person person = db.Person.Where(p => id == p.Id).FirstOrDefault();
+                Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
                 if (person != null)
                 {
                     return View(person);
@@ -71,7 +71,7 @@ namespace Portal.Controllers
         {
             ViewBag.Title = "People";
             ViewBag.SearchValue = SearchFor;
-            var PersonList = db.Person.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
+            var PersonList = db.Users.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
                                                    ).Take(50).ToArray();
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };

@@ -12,7 +12,7 @@ using Portal.Models;
 
 namespace Portal.Models
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
@@ -66,11 +66,11 @@ namespace Portal.Models
             var user = new ApplicationUserManager(new UserStore<Person>(db));
             List<Person> Persons = new List<Person>
             {
-                new Person{ Person_Type = "Student" , Exists = true, UserName =    "qr@yandex.ru", Email =   "qr@yandex.ru", Phone="+7(912)2345678", First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich",   Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015 , Picture = p1   },
-                new Person{ Person_Type = "Student", Exists = true,  UserName =   "qrd@yandex.ru", Email =  "qrd@yandex.ru", Phone="+7(912)2342678", First_Name = "Grisha", Second_Name ="Yakovlev", Middle_Name = "Sergeevich1",   Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy2, Picture = p2  },
+                new Person{ Person_Type = "Student" , Exists = true, UserName =    "qr@yandex.ru", Email =   "qr@yandex.ru", PhoneNumber="+7(912)2345678", First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich",   Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015 , Picture = p1   },
+                new Person{ Person_Type = "Student", Exists = true,  UserName =   "qrd@yandex.ru", Email =  "qrd@yandex.ru", PhoneNumber="+7(912)2342678", First_Name = "Grisha", Second_Name ="Yakovlev", Middle_Name = "Sergeevich1",   Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy2, Picture = p2  },
                 new Person{ Person_Type = "Student", Exists = true,  UserName =   "qra@yandex.ru", Email =  "qra@yandex.ru", First_Name = "Dmitriy", Second_Name ="Kozhoma", Middle_Name = "Vasilevich",   Group = group2, Faculty = fupm, Base_Company = basefupm , Picture = p3 },
-                new Person{ Person_Type = "Teacher", Exists = true,  UserName =  "qrad@yandex.ru", Email = "qrad@yandex.ru", Phone="+7(912)2322678", First_Name = "Uriy", Second_Name = "Lushkov", Middle_Name = "Urevich", Base_Company = basefivt , Picture = p4  },
-                new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qrasd@yandex.ru", Email ="qrasd@yandex.ru", Phone="+7(912)2342678",First_Name = "Sergey", Second_Name = "Lavrov", Middle_Name = "Michailovich",  Base_Company =  basefupm , Picture = p5 },
+                new Person{ Person_Type = "Teacher", Exists = true,  UserName =  "qrad@yandex.ru", Email = "qrad@yandex.ru", PhoneNumber="+7(912)2322678", First_Name = "Uriy", Second_Name = "Lushkov", Middle_Name = "Urevich", Base_Company = basefivt , Picture = p4  },
+                new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qrasd@yandex.ru", Email ="qrasd@yandex.ru", PhoneNumber="+7(912)2342678",First_Name = "Sergey", Second_Name = "Lavrov", Middle_Name = "Michailovich",  Base_Company =  basefupm , Picture = p5 },
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qradz@yandex.ru", Email ="qradz@yandex.ru", First_Name = "Konstantin", Second_Name = "Kobalt", Middle_Name = "Borisovich",  Base_Company = basefivt , Picture = p6 }
             };
 
@@ -94,13 +94,13 @@ namespace Portal.Models
             db.SaveChanges();
 
             List<Person> NewPersons = new List<Person>();
-            foreach ( Person p in db.Person)
+            foreach ( Person p in db.Users)
                 NewPersons.Add(p);
             ////
 
             // Получение сущностей с ID
             List<Person> authors = new List<Person>();
-            foreach (Person p in db.Person)
+            foreach (Person p in db.Users)
             {
                 if( p.Person_Type == "Teacher")
                     authors.Add(p);

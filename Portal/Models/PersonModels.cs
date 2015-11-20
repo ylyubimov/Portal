@@ -15,12 +15,10 @@ namespace Portal.Models
         public string First_Name { get; set; }
         public string Second_Name { get; set; }
         public string Middle_Name { get; set; }
-        public string Phone { get; set; }
+        //public string Phone { get; set; }
         public DateTime? Registration_Date { get; set; }
         public DateTime? Last_Date_Was_Online { get; set; }
         public string Person_Type { get; set; }
-        [Required]
-        public string Email { get; set; }
         [Required]
         public bool Exists { get; set; }
         public virtual Picture Picture { get; set; }

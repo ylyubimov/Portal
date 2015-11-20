@@ -96,14 +96,14 @@ namespace Portal.Controllers
                     Middle_Name = model.Middle_Name,
                     Registration_Date = DateTime.Now,
                     Last_Date_Was_Online = DateTime.Now,
-                    Phone = model.Phone,
+                    PhoneNumber = model.Phone,
                     Exists = true,
                     Person_Type = model.Person_Type
                 };   
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Person pers =  db.Person.Where(p => p.UserName == model.UserName).FirstOrDefault();
+                    Person pers =  db.Users.Where(p => p.UserName == model.UserName).FirstOrDefault();
                     pers.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").FirstOrDefault();
                     userManager.AddToRole(pers.Id, "user");
                     db.SaveChanges();

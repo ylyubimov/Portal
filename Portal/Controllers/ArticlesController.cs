@@ -173,7 +173,7 @@ namespace Portal.Controllers
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
 
-            Person authorComment = db.Person.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+            Person authorComment = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
             //TODO: delete this line
 
             Comment c = new Comment();
