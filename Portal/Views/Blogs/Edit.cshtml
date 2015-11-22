@@ -1,0 +1,12 @@
+﻿@using Portal.Models
+@model Blog
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm("edit", "blogs", new { @id = Model.ID }, FormMethod.Post))
+{
+    @Html.EditorFor(m => m.Name);
+    <input type="submit" />
+}
