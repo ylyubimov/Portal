@@ -9,6 +9,8 @@
             </a>
             <div class="date">@Model.Date_of_Creation</div>
             <div class="article-actions">
+                @if (User.Identity.Name != "")
+                {
                 <div class="rating">
                     <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" >
                     <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
@@ -17,6 +19,7 @@
                     <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                     </div>
                 </div>
+                }
                 @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
                 {
                 <div class="article-settings dropdown">
