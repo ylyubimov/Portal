@@ -84,7 +84,15 @@
     vertical-align: middle;
 }
 
-.person-contacts a::before {
+.person-contacts a span {
+    border-bottom: 1px dotted;
+}
+
+.person-contacts a span:hover {
+    border-bottom: none;
+}
+
+.person-contacts a::after {
     color: transparent;
     content: "|";
 }
@@ -106,8 +114,11 @@
 .person-blogs a {
     color: #9B9B9B;
     text-decoration: none;
-    display: block;
     padding: 10px 0;
+}
+
+.person-blog {
+    padding: 5px 0;
 }
 
 .person-courses a {
@@ -115,6 +126,10 @@
     text-decoration: none;
     display: block;
     padding: 10px 0;
+}
+
+.person-course {
+    padding: 5px 0;
 }
 
 .person-preview {
@@ -145,6 +160,14 @@
     color: black;
 }
 
+.person-preview-phone span {
+    border-bottom: 1px dotted;
+}
+
+.person-preview-phone span:hover{
+    border-bottom: 1px none;
+}
+
 .person-preview-phone:hover {
     text-decoration: none;
     color: black;
@@ -158,6 +181,14 @@
     display: inline-block;
     vertical-align: middle;
     color: black;
+}
+
+.person-preview-mail span {
+    border-bottom: 1px dotted;
+}
+
+.person-preview-mail span:hover{
+    border-bottom: 1px none;
 }
 
 .person-preview-mail:hover {
