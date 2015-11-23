@@ -1,6 +1,10 @@
 ﻿@using Portal.Models
 @model Person
 
+@{
+    ViewBag.Title = Model.First_Name + " " + Model.Second_Name;
+}
+
 <div class="container person-wrap">
     <div class="person">
         <div class="person-general-info">

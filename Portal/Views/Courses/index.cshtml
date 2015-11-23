@@ -1,5 +1,9 @@
 ﻿@Html.Partial("_Search", @"Courses")
 
+@{ 
+    ViewBag.Title = "Courses"
+}
+
 <div class="container course-filter-wrap">
     <div class="course-filter">
         @Html.ActionLink("3 курс", "index", new { grade = 3, basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == 3 ? "course-active-link" : "") })

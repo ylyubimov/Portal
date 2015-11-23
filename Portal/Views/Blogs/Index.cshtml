@@ -1,5 +1,9 @@
 ﻿@model Portal.Models.Blog[]
 
+@{ 
+    ViewBag.Title = "Blogs";
+}
+
 @Html.Partial("_Search", @"Blogs")
 @Html.Partial("_BlogPreviewList", @Model);
 
