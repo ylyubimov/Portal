@@ -48,7 +48,7 @@ namespace Portal.Controllers
         [Route("{id:int}")]
         public ActionResult Course(int id)
         {
-            Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
+            Course course = db.Course.Include("Lessons").Where(p => id == p.ID).FirstOrDefault();
             if (course == null)
             {
                 return HttpNotFound();
