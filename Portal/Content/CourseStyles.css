@@ -71,3 +71,8 @@
 .course-active-link {
     color: red !important;
 }
+
+.course-blogs {
+    padding: 5px 0 15px;
+    font-size: 18px;
+}
