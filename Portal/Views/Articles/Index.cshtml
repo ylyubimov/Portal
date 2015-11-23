@@ -1,7 +1,9 @@
-﻿@model Portal.Models.Article
+﻿@using Portal.Models
+@model Article
 
 @{
     ViewBag.Title = Model.Name;
+    Person currentPerson = Portal.Models.ApplicationDbContext.Create().Users.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
 }
 
 <div class="container-fluid">
@@ -54,8 +56,8 @@
         <div class="add-comment comment">
             <div class="comment-header">
                 <div class="author">
-                    <img class="img-circle" src=@Portal.Models.ApplicationDbContext.Create().Person.Where(p => p.UserName == User.Identity.Name).FirstOrDefault().Picture.URL />
-                    @User.Identity.Name
+                    <img class="img-circle" src=@currentPerson.Picture.URL />
+                    @currentPerson.First_Name @currentPerson.Second_Name
                 </div>
             </div>
 
