@@ -9,14 +9,42 @@
             </a>
             <div class="date">@Model.Date_of_Creation</div>
             <div class="article-actions">
-                <div class="rating">
-                    <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" >
-                    <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
-                    </div>
-                    <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" >
-                    <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
-                    </div>
-                </div>
+                @if (User.Identity.Name != "")
+                {
+                    if (Model.Dislikes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
+                    {
+                        <div class="rating">
+                            <div class="rating-plus" style="opacity: 0.4;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            </div>
+                            <div class="rating-minus" style="opacity: 1;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            </div>
+                        </div>
+                    }
+                    else if (Model.Likes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
+                    {
+                        <div class="rating">
+                            <div class="rating-plus" style="opacity: 1;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            </div>
+                            <div class="rating-minus" style="opacity: 0.4;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rating">
+                            <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
+                            <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            </div>
+                            <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')"  id=@("DislikesCountOnClick" + Model.ID)>
+                            <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            </div>
+                        </div>
+                    }
+                }
                 @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
                 {
                 <div class="article-settings dropdown">

@@ -11,21 +11,44 @@ namespace Portal.Controllers
     public class CoursesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        //
+        
         // GET: /Courses/
+        [HttpGet]
         [Route("")]
-        public ActionResult Index()
+        public ActionResult Index(int? grade, string basePart)
         {
             ViewBag.Title = "Courses";
-            ViewBag.Action = "/course";
-            var courses = db.Course.OrderBy(t => t.Report_Date).ToArray();
+            ViewBag.Grade = grade;
+            ViewBag.BasePart = basePart;
+            Course[] courses = new Course[] { };
+            if (grade != null && basePart != null)
+            {
+                courses = db.Course.Where(p => p.BasePart == basePart && p.Grade == grade).ToArray();
+            } else
+            {
+                if (grade != null)
+                {
+                    courses = db.Course.Where(p => p.Grade == grade).ToArray();
+                }
+                else
+                {
+                    if (basePart != null)
+                    {
+                        courses = db.Course.Where(p => p.BasePart == basePart).ToArray();
+                    } else
+                    {
+                        courses = db.Course.ToArray();
+                    }
+                }
+            }
+            
             return View(courses);
         }
 
         [Route("{id:int}")]
         public ActionResult Course(int id)
         {
-            Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
+            Course course = db.Course.Include("Lessons").Where(p => id == p.ID).FirstOrDefault();
             if (course == null)
             {
                 return HttpNotFound();

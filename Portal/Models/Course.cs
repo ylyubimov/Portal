@@ -27,5 +27,8 @@ namespace Portal.Models
         public virtual ICollection<Program> Programs { get; set; }
         public virtual Faculty Faculty { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; }
+
+        public int? Grade { get; set; }
+        public string BasePart { get; set; }
     }
 }

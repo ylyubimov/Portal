@@ -70,5 +70,35 @@ namespace Portal.Controllers
                 return View("Error");
             return RedirectToAction("Blog", "Blogs", new { id = blog.ID });
         }
+
+        [HttpGet]
+        [Route("{id:int}/edit")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Edit( int id )
+        {
+            Blog blog = db.Blog.Where(b => b.ID == id).FirstOrDefault();
+            if (blog == null)
+            {
+                HttpNotFound();
+            }
+            return View(blog);
+        }
+
+        [HttpPost]
+        [Route("{blogId:int}/edit")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Edit(int blogId, Blog editedBlog)
+        {
+            Blog blog = db.Blog.Where(b => b.ID == blogId).FirstOrDefault();
+            if (blog != null)
+            {
+                if (blog.Author.UserName == User.Identity.Name || User.IsInRole("admin"))
+                {
+                    blog.Name = editedBlog.Name;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Blog", "Blogs", new { id = blogId });
+        }
     }
 }

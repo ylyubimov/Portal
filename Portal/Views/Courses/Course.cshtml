@@ -2,7 +2,7 @@
 @model Course
 
 @{
-    ViewBag.Title = "Course";
+    ViewBag.Title = Model.Name + " course";
 }
 
 <div class="container-fluid">
@@ -10,6 +10,13 @@
         <div class="course">
             <div class="course-description">
                 <h2>@Model.Name</h2>
+                <div class="course-blogs">
+                    Blogs:
+                    @foreach (Blog blog in Model.Blogs)
+                    {
+                        @Html.ActionLink(blog.Name, "blog", "blogs", null, null) 
+                    }
+                </div>
                 @Model.Description
             </div>
             <h4>Teachers:</h4>
@@ -25,13 +32,10 @@
             <h4>Duration:</h4>
             <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hours</div>
             <h4>Materials:</h4>
-            <div class="course-materials">
-                @foreach(Blog blog in Model.Blogs)
-                {
-                    <div>Blog @Html.ActionLink(blog.Name, "blog", "blogs", null, null)</div>
-                }
+            <div class="course-materials">       
             </div>
         </div>
+
         @foreach (Portal.Models.Lesson lesson in Model.Lessons)
         {
             <div class="comment">
@@ -41,22 +45,26 @@
                     </a>
                 </div>
                 <p>@lesson.Description</p>
+                <p>@lesson.Links</p>
             </div>
         }
 
+        
+
         @using (Html.BeginForm("AddLesson", "Courses", new { @id = Model.ID }, FormMethod.Post))
-        { 
-        <div class="add-comment comment">
-            <div class="comment-header">
-                <div class="author">
-                    <input class="add-comment-input" type="text" placeholder="Name" name="Name" />
+        {
+            <div class="add-comment comment">
+                <h4>Add new lesson:</h4>
+                <div class="comment-header">
+                    <div class="author">
+                        <input class="add-comment-input" type="text" placeholder="Lesson name" name="Name" />
+                    </div>
                 </div>
-            </div>
-                <input class="add-comment-input" type="text" placeholder="Description" name="Description" />
-                <input class="add-comment-input" type="text" placeholder="Links" name="Links" />
-                <input class="btn add-comment-button" type="submit" value="Create" />
+                    <input class="add-comment-input" type="text" placeholder="Description" name="Description" />
+                    <input class="add-comment-input" type="text" placeholder="Links list" name="Links" />
+                    <input class="btn add-comment-button" type="submit" value="Create new lesson" />
             
-        </div>
+            </div>
         }
     </div>
 </div>

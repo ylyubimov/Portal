@@ -1,6 +1,10 @@
 ﻿@using Portal.Models
 @model Person
 
+@{
+    ViewBag.Title = Model.First_Name + " " + Model.Second_Name;
+}
+
 <div class="container person-wrap">
     <div class="person">
         <div class="person-general-info">
@@ -16,32 +20,39 @@
                         <div class="person-type">Student</div>
                     }
                 <div class="person-contacts">
-                    <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a>
-                    <a href="mailto:@Model.Email">@Model.Email</a>
+                    <a href="tel:@Model.PhoneNumber"><span>@Model.PhoneNumber</span></a>
+                    <a href="mailto:@Model.Email"><span>@Model.Email</span></a>
                 </div>
             </div>
         </div>
         <div class="person-blogs">
             <h4>Most popular blogs</h4>
-            @foreach(Blog blog in Model.Blogs)
+            @foreach (Blog blog in Model.Blogs)
             {
-                @Html.ActionLink(blog.Name, "blog", "blog", new { @id = blog.ID }, null)
+                <div class="person-blog">
+                    @Html.ActionLink(blog.Name, "blog", "blog", new { @id = blog.ID }, null)
+                </div>
             }
-        </div>
+                </div>
         <div class="person-courses">
             @if (Model.Person_Type == "Teacher")
             {
                 <h4>Taught courses</h4>
                 foreach (Course course in Model.Taught_Courses)
                 {
-                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                    <div class="person-course">
+                        @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                    </div>
                 }
-            } else
+            }
+            else
             {
                 <h4>Subscribed courses</h4>
                 foreach (Course course in Model.Subscribed_Courses)
                 {
-                    @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null);
+                    <div class="person-course">
+                        @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                    </div>
                 }
             }
         </div>

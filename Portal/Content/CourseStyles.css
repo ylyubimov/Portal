@@ -46,3 +46,33 @@
 .course-materials {
     text-align: center;
 }
+
+.course-filter-wrap {
+    text-align: center;
+    width: 60%;
+    min-width: 600px;
+}
+
+.course-filter {
+    display: inline-block;
+    background: white;
+    text-align: center;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 25px 15px 0;
+}
+
+.course-filter a {
+    margin: 0 10px;
+    display: inline-block;
+    color: black;
+}
+
+.course-active-link {
+    color: red !important;
+}
+
+.course-blogs {
+    padding: 5px 0 15px;
+    font-size: 18px;
+}
