@@ -1,3 +1,20 @@
 ﻿@Html.Partial("_Search", @"Courses")
+
+<div class="container course-filter-wrap">
+    <div class="course-filter">
+        @Html.ActionLink("3 курс", "index", new { grade = 3, basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == 3 ? "course-active-link" : "") })
+        @Html.ActionLink("4 курс", "index", new { grade = 4, basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == 4 ? "course-active-link" : "") })
+        @Html.ActionLink("5 курс", "index", new { grade = 5, basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == 5 ? "course-active-link" : "") })
+        @Html.ActionLink("6 курс", "index", new { grade = 6, basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == 6 ? "course-active-link" : "") })
+        @Html.ActionLink("Все курсы", "index", new { basePart = ViewBag.basePart }, new { @class = (ViewBag.Grade == null ? "course-active-link" : "") })
+    </div>
+    <div class="course-filter">
+        @Html.ActionLink("КЛ", "index", new { grade = ViewBag.grade, basePart = "KL" }, new { @class = (ViewBag.BasePart == "KL" ? "course-active-link" : "") })
+        @Html.ActionLink("РИОТ", "index", new { grade = ViewBag.grade, basePart = "RIOT" }, new { @class = (ViewBag.BasePart == "RIOT" ? "course-active-link" : "") })
+        @Html.ActionLink("Все кафедры", "index", new { grade = ViewBag.grade }, new { @class = (ViewBag.BasePart == null ? "course-active-link" : "") })
+
+    </div>
+</div>
+
 @Html.Partial("_CoursePreViewList",(Portal.Models.Course[])Model)
 

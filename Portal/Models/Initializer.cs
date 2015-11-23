@@ -148,8 +148,11 @@ namespace Portal.Models
             // Добавление курсов
             List<Course> courses = new List<Course>
             {
-                new Course { Name = "PPS", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48 },
-                new Course { Name = "Funkan",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16  },
+                new Course { Name = "PPS", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48, Grade = 4, BasePart = "KL" },
+                new Course { Name = "Funkan",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 5, BasePart = "RIOT" },
+                new Course { Name = ".Net", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "Самый лучший курс на свете", Number_of_Classes = 10, Number_of_Hours = 40, Grade = 6 },
+                new Course { Name = "TPS",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "Тестирование - очень важная часть разработки", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 3  },
+                new Course { Name = "Physics",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "^_^", Number_of_Hours = 4, Number_of_Classes = 6 }
             };
             List<Course> NewCourses = new List<Course>();
             foreach (Course c in courses)
