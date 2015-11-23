@@ -75,8 +75,9 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
-            person.Exists = false;
+            //Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
+            //person.Exists = false;
+            Person.DeleteUser(db, id);
             db.SaveChanges();
             return RedirectToAction("AdminTable");
         }

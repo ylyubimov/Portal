@@ -43,5 +43,74 @@ namespace Portal.Models
         public virtual ICollection<Course> Taught_Courses { get; set; }
         public virtual ICollection<Program> Taught_Programs { get; set; }
         //
+        public static void DeleteUser(ApplicationDbContext db, string id)
+        {
+            Person person = db.Users.Where(p => p.Id == id).FirstOrDefault();
+            person = db.Entry(person).Entity;
+            Person def = db.Users.Where(p => p.UserName == "Deleted").FirstOrDefault();
+            List<Article> articles = person.Written_Articles.ToList();
+            foreach ( Article a in articles)
+            {
+                db.Entry(a).Entity.Author = def;
+            }
+            db.SaveChanges();
+            foreach ( Comment c in db.Comment)
+            {
+                db.Entry(c).Entity.Author = def;
+            }
+            db.SaveChanges();
+            if (person.Subscribed_Courses != null)
+            {
+                person.Subscribed_Courses.Clear();
+            }
+            db.SaveChanges();
+            if (person.Subscribed_Programs != null)
+            {
+                person.Subscribed_Programs.Clear();
+            }
+            db.SaveChanges();
+            if (person.Taught_Courses != null)
+            {
+                foreach( Course c in person.Taught_Courses )
+                {
+                    c.Teachers.Remove(person);
+                    if( c.Teachers.Count() == 0)
+                    {
+                        c.Teachers.Add(def);
+                    }
+                    
+                }
+                person.Taught_Courses.Clear();
+            }
+            db.SaveChanges();
+            if (person.Taught_Programs != null)
+            {
+
+                foreach (Program p in person.Taught_Programs)
+                {
+                    p.Teachers.Remove(person);
+                    if (p.Teachers.Count() == 0)
+                    {
+                        p.Teachers.Add(def);
+                    }
+                }
+                person.Taught_Programs.Clear();
+            }
+            db.SaveChanges();
+            List<Blog> blogs;
+            if (person.Blogs != null)
+            {
+                blogs = person.Blogs.ToList();
+                foreach( Blog b in blogs)
+                {
+                    Blog bl = db.Entry(b).Entity;
+                    bl.Author = def;
+                }
+            }
+            db.SaveChanges();
+            db.Users.Remove(person);
+            db.SaveChanges();
+        }
     }
+   
 }

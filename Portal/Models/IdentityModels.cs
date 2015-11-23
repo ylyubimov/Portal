@@ -46,6 +46,12 @@ namespace Portal.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<Person>()
+            .HasMany(c => c.Written_Articles)
+            .WithRequired(c => c.Author);
+
+            //modelBuilder.
+
             modelBuilder.Entity<Course>()
             .HasMany(c => c.Students)
             .WithMany(p => p.Subscribed_Courses)
