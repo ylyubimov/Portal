@@ -23,6 +23,7 @@ body {
 .body-wrap {    
     margin-top: 52px;
     margin-bottom: 52px;
+    height: 80%;
 }
 
 input:focus {
