@@ -98,17 +98,7 @@ namespace Portal.Controllers
         [Authorize(Roles = "editor, admin")]
         public ActionResult Create(int blogId)
         {
-            var blog = db.Blog.Where(b => b.ID == blogId).FirstOrDefault();
-            var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
-            if (blog != null)
-            {
-                BlogsList.Remove(blog);
-                BlogsList.Add(blog);
-                BlogsList.Reverse();
-            };
-            var Blogs = BlogsList.Select(rr =>
-               new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Blogs = Blogs;
+            ViewBag.BlodID = blogId;
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
             if (author == null)
@@ -120,9 +110,9 @@ namespace Portal.Controllers
         [Route("Create")]
         [Authorize(Roles = "editor, admin")]
         [Route("{blogId:int}/Create")]
-        public ActionResult Create(string[] Blogs, Article articleEdit)
+        public ActionResult Create(int blogId, Article articleEdit)
         {
-            articleEdit.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToArray();
+            articleEdit.Blogs = db.Blog.Where(p => p.ID == blogId ).ToArray();
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
             if (author == null)
@@ -131,11 +121,6 @@ namespace Portal.Controllers
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
             articleEdit.Dislikes_Count = 0;
-            /* if (!ModelState.IsValid)
-             {
-                 var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-                 return View("Error " + errors);
-             };*/
             var article = db.Article.Add(articleEdit);
             db.SaveChanges();
             if (article == null)
