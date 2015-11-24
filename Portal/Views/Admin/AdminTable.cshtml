@@ -16,25 +16,19 @@
                     <td>@p.First_Name @p.Second_Name</td>
                 }
 
-                @if (p.Person_Type == "Teacher")
-                {
-                    <td>Teacher</td>
-                }
-                else
-                {
-                    <td>Student</td>
-                }
-                
                 @using (Html.BeginForm("Change", "Admin", new { id = p.Id }, FormMethod.Post))
                 {
-                    <td><input class="change-button" type="submit" value="Change" /></td>
+                    <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
                 }
+
                 @using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
                 {
                     <td><input class="delete-button" type="submit" value="Delete" /></td>
                 }
                 
-            </tr>
+                <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
+
+</tr>
         }
     </tbody>
 </table>
