@@ -179,7 +179,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
@@ -300,12 +299,6 @@
     <Content Include="Views\Persons\_PersonPreviewList.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Admin\AdminTable.cshtml" />
-    <Content Include="Views\Programs\Edit.cshtml" />
-    <Content Include="Views\Programs\Create.cshtml" />
-    <Content Include="Views\Programs\_ProgramPreViewList.cshtml" />
-    <Content Include="Views\Programs\Program.cshtml" />
-    <Content Include="Views\Programs\index.cshtml" />
-    <Content Include="Views\Programs\_ProgramPreView.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Blogs\Create.cshtml" />
     <Content Include="Views\Blogs\Edit.cshtml" />
