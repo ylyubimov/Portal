@@ -29,6 +29,16 @@
                     </a>
                 }
             </div>
+            <h4>Students:</h4>
+            <div class="course-teachers">
+                @foreach (Person student in Model.Students)
+                {
+                    <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = student.Id })>
+                        <img src=@student.Picture.URL />
+                        <div>@student.First_Name @student.Second_Name</div>
+                    </a>
+                }
+            </div>
             <h4>Duration:</h4>
             <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hours</div>
             <h4>Materials:</h4>

@@ -23,6 +23,22 @@
     margin-bottom: 10px;
 }
 
+.course-students {
+    text-align: center;
+}
+
+.course-student {
+    display: inline-block;
+    margin: 10px;
+}
+
+.course-student img {
+    height: 45px;
+    width: 45px;
+
+    border-radius: 50%;
+}
+
 .course-teachers {
     text-align: center;
 }
