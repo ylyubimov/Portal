@@ -6,29 +6,44 @@
 <table class="table table-hover">
     <tbody>
         @foreach (Portal.Models.Person p in Model)
-        { 
+        {
             <tr>
                 @if (p.Person_Type == "Student")
                 {
                     <td>@Html.ActionLink(p.First_Name + ' ' + p.Second_Name, "index", "admin", new { @id = p.Id }, null)</td>
-                } else
+                    using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
+                    }
+
+                    using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        <td><input class="delete-button" type="submit" value="Delete" /></td>
+                    }
+
+                    <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
+                }
+            </tr>
+        }
+        @foreach (Portal.Models.Person p in Model)
+        {
+            <tr>
+                @if (p.Person_Type == "Teacher")
                 {
                     <td>@p.First_Name @p.Second_Name</td>
-                }
+                    using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
+                    }
 
-                @using (Html.BeginForm("Change", "Admin", new { id = p.Id }, FormMethod.Post))
-                {
-                    <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
-                }
+                    using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        <td><input class="delete-button" type="submit" value="Delete" /></td>
+                    }
 
-                @using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
-                {
-                    <td><input class="delete-button" type="submit" value="Delete" /></td>
+                    <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
                 }
-                
-                <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
-
-</tr>
+            </tr>
         }
     </tbody>
 </table>

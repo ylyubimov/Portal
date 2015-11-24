@@ -83,9 +83,10 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Change(string id)
+        public ActionResult ChangeType(string id)
         {
             Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
+
             if (person.Person_Type == "Student")
             {
                 person.Person_Type = "Teacher";
