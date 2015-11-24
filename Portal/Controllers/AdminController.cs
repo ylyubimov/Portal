@@ -15,6 +15,7 @@ namespace Portal.Controllers
         public HashSet<int> checkedIds { get; set; }
         public string personId { get; set; }
     }
+
     [RoutePrefix("admin")]
     public class AdminController : Controller
     {
@@ -95,6 +96,32 @@ namespace Portal.Controllers
                 person.Person_Type = "Student";
             }
             db.SaveChanges();
+            return RedirectToAction("AdminTable");
+        }
+        [HttpPost]
+        public ActionResult ChangeRole(string id)
+        {
+            Person p = db.Users.Where(pp => id == pp.Id).FirstOrDefault();
+
+            var userManager = new ApplicationUserManager(new UserStore<Person>(db));
+
+            if (userManager.IsInRole(p.Id, "editor"))
+            {
+                userManager.RemoveFromRole(p.Id, "editor");
+                userManager.AddToRole(p.Id, "admin");
+            } else if (userManager.IsInRole(p.Id, "admin"))
+            {
+                userManager.RemoveFromRole(p.Id, "admin");
+                userManager.AddToRole(p.Id, "user");
+
+            } else
+            {
+                userManager.RemoveFromRole(p.Id, "user");
+                userManager.AddToRole(p.Id, "editor");
+            }
+
+            db.SaveChanges();
+                       
             return RedirectToAction("AdminTable");
         }
     }

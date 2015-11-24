@@ -1,10 +1,19 @@
-﻿@model Portal.Models.Person[]
+﻿@using Portal.Models
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@model Person[]
+
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
+    var userManager = new ApplicationUserManager(new UserStore<Person>(db));
+}
 
 @Html.Partial("_Search", @"Persons")
 <h2>@ViewBag.Title</h2>
 
 <table class="table table-hover">
     <tbody>
+
         @foreach (Portal.Models.Person p in Model)
         {
             <tr>
@@ -16,12 +25,26 @@
                         <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
                     }
 
+                    using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        if (userManager.IsInRole(p.Id, "editor"))
+                        {
+                            <td><input class="change-button" type="submit" value="editor" /></td>
+                        }
+                        if (userManager.IsInRole(p.Id, "admin"))
+                        {
+                            <td><input class="change-button" type="submit" value="admin" /></td>
+                        }
+                        if (userManager.IsInRole(p.Id, "user"))
+                        {
+                            <td><input class="change-button" type="submit" value="user" /></td>
+                        }
+                    }
+
                     using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
                     {
                         <td><input class="delete-button" type="submit" value="Delete" /></td>
-                    }
-
-                    <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
+                    }                    
                 }
             </tr>
         }
@@ -36,12 +59,26 @@
                         <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
                     }
 
+                    using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
+                    {
+                        if (userManager.IsInRole(p.Id, "editor"))
+                        {
+                            <td><input class="change-button" type="submit" value="editor" /></td>
+                        }
+                        if (userManager.IsInRole(p.Id, "admin"))
+                        {
+                            <td><input class="change-button" type="submit" value="admin" /></td>
+                        }
+                        if (userManager.IsInRole(p.Id, "user"))
+                        {
+                            <td><input class="change-button" type="submit" value="user" /></td>
+                        }
+                    }
+
                     using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
                     {
                         <td><input class="delete-button" type="submit" value="Delete" /></td>
                     }
-
-                    <td><input class="delete-button" type="submit" value=@p.Roles.ToArray() /></td>
                 }
             </tr>
         }
