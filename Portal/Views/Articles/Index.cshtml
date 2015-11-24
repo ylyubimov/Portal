@@ -69,16 +69,36 @@
         </div>
         
         @foreach (Portal.Models.Comment comment in Model.Comments) {
-            <div class="comment">
-                <div class="comment-header">
-                    <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = comment.Author.Id }) >
-                        <img class="img-circle" src=@comment.Author.Picture.URL />
-                        @comment.Author.First_Name @comment.Author.Second_Name
-                    </a>
-                    <div class="date">commented on @comment.Create_Time</div>
+            if (User.Identity.Name == comment.Author.UserName)
+            {
+                using (Html.BeginForm("DeleteComment", "Articles", new { id = Model.ID, idComment = comment.ID }, FormMethod.Post))
+                {
+                    <div class="comment">
+                        <div class="comment-header">
+                            <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = comment.Author.Id })>
+                                <img class="img-circle" src=@comment.Author.Picture.URL />
+                                @comment.Author.First_Name @comment.Author.Second_Name
+                            </a>
+                            <div class="date">commented on @comment.Create_Time</div>
+                            <input class="btn add-comment-button" type="submit" value="Delete" style="float:right" />
+                        </div>
+                            <p>@comment.Text</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="comment">
+                    <div class="comment-header">
+                        <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = comment.Author.Id })>
+                            <img class="img-circle" src=@comment.Author.Picture.URL />
+                            @comment.Author.First_Name @comment.Author.Second_Name
+                        </a>
+                        <div class="date">commented on @comment.Create_Time</div>
+                    </div>
+                    <p>@comment.Text</p>
                 </div>
-                <p>@comment.Text</p>
-            </div>
+            }
         }
 
         <div class="add-comment comment">

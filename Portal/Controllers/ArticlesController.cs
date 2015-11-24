@@ -190,6 +190,25 @@ namespace Portal.Controllers
 
         [Authorize]
         [HttpPost]
+        public ActionResult DeleteComment(int idComment, int id)
+        {
+            Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if (article == null)
+                return View("error");
+            Comment comment = db.Comment.Where(c => c.ID == idComment).FirstOrDefault();
+            if(comment == null)
+                return View("error");
+            if (comment.Author.UserName != User.Identity.Name)
+                return View("error");
+
+            article.Comments.Remove(comment);
+            db.Comment.Remove(comment);
+            db.SaveChanges();
+            return RedirectToAction("index", id);
+        }
+
+        [Authorize]
+        [HttpPost]
         [Route("{id:int}/like")]
         public JsonResult LikeArticle(HttpRequestMessage request, int id)
         {
