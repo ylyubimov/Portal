@@ -157,12 +157,11 @@ namespace Portal.Controllers
                 blog.Articles.Remove(article);
             }
             Comment[] comments = db.Comment.Where(p => p.Article.ID == article.ID).ToArray();
+            db.Article.Remove(article);
             foreach (Comment comment in comments)
             {
                 db.Comment.Remove(comment);
             }
-            db.SaveChanges();
-            db.Article.Remove(article);
             db.SaveChanges();
             return RedirectToAction("index", "home"); 
         }
