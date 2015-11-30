@@ -12,7 +12,7 @@ using Portal.Models;
 
 namespace Portal.Models
 {
-    public class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext db)
         {
@@ -63,6 +63,7 @@ namespace Portal.Models
             roleManager.Create(role2);
             roleManager.Create(role3);
             db.SaveChanges();
+      
 
             //доавление юзеров 
             var user = new ApplicationUserManager(new UserStore<Person>(db));
@@ -76,7 +77,6 @@ namespace Portal.Models
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qradz@yandex.ru", Email ="qradz@yandex.ru", First_Name = "Konstantin", Second_Name = "Kobalt", Middle_Name = "Borisovich",  Base_Company = basefivt , Picture = p6 },
                 new Person{ Person_Type = "Teacher", Exists = false, UserName = "Deleted", Email = "Deleted", First_Name = "Deleted", Second_Name = "Deleted" , Middle_Name = "Deleted", PhoneNumber = "Deleted", Picture = def  }
             };
-
             foreach (Person u in Persons)
             {
                 var result = user.Create(u, "qwerty");
@@ -171,6 +171,7 @@ namespace Portal.Models
             db.Comment.Add(new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-09-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-05-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse("2015-09-16") });
+
             base.Seed(db);
         }
     }
