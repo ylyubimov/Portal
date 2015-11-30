@@ -1,0 +1,15 @@
+﻿@using Portal.Models
+@model Course
+
+@{
+    ViewBag.Title = "Create course";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Courses", null, FormMethod.Post))
+{
+    @Html.EditorFor(m => m.Name)
+    @Html.ValidationMessageFor(m => m.Name)
+    <input type="submit" value="Create" />
+}

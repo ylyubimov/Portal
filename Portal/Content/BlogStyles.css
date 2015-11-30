@@ -276,3 +276,17 @@
     border: none;
     font-size: 20px;
 }
+
+.add-course-button{
+    background: #FF0F0F;
+    color: white;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+}

@@ -22,3 +22,11 @@
 
 @Html.Partial("_CoursePreViewList",(Portal.Models.Course[])Model)
 
+@if (User.IsInRole("editor") || User.IsInRole("admin"))
+{
+    using (Html.BeginForm("Create", "Course", null, FormMethod.Get))
+    {
+        <input type="submit" class="add-course-button" value="+" />
+    }
+}
+

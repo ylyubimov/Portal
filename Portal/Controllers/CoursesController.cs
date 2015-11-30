@@ -100,5 +100,27 @@ namespace Portal.Controllers
             db.SaveChanges();
             return RedirectToAction("Course", id);
         }
+
+
+        [HttpGet]
+        [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Create()
+        {
+            return View(new Course() { Name = "Name" });
+        }
+
+        [HttpPost]
+        [Route("Create")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Create(Course newCourse)
+        {
+            //var course = db.Course.Add(newCourse);
+            //course.Teachers.Add(db.Person.Where.Person)
+            //db.SaveChanges();
+            //if (course == null)
+               // return View("Error");
+            return RedirectToAction("Index", "Courses");
+        }
     }
 }
