@@ -69,7 +69,7 @@
         </div>
         
         @foreach (Portal.Models.Comment comment in Model.Comments) {
-            if (User.Identity.Name == comment.Author.UserName)
+            if (User.Identity.Name == comment.Author.UserName || User.IsInRole("admin"))
             {
                 using (Html.BeginForm("DeleteComment", "Articles", new { id = Model.ID, idComment = comment.ID }, FormMethod.Post))
                 {
