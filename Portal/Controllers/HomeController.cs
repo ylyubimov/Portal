@@ -12,7 +12,7 @@ namespace Portal.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            var ArticleList = db.Article.OrderBy(x => x.Date_of_Creation ).Take(5).ToArray();
+            var ArticleList = db.Article.OrderByDescending(x => x.Date_of_Creation).Take(5).ToArray();
             return View(ArticleList);
         }
             

@@ -18,8 +18,7 @@ namespace Portal.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Articles
-
-        [Authorize]
+        
         [Route("{id:int}")]
         public ActionResult Index(int id)
         {

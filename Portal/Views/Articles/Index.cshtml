@@ -16,7 +16,7 @@
                 </a>
                 <div class="date">@Model.Date_of_Creation</div>
                 <div class="article-actions">
-                    @if (User.Identity.Name != "")
+                    @if (User.Identity.IsAuthenticated)
                     {
                         if (Model.Dislikes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
                         {
@@ -51,6 +51,17 @@
                                 </div>
                             </div>
                         }
+                    }
+                    else
+                    {
+                        <div class="rating">
+                            <div class="rating-plus" style="opacity: 0.4;"  id=@("LikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            </div>
+                            <div class="rating-minus" style="opacity: 0.4;" id=@("DislikesCountOnClick" + Model.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            </div>
+                        </div>
                     }
                     @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
                     {
@@ -100,7 +111,8 @@
                 </div>
             }
         }
-
+        @if (User.Identity.IsAuthenticated)
+        {
         <div class="add-comment comment">
             <div class="comment-header">
                 <div class="author">
@@ -115,5 +127,6 @@
                 <input class="btn add-comment-button" type="submit" value="Send"/>
             }
         </div>
+        };
     </div>
 </div>
