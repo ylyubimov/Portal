@@ -23,6 +23,8 @@ namespace Portal.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Articles
+
+        [Authorize(Roles = "admin")]
         [Route("")]
         [HttpGet]
         public ActionResult AdminTable()
@@ -33,6 +35,7 @@ namespace Portal.Controllers
             return View(allPersons);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Save(string id , string[] checkedCourses)
         {
@@ -49,6 +52,7 @@ namespace Portal.Controllers
             return RedirectToAction("AdminTable");
         }
 
+        [Authorize(Roles = "admin")]
         [Route("{id}")]
         [HttpGet]
         public ActionResult Index(string id)
@@ -74,7 +78,8 @@ namespace Portal.Controllers
             return View(viewModel);
         }
 
-        
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Delete(string id)
         {
@@ -85,6 +90,7 @@ namespace Portal.Controllers
             return RedirectToAction("AdminTable");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult ChangeType(string id)
         {
@@ -100,6 +106,7 @@ namespace Portal.Controllers
             db.SaveChanges();
             return RedirectToAction("AdminTable");
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult ChangeRole(string id)
         {

@@ -64,7 +64,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpPost]
         [Route("{id:int}/edit")]
-        public ActionResult Edit(int id, string[] Blogs, Article articleEdit)
+        public ActionResult Edit(int id, Article articleEdit)
         {
 
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
@@ -75,7 +75,6 @@ namespace Portal.Controllers
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
                     article.Blogs.Clear();
-                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToList();
                     //db.Entry(article).State = EntityState.Modified;
 
                     db.SaveChanges();
@@ -125,7 +124,7 @@ namespace Portal.Controllers
             db.SaveChanges();
             if (article == null)
                 return View("Error");
-            return RedirectToAction("Index", "articles", new { id = article.ID });
+            return RedirectToAction("blog", "Blogs", new { id = article.Blogs.First().ID });
         }
 
         [Authorize]
