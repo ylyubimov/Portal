@@ -183,7 +183,7 @@ namespace Portal.Controllers
             Comment comment = db.Comment.Where(c => c.ID == idComment).FirstOrDefault();
             if(comment == null)
                 return View("error");
-            if (comment.Author.UserName != User.Identity.Name)
+            if (comment.Author.UserName != User.Identity.Name && User.IsInRole("admin"))
                 return View("error");
 
             article.Comments.Remove(comment);

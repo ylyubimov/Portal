@@ -62,9 +62,10 @@
         }
 
         
-
-        @using (Html.BeginForm("AddLesson", "Courses", new { @id = Model.ID }, FormMethod.Post))
+        @if (Model.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() != null || User.IsInRole("admin"))
         {
+            using (Html.BeginForm("AddLesson", "Courses", new { @id = Model.ID }, FormMethod.Post))
+            {
             <div class="add-comment comment">
                 <h4>Add new lesson:</h4>
                 <div class="comment-header">
@@ -77,6 +78,7 @@
                     <input class="btn add-comment-button" type="submit" value="Create new lesson" />
             
             </div>
+            }
         }
     </div>
 </div>
