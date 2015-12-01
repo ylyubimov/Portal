@@ -43,7 +43,7 @@ namespace Portal.Models
             Picture p4 = new Picture { Name = "ava1", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg" };
             Picture p5 = new Picture { Name = "ava2", URL = "http://fs00.infourok.ru/images/doc/148/171148/hello_html_33f0bc3e.jpg" };
             Picture p6 = new Picture { Name = "ava3", URL = "http://www.yaom.ru/wp-content/uploads/will-smith.jpeg" };
-            Picture def = new Picture { Name = "DefaultPicture", URL = "/images/genel.jpg"  };
+            Picture def = new Picture { Name = "DefaultPicture", URL = "/images/genel.jpg" };
 
             p1 = db.Picture.Add(p1);
             p2 = db.Picture.Add(p2);
@@ -63,7 +63,7 @@ namespace Portal.Models
             roleManager.Create(role2);
             roleManager.Create(role3);
             db.SaveChanges();
-      
+
 
             //доавление юзеров 
             var user = new ApplicationUserManager(new UserStore<Person>(db));
@@ -75,7 +75,7 @@ namespace Portal.Models
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName =  "qrad@yandex.ru", Email = "qrad@yandex.ru", PhoneNumber="+7(912)2322678", First_Name = "Uriy", Second_Name = "Lushkov", Middle_Name = "Urevich", Base_Company = basefivt , Picture = p4  },
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qrasd@yandex.ru", Email ="qrasd@yandex.ru", PhoneNumber="+7(912)2342678",First_Name = "Sergey", Second_Name = "Lavrov", Middle_Name = "Michailovich",  Base_Company =  basefupm , Picture = p5 },
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qradz@yandex.ru", Email ="qradz@yandex.ru", First_Name = "Konstantin", Second_Name = "Kobalt", Middle_Name = "Borisovich",  Base_Company = basefivt , Picture = p6 },
-                new Person{ Person_Type = "Teacher", Exists = false, UserName = "Deleted", Email = "Deleted", First_Name = "Deleted", Second_Name = "Deleted" , Middle_Name = "Deleted", PhoneNumber = "Deleted", Picture = def  }
+                new Person{ Person_Type = "Fake", Exists = false, UserName = "Deleted", Email = "Deleted", First_Name = "Deleted", Second_Name = "Deleted" , Middle_Name = "Deleted", PhoneNumber = "Deleted", Picture = def  }
             };
             foreach (Person u in Persons)
             {
@@ -89,16 +89,27 @@ namespace Portal.Models
             db.SaveChanges();
 
 
-            Person t = new Person { Person_Type = "Admin", Exists = true, UserName =  "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4 };
+            Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4 };
 
             user.Create(t, "qwerty");
             db.SaveChanges();
             user.AddToRole(t.Id, "admin");
             db.SaveChanges();
 
-            List<Person> NewPersons = new List<Person>();
-            foreach ( Person p in db.Users)
-                NewPersons.Add(p);
+            List<Person> NewTeachers = new List<Person>();
+            foreach (Person p in db.Users)
+                if (p.Person_Type == "Teacher")
+                {
+                    NewTeachers.Add(p);
+                }
+
+            List<Person> NewStudents = new List<Person>();
+            foreach (Person p in db.Users) { 
+                if (p.Person_Type == "Student")
+                {
+                    NewStudents.Add(p);
+                }
+            }
 
             // Получение сущностей с ID
             List<Person> authors = new List<Person>();
@@ -155,19 +166,19 @@ namespace Portal.Models
             // Добавление курсов
             List<Course> courses = new List<Course>
             {
-                db.Course.Add(new Course { Name = "PPS", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48, Grade = 4, BasePart = "KL", Lessons = lessons }),
-                db.Course.Add(new Course { Name = "Funkan",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 5, BasePart = "RIOT" }),
-                db.Course.Add(new Course { Name = ".Net", Students = NewPersons.GetRange(0,3), Teachers = NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "Самый лучший курс на свете", Number_of_Classes = 10, Number_of_Hours = 40, Grade = 6 }),
-                db.Course.Add(new Course { Name = "TPS",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "Тестирование - очень важная часть разработки", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 3 }),
-                db.Course.Add(new Course { Name = "Physics",  Students = NewPersons.GetRange(0,3), Teachers =NewPersons.GetRange(3,3), Blogs = new List<Blog> {}, Description = "^_^", Number_of_Hours = 4, Number_of_Classes = 6 })
+                db.Course.Add(new Course { Name = "PPS", Students = NewStudents, Teachers = NewTeachers, Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48, Grade = 4, BasePart = "KL", Lessons = lessons }),
+                db.Course.Add(new Course { Name = "Funkan",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 5, BasePart = "RIOT" }),
+                db.Course.Add(new Course { Name = ".Net", Students = NewStudents, Teachers = NewTeachers, Blogs = new List<Blog> {}, Description = "Самый лучший курс на свете", Number_of_Classes = 10, Number_of_Hours = 40, Grade = 6 }),
+                db.Course.Add(new Course { Name = "TPS",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "Тестирование - очень важная часть разработки", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 3 }),
+                db.Course.Add(new Course { Name = "Physics",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "^_^", Number_of_Hours = 4, Number_of_Classes = 6 })
             };
             db.SaveChanges();
 
             // Добавление программы
-            db.Program.Add(new Program { Name = "3 курс", Courses = courses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
-            db.Program.Add(new Program { Name = "4 курс", Courses = courses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
-            db.Program.Add(new Program { Name = "5 курс", Courses = courses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
-            db.Program.Add(new Program { Name = "6 курс", Courses = courses, Teachers = NewPersons.GetRange(3, 3), Students = NewPersons.GetRange(0, 3) });
+            db.Program.Add(new Program { Name = "3 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
+            db.Program.Add(new Program { Name = "4 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
+            db.Program.Add(new Program { Name = "5 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
+            db.Program.Add(new Program { Name = "6 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
             db.Comment.Add(new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-09-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-05-06") });
             db.Comment.Add(new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse("2015-09-16") });
