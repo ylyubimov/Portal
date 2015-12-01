@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,6 +28,7 @@ namespace Portal.Controllers
         public ActionResult AdminTable()
         {
             Person[] allPersons = db.Users.Where(p => true == p.Exists).ToArray();
+            Array.Sort(allPersons, new Comparison<Person>((x, y) => String.Compare(x.Second_Name, y.Second_Name)));
             ViewBag.Title = "People";
             return View(allPersons);
         }
