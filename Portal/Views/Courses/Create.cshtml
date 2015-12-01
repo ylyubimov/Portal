@@ -11,5 +11,17 @@
 {
     @Html.EditorFor(m => m.Name)
     @Html.ValidationMessageFor(m => m.Name)
+    <div class="dropdown" id="TeachersId" >
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Teachers <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @foreach (Person p in ApplicationDbContext.Create().Users)
+            {
+                if (p.Person_Type == "Teacher")
+                {
+                    <li><a href="#"> @p.UserName @p.First_Name @p.Second_Name @p.Middle_Name </a></li>
+                }
+            }
+        </ul>
+    </div>
     <input type="submit" value="Create" />
 }
