@@ -19,66 +19,37 @@
             <tr>
                 @if (p.Person_Type == "Student")
                 {
-                    <td>@Html.ActionLink(p.First_Name + ' ' + p.Second_Name, "index", "admin", new { @id = p.Id }, null)</td>
-                    using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
-                    {
-                        <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
-                    }
-
-                    using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
-                    {
-                        if (userManager.IsInRole(p.Id, "editor"))
-                        {
-                            <td><input class="change-button" type="submit" value="editor" /></td>
-                        }
-                        if (userManager.IsInRole(p.Id, "admin"))
-                        {
-                            <td><input class="change-button" type="submit" value="admin" /></td>
-                        }
-                        if (userManager.IsInRole(p.Id, "user"))
-                        {
-                            <td><input class="change-button" type="submit" value="user" /></td>
-                        }
-                    }
-
-                    using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
-                    {
-                        <td><input class="delete-button" type="submit" value="Delete" /></td>
-                    }                    
+                    <td>@Html.ActionLink(p.Second_Name + ' ' + p.First_Name, "index", "admin", new { @id = p.Id }, null)</td>
                 }
-            </tr>
-        }
-        @foreach (Portal.Models.Person p in Model)
-        {
-            <tr>
-                @if (p.Person_Type == "Teacher")
+                else
                 {
-                    <td>@p.First_Name @p.Second_Name</td>
-                    using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
-                    {
-                        <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
-                    }
+                    <td>@p.Second_Name @p.First_Name</td>
+                }
+                
+                @using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
+                {
+                    <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
+                }
 
-                    using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
+                @using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
+                {
+                    if (userManager.IsInRole(p.Id, "editor"))
                     {
-                        if (userManager.IsInRole(p.Id, "editor"))
-                        {
-                            <td><input class="change-button" type="submit" value="editor" /></td>
-                        }
-                        if (userManager.IsInRole(p.Id, "admin"))
-                        {
-                            <td><input class="change-button" type="submit" value="admin" /></td>
-                        }
-                        if (userManager.IsInRole(p.Id, "user"))
-                        {
-                            <td><input class="change-button" type="submit" value="user" /></td>
-                        }
+                        <td><input class="change-button" type="submit" value="editor" /></td>
                     }
+                    if (userManager.IsInRole(p.Id, "admin"))
+                    {
+                        <td><input class="change-button" type="submit" value="admin" /></td>
+                    }
+                    if (userManager.IsInRole(p.Id, "user"))
+                    {
+                        <td><input class="change-button" type="submit" value="user" /></td>
+                    }
+                }
 
-                    using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
-                    {
-                        <td><input class="delete-button" type="submit" value="Delete" /></td>
-                    }
+                @using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
+                {
+                    <td><input class="delete-button" type="submit" value="Delete" /></td>
                 }
             </tr>
         }
