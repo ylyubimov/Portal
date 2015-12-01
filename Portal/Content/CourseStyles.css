@@ -92,3 +92,28 @@
     padding: 5px 0 15px;
     font-size: 18px;
 }
+
+.hide {
+    display: none; 
+}
+.hide + label ~ div{
+    display: none;
+}
+
+.hide + label {
+    background-color: white;
+    padding: 0px 0px 0px 0px;
+    display: inline-block; 
+    margin-bottom: 20px;
+}
+
+.hide:checked + label {
+    color: black;
+    border-bottom: 0;
+}
+
+.hide:checked + label + div {
+    display: block;
+    background: white;
+    padding: 10px; 
+}

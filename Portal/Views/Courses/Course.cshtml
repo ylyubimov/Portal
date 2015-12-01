@@ -29,8 +29,14 @@
                     </a>
                 }
             </div>
-            <h4>Students:</h4>
-            <div class="course-teachers">
+            <h4>Materials:</h4>
+            <div class="course-materials">       
+            </div>
+        </div>
+        <div class="course_list_of_students">
+            <input type="checkbox" id="hd" class="hide" />
+            <label for="hd">Список студентов</label>
+            <div>
                 @foreach (Person student in Model.Students)
                 {
                     <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = student.Id })>
@@ -39,11 +45,7 @@
                     </a>
                 }
             </div>
-            <h4>Duration:</h4>
-            <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hours</div>
-            <h4>Materials:</h4>
-            <div class="course-materials">       
-            </div>
+            <br/>
         </div>
 
         @foreach (Portal.Models.Lesson lesson in Model.Lessons)
