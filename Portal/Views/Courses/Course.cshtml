@@ -39,13 +39,21 @@
             <input type="checkbox" id="hd" class="hide" />
             <label for="hd">Список студентов</label>
             <div>
-                @foreach (Person student in Model.Students)
-                {
-                    <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = student.Id })>
-                        <img src=@student.Picture.URL />
-                        <div>@student.First_Name @student.Second_Name</div>
-                    </a>
-                }
+                <table border="1" width="500">
+                    <tr>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>Email</th>
+                    </tr>
+                    @foreach (Person student in Model.Students)
+                    {
+                        <tr>
+                            <td>@student.Second_Name @student.First_Name</td>
+                            <td>@student.PhoneNumber</td>
+                            <td>@student.Email</td>
+                        </tr>
+                    }
+                </table>                
             </div>
             <br/>
         </div>
