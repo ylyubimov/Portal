@@ -20,8 +20,12 @@
 }
 
 .article-settings-menu {
-    min-width: 93px;
-    width: 93px;
+    min-width: 120px;
+    width: 120px;
+}
+
+.article-menu-item {
+    font-size: 10px;
 }
 
 .article-settings-btn {
@@ -30,6 +34,8 @@
 
 .open > .article-settings-btn {
     background: #F0F0F0;
+    min-width: 120px;
+    width: 120px;
 }
 
 .article-settings ul {
@@ -205,6 +211,13 @@
     border: none;
 }
 
+.delete-comment-button {
+    display: block;
+    color: white;
+    border-radius: 30px;
+    float: right;
+}
+
 .add-comment-button {
     margin-top: 20px;
     display: block;
@@ -228,8 +241,8 @@
 }
 
 .blog-settings-menu {
-    min-width: 93px;
-    width: 93px;
+    min-width: 110px;
+    width: 110px;
 }
 
 .blog-menu-item {
@@ -242,6 +255,8 @@
 
 .open > .blog-settings-btn {
     background: #F0F0F0;
+    min-width: 110px;
+    width: 110px;
 }
 
 .blog-settings ul {
@@ -293,4 +308,25 @@
     border-radius: 50%;
     border: none;
     font-size: 20px;
+}
+
+.blog-create-button {    
+    display: inline-block;
+    color: white;
+    background: #FF0F0F;
+    border-radius: 30px;
+    padding: 5px 15px;
+    position: static;
+    vertical-align: middle;
+    float: right;
+}
+
+.blog-create-input {
+    display: inline-block;
+    position: static;
+    vertical-align: middle;
+    float: left;
+    min-height: 32px;
+    width: 50%;
+    border: none;
 }

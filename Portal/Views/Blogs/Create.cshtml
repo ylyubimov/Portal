@@ -5,11 +5,13 @@
     ViewBag.Title = "Create blog";
 }
 
-<h2>Create</h2>
-
 @using (Html.BeginForm("Create", "Blogs", null, FormMethod.Post))
 {
-    @Html.EditorFor(m => m.Name)
-    @Html.ValidationMessageFor(m => m.Name)
-    <input type="submit" value="Create" />
+    <div class="container blog-wrap">
+        @Html.ValidationMessageFor(m => m.Name)
+        <div class="blog-preview">
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "blog-create-input" } })
+            <input class="btn blog-create-button" type="submit" value="Создать" />
+        </div>
+    </div>
 }

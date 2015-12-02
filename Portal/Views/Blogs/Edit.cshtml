@@ -7,6 +7,11 @@
 
 @using (Html.BeginForm("edit", "blogs", new { @id = Model.ID }, FormMethod.Post))
 {
-    @Html.EditorFor(m => m.Name);
-    <input type="submit" />
+    <div class="container blog-wrap">
+        @Html.ValidationMessageFor(m => m.Name)
+        <div class="blog-preview">
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "blog-create-input" } })
+            <input class="btn blog-create-button" type="submit" value="Сохранить" />
+        </div>
+    </div>
 }

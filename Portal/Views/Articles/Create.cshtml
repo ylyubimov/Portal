@@ -20,7 +20,7 @@
             <form action="~/Articles/@ViewBag.BlodID/Create" method="post">
                 @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input" } }) @Html.ValidationMessageFor(m => m.Name)<br />
                 @Html.EditorFor(m => m.Text, new { htmlAttributes = new { @class = "add-comment-input", @style = "height: 300px" } }) @Html.ValidationMessageFor(m => m.Text)<br />
-                <input class="btn add-comment-button" type="submit" value="Create" />
+                <input class="btn add-comment-button" type="submit" value="Создать" />
             </form>
         </div>
     </div>
