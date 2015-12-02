@@ -8,20 +8,20 @@
     <div class="login-page-wrap login-jumbotron">
         <div class="login-form-wrap">
             <div class="login-form">
-                <h2>Welcome to ABBYY Portal</h2>
+                <h2>Приветствуем на портале ABBYY</h2>
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
         {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "login-text-input", placeholder = "email" })
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "login-text-input", placeholder = "электронная почта" })
                     @Html.ValidationMessageFor(m => m.UserName)
 
-                    @Html.PasswordFor(m => m.Password, new { @class = "login-text-input", placeholder = "password" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "login-text-input", placeholder = "пароль" })
                     @Html.ValidationMessageFor(m => m.Password)
 
-                    <input type="submit" value="Sign in" class="btn login-form-button login-sign-in-button" />
-                    <a href=@Url.Action("register", "account") class="btn login-form-button login-sign-up-button">Sign up</a>
+                    <input type="submit" value="Вход на сайт" class="btn login-form-button login-sign-in-button" />
+                    <a href=@Url.Action("register", "account") class="btn login-form-button login-sign-up-button">Регистрация</a>
                 }
             </div>
         </div>
