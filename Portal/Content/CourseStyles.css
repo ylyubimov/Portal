@@ -101,10 +101,7 @@
 }
 
 .hide + label {
-    background-color: white;
-    padding: 0px 0px 0px 0px;
-    display: inline-block; 
-    margin-bottom: 20px;
+    display: inline-block;
 }
 
 .hide:checked + label {
@@ -115,5 +112,29 @@
 .hide:checked + label + div {
     display: block;
     background: white;
-    padding: 10px; 
+}
+
+.course-list-of-students {
+    background: white;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.course-list-of-students label {
+    cursor: pointer;
+}
+
+.course-students-table {
+    padding: 20px 0;
+}
+
+.course-student-info-link {
+    color: black;
+    border-bottom: 1px dotted;
+}
+
+.course-student-info-link:hover{
+    color: black;
+    border-bottom: none;
+    text-decoration: none;
 }

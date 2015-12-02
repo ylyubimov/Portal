@@ -6,9 +6,9 @@
         <div class="course-description">
             <h2>@Model.Name</h2>
             <p>@Model.Description.Substring(0, (Model.Description.Length > 500) ? 500 : Model.Description.Length)...</p>
-            <a>@Html.ActionLink("Read more...", "course", new { @id = Model.ID })</a>
+            <a>@Html.ActionLink("Читать далее...", "course", new { @id = Model.ID })</a>
         </div>
-        <h4>Teachers:</h4>
+        <h4>Учителя:</h4>
         <div class="course-teachers">
             @foreach (Person teacher in Model.Teachers)
             {
@@ -18,8 +18,6 @@
                 </a>
             }
         </div>
-        <h4>Duration:</h4>
-        <div class="course-duration">@Model.Number_of_Classes classes, @Model.Number_of_Hours hours</div>
     </div>
 </div>
 
