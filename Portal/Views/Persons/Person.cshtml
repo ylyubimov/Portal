@@ -24,6 +24,10 @@
                     <a href="mailto:@Model.Email"><span>@Model.Email</span></a>
                 </div>
             </div>
+            @if (User.Identity.Name == Model.UserName || User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Редактировать", "edit", "persons", new { @id = Model.Id }, new { @class = "btn person-goto-edit-button" })
+            }
         </div>
         @if (Model.Person_Type == "Teacher")
         {

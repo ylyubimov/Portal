@@ -78,6 +78,40 @@ namespace Portal.Controllers
             Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
             return View( persons);
         }
-      
+
+        [HttpGet]
+        [Route("{id}/edit")]
+        [Authorize]
+        public ActionResult Edit(string id)
+        {
+            Person person = db.Users.Where(x => x.Id == id).First();
+            if (person == null || !User.IsInRole("admin") && User.Identity.Name != person.UserName)
+            {
+                return HttpNotFound();
+            }
+            return View(person);
+        }
+
+        [HttpPost]
+        [Route("{id}/edit")]
+        [Authorize]
+        public ActionResult Edit(string id, Person editedPerson)
+        {
+            Person person = db.Users.Where(p => p.Id == id).FirstOrDefault();
+            if (person != null)
+            {
+                if (person.UserName == User.Identity.Name || User.IsInRole("admin"))
+                {
+                    person.First_Name = editedPerson.First_Name;
+                    person.Middle_Name = editedPerson.Middle_Name;
+                    person.Second_Name = editedPerson.Second_Name;
+                    person.PhoneNumber = editedPerson.PhoneNumber;
+                    person.Email = editedPerson.Email;
+                    person.Picture.URL = editedPerson.Picture.URL;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("person", new { @id=id } );
+        }
     }
 }
