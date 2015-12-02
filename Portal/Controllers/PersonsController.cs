@@ -71,6 +71,7 @@ namespace Portal.Controllers
         {
             ViewBag.Title = "People";
             ViewBag.SearchValue = SearchFor;
+            ViewBag.ExtendType = "person";
             var PersonList = db.Users.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
                                                    (x.First_Name + " "+ x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
                                                    ).Take(50).ToArray();
