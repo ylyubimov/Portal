@@ -8,6 +8,9 @@
 
 <div class="container-fluid">
     <div class="container article-wrap">
+        <div class="blog-header">
+            <h3 class="blog-title">@Html.ActionLink(Model.Blogs.First().Name, "blog", "blogs", new { @id = Model.Blogs.First().ID }, new { @class = "no-link-attributes" })</h3>
+        </div>
         <div class="article">
             <div class="article-header">
                 <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id }) >
