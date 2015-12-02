@@ -138,3 +138,20 @@
     border-bottom: none;
     text-decoration: none;
 }
+
+.course-lesson-list {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.course-add-lesson {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.course-add-lesson-input {    
+    width: 100%;
+    border: none;
+}
