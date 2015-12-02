@@ -6,11 +6,11 @@
     @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
     @if (Model.Person_Type ==  "Teacher")
     {
-        <div class="person-type">Teacher</div>
+        <div class="person-type">Преподаватель</div>
     }
     else
     {
-        <div class="person-type">Student</div>
+        <div class="person-type">Студент</div>
     }
     <div class="person-info">
         <div class="person-contacts">

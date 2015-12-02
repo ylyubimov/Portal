@@ -13,11 +13,11 @@
                 <div class="person-name">@Model.First_Name @Model.Second_Name</div>
                     @if (Model.Person_Type == "Teacher")
                     {
-                        <div class="person-type">Teacher</div>
+                        <div class="person-type">Преподаватель</div>
                     }
                     else
                     {
-                        <div class="person-type">Student</div>
+                        <div class="person-type">Студент</div>
                     }
                 <div class="person-contacts">
                     <a href="tel:@Model.PhoneNumber"><span>@Model.PhoneNumber</span></a>
@@ -25,19 +25,22 @@
                 </div>
             </div>
         </div>
-        <div class="person-blogs">
-            <h4>Most popular blogs</h4>
-            @foreach (Blog blog in Model.Blogs)
-            {
-                <div class="person-blog">
-                    @Html.ActionLink(blog.Name, "blog", "blog", new { @id = blog.ID }, null)
-                </div>
-            }
-                </div>
+        @if (Model.Person_Type == "Teacher")
+        {
+            <div class="person-blogs">
+                <h4>Блоги</h4>
+                @foreach (Blog blog in Model.Blogs)
+                {
+                    <div class="person-blog">
+                        @Html.ActionLink(blog.Name, "blog", "blog", new { @id = blog.ID }, null)
+                    </div>
+                }
+            </div>
+        }
         <div class="person-courses">
             @if (Model.Person_Type == "Teacher")
             {
-                <h4>Taught courses</h4>
+                <h4>Преподаваемые курсы</h4>
                 foreach (Course course in Model.Taught_Courses)
                 {
                     <div class="person-course">
@@ -47,7 +50,7 @@
             }
             else
             {
-                <h4>Subscribed courses</h4>
+                <h4>Посещаемые курсы</h4>
                 foreach (Course course in Model.Subscribed_Courses)
                 {
                     <div class="person-course">
