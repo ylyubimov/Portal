@@ -53,6 +53,10 @@ namespace Portal.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MailToAll = "";
+            foreach(Person student in course.Students.ToArray()) {
+                ViewBag.MailToAll += "<" + student.Email + ">,";
+            }
             return View(course);
         }
         
