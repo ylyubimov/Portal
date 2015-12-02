@@ -12,10 +12,10 @@
             @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
             {
                 <div class="blog-settings dropdown">
-                    <div class="blog-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Actions</div>
+                    <div class="blog-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Actions </div>
                     <ul class="dropdown-menu blog-settings-menu">
-                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Delete", "Delete", "Blogs", new { @id = Model.ID }, new { @class = "" })</li>
-                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Edit", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "" })</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Delete", "Delete", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" })</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Rename", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" })</li>
                     </ul>
                 </div>
             }

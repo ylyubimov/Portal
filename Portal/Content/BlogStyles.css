@@ -232,6 +232,10 @@
     width: 93px;
 }
 
+.blog-menu-item {
+    font-size: 12px;
+}
+
 .blog-settings-btn {
     padding: 5px;
 }
