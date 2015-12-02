@@ -13,7 +13,7 @@
                     if (Model.Dislikes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
                     {
                         <div class="rating">
-                            <div class="rating-plus" style="opacity: 0.4;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
+                            <div class="rating-plus" style="opacity: 0.4;cursor: default;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
                                 <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
                             </div>
                             <div class="rating-minus" style="opacity: 1;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
@@ -27,7 +27,7 @@
                             <div class="rating-plus" style="opacity: 1;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
                                 <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
                             </div>
-                            <div class="rating-minus" style="opacity: 0.4;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
+                            <div class="rating-minus" style="opacity: 0.4;cursor: default;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
                                 <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                             </div>
                         </div>
@@ -47,10 +47,10 @@
                 else
                 {
                     <div class="rating">
-                        <div class="rating-plus" style="opacity: 0.4; cursor: not-allowed;" id=@("LikesCountOnClick" + Model.ID)>
+                        <div class="rating-plus" style="opacity: 0.4;cursor: default;" id=@("LikesCountOnClick" + Model.ID)>
                             <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
                         </div>
-                        <div class="rating-minus" style="opacity: 0.4; cursor: not-allowed;" id=@("DislikesCountOnClick" + Model.ID)>
+                        <div class="rating-minus" style="opacity: 0.4;cursor: default;" id=@("DislikesCountOnClick" + Model.ID)>
                             <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                         </div>
                     </div>
