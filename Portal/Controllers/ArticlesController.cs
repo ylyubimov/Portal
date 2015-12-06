@@ -42,16 +42,6 @@ namespace Portal.Controllers
                 return HttpNotFound();
             if (article != null)
             {
-                var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
-                if (article.Blogs.FirstOrDefault() != null)
-                {
-                    BlogsList.Remove(article.Blogs.FirstOrDefault());
-                    BlogsList.Add(article.Blogs.FirstOrDefault());
-                    BlogsList.Reverse();
-                }
-                var Blogs =  BlogsList.Select(rr =>
-                    new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name, Selected = article.Blogs.Contains(rr) }).ToList();
-                ViewBag.Blogs = Blogs;
                 return View(article);
             }
             else
@@ -73,8 +63,12 @@ namespace Portal.Controllers
                 {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
-                    article.Blogs.Clear();
-                    //db.Entry(article).State = EntityState.Modified;
+                    //Какой-то неопознанный баг, пришлось костылить, простите меня(
+                    ModelState["Author"].Errors.Clear();
+                    if (!ModelState.IsValid)
+                    {
+                        return View(article);
+                    }
 
                     db.SaveChanges();
                     return RedirectToAction("Index", "articles", article.ID);
