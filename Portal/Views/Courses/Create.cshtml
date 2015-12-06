@@ -2,26 +2,54 @@
 @model Course
 
 @{
-    ViewBag.Title = "Create course";
+    ViewBag.Title = "Create";
+    List<Person> users = ApplicationDbContext.Create().Users.ToList();
 }
 
-<h2>Create</h2>
+<h2>Введите данные курса</h2>
 
 @using (Html.BeginForm("Create", "Courses", null, FormMethod.Post))
 {
+    <h4>Введите название курса</h4>
     @Html.EditorFor(m => m.Name)
     @Html.ValidationMessageFor(m => m.Name)
-    <div class="dropdown" id="TeachersId" >
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Teachers <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            @foreach (Person p in ApplicationDbContext.Create().Users)
+    <div>    
+        <h4>Выберите учителей</h4>
+        
+            @foreach (Person p in users )
             {
                 if (p.Person_Type == "Teacher")
                 {
-                    <li><a href="#"> @p.UserName @p.First_Name @p.Second_Name @p.Middle_Name </a></li>
+                    <div>
+                        <img src=@p.Picture.URL width="40" height="40">
+                    </div>
+                    <div>
+                        @Html.CheckBox(p.Id) @( p.First_Name + " " + p.Second_Name + " " + p.Middle_Name) <br />
+                        <label> @p.UserName</label>
+                    </div>
+
                 }
             }
-        </ul>
+            
+    </div>
+    <div>
+        <h4>Выберите студентов</h4>
+
+        @foreach (Person p in users)
+        {
+            if (p.Person_Type == "Student")
+            {
+                <div>
+                    <img src=@p.Picture.URL width="40" height="40">
+                </div>
+                <div>
+                    @Html.CheckBox(p.Id) @( p.First_Name + " " + p.Second_Name + " " + p.Middle_Name) <br />
+                    <label> @p.UserName</label>
+                </div>
+
+            }
+        }
+
     </div>
     <input type="submit" value="Create" />
 }

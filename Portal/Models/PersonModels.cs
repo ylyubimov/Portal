@@ -15,6 +15,7 @@ namespace Portal.Models
         public string First_Name { get; set; }
         public string Second_Name { get; set; }
         public string Middle_Name { get; set; }
+        public string About_Your_Self { get; set; }
         public DateTime? Registration_Date { get; set; }
         public DateTime? Last_Date_Was_Online { get; set; }
         public string Person_Type { get; set; }
@@ -23,6 +24,7 @@ namespace Portal.Models
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Article> Written_Articles { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
+
         // Кафедра есть и у студенета и у учителя
         public virtual Base_Company Base_Company { get; set; }
 

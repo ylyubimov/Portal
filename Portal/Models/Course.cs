@@ -20,6 +20,7 @@ namespace Portal.Models
         public DateTime? Report_Date { get; set; }
         public int? Number_of_Hours { get; set; }
         public int? Number_of_Classes { get; set; }
+        public string Type_Of_Accountancy { get; set; }
         public virtual ICollection<Person> Students { get; set; }
         [Required]
         public virtual ICollection<Person> Teachers { get; set; }
