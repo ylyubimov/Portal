@@ -155,21 +155,28 @@ namespace Portal.Controllers
         public ActionResult AddComment(string comment, int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if (comment != null && comment != "")
+            {
 
-            Person authorComment = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
-            //TODO: delete this line
+                Person authorComment = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+                //TODO: delete this line
 
-            Comment c = new Comment();
+                Comment c = new Comment();
 
-            c.Text = comment;
-            c.Article = article;
-            c.Author = authorComment;
-            c.Create_Time = DateTime.Now;
+                c.Text = comment;
+                c.Article = article;
+                c.Author = authorComment;
+                c.Create_Time = DateTime.Now;
 
-            article.Comments.Add(c);
+                article.Comments.Add(c);
 
-            db.SaveChanges();
-            return RedirectToAction("index", id);
+                db.SaveChanges();
+                return RedirectToAction("index", id);
+            } else
+            {
+                ViewBag.EmptyComment = true;
+                return View("index", article);
+            }
         }
 
         [Authorize]

@@ -113,7 +113,15 @@
 
             @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post))
             {
-                <input class="add-comment-input" type="text" placeholder="Оставьте комментарий..." name="comment"/>
+                if (ViewBag.EmptyComment == true)
+                {
+                    <input class="add-comment-input input-validation-error" type="text" placeholder="Оставьте комментарий..." name="comment" />
+                    <span class="field-validation-error" data-valmsg-for="comment" data-valmsg-replace="true">Напишите непустой комментарий</span>
+                }
+                else
+                {
+                    <input class="add-comment-input" type="text" placeholder="Оставьте комментарий..." name="comment" />
+                }
                 <input class="btn add-comment-button" type="submit" value="Отправить"/>
             }
         </div>
