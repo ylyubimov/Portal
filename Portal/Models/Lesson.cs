@@ -10,7 +10,7 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Заполните название урока")]
         public string Name { get; set; }
         public string Description { get; set; }
         public string Links { get; set; }

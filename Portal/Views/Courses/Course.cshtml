@@ -38,6 +38,7 @@
                         <th>Название</th>
                         <th>Описание</th>
                         <th>Ссылка</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,8 +46,9 @@
                     {
                         <tr>
                             <td style="word-break: break-word;">@lesson.Name</td>
-                            <td>@lesson.Description</td>
+                            <td>@lesson.Description @lesson.Description</td>
                             <td style="word-break: break-word;"><a href="@lesson.Links">@lesson.Links</a></td>
+                            <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseId=Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
                         </tr>
                     }
                 </tbody>
