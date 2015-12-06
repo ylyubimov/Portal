@@ -89,6 +89,13 @@ namespace Portal.Controllers
             {
                 return HttpNotFound();
             }
+            if (person.Picture == null || person.Picture.Name == "DefaultPicture")
+            {
+                person.Picture = new Picture
+                {
+                    URL = null
+                };
+            }
             return View(person);
         }
 
@@ -107,7 +114,18 @@ namespace Portal.Controllers
                     person.Second_Name = editedPerson.Second_Name;
                     person.PhoneNumber = editedPerson.PhoneNumber;
                     person.Email = editedPerson.Email;
-                    person.Picture.URL = editedPerson.Picture.URL;
+                    if (editedPerson.Picture.URL != null)
+                    {
+                        person.Picture = new Picture
+                        {
+                            URL = editedPerson.Picture.URL,
+                            Name = person.UserName + "picture"
+                        };
+                    }
+                    else
+                    {
+                        person.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").First();
+                    }
                 }
             }
             db.SaveChanges();
