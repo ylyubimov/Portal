@@ -114,12 +114,19 @@ namespace Portal.Controllers
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
             if (author == null)
-                return View("Can't find your account in persons");
+                return View("Error", "Can't find your account in persons");
             articleEdit.Author = author;
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
             articleEdit.Dislikes_Count = 0;
             var article = db.Article.Add(articleEdit);
+            //Какой-то неопознанный баг, пришлось костылить, простите меня(
+            ModelState["Author"].Errors.Clear();
+            if (!ModelState.IsValid)
+            {
+                ViewBag.BlodID = blogId;
+                return View(article);
+            }
             db.SaveChanges();
             if (article == null)
                 return View("Error");
