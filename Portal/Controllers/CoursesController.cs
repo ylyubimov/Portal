@@ -171,5 +171,25 @@ namespace Portal.Controllers
 
             return RedirectToAction("course", new { id = courseId });
         }
+
+        [HttpGet]
+        [Route("{lessonId:int}/RemoveLesson")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult RemoveLesson(int courseId, int lessonId)
+        {
+            Lesson lesson = db.Lesson.Where(l => l.ID == lessonId).First();
+            if (lesson == null)
+            {
+                return View("Error", "Lesson not found");
+            }
+            Course course = db.Course.Where(c => c.ID == courseId).First();
+
+            course.Lessons.Remove(lesson);
+            db.Lesson.Remove(lesson);
+
+            db.SaveChanges();
+
+            return RedirectToAction("course", new { id = courseId });
+        }
     }
 }
