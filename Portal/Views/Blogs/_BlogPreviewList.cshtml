@@ -1,5 +1,14 @@
-﻿
-@foreach (Portal.Models.Blog blog in Model)
+﻿@if (Model.Length != 0) {
+    foreach (Portal.Models.Blog blog in Model)
+    {
+        @Html.Partial("_BlogPreView", blog)
+    }
+}
+else
 {
-    @Html.Partial("_BlogPreView", blog)
+    <div class="container search-error-wrap">
+        <div class="search-error">
+            К сожалению, по вашему запросу ничего не найдено
+        </div>
+    </div>
 }

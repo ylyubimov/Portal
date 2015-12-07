@@ -18,8 +18,7 @@ namespace Portal.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Articles
-
-        [Authorize]
+        
         [Route("{id:int}")]
         public ActionResult Index(int id)
         {
@@ -43,16 +42,6 @@ namespace Portal.Controllers
                 return HttpNotFound();
             if (article != null)
             {
-                var BlogsList = db.Blog.OrderBy(r => r.Name).ToList();
-                if (article.Blogs.FirstOrDefault() != null)
-                {
-                    BlogsList.Remove(article.Blogs.FirstOrDefault());
-                    BlogsList.Add(article.Blogs.FirstOrDefault());
-                    BlogsList.Reverse();
-                }
-                var Blogs =  BlogsList.Select(rr =>
-                    new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name, Selected = article.Blogs.Contains(rr) }).ToList();
-                ViewBag.Blogs = Blogs;
                 return View(article);
             }
             else
@@ -64,7 +53,7 @@ namespace Portal.Controllers
         [Authorize]
         [HttpPost]
         [Route("{id:int}/edit")]
-        public ActionResult Edit(int id, string[] Blogs, Article articleEdit)
+        public ActionResult Edit(int id, Article articleEdit)
         {
 
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
@@ -74,9 +63,12 @@ namespace Portal.Controllers
                 {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
-                    article.Blogs.Clear();
-                    article.Blogs = db.Blog.Where(p => Blogs.Contains(p.Name)).ToList();
-                    //db.Entry(article).State = EntityState.Modified;
+                    //Какой-то неопознанный баг, пришлось костылить, простите меня(
+                    ModelState["Author"].Errors.Clear();
+                    if (!ModelState.IsValid)
+                    {
+                        return View(article);
+                    }
 
                     db.SaveChanges();
                     return RedirectToAction("Index", "articles", article.ID);
@@ -116,16 +108,23 @@ namespace Portal.Controllers
             var um = new UserManager<Person>(new UserStore<Person>(db));
             var author = um.FindByName(User.Identity.Name);
             if (author == null)
-                return View("Can't find your account in persons");
+                return View("Error", "Can't find your account in persons");
             articleEdit.Author = author;
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
             articleEdit.Dislikes_Count = 0;
             var article = db.Article.Add(articleEdit);
+            //Какой-то неопознанный баг, пришлось костылить, простите меня(
+            ModelState["Author"].Errors.Clear();
+            if (!ModelState.IsValid)
+            {
+                ViewBag.BlodID = blogId;
+                return View(article);
+            }
             db.SaveChanges();
             if (article == null)
                 return View("Error");
-            return RedirectToAction("Index", "articles", new { id = article.ID });
+            return RedirectToAction("blog", "Blogs", new { id = article.Blogs.First().ID });
         }
 
         [Authorize]
@@ -156,21 +155,28 @@ namespace Portal.Controllers
         public ActionResult AddComment(string comment, int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+            if (comment != null && comment != "")
+            {
 
-            Person authorComment = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
-            //TODO: delete this line
+                Person authorComment = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
+                //TODO: delete this line
 
-            Comment c = new Comment();
+                Comment c = new Comment();
 
-            c.Text = comment;
-            c.Article = article;
-            c.Author = authorComment;
-            c.Create_Time = DateTime.Now;
+                c.Text = comment;
+                c.Article = article;
+                c.Author = authorComment;
+                c.Create_Time = DateTime.Now;
 
-            article.Comments.Add(c);
+                article.Comments.Add(c);
 
-            db.SaveChanges();
-            return RedirectToAction("index", id);
+                db.SaveChanges();
+                return RedirectToAction("index", id);
+            } else
+            {
+                ViewBag.EmptyComment = true;
+                return View("index", article);
+            }
         }
 
         [Authorize]

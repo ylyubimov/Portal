@@ -9,10 +9,10 @@
                 }
                 else
                 {
-                    <input class="form-control" placeholder="Search" type="text" name="SearchFor">
+                    <input class="form-control" placeholder="Поиск" type="text" name="SearchFor">
                 }
             </div>
-            <input class="search-bar-button btn" type="submit" value="Search" style=@(ViewBag.ExtendType == "person" ? "display:none" : "") />
+            <input class="search-bar-button btn" type="submit" value="Поиск" style=@(ViewBag.ExtendType == "person" ? "display:none" : "") />
         </div>
         <div class="search-additional" style=@(ViewBag.ExtendType == "person" ? "width:40%" : "display:none")>
             <div class="search-grid-radio">
@@ -21,22 +21,22 @@
             </div>
             <div class="search-person-select">
                 <select onchange="location = this.options[this.selectedIndex].value;">
-                    <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "all" })>All</option>
+                    <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "all" })>Все</option>
                     @if (ViewBag.Type == "teachers")
                     {
-                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" }) selected>Teacher</option>
+                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" }) selected>Преподаватель</option>
                     }
                     else
                     {
-                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" })>Teacher</option>
+                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" })>Преподаватель</option>
                     }
                     @if (ViewBag.Type == "students")
                     {
-                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" }) selected>Student</option>
+                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" }) selected>Студент</option>
                     }
                     else
                     {
-                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" })>Student</option>
+                        <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" })>Студент</option>
                     }
                 </select>
             </div>

@@ -11,7 +11,7 @@
             <div class="course-description">
                 <h2>@Model.Name</h2>
                 <div class="course-blogs">
-                    Blogs:
+                    Блоги:
                     @foreach (Blog blog in Model.Blogs)
                     {
                         @Html.ActionLink(blog.Name, "blog", "blogs", null, null) 
@@ -19,7 +19,7 @@
                 </div>
                 @Model.Description
             </div>
-            <h4>Teachers:</h4>
+            <h4>Учителя:</h4>
             <div class="course-teachers">
                 @foreach(Person teacher in Model.Teachers)
                 {
@@ -29,56 +29,80 @@
                     </a>
                 }
             </div>
-            <h4>Materials:</h4>
-            <div class="course-materials">       
-            </div>
         </div>
-        <div class="course_list_of_students">
-            <input type="checkbox" id="hd" class="hide" />
-            <label for="hd">Список студентов</label>
-            <div>
-                @foreach (Person student in Model.Students)
-                {
-                    <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = student.Id })>
-                        <img src=@student.Picture.URL />
-                        <div>@student.First_Name @student.Second_Name</div>
-                    </a>
-                }
-            </div>
-            <br/>
+       
+        <div class="course-lesson-list">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Описание</th>
+                        <th>Ссылка</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Portal.Models.Lesson lesson in Model.Lessons)
+                    {
+                        <tr>
+                            <td style="word-break: break-word;">@lesson.Name</td>
+                            <td>@lesson.Description @lesson.Description</td>
+                            <td style="word-break: break-word;"><a href="@lesson.Links">@lesson.Links</a></td>
+                            @if (Model.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() != null || User.IsInRole("admin"))
+                            {
+                                <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
+                                <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-
-        @foreach (Portal.Models.Lesson lesson in Model.Lessons)
-        {
-            <div class="comment">
-                <div class="comment-header">
-                    <a class="author no-link-attributes">
-                        @lesson.Name
-                    </a>
-                </div>
-                <p>@lesson.Description</p>
-                <p>@lesson.Links</p>
-            </div>
-        }
-
         
         @if (Model.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() != null || User.IsInRole("admin"))
         {
             using (Html.BeginForm("AddLesson", "Courses", new { @id = Model.ID }, FormMethod.Post))
             {
-            <div class="add-comment comment">
-                <h4>Add new lesson:</h4>
-                <div class="comment-header">
-                    <div class="author">
-                        <input class="add-comment-input" type="text" placeholder="Lesson name" name="Name" />
-                    </div>
-                </div>
-                    <input class="add-comment-input" type="text" placeholder="Description" name="Description" />
-                    <input class="add-comment-input" type="text" placeholder="Links list" name="Links" />
-                    <input class="btn add-comment-button" type="submit" value="Create new lesson" />
+            <div class="course-add-lesson">
+                <h4>Добавить новый урок:</h4>
+                <input class="course-add-lesson-input" type="text" placeholder="Название урока" name="Name" />
+                <input class="course-add-lesson-input" type="text" placeholder="Описание" name="Description" />
+                <input class="course-add-lesson-input" type="text" placeholder="Ссылка на материалы" name="Links" />
+                <input class="btn add-comment-button" type="submit" value="Создать новый урок" />
             
             </div>
             }
+        }
+
+        @if (Model.Teachers.Where(c => c.UserName == User.Identity.Name).FirstOrDefault() != null || User.IsInRole("admin"))
+        {
+            <div class="course-list-of-students">
+                <input type="checkbox" id="hd" class="hide" />
+                <label for="hd"><span>Список студентов</span> <span class="glyphicon glyphicon-chevron-down" style="font-size: 10px;"></span></label>
+                <div class="course-students-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ФИО</th>
+                                <th>Телефон</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Person student in Model.Students)
+                            {
+                                <tr>
+                                    <td>@student.Second_Name @student.First_Name</td>
+                                    <td><a class="course-student-info-link" href="tel:@student.PhoneNumber">@student.PhoneNumber</a></td>
+                                    <td><a class="course-student-info-link" href="mailto:@student.Email">@student.Email</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="mailto:@ViewBag.MailToAll" class="btn btn-default">Написать всем студентам</a>
+                </div>
+            </div>
         }
     </div>
 </div>

@@ -14,23 +14,12 @@
                     @Model.Author.First_Name @Model.Author.Second_Name
                 </a>
                 <div class="date">@DateTime.Now</div>
-                <div class="article-actions">
-                    <div class="rating">
-                        <div class="rating-plus">
-                            <img class="icon" src="~/images/icons/plusIcon.png" /><span>0</span>
-                        </div>
-                        <div class="rating-minus">
-                            <img class="icon" src="~/images/icons/minusIcon.png" /><span>0</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            @Html.ValidationSummary()
             <form action="~/Articles/@ViewBag.BlodID/Create" method="post">
                 @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input" } }) @Html.ValidationMessageFor(m => m.Name)<br />
                 @Html.EditorFor(m => m.Text, new { htmlAttributes = new { @class = "add-comment-input", @style = "height: 300px" } }) @Html.ValidationMessageFor(m => m.Text)<br />
-                <input class="btn add-comment-button" type="submit" value="Create" />
+                <input class="btn add-comment-button" type="submit" value="Создать" />
             </form>
         </div>
     </div>

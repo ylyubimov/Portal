@@ -208,3 +208,16 @@ input.input-validation-error {
 
     border-radius: 50%;
 }
+
+.search-error-wrap {
+    width: 60%;
+    min-width: 600px;
+    margin-top: 20px;
+}
+
+.search-error {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
