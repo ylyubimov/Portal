@@ -191,7 +191,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\Blog.cs" />
-    <Compile Include="Models\CourseEdit.cs" />
+    <Compile Include="Models\CourseCreateEdit.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\ContentModels.cs" />
     <Compile Include="Models\Course.cs" />

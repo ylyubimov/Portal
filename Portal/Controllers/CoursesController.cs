@@ -107,19 +107,52 @@ namespace Portal.Controllers
         [Authorize(Roles = "editor, admin")]
         public ActionResult Create()
         {
-            return View(new Course() { Name = "Name" });
+            CourseCreateEdit c = new Models.CourseCreateEdit();
+            c.Name = "Name";
+            List<Tuple<Person, bool>> students = new List<Tuple<Person, bool>>();
+            List<Tuple<Person, bool>> teachers = new List<Tuple<Person, bool>>();
+            foreach (Person p in db.Users)
+            {
+                if (p.Person_Type == "Teacher")
+                {
+                    teachers.Add(new Tuple<Person, bool>(p, false));
+                }
+                else if (p.Person_Type == "Student")
+                {
+                    students.Add(new Tuple<Person, bool>(p, false));
+                }
+            }
+            c.Teachers = teachers;
+            c.Students = students;
+            return View(c);
         }
 
         [HttpPost]
         [Route("Create")]
         [Authorize(Roles = "editor, admin")]
-        public ActionResult Create(Course newCourse)
+        public ActionResult Create(CourseCreateEdit newCourse)
         {
-            //var course = db.Course.Add(newCourse);
-            //course.Teachers.Add(db.Person.Where.Person)
-            //db.SaveChanges();
-            //if (course == null)
-               // return View("Error");
+            List<Person> students = new List<Person>() ;
+            List<Person> teachers = new List<Person>() ;
+
+            foreach (Tuple<Person, bool> t in newCourse.Students) {
+                if (t.Item2)
+                {
+                    students.Add(db.Users.Where(p=> p.Id == t.Item1.Id).FirstOrDefault());
+                }
+            }
+            foreach (Tuple<Person, bool> t in newCourse.Teachers)
+            {
+                if (t.Item2)
+                {
+                    students.Add(db.Users.Where(p => p.Id == t.Item1.Id).FirstOrDefault());
+                }
+            }
+
+            var course = new Course { Name = newCourse.Name, Description = newCourse.Description,  Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = students, Teachers = teachers }  ;
+
+            db.Course.Add(course);
+            db.SaveChanges();
             return RedirectToAction("Index", "Courses");
         }
     }

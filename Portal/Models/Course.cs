@@ -14,13 +14,12 @@ namespace Portal.Models
         public string Name { get; set; }
         public string Present { get; set; }
         public DateTime? Date_and_Time { get; set; }
-        public string Report_type { get; set; }
+        public string Report_Type { get; set; }
         public string Place { get; set; }
         public string Description { get; set; }
         public DateTime? Report_Date { get; set; }
         public int? Number_of_Hours { get; set; }
         public int? Number_of_Classes { get; set; }
-        public string Type_Of_Accountancy { get; set; }
         public virtual ICollection<Person> Students { get; set; }
         [Required]
         public virtual ICollection<Person> Teachers { get; set; }
