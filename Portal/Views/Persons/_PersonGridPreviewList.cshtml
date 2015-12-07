@@ -15,7 +15,7 @@
         <div class="person-part-name">Студенты</div>
         foreach (Portal.Models.Person person in Model[1])
         {
-            if (person.Person_Type != "Fake")
+            if (person.First_Name != "Deleted" || person.Second_Name != "Deleted")
             {
                 @Html.Partial("_PersonGridPreview", person);
             }
