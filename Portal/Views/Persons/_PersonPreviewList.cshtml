@@ -4,7 +4,10 @@
         <div class="person-part-name">Преподаватели</div>
         foreach (Portal.Models.Person person in Model[0])
         {
-            @Html.Partial("_PersonPreview", person)
+            if (person.First_Name != "Deleted" || person.Second_Name != "Deleted")
+            {
+                @Html.Partial("_PersonPreview", person);
+            }
         }
     }
     @if (ViewBag.Type != "teachers")
@@ -12,7 +15,10 @@
         <div class="person-part-name">Студенты</div>
         foreach (Portal.Models.Person person in Model[1])
         {
-            @Html.Partial("_PersonPreview", person)
+            if (person.First_Name != "Deleted" || person.Second_Name != "Deleted")
+            {
+                @Html.Partial("_PersonPreview", person);
+            }
         }
     }
 </div>
