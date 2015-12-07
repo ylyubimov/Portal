@@ -1,6 +1,18 @@
-﻿
-@foreach (Portal.Models.Course course in Model)
+﻿@if (Model.Length != 0)
 {
-    @Html.Partial("_CoursePreView", course)
+
+    foreach (Portal.Models.Course course in Model)
+    {
+        @Html.Partial("_CoursePreView", course)
+    }
+
+}
+else
+{
+    <div class="container search-error-wrap">
+        <div class="search-error">
+            К сожалению, по вашему запросу ничего не найдено
+        </div>
+    </div>
 }
 

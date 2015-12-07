@@ -21,7 +21,7 @@
             }
         </div>
     </div>
-    @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles)
+    @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles.ToArray())
     @if (User.Identity.Name == Model.Author.UserName)
     {
         using (Html.BeginForm(Model.ID.ToString()+"/Create", "Articles", FormMethod.Get))
