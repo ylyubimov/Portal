@@ -12,7 +12,7 @@ namespace Portal.Models
         public int ID { get; set; }
         public int? Likes_Count { get; set; }
         public int? Dislikes_Count { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Заполните название блога")]
         public string Name { get; set; }
         public int? Rating { get; set; }
         [Required]

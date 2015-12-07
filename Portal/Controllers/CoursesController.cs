@@ -53,6 +53,10 @@ namespace Portal.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MailToAll = "";
+            foreach(Person student in course.Students.ToArray()) {
+                ViewBag.MailToAll += "<" + student.Email + ">,";
+            }
             return View(course);
         }
         
@@ -91,12 +95,17 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult AddLesson(string Name, string Description, string Links, int id)
         {
+            if (Name == null || Name == "")
+            {
+                Name = "Урок";
+            }
             Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
             Person author = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
             if(!course.Teachers.Contains(author))
                 return View("Error");
             var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
             course.Lessons.Add(lesson);
+            
             db.SaveChanges();
             return RedirectToAction("Course", id);
         }
@@ -121,6 +130,46 @@ namespace Portal.Controllers
             //if (course == null)
                // return View("Error");
             return RedirectToAction("Index", "Courses");
+        }
+
+
+        [HttpGet]
+        [Route("{id:int}/EditLesson")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult EditLesson(int id, int courseId)
+        {
+            Lesson lesson = db.Lesson.Where(l => l.ID == id).First();
+            if (lesson == null)
+            {
+                return View("Error", "Lesson not found");
+            }
+            ViewBag.CourseId = courseId;
+            return View(lesson);
+        }
+
+        [HttpPost]
+        [Route("{id:int}/EditLesson")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult EditLesson(int courseId, int id, Lesson editedLesson)
+        {
+            Lesson lesson = db.Lesson.Where(l => l.ID == id).First();
+            if (lesson == null)
+            {
+                return View("Error", "Lesson not found");
+            }
+            lesson.Name = editedLesson.Name;
+            lesson.Description = editedLesson.Description;
+            lesson.Links = editedLesson.Links;
+            
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CourseId = courseId;
+                return View(lesson);
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("course", new { id = courseId });
         }
     }
 }

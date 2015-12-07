@@ -29,7 +29,7 @@
 
 .person-name {
     color: black;
-    font-size: 18px;
+    font-size: 17px;
     margin-top: 10px;
     display: block;
 }
@@ -53,8 +53,8 @@
 }
 
 .person-general-info {
-    border-bottom: solid 1px #9B9B9B;
     padding-bottom: 20px;
+    position: relative;
 }
 
 .person-general-info img {
@@ -102,12 +102,12 @@
 }
 
 .person-type {
-    font-size: 14px;
+    font-size: 13px;
     color: #9B9B9B;
 }
 
 .person-blogs {
-    border-bottom: solid 1px #9B9B9B;
+    border-top: solid 1px #9B9B9B;
     padding-bottom: 15px;
 }
 
@@ -119,6 +119,10 @@
 
 .person-blog {
     padding: 5px 0;
+}
+
+.person-courses {
+    border-top: solid 1px #9B9B9B;
 }
 
 .person-courses a {
@@ -193,4 +197,64 @@
 .person-preview-mail:hover {
     text-decoration: none;
     color: black;
+}
+
+.person-edit-name-input {
+    display: inline-block;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+}
+
+.person-edit-name-input:focus, .person-edit-name-input:active {
+    display: inline-block;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+}
+
+.person-edit-field {
+    color: black;
+    font-size: 16px;
+    display: block;
+}
+
+.person-edit-button {
+    display: inline-block;
+    color: white;
+    border-radius: 30px;
+    background: #FF0F0F;
+    margin-top: 15px;
+    width: 150px;
+}
+
+.person-edit-button:hover {
+    color: #FF8D8D;
+}
+
+.person-edit-cancel-button {
+    display: inline-block;
+    background: #9B9B9B;
+    border-radius: 30px;
+    margin-top: 15px;
+    margin-left: 15px;
+    color: white;
+    width: 150px;
+}
+
+.person-edit-cancel-button:hover {
+    color: black;
+}
+
+.person-edit-buttons {
+    text-align: center;
+}
+
+.person-goto-edit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #9B9B9B;
+    color: white;
+    border-radius: 30px;
 }

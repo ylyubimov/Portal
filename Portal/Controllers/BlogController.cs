@@ -65,6 +65,15 @@ namespace Portal.Controllers
             newBlog.Likes_Count = 0;
             newBlog.Dislikes_Count = 0;
             var blog = db.Blog.Add(newBlog);
+
+            //Какой-то неопознанный баг, пришлось костылить, простите меня(
+            ModelState["Author"].Errors.Clear();
+
+            if (!ModelState.IsValid)
+            {
+                return View(blog);
+            }
+
             db.SaveChanges();
             if (blog == null)
                 return View("Error");
@@ -95,9 +104,18 @@ namespace Portal.Controllers
                 if (blog.Author.UserName == User.Identity.Name || User.IsInRole("admin"))
                 {
                     blog.Name = editedBlog.Name;
+
+                    //Какой-то неопознанный баг, пришлось костылить, простите меня(
+                    ModelState["Author"].Errors.Clear();
+
+                    if (!ModelState.IsValid)
+                    {
+                        return View(blog);
+                    }
+
+                    db.SaveChanges();
                 }
             }
-            db.SaveChanges();
             return RedirectToAction("Blog", "Blogs", new { id = blogId });
         }
     }
