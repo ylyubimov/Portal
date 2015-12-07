@@ -68,7 +68,7 @@ namespace Portal.Controllers
             var course = db.Course.Where(p => id == p.ID).FirstOrDefault();
             if (course == null)
             {
-                return View("Error");
+                return HttpNotFound();
             };
             return View(course);
         }
@@ -101,8 +101,10 @@ namespace Portal.Controllers
             }
             Course course = db.Course.Where(p => id == p.ID).FirstOrDefault();
             Person author = db.Users.Where(p => User.Identity.Name == p.UserName).FirstOrDefault();
-            if(!course.Teachers.Contains(author))
-                return View("Error");
+            if (!course.Teachers.Contains(author))
+            {
+                return View("Error", "У вас нет прав на редактирование этих материалов");
+            }
             var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
             course.Lessons.Add(lesson);
             
@@ -141,7 +143,13 @@ namespace Portal.Controllers
             Lesson lesson = db.Lesson.Where(l => l.ID == id).First();
             if (lesson == null)
             {
-                return View("Error", "Lesson not found");
+                return HttpNotFound();
+            }
+
+            Course course = db.Course.Where(c => c.ID == courseId).First();
+            if (course.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() == null && !User.IsInRole("admin"))
+            {
+                return View("Error", "У вас нет прав на редактирование этих материалов");
             }
             ViewBag.CourseId = courseId;
             return View(lesson);
@@ -155,8 +163,15 @@ namespace Portal.Controllers
             Lesson lesson = db.Lesson.Where(l => l.ID == id).First();
             if (lesson == null)
             {
-                return View("Error", "Lesson not found");
+                return HttpNotFound();
             }
+
+            Course course = db.Course.Where(c => c.ID == courseId).First();
+            if (course.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() == null && !User.IsInRole("admin"))
+            {
+                return View("Error", "У вас нет прав на редактирование этих материалов");
+            }
+
             lesson.Name = editedLesson.Name;
             lesson.Description = editedLesson.Description;
             lesson.Links = editedLesson.Links;
@@ -180,9 +195,15 @@ namespace Portal.Controllers
             Lesson lesson = db.Lesson.Where(l => l.ID == lessonId).First();
             if (lesson == null)
             {
-                return View("Error", "Lesson not found");
+                return HttpNotFound();
             }
+
             Course course = db.Course.Where(c => c.ID == courseId).First();
+
+            if (course.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() == null && !User.IsInRole("admin"))
+            {
+                return View("Error", "У вас нет прав на редактирование этих материалов");
+            }
 
             course.Lessons.Remove(lesson);
             db.Lesson.Remove(lesson);

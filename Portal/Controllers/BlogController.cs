@@ -118,5 +118,53 @@ namespace Portal.Controllers
             }
             return RedirectToAction("Blog", "Blogs", new { id = blogId });
         }
+
+        [HttpGet]
+        [Route("{blogId:int}/delete")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Delete(int blogId)
+        {
+            Blog blog = db.Blog.Where(b => b.ID == blogId).First();
+
+            if (blog == null)
+            {
+                return HttpNotFound();
+            }
+            if (blog.Author.UserName != User.Identity.Name && !User.IsInRole("admin"))
+            {
+                return View("Error", "У вас нет прав на редактирование этих материалов");
+            }
+
+            Article[] articles = blog.Articles.ToArray();
+            foreach (Article article in articles)
+            {
+                article.Blogs.Remove(blog);
+                if (article.Blogs.ToArray().Length == 0)
+                {
+                    Person author = article.Author;
+                    author.Written_Articles.Remove(article);
+
+                    Comment[] comments = db.Comment.Where(p => p.Article.ID == article.ID).ToArray();
+                    db.Article.Remove(article);
+                    foreach (Comment comment in comments)
+                    {
+                        db.Comment.Remove(comment);
+                    }
+                }
+            }
+
+            Course[] courses = db.Course.Where(c => true).ToArray();
+            foreach (Course course in courses)
+            {
+                if (course.Blogs.Contains(blog))
+                {
+                    course.Blogs.Remove(blog);
+                }
+            }
+            db.Blog.Remove(blog);
+
+            db.SaveChanges();
+            return RedirectToAction("index");
+        }
     }
 }

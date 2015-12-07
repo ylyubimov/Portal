@@ -14,7 +14,7 @@
                 <div class="blog-settings dropdown">
                     <div class="blog-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
                     <ul class="dropdown-menu blog-settings-menu">
-                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" })</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Blogs", new { @blogId = Model.ID }, new { @class = "blog-menu-item" })</li>
                         <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Изменить", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" })</li>
                     </ul>
                 </div>
