@@ -2,13 +2,15 @@
 @model CourseCreateEdit
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
 <h2>Введите данные курса</h2>
 
-@using (Html.BeginForm("Create", "Courses", null, FormMethod.Post))
+@using (Html.BeginForm("Edit", "Courses", null, FormMethod.Post))
 {
+    @Html.HiddenFor(m => m.ID)
+    
     <h4>Название курса</h4>
     @Html.EditorFor(m => m.Name)
     @Html.ValidationMessageFor(m => m.Name)
@@ -18,7 +20,7 @@
     @Html.ValidationMessageFor(m => m.Description)
     
     <h4>Выберите базовую кафедру</h4>
-    @Html.DropDownListFor(m => m.Base_Part, new SelectList( (new List<string> { "KL", "RIOT" })), "value")
+    @Html.DropDownListFor(m => m.Base_Part, new SelectList((new List<string> { "KL", "RIOT" })), "Кафедра")
     
     <h4>Число занятий</h4>
     @Html.EditorFor(m => m.Number_of_Classes)
@@ -42,13 +44,15 @@
     <div>
         <h4>Выберите учителей</h4>
 
-            @for( int i = 0; i < Model.Teachers.Count(); i++ )
+        @if (Model.Teachers != null)
+        {
+            for (int i = 0; i < Model.Teachers.Count(); i++)
             {
                 if (Model.Teachers[i].Person_Type == "Teacher")
                 {
-                    <div>
-                        <img src=@Model.Teachers[i].Picture.URL width="40" height="40">
-                    </div>
+                <div>
+                    <img src=@Model.Teachers[i].Picture.URL width="40" height="40">
+                </div>
                     <div>
                         @Html.CheckBoxFor(m => m.Chosen_Teachers[i]) @(Model.Teachers[i].First_Name + " " + Model.Teachers[i].Second_Name + " " + Model.Teachers[i].Middle_Name) <br />
                         <label> @(Model.Teachers[i].UserName)</label>
@@ -57,38 +61,44 @@
 
                 }
             }
+        }
+
 
     </div>
     <div>
         <h4>Выберите студентов</h4>
 
-        @for (int i = 0; i < Model.Students.Count(); i++)
+        @if (Model.Students != null)
         {
-            if (Model.Students[i].Person_Type == "Student")
+            for (int i = 0; i < Model.Students.Count(); i++)
             {
-                <div>
-                    <img src=@Model.Students[i].Picture.URL width="40" height="40">
-                </div>
+                if (Model.Students[i].Person_Type == "Student")
+                {
+                    <div>
+                        <img src=@Model.Students[i].Picture.URL width="40" height="40">
+                    </div>
                     <div>
                         @Html.CheckBoxFor(m => m.Chosen_Students[i]) @(Model.Students[i].First_Name + " " + Model.Students[i].Second_Name + " " + Model.Students[i].Middle_Name) <br />
                         <label> @(Model.Students[i].UserName)</label>
-                        @Html.HiddenFor( m => m.Students[i].Id)
+                        @Html.HiddenFor(m => m.Students[i].Id)
                     </div>
 
+                }
             }
         }
     </div>
     <div>
-    <h4>Выберите программы</h4>
-        @for (int i = 0; i < Model.Programs.Count(); i++)
+       
+         <h4>Выберите программы</h4>
+        @if (Model.Programs != null)
         {
-            <div>
-                @Html.CheckBoxFor(m => m.Chosen_Programs[i]) @(Model.Programs[i].Name) <br />
+            for (int i = 0; i < Model.Programs.Count(); i++)
+            {
+                @Html.CheckBoxFor(m => m.Chosen_Programs[i]) @(Model.Programs[i].Name) 
                 @Html.HiddenFor(m => m.Programs[i].ID);
-            </div>
+            }
         }
     </div>
-
     <input type="submit" value="Создать" />
-
 }
+

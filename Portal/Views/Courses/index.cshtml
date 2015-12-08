@@ -24,7 +24,7 @@
 
 @if (User.IsInRole("editor") || User.IsInRole("admin"))
 {
-    using (Html.BeginForm("Create", "Course", null, FormMethod.Get))
+    using (Html.BeginForm("Create", "Courses", null, FormMethod.Get))
     {
         <input type="submit" class="add-course-button" value="+" />
     }

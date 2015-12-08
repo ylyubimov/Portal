@@ -2,9 +2,24 @@
 @model Portal.Models.Course
 
 <div class="container course-wrap">
+   
     <div class="course-preview">
-        <div class="course-description">
+        <div class="course-header">
             <h2>@Model.Name</h2>
+            @if (User.IsInRole("admin"))
+            {
+                <div class="course-actions">
+                    <div class="course-settings dropdown">
+                        <div class="course-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
+                        <ul class="dropdown-menu article-settings-menu">
+                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" })</li>
+                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Редактировать", "Edit", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" })</li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="course-description">
             <p>@Model.Description.Substring(0, (Model.Description.Length > 500) ? 500 : Model.Description.Length)...</p>
             <a>@Html.ActionLink("Читать далее...", "course", new { @id = Model.ID })</a>
         </div>

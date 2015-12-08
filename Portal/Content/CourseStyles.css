@@ -155,3 +155,27 @@
     width: 100%;
     border: none;
 }
+
+.course-menu-item {
+    font-size: 10px;
+}
+
+.course-actions {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+.course-settings {
+    display: inline-block;
+    vertical-align: middle;
+    background: white;
+    cursor: pointer;
+}
+.course-settings-btn {
+    padding: 5px;
+}
+.course-header {
+    min-height: 50px;
+    position: relative;
+}

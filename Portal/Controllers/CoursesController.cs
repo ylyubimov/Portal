@@ -60,27 +60,6 @@ namespace Portal.Controllers
             return View(course);
         }
         
-        [HttpGet]
-        [Route("{id:int}/edit")]
-        [Authorize(Roles = "editor, admin")]
-        public ActionResult Edit(int id)
-        {
-            var course = db.Course.Where(p => id == p.ID).FirstOrDefault();
-            if (course == null)
-            {
-                return HttpNotFound();
-            };
-            return View(course);
-        }
-        
-        [HttpPost]
-        [Route("{id:int}/edit")]
-        [Authorize(Roles = "editor, admin")]
-        public ActionResult Edit(Course course)
-        {
-            return View();
-        }
-
         [HttpPost]
         [Route("")]
         public ActionResult Index(string SearchFor)
@@ -120,53 +99,235 @@ namespace Portal.Controllers
         {
             CourseCreateEdit c = new Models.CourseCreateEdit();
             c.Name = "Name";
-            List<Tuple<Person, bool>> students = new List<Tuple<Person, bool>>();
-            List<Tuple<Person, bool>> teachers = new List<Tuple<Person, bool>>();
+            List<Person> studentsList = new List<Person>();
+            List<Person> teachersList = new List<Person>();
+            List<Program> programsList = new List<Program>();
             foreach (Person p in db.Users)
             {
                 if (p.Person_Type == "Teacher")
                 {
-                    teachers.Add(new Tuple<Person, bool>(p, false));
+                    teachersList.Add(p);
                 }
                 else if (p.Person_Type == "Student")
                 {
-                    students.Add(new Tuple<Person, bool>(p, false));
+                    studentsList.Add(p);
                 }
             }
-            c.Teachers = teachers;
-            c.Students = students;
+            foreach( Program p in db.Program)
+            {
+                programsList.Add(p);
+            }
+            c.Chosen_Teachers = new bool[teachersList.Count];
+            c.Chosen_Students = new bool[studentsList.Count];
+            c.Chosen_Programs = new bool[programsList.Count];
+            for ( int i = 0; i < teachersList.Count; i++)
+            {
+                c.Chosen_Teachers[i] = false;
+            }
+            for (int i = 0; i < studentsList.Count; i++)
+            {
+                c.Chosen_Students[i] = false;
+            }
+            for (int i = 0; i < programsList.Count; i++)
+            {
+                c.Chosen_Programs[i] = false;
+            }
+            c.Teachers = teachersList.ToArray();
+            c.Students = studentsList.ToArray();
+            c.Programs = programsList.ToArray();
             return View(c);
         }
 
         [HttpPost]
         [Route("Create")]
         [Authorize(Roles = "editor, admin")]
-        public ActionResult Create(CourseCreateEdit newCourse)
+        public ActionResult Create(  CourseCreateEdit newCourse)
         {
-            List<Person> students = new List<Person>() ;
-            List<Person> teachers = new List<Person>() ;
-
-            foreach (Tuple<Person, bool> t in newCourse.Students) {
-                if (t.Item2)
+            List<Person> studentsList = new List<Person>();
+            List<Person> teachersList = new List<Person>();
+            List<Program> programList = new List<Program>();
+            for (int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
+                if( newCourse.Chosen_Students[i] )
                 {
-                    students.Add(db.Users.Where(p=> p.Id == t.Item1.Id).FirstOrDefault());
+                    string id = newCourse.Students[i].Id;
+                    Person student = db.Users.Where(p => p.Id == id).FirstOrDefault();
+                    studentsList.Add(student);
                 }
             }
-            foreach (Tuple<Person, bool> t in newCourse.Teachers)
+            for (int i = 0; i < newCourse.Chosen_Teachers.Count(); i++)
             {
-                if (t.Item2)
+                if (newCourse.Chosen_Teachers[i])
                 {
-                    students.Add(db.Users.Where(p => p.Id == t.Item1.Id).FirstOrDefault());
+                    string id = newCourse.Teachers[i].Id;
+                    Person teacher = db.Users.Where(p => p.Id == id).FirstOrDefault();
+                    teachersList.Add(teacher);
+                }
+            }
+            for (int i = 0; i < newCourse.Chosen_Programs.Count(); i++)
+            {
+                if (newCourse.Chosen_Programs[i])
+                {
+                    int id = newCourse.Programs[i].ID;
+                    Program program = db.Program.Where(p => p.ID == id).FirstOrDefault();
+                    programList.Add(program);
                 }
             }
 
-            var course = new Course { Name = newCourse.Name, Description = newCourse.Description,  Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = students, Teachers = teachers }  ;
+            var course = new Course { Name = newCourse.Name, Description = newCourse.Description, BasePart = newCourse.Base_Part,  Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = studentsList, Teachers = teachersList, Programs = programList }  ;
 
             db.Course.Add(course);
             db.SaveChanges();
             return RedirectToAction("Index", "Courses");
         }
 
+        [HttpGet]
+        [Route("{id}/Delete")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Delete(int id)
+        {
+            Course course = db.Course.Where(c => c.ID == id).FirstOrDefault();
+            if( course == null)
+            {
+                return HttpNotFound();
+            }
+            course.Students.Clear();
+            course.Teachers.Clear();
+            course.Lessons.Clear();
+            course.Programs.Clear();
+            course.Blogs.Clear();
+            db.Course.Remove(course);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Courses");
+        }
+        [HttpGet]
+        [Route("{id}/Edit")]
+        [Authorize(Roles = "editor, admin")]
+
+        public ActionResult Edit(int id)
+        {
+            Course course = db.Course.Where(crse => crse.ID == id).FirstOrDefault();
+            CourseCreateEdit c = new Models.CourseCreateEdit();
+            c.ID = course.ID;
+            c.Name = course.Name;
+            c.Date_and_Time = course.Date_and_Time;
+            c.Description = course.Description;
+            c.Number_of_Classes = course.Number_of_Classes;
+            c.Number_of_Hours = course.Number_of_Hours;
+            c.Place = course.Place;
+            c.Report_Date = course.Report_Date;
+            c.Report_Type = course.Report_Type;
+            c.Base_Part = course.BasePart;
+            List<Person> students = new List<Person>();
+            List<Person> teachers = new List<Person>();
+            List<Program> programs = new List<Program>(); 
+            foreach (Person p in db.Users)
+            {
+                if (p.Person_Type == "Teacher")
+                {
+                    teachers.Add(p);
+                }
+                else if (p.Person_Type == "Student")
+                {
+                    students.Add(p);
+                }
+            }
+            c.Chosen_Teachers = new bool[teachers.Count];
+            c.Chosen_Students = new bool[students.Count];
+            c.Teachers = teachers.ToArray();
+            c.Students = students.ToArray();
+            c.Programs = course.Programs.ToArray();
+            for (int i = 0; i < teachers.Count; i++)
+            {
+                if (course.Teachers.Where(t => t.Id == c.Teachers[i].Id).First() != null)
+                {
+                    c.Chosen_Teachers[i] = true;
+                }
+                else
+                {
+                    c.Chosen_Teachers[i] = false;
+                }
+            }
+            for (int i = 0; i < students.Count; i++)
+            {
+                if (course.Students.Where(t => t.Id == c.Students[i].Id).First() != null)
+                {
+                    c.Chosen_Students[i] = true;
+                }
+                else
+                {
+                    c.Chosen_Students[i] = false;
+                }
+            }
+            for (int i = 0; i < course.Programs.Count; i++)
+            {
+                if (course.Programs.Where(t => t.ID == c.Programs[i].ID).First() != null)
+                {
+                    c.Chosen_Programs[i] = true;
+                }
+                else
+                {
+                    c.Chosen_Programs[i] = false;
+                }
+            }
+            return View(c);
+        }
+
+        [HttpPost]
+        [Route("Edit")]
+        [Authorize(Roles = "editor, admin")]
+        public ActionResult Edit(CourseCreateEdit newCourse)
+        {
+            List<Person> studentsList = new List<Person>();
+            List<Person> teachersList = new List<Person>();
+            List<Program> programList = new List<Program>();
+            for (int i = 0; i < newCourse.Chosen_Students.Count(); i++)
+            {
+                if (newCourse.Chosen_Students[i])
+                {
+                    string id = newCourse.Students[i].Id;
+                    Person student = db.Users.Where(p => p.Id == id).FirstOrDefault();
+                    studentsList.Add(student);
+                }
+            }
+            for (int i = 0; i < newCourse.Chosen_Teachers.Count(); i++)
+            {
+                if (newCourse.Chosen_Teachers[i])
+                {
+                    string id = newCourse.Teachers[i].Id;
+                    Person teacher = db.Users.Where(p => p.Id == id).FirstOrDefault();
+                    teachersList.Add(teacher);
+                }
+            }
+            for (int i = 0; i < newCourse.Chosen_Programs.Count(); i++)
+            {
+                if (newCourse.Chosen_Programs[i])
+                {
+                    int id = newCourse.Programs[i].ID;
+                    Program program = db.Program.Where(p => p.ID == id).FirstOrDefault();
+                    programList.Add(program);
+                }
+            }
+
+            var course = db.Course.Where(c => c.ID == newCourse.ID).First();
+            if( course == null)
+            {
+                return HttpNotFound();
+            }
+            course.Name = newCourse.Name;
+            course.Description = newCourse.Description;
+            course.BasePart = newCourse.Base_Part;
+            course.Date_and_Time = newCourse.Date_and_Time;
+            course.Place = newCourse.Place;
+            course.Number_of_Classes = newCourse.Number_of_Classes;
+            course.Number_of_Hours = newCourse.Number_of_Hours;
+            course.Report_Type = newCourse.Report_Type;
+            course.Report_Date = newCourse.Report_Date;
+            course.Students = studentsList;
+            course.Teachers = teachersList;
+            course.Programs = programList;
+            db.SaveChanges();
+            return RedirectToAction("Index", "Courses");
+        }
 
         [HttpGet]
         [Route("{id:int}/EditLesson")]
