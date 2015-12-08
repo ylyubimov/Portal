@@ -101,6 +101,7 @@ namespace Portal.Controllers
                     Person_Type = model.Person_Type
                 };   
                 var result = await userManager.CreateAsync(user, model.Password);
+                db.SaveChanges();
                 if (result.Succeeded)
                 {
                     Person pers =  db.Users.Where(p => p.UserName == model.UserName).FirstOrDefault();

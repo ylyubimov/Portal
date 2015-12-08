@@ -31,7 +31,7 @@
                 @Html.TextBoxFor(m => m.Middle_Name, new { @class = "register-text-input", placeholder = "отчество" })
                 @Html.ValidationMessageFor(m => m.Middle_Name)
 
-                @Html.DropDownListFor(m => m.Person_Type, new SelectList(new List<string> { "Студент", "Учитель" }), new { @class = "register-select-input" })
+                @Html.DropDownListFor(m => m.Person_Type, new List<SelectListItem>(){ new SelectListItem() { Text = "Студент", Value = "Student" }, new SelectListItem() { Text = "Преподаватель", Value = "Teacher" } }, new { @class = "register-select-input" })
                 <br/>
                 <input type="submit" value="Регистрация" class="btn login-form-button login-sign-up-button" />
             }

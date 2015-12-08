@@ -96,12 +96,17 @@ namespace Portal.Controllers
         {
             Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
 
-            if (person.Person_Type == "Student")
+            if (person.Person_Type == "Teacher")
             {
-                person.Person_Type = "Teacher";
-            } else
+                person.Person_Type = "Admin";
+            }
+            else if (person.Person_Type == "Admin")
             {
                 person.Person_Type = "Student";
+            }
+            else
+            {
+                person.Person_Type = "Teacher";
             }
             db.SaveChanges();
             return RedirectToAction("AdminTable");
