@@ -327,6 +327,9 @@ namespace Portal.Controllers
             course.Number_of_Hours = newCourse.Number_of_Hours;
             course.Report_Type = newCourse.Report_Type;
             course.Report_Date = newCourse.Report_Date;
+            course.Students.Clear();
+            course.Teachers.Clear();
+            course.Programs.Clear();
             course.Students = studentsList;
             course.Teachers = teachersList;
             course.Programs = programList;
