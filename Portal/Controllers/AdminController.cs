@@ -31,7 +31,7 @@ namespace Portal.Controllers
         {
             Person[] allPersons = db.Users.Where(p => true == p.Exists).ToArray();
             Array.Sort(allPersons, new Comparison<Person>((x, y) => String.Compare(x.Second_Name, y.Second_Name)));
-            ViewBag.Title = "People";
+            ViewBag.Title = "Люди";
             return View(allPersons);
         }
 
@@ -83,8 +83,28 @@ namespace Portal.Controllers
         [HttpPost]
         public ActionResult Delete(string id)
         {
-            //Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
-            //person.Exists = false;
+            Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
+            var userManager = new ApplicationUserManager(new UserStore<Person>(db));
+            if (User.Identity.GetUserName() == person.UserName)
+            {
+                return RedirectToAction("AdminTable");
+            }
+            if (userManager.IsInRole(person.Id, "admin"))
+            {
+                var countAdmin = 0;
+                var allPersons = db.Users.Where(pp => true == pp.Exists).ToArray();
+                foreach (var p in allPersons)
+                {
+                    if (userManager.IsInRole(p.Id, "admin"))
+                    {
+                        countAdmin += 1;
+                    }
+                }
+                if (countAdmin == 1)
+                {
+                    return RedirectToAction("AdminTable");
+                }
+            }
             Person.DeleteUser(db, id);
             db.SaveChanges();
             return RedirectToAction("AdminTable");
@@ -125,9 +145,23 @@ namespace Portal.Controllers
                 userManager.AddToRole(p.Id, "admin");
             } else if (userManager.IsInRole(p.Id, "admin"))
             {
-                userManager.RemoveFromRole(p.Id, "admin");
-                userManager.AddToRole(p.Id, "user");
+                var countAdmin = 0;
+                var allPersons = db.Users.Where(pp => true == pp.Exists).ToArray();
+                foreach (var person in allPersons){
+                    if (userManager.IsInRole(person.Id, "admin"))
+                    {
+                        countAdmin += 1;
+                    }
 
+                }
+                if (countAdmin == 1)
+                {
+                    return RedirectToAction("AdminTable");
+                } else
+                {
+                    userManager.RemoveFromRole(p.Id, "admin");
+                    userManager.AddToRole(p.Id, "user");
+                }                
             } else
             {
                 userManager.RemoveFromRole(p.Id, "user");
