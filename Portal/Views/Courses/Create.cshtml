@@ -18,7 +18,7 @@
     @Html.ValidationMessageFor(m => m.Description)
     
     <h4>Выберите базовую кафедру</h4>
-    @Html.DropDownListFor(m => m.Base_Part, new SelectList( (new List<string> { "KL", "RIOT" })), "value")
+    @Html.DropDownListFor(m => m.Base_Part, new SelectList( (new List<string> { "KL", "RIOT" })), "Все")
     
     <h4>Число занятий</h4>
     @Html.EditorFor(m => m.Number_of_Classes)
@@ -52,7 +52,7 @@
                     <div>
                         @Html.CheckBoxFor(m => m.Chosen_Teachers[i]) @(Model.Teachers[i].First_Name + " " + Model.Teachers[i].Second_Name + " " + Model.Teachers[i].Middle_Name) <br />
                         <label> @(Model.Teachers[i].UserName)</label>
-                        @Html.HiddenFor(m => m.Teachers[i].Id);
+                        @Html.HiddenFor(m => m.Teachers[i].Id)
                     </div>
 
                 }
@@ -84,7 +84,7 @@
         {
             <div>
                 @Html.CheckBoxFor(m => m.Chosen_Programs[i]) @(Model.Programs[i].Name) <br />
-                @Html.HiddenFor(m => m.Programs[i].ID);
+                @Html.HiddenFor(m => m.Programs[i].ID)
             </div>
         }
     </div>

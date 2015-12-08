@@ -11,7 +11,7 @@ namespace Portal.Controllers
     public class CoursesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        
+
         // GET: /Courses/
         [HttpGet]
         [Route("")]
@@ -24,7 +24,8 @@ namespace Portal.Controllers
             if (grade != null && basePart != null)
             {
                 courses = db.Course.Where(p => p.BasePart == basePart && p.Grade == grade).ToArray();
-            } else
+            }
+            else
             {
                 if (grade != null)
                 {
@@ -35,13 +36,14 @@ namespace Portal.Controllers
                     if (basePart != null)
                     {
                         courses = db.Course.Where(p => p.BasePart == basePart).ToArray();
-                    } else
+                    }
+                    else
                     {
                         courses = db.Course.ToArray();
                     }
                 }
             }
-            
+
             return View(courses);
         }
 
@@ -54,12 +56,13 @@ namespace Portal.Controllers
                 return HttpNotFound();
             }
             ViewBag.MailToAll = "";
-            foreach(Person student in course.Students.ToArray()) {
+            foreach (Person student in course.Students.ToArray())
+            {
                 ViewBag.MailToAll += "<" + student.Email + ">,";
             }
             return View(course);
         }
-        
+
         [HttpPost]
         [Route("")]
         public ActionResult Index(string SearchFor)
@@ -86,7 +89,7 @@ namespace Portal.Controllers
             }
             var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
             course.Lessons.Add(lesson);
-            
+
             db.SaveChanges();
             return RedirectToAction("Course", id);
         }
@@ -113,14 +116,14 @@ namespace Portal.Controllers
                     studentsList.Add(p);
                 }
             }
-            foreach( Program p in db.Program)
+            foreach (Program p in db.Program)
             {
                 programsList.Add(p);
             }
             c.Chosen_Teachers = new bool[teachersList.Count];
             c.Chosen_Students = new bool[studentsList.Count];
             c.Chosen_Programs = new bool[programsList.Count];
-            for ( int i = 0; i < teachersList.Count; i++)
+            for (int i = 0; i < teachersList.Count; i++)
             {
                 c.Chosen_Teachers[i] = false;
             }
@@ -141,13 +144,14 @@ namespace Portal.Controllers
         [HttpPost]
         [Route("Create")]
         [Authorize(Roles = "editor, admin")]
-        public ActionResult Create(  CourseCreateEdit newCourse)
+        public ActionResult Create(CourseCreateEdit newCourse)
         {
             List<Person> studentsList = new List<Person>();
             List<Person> teachersList = new List<Person>();
             List<Program> programList = new List<Program>();
-            for (int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
-                if( newCourse.Chosen_Students[i] )
+            for (int i = 0; i < newCourse.Chosen_Students.Count(); i++)
+            {
+                if (newCourse.Chosen_Students[i])
                 {
                     string id = newCourse.Students[i].Id;
                     Person student = db.Users.Where(p => p.Id == id).FirstOrDefault();
@@ -173,7 +177,7 @@ namespace Portal.Controllers
                 }
             }
 
-            var course = new Course { Name = newCourse.Name, Description = newCourse.Description, BasePart = newCourse.Base_Part,  Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = studentsList, Teachers = teachersList, Programs = programList }  ;
+            var course = new Course { Name = newCourse.Name, Description = newCourse.Description, BasePart = newCourse.Base_Part, Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = studentsList, Teachers = teachersList, Programs = programList };
 
             db.Course.Add(course);
             db.SaveChanges();
@@ -181,12 +185,12 @@ namespace Portal.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/Delete")]
+        [Route("{id:int}/Delete")]
         [Authorize(Roles = "editor, admin")]
         public ActionResult Delete(int id)
         {
             Course course = db.Course.Where(c => c.ID == id).FirstOrDefault();
-            if( course == null)
+            if (course == null)
             {
                 return HttpNotFound();
             }
@@ -199,10 +203,10 @@ namespace Portal.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Courses");
         }
-        [HttpGet]
-        [Route("{id}/Edit")]
-        [Authorize(Roles = "editor, admin")]
 
+        [HttpGet]
+        [Route("{id:int}/edit")]
+        [Authorize(Roles = "editor, admin")]
         public ActionResult Edit(int id)
         {
             Course course = db.Course.Where(crse => crse.ID == id).FirstOrDefault();
@@ -219,7 +223,7 @@ namespace Portal.Controllers
             c.Base_Part = course.BasePart;
             List<Person> students = new List<Person>();
             List<Person> teachers = new List<Person>();
-            List<Program> programs = new List<Program>(); 
+            List<Program> programs = new List<Program>();
             foreach (Person p in db.Users)
             {
                 if (p.Person_Type == "Teacher")
@@ -233,6 +237,7 @@ namespace Portal.Controllers
             }
             c.Chosen_Teachers = new bool[teachers.Count];
             c.Chosen_Students = new bool[students.Count];
+            c.Chosen_Programs = new bool[4];
             c.Teachers = teachers.ToArray();
             c.Students = students.ToArray();
             c.Programs = course.Programs.ToArray();
@@ -273,7 +278,7 @@ namespace Portal.Controllers
         }
 
         [HttpPost]
-        [Route("Edit")]
+        [Route("{id:int}/edit")]
         [Authorize(Roles = "editor, admin")]
         public ActionResult Edit(CourseCreateEdit newCourse)
         {
@@ -309,7 +314,7 @@ namespace Portal.Controllers
             }
 
             var course = db.Course.Where(c => c.ID == newCourse.ID).First();
-            if( course == null)
+            if (course == null)
             {
                 return HttpNotFound();
             }
@@ -369,7 +374,7 @@ namespace Portal.Controllers
             lesson.Name = editedLesson.Name;
             lesson.Description = editedLesson.Description;
             lesson.Links = editedLesson.Links;
-            
+
             if (!ModelState.IsValid)
             {
                 ViewBag.CourseId = courseId;
