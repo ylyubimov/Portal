@@ -39,13 +39,12 @@
     <h4>Дата зачета/экзамена </h4>
     @Html.EditorFor(m => m.Report_Date);
     @Html.ValidationMessageFor(m => m.Report_Date)
+    @Html.HiddenFor(m => m.ID)
     <div>
         <h4>Выберите учителей</h4>
 
             @for( int i = 0; i < Model.Teachers.Count(); i++ )
             {
-                if (Model.Teachers[i].Person_Type == "Teacher")
-                {
                     <div>
                         <img src=@Model.Teachers[i].Picture.URL width="40" height="40">
                     </div>
@@ -53,9 +52,13 @@
                         @Html.CheckBoxFor(m => m.Chosen_Teachers[i]) @(Model.Teachers[i].First_Name + " " + Model.Teachers[i].Second_Name + " " + Model.Teachers[i].Middle_Name) <br />
                         <label> @(Model.Teachers[i].UserName)</label>
                         @Html.HiddenFor(m => m.Teachers[i].Id)
+                        @Html.HiddenFor(m => m.Teachers[i].First_Name)
+                        @Html.HiddenFor(m => m.Teachers[i].Second_Name)
+                        @Html.HiddenFor(m => m.Teachers[i].Middle_Name)
+                        @Html.HiddenFor(m => m.Teachers[i].UserName)
+                        @Html.HiddenFor(m => m.Teachers[i].Picture.URL)
                     </div>
 
-                }
             }
 
     </div>
@@ -64,18 +67,21 @@
 
         @for (int i = 0; i < Model.Students.Count(); i++)
         {
-            if (Model.Students[i].Person_Type == "Student")
-            {
+            
                 <div>
                     <img src=@Model.Students[i].Picture.URL width="40" height="40">
                 </div>
                     <div>
                         @Html.CheckBoxFor(m => m.Chosen_Students[i]) @(Model.Students[i].First_Name + " " + Model.Students[i].Second_Name + " " + Model.Students[i].Middle_Name) <br />
                         <label> @(Model.Students[i].UserName)</label>
-                        @Html.HiddenFor( m => m.Students[i].Id)
+                        @Html.HiddenFor(m => m.Students[i].Id)
+                        @Html.HiddenFor(m => m.Students[i].First_Name)
+                        @Html.HiddenFor(m => m.Students[i].Second_Name)
+                        @Html.HiddenFor(m => m.Students[i].Middle_Name)
+                        @Html.HiddenFor(m => m.Students[i].UserName)
+                        @Html.HiddenFor(m => m.Students[i].Picture.URL)
                     </div>
 
-            }
         }
     </div>
     <div>
@@ -85,6 +91,19 @@
             <div>
                 @Html.CheckBoxFor(m => m.Chosen_Programs[i]) @(Model.Programs[i].Name) <br />
                 @Html.HiddenFor(m => m.Programs[i].ID)
+                @Html.HiddenFor(m => m.Programs[i].Name)
+            </div>
+        }
+    </div>
+
+    <div>
+        <h4>Выберите блог</h4>
+        @for (int i = 0; i < Model.Blogs.Count(); i++)
+        {
+            <div>
+                @Html.CheckBoxFor(m => m.Chosen_Blogs[i]) @(Model.Blogs[i].Name) <br />
+                @Html.HiddenFor(m => m.Blogs[i].ID)
+                @Html.HiddenFor(m => m.Blogs[i].Name)
             </div>
         }
     </div>

@@ -22,7 +22,7 @@
 
 @Html.Partial("_CoursePreViewList",(Portal.Models.Course[])Model)
 
-@if (User.IsInRole("editor") || User.IsInRole("admin"))
+@if ( User.IsInRole("admin"))
 {
     using (Html.BeginForm("Create", "Courses", null, FormMethod.Get))
     {

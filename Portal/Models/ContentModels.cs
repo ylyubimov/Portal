@@ -9,7 +9,6 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
@@ -22,7 +21,6 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
@@ -35,7 +33,6 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
@@ -47,7 +44,6 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string URL { get; set; }
