@@ -47,7 +47,7 @@
                     {
                         <tr>
                             <td style="word-break: break-word;">@lesson.Name</td>
-                            <td>@lesson.Description @lesson.Description</td>
+                            <td>@lesson.Description</td>
                             <td style="word-break: break-word;"><a href="@lesson.Links">@lesson.Links</a></td>
                             @if (Model.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() != null || User.IsInRole("admin") )
                             {

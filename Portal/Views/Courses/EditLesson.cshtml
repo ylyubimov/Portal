@@ -10,9 +10,9 @@
     {
         <div class="course-add-lesson">
             <h4>Редактировать урок:</h4>
-            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input" } }) @Html.ValidationMessageFor(m => m.Name)
-            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input" } }) @Html.ValidationMessageFor(m => m.Description)
-            @Html.EditorFor(m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input" } }) @Html.ValidationMessageFor(m => m.Links)
+            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder="Название" } }) @Html.ValidationMessageFor(m => m.Name)
+            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Описание" } }) @Html.ValidationMessageFor(m => m.Description)
+            @Html.EditorFor(m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Ссылки" } }) @Html.ValidationMessageFor(m => m.Links)
         </div>
         <div class="person-edit-buttons">
             <input class="btn person-edit-button" type="submit" value="Сохранить" />
