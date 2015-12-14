@@ -204,7 +204,13 @@ namespace Portal.Controllers
                 }
             }
 
-            var course = new Course { Name = newCourse.Name, Description = newCourse.Description, BasePart = newCourse.Base_Part, Date_and_Time = newCourse.Date_and_Time, Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours, Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = studentsList, Teachers = teachersList, Programs = programList, Blogs = blogsList };
+            var course = new Course {   Name = newCourse.Name, Description = newCourse.Description, BasePart = newCourse.Base_Part, Date_and_Time = newCourse.Date_and_Time,
+                                        Place = newCourse.Place, Number_of_Classes = newCourse.Number_of_Classes, Number_of_Hours = newCourse.Number_of_Hours,
+                                        Report_Type = newCourse.Report_Type, Report_Date = newCourse.Report_Date, Students = studentsList, Teachers = teachersList,
+                                        Programs = programList, Blogs = blogsList };
+            if (newCourse.Chosen_Programs.ToArray().Contains(true))
+                course.Grade = newCourse.Chosen_Programs.ToList().IndexOf(true)+3;
+
             db.Course.Add(course);
             db.SaveChanges();
             return RedirectToAction("Index", "Courses");
