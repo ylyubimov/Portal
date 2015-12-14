@@ -23,13 +23,22 @@ namespace Portal.Controllers
             Course[] courses = new Course[] { };
             if (grade != null && basePart != null)
             {
-                courses = db.Course.Where(p => p.BasePart == basePart && p.Grade == grade).ToArray();
+                var prog = db.Program.Where(p => p.Name == grade.ToString() + " курс").FirstOrDefault();
+                if(prog != null)
+                    courses = prog.Courses.Where(p => p.BasePart == basePart).ToArray();
+                else
+                    courses = db.Course.ToArray();
             }
             else
             {
                 if (grade != null)
                 {
-                    courses = db.Course.Where(p => p.Grade == grade).ToArray();
+                    var prog = db.Program.Where(p => p.Name == grade.ToString() + " курс").FirstOrDefault();
+                    prog.Courses.ToArray();
+                    if (prog != null)
+                        courses = prog.Courses.ToArray();
+                    else
+                        courses = db.Course.ToArray();
                 }
                 else
                 {
