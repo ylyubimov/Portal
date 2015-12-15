@@ -242,3 +242,24 @@
     width: 40px;
     height: 40px;
 }
+
+.course-create-wrap {
+    width: 60%;
+    min-width: 600px;
+    text-align: left;
+    padding: 25px;
+    margin-top: 15px;
+    background-color: white;
+}
+
+.course-create-wrap input[type=text], .course-create-wrap input[type=number], .course-create-wrap input[type=date] {
+    border: none;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+}
+
+.course-create-wrap img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
