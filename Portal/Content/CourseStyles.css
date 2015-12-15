@@ -179,3 +179,48 @@
     min-height: 50px;
     position: relative;
 }
+
+.course-settings-menu {
+    min-width: 120px;
+    width: 120px;
+}
+
+.course-menu-item {
+    font-size: 10px;
+}
+
+.open > .course-settings-btn {
+    background: #F0F0F0;
+    min-width: 120px;
+    width: 120px;
+}
+
+.course-settings ul {
+    background: white;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    margin-top: -1px;
+    box-shadow: none;
+}
+
+.open ul li {
+    background: #F0F0F0;
+    border: none;
+    border-radius: 0;
+    margin-top: -1px;
+
+    padding: 0 5px;
+}
+
+.open ul li a {
+    padding: 0;
+    display: inline-block;
+}
+
+.open ul li a:hover {
+    padding: 0;
+    border-bottom: 1px dotted;
+    display:inline-block;
+    background: #F0F0F0;
+}

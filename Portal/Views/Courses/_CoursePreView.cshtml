@@ -11,7 +11,7 @@
                 <div class="course-actions">
                     <div class="course-settings dropdown">
                         <div class="course-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
-                        <ul class="dropdown-menu article-settings-menu">
+                        <ul class="dropdown-menu course-settings-menu">
                             @if (User.IsInRole("admin"))
                             {
                             <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" })</li>
