@@ -269,45 +269,39 @@
 }
 
 .add-article-button {
-    background: #FF0F0F;
-    color: white;
-    height: 30px;
-    width: 30px;
-    text-align: center;
     position: fixed;
     bottom: 15px;
     right: 15px;
-    border-radius: 50%;
     border: none;
     font-size: 20px;
+    background-color: transparent;
+}
+
+.add-article-button:active, .add-article-button:focus {
+    outline: none;
+}
+
+.add-article-button img {
+    width: 40px;
+    height: 40px;
 }
 
 .add-blog-button {
-    background: #FF0F0F;
-    color: white;
-    height: 30px;
-    width: 30px;
-    text-align: center;
     position: fixed;
     bottom: 15px;
     right: 15px;
-    border-radius: 50%;
     border: none;
     font-size: 20px;
+    background-color: transparent;
 }
 
-.add-course-button{
-    background: #FF0F0F;
-    color: white;
-    height: 30px;
-    width: 30px;
-    text-align: center;
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    border-radius: 50%;
-    border: none;
-    font-size: 20px;
+.add-blog-button:active, .add-blog-button:focus {
+    outline: none;
+}
+
+.add-blog-button img {
+    width: 40px;
+    height: 40px;
 }
 
 .blog-create-button {    

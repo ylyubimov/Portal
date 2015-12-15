@@ -224,3 +224,21 @@
     display:inline-block;
     background: #F0F0F0;
 }
+
+.add-course-button{
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border: none;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+.add-course-button:active, .add-course-button:focus {
+    outline: none;
+}
+
+.add-course-button img {
+    width: 40px;
+    height: 40px;
+}

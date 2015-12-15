@@ -26,7 +26,9 @@
     {
         using (Html.BeginForm(Model.ID.ToString()+"/Create", "Articles", FormMethod.Get))
         {
-            <input type="submit" class="add-article-button" value="+" />
+            <button type="submit" class="add-article-button">
+                <img src="~/images/icons/addButton.png" />
+            </button>
         }
     }
 </div>
