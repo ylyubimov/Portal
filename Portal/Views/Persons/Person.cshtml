@@ -10,15 +10,16 @@
         <div class="person-general-info">
             <img src=@Model.Picture.URL />
             <div class="person-info-text">
-                <div class="person-name">@Model.First_Name @Model.Second_Name</div>
-                    @if (Model.Person_Type == "Teacher")
-                    {
-                        <div class="person-type">Преподаватель</div>
-                    }
-                    else
-                    {
-                        <div class="person-type">Студент</div>
-                    }
+                @if (Model.Person_Type == "Teacher")
+                {
+                    <div class="person-name">@Model.First_Name @Model.Middle_Name @Model.Second_Name</div>
+                    <div class="person-type">Преподаватель</div>
+                }
+                else
+                {
+                    <div class="person-name">@Model.First_Name @Model.Second_Name</div>
+                    <div class="person-type">Студент</div>
+                }
                 <div class="person-contacts">
                     <a href="tel:@Model.PhoneNumber"><span>@Model.PhoneNumber</span></a>
                     <a href="mailto:@Model.Email"><span>@Model.Email</span></a>
