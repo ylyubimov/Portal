@@ -127,12 +127,16 @@ namespace Portal.Controllers
             return RedirectToAction("blog", "Blogs", new { id = article.Blogs.First().ID });
         }
 
-        [Authorize]
+        [Authorize(Roles = "editor, admin")]
         [HttpGet]
         [Route("Delete/{id:int}")]
         public ActionResult Delete(int id)
         {
             Article article = db.Article.Where(p => id == p.ID).FirstOrDefault();
+
+            article.Likes_Authors.Clear();
+            article.Dislikes_Authors.Clear();
+
             Person author = article.Author;
             author.Written_Articles.Remove(article);
             Blog[] blogs = article.Blogs.ToArray();
@@ -146,6 +150,7 @@ namespace Portal.Controllers
             {
                 db.Comment.Remove(comment);
             }
+
             db.SaveChanges();
             return RedirectToAction("index", "home"); 
         }

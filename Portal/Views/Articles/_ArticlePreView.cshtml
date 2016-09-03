@@ -70,7 +70,12 @@
         <h3>@Model.Name</h3>
         @if (@Model.Text != null)
         {
-            <p style="word-wrap: break-word;">@Model.Text.Substring(0, (Model.Text.Length > 500) ? 500 : Model.Text.Length)...</p>
+            if (Model.Text.Length > 500)
+            {
+                <p style="word-wrap: break-word;">@Model.Text.Substring(0, (Model.Text.Length > 500) ? 500 : Model.Text.Length)...</p>
+            } else {
+                <p style="word-wrap: break-word;">@Model.Text.Substring(0, (Model.Text.Length > 500) ? 500 : Model.Text.Length)</p>
+            }
         }
         <a>@Html.ActionLink("Читать далее...", "Index", "Articles", new { @id = Model.ID }, new { @class = "" })</a>
     </div>

@@ -147,7 +147,7 @@ input.input-validation-error {
 }
 
 .search-general {
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     vertical-align: middle;
 }
