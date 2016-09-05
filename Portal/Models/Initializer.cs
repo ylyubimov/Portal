@@ -37,7 +37,7 @@ namespace Portal.Models
 
             db.SaveChanges();
 
-            Picture p1 = new Picture { Name = "ava1", URL = "http://mobini.pl/upload/files/127/095/114/902/672/728_peter-parker.jpg" };
+            Picture p1 = new Picture { Name = "ava1", URL = "http://wikicomics.ru/uploads/posts/2015-06/1433191285_1429875036_tobey-maguire-as-peter-parker.jpg" };
             Picture p2 = new Picture { Name = "ava2", URL = "http://rebarron.com/wp-content/uploads/2013/06/Angry-yelling-man.jpg" };
             Picture p3 = new Picture { Name = "ava3", URL = "http://1.fwcdn.pl/ph/87/13/138713/98628.1.jpg" };
             Picture p4 = new Picture { Name = "ava1", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg" };

@@ -77,6 +77,11 @@
     font-size: 14px;
 }
 
+.person-contacts-no-phone::after {
+    color: transparent;
+    content: "|";
+}
+
 .person-contacts a {
     color: #9B9B9B;
     text-decoration: none;
@@ -90,11 +95,6 @@
 
 .person-contacts a span:hover {
     border-bottom: none;
-}
-
-.person-contacts a::after {
-    color: transparent;
-    content: "|";
 }
 
 .person-contacts a:hover {
