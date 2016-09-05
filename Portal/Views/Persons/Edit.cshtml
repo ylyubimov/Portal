@@ -10,12 +10,16 @@
     <div class="container person-wrap">
         <div class="person">
             <div class="person-general-info">
-                @if (Model.Picture.URL == null)
+                <div class="person-general-info-image">
+                    @if (Model.Picture.URL == null)
                 {
-                    <img src="/images/genel.jpg" />
-                } else {
-                    <img src=@Model.Picture.URL />
-                }
+                        <img src="/images/genel.jpg" />
+                    }
+                    else
+                    {
+                        <img src=@Model.Picture.URL />
+                    }
+                </div>
                 <div class="person-info-text">
                     <div class="person-edit-field">
                         @Html.EditorFor(m => m.First_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Имя" } })

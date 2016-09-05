@@ -20,11 +20,17 @@
     color: #9B9B9B;
 }
 
-.person-grid-preview img {
+.person-grid-preview-image {
     height: 150px;
     width: 150px;
+    overflow: hidden;   
     border-radius: 50%;
-    margin-bottom: 15px;
+    border: #DDD dotted 1px;
+}
+
+.person-grid-preview-image img {
+    height: 150px;
+    margin: 0 -50% 15px -50%;
 }
 
 .person-name {
@@ -57,10 +63,18 @@
     position: relative;
 }
 
-.person-general-info img {
+.person-general-info-image {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.person-general-info img {
+    height: 200px;
+    display: inline-block;
 }
 
 .person-info-text {
@@ -142,11 +156,20 @@
     position: relative;
 }
 
-.person-preview img {
+.person-preview-image {
     height: 60px; 
     width: 60px;
     border-radius: 50%;
-    margin-left: 10px;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    border: #DDD dotted 1px;
+}
+
+.person-preview-image img {
+    height: 60px; 
+    margin: 0 -50% 0 -50%;
+    display: inline-block;
 }
 
 .person-preview .person-info-text {
@@ -157,7 +180,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 45%;
+    right: 30%;
     display: inline-block;
     vertical-align: middle;
     color: black;
@@ -180,7 +203,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 80%;
+    right: 20px;
     display: inline-block;
     vertical-align: middle;
     color: black;

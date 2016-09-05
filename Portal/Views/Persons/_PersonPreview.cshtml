@@ -2,7 +2,7 @@
 @model Person
 
 <div class="person-preview">
-    <a href=@Url.Action("person", new { @id=Model.Id })><img src=@Model.Picture.URL /></a>
+    <a href=@Url.Action("person", new { @id=Model.Id })><div class="person-preview-image"><img src=@Model.Picture.URL /></div></a>
     <div class="person-info-text">
         @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
         @if (Model.Person_Type == "Teacher")
