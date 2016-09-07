@@ -203,11 +203,17 @@ input.input-validation-error {
     padding: 5px 15px !important;
 }
 
-.login-user-img-link img {
+.login-user-img-link-image {
     width: 40px;
     height: 40px;
-
     border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.login-user-img-link img {
+    height: 40px;
+    display: inline-block;
 }
 
 .search-error-wrap {

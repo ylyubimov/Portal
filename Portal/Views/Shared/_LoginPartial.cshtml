@@ -15,7 +15,7 @@
             @Html.ActionLink(currentUser.First_Name + " " + currentUser.Second_Name, "person", "persons", routeValues: new { id = currentUser.Id }, htmlAttributes: new { title = "Manage", @class = "login-user-info" })
             <a class="login-user-info" href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
         </li>
-        <li><a class="login-user-img-link" href=@Url.Action("person", "persons", new { id = currentUser.Id })><img src=@currentUser.Picture.URL /></a></li>
+        <li><a class="login-user-img-link" href=@Url.Action("person", "persons", new { id = currentUser.Id })><div class="login-user-img-link-image"><img src=@currentUser.Picture.URL /></div></a></li>
     </ul>
     }
 }

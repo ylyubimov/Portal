@@ -26,11 +26,11 @@
     overflow: hidden;   
     border-radius: 50%;
     border: #DDD dotted 1px;
+    text-align: center;
 }
 
 .person-grid-preview-image img {
     height: 150px;
-    margin: 0 -50% 15px -50%;
 }
 
 .person-name {
@@ -168,7 +168,6 @@
 
 .person-preview-image img {
     height: 60px; 
-    margin: 0 -50% 0 -50%;
     display: inline-block;
 }
 

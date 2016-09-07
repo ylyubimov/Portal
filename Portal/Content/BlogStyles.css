@@ -116,10 +116,23 @@
     position: static;
 }
 
-.author img {
+.author-image {    
     height: 45px;
     width: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+
     margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+
+    border: 1px dotted #CCC;
+}
+
+.author img {
+    height: 45px;
+    display: inline-block;
 }
 
 .comment {

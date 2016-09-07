@@ -4,7 +4,7 @@
     <div class="article-preview">
         <div class="article-header">
             <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id}) >
-                <img class="img-circle" src=@Model.Author.Picture.URL />
+                <div class="author-image"><img src=@Model.Author.Picture.URL /></div>
                 @Model.Author.First_Name @Model.Author.Second_Name
             </a>
             <div class="date">@Model.Date_of_Creation</div>

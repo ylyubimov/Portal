@@ -48,11 +48,19 @@
     margin: 10px;
 }
 
-.course-teacher img {
+.course-teacher-image {
+    display: inline-block;
     height: 45px;
     width: 45px;
-
     border-radius: 50%;
+    overflow: hidden;
+
+    border: 1px dotted #CCC;
+    text-align: center;
+}
+
+.course-teacher img {
+    height: 45px;
 }
 
 .course-duration {

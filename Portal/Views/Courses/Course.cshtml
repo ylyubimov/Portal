@@ -41,7 +41,7 @@
                 @foreach (Person teacher in Model.Teachers)
                 {
                     <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = teacher.Id })>
-                        <img src=@teacher.Picture.URL />
+                        <div class="course-teacher-image"><img src=@teacher.Picture.URL /></div>
                         <div>@teacher.First_Name @teacher.Second_Name</div>
                     </a>
                 }
