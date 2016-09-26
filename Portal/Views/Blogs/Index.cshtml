@@ -1,17 +1,15 @@
 ﻿@model Portal.Models.Blog[]
 
-@{ 
+@{
     ViewBag.Title = "Blogs";
 }
 
-@Html.Partial("_Search", @"Blogs")
-@Html.Partial("_BlogPreviewList", @Model)
+@Html.Partial( "_Search", @"Blogs" )
+@Html.Partial( "_BlogPreviewList", @Model )
 
-@if (User.IsInRole("editor") || User.IsInRole("admin"))
-{
-    using (Html.BeginForm("Create", "Blogs", null, FormMethod.Get))
-    {
-        <button type="submit" class="add-blog-button" >
+@if( User.IsInRole( "editor" ) || User.IsInRole( "admin" ) ) {
+    using( Html.BeginForm( "Create", "Blogs", null, FormMethod.Get ) ) {
+        <button type="submit" class="add-blog-button">
             <img src="~/images/icons/addButton.png" />
         </button>
     }

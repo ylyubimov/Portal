@@ -2,31 +2,30 @@
 
 @{
     ViewBag.Title = "Log in";
-    @Styles.Render("~/Content/LoginStyles.css")
+    @Styles.Render( "~/Content/LoginStyles.css" )
 }
 
-    <div class="login-page-wrap login-jumbotron">
-        <div class="login-form-wrap">
-            <div class="login-form">
-                <h2>Приветствуем на портале ABBYY</h2>
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
-        {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
+<div class="login-page-wrap login-jumbotron">
+    <div class="login-form-wrap">
+        <div class="login-form">
+            <h2>Приветствуем на портале ABBYY</h2>
+            @using( Html.BeginForm( "Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" } ) ) {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary( true )
 
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "login-text-input", placeholder = "электронная почта" })
-                    @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor( m => m.UserName, new { @class = "login-text-input", placeholder = "электронная почта" } )
+                @Html.ValidationMessageFor( m => m.UserName )
 
-                    @Html.PasswordFor(m => m.Password, new { @class = "login-text-input", placeholder = "пароль" })
-                    @Html.ValidationMessageFor(m => m.Password)
+                @Html.PasswordFor( m => m.Password, new { @class = "login-text-input", placeholder = "пароль" } )
+                @Html.ValidationMessageFor( m => m.Password )
 
-                    <input type="submit" value="Вход на сайт" class="btn login-form-button login-sign-in-button" />
+                <input type="submit" value="Вход на сайт" class="btn login-form-button login-sign-in-button" />
                     <a href=@Url.Action("register", "account") class="btn login-form-button login-sign-up-button">Регистрация</a>
-                }
-            </div>
+            }
         </div>
     </div>
+</div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render( "~/bundles/jqueryval" )
 }

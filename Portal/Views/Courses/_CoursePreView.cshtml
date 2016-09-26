@@ -1,39 +1,34 @@
 ﻿@using Portal.Models
 @model Portal.Models.Course
-
 <div class="container course-wrap">
-   
+
     <div class="course-preview">
         <div class="course-header">
             <h2>@Model.Name</h2>
-            @if (User.IsInRole("admin") || Model.Teachers.Where(t => t.UserName == User.Identity.Name).FirstOrDefault() != null )
-            {
+            @if( User.IsInRole( "admin" ) || Model.Teachers.Where( t => t.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                 <div class="course-actions">
                     <div class="course-settings dropdown">
                         <div class="course-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
                         <ul class="dropdown-menu course-settings-menu">
-                            @if (User.IsInRole("admin"))
-                            {
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" })</li>
+                            @if( User.IsInRole( "admin" ) ) {
+                                <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" } )</li>
                             }
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Редактировать", "Edit", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" })</li>
+                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" } )</li>
                         </ul>
                     </div>
                 </div>
             }
         </div>
         <div class="course-description">
-            @if (Model.Description != null)
-            {
-                <p>@Model.Description.Substring(0, (Model.Description.Length > 500) ? 500 : Model.Description.Length)...</p>
+            @if( Model.Description != null ) {
+                <p>@Model.Description.Substring( 0, ( Model.Description.Length > 500 ) ? 500 : Model.Description.Length )...</p>
             }
-            <a>@Html.ActionLink("Читать далее...", "course", new { @id = Model.ID })</a>
+            <a>@Html.ActionLink( "Читать далее...", "course", new { @id = Model.ID } )</a>
         </div>
         <h4>Учителя:</h4>
         <div class="course-teachers">
-            @foreach (Person teacher in Model.Teachers)
-            {
-                <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = teacher.Id }) >
+            @foreach( Person teacher in Model.Teachers ) {
+                <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = teacher.Id })>
                     <div class="course-teacher-image"><img src=@teacher.Picture.URL /></div>
                     <div>@teacher.First_Name @teacher.Second_Name</div>
                 </a>
@@ -41,4 +36,3 @@
         </div>
     </div>
 </div>
-

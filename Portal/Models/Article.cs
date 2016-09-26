@@ -9,13 +9,13 @@ namespace Portal.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required(ErrorMessage = "Заполните название статьи")]
+        [Required( ErrorMessage = "Заполните название статьи" )]
         public string Name { get; set; }
         public DateTime? Date_of_Creation { get; set; }
-        public int? Likes_Count { get; set; } 
+        public int? Likes_Count { get; set; }
         public int? Dislikes_Count { get; set; }
-        [DataType(DataType.MultilineText)]
-        [Required(ErrorMessage = "Текст статьи обязателен")]
+        [DataType( DataType.MultilineText )]
+        [Required( ErrorMessage = "Текст статьи обязателен" )]
         public string Text { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         [Required]

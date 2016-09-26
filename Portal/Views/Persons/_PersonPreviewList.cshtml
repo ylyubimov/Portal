@@ -1,23 +1,17 @@
 ﻿<div class=" container person-wrap">
-    @if (ViewBag.Type != "students")
-    {
+    @if( ViewBag.Type != "students" ) {
         <div class="person-part-name">Преподаватели</div>
-        foreach (Portal.Models.Person person in Model[0])
-        {
-            if (person.First_Name != "Deleted" || person.Second_Name != "Deleted")
-            {
-                @Html.Partial("_PersonPreview", person);
+        foreach( Portal.Models.Person person in Model[0] ) {
+            if( person.First_Name != "Deleted" || person.Second_Name != "Deleted" ) {
+                @Html.Partial( "_PersonPreview", person );
             }
         }
     }
-    @if (ViewBag.Type != "teachers")
-    {
+    @if( ViewBag.Type != "teachers" ) {
         <div class="person-part-name">Студенты</div>
-        foreach (Portal.Models.Person person in Model[1])
-        {
-            if (person.First_Name != "Deleted" || person.Second_Name != "Deleted")
-            {
-                @Html.Partial("_PersonPreview", person);
+        foreach( Portal.Models.Person person in Model[1] ) {
+            if( person.First_Name != "Deleted" || person.Second_Name != "Deleted" ) {
+                @Html.Partial( "_PersonPreview", person );
             }
         }
     }

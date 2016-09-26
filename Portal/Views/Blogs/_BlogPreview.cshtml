@@ -1,13 +1,12 @@
 ﻿@using Portal.Models
 @model Portal.Models.Blog
-
 <div class="container blog-wrap">
     <div class="blog-preview">
-        <a class="author blog-author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id }) >
+        <a class="author blog-author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id })>
             <div class="author-image"><img src=@Model.Author.Picture.URL /></div>
             @Model.Author.First_Name @Model.Author.Second_Name
         </a>
-        <h3 class="blog-title">@Html.ActionLink(@Model.Name, "blog", new { @id = Model.ID }, new { @class = "no-link-attributes" })</h3></a>
+        <h3 class="blog-title">@Html.ActionLink( @Model.Name, "blog", new { @id = Model.ID }, new { @class = "no-link-attributes" } )</h3></a>
         <div class="blog-articles-preview-length">@Model.Articles.ToArray().Length статей</div>
     </div>
 </div>

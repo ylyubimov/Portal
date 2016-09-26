@@ -9,23 +9,20 @@
         <div class="blog-header">
             <div class="blog-articles-length">@Model.Articles.ToArray().Length статей</div>
             <h3 class="blog-title">@Model.Name</h3>
-            @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
-            {
+            @if( User.Identity.Name == Model.Author.UserName || User.IsInRole( "admin" ) ) {
                 <div class="blog-settings dropdown">
                     <div class="blog-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
                     <ul class="dropdown-menu blog-settings-menu">
-                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Blogs", new { @blogId = Model.ID }, new { @class = "blog-menu-item" })</li>
-                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Изменить", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" })</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Blogs", new { @blogId = Model.ID }, new { @class = "blog-menu-item" } )</li>
+                        <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Изменить", "Edit", "Blogs", new { @id = Model.ID }, new { @class = "blog-menu-item" } )</li>
                     </ul>
                 </div>
             }
         </div>
     </div>
-    @Html.Partial("../Articles/_ArticlePreViewList", Model.Articles.ToArray())
-    @if (User.Identity.Name == Model.Author.UserName)
-    {
-        using (Html.BeginForm(Model.ID.ToString()+"/Create", "Articles", FormMethod.Get))
-        {
+    @Html.Partial( "../Articles/_ArticlePreViewList", Model.Articles.ToArray() )
+    @if( User.Identity.Name == Model.Author.UserName ) {
+        using( Html.BeginForm( Model.ID.ToString() + "/Create", "Articles", FormMethod.Get ) ) {
             <button type="submit" class="add-article-button">
                 <img src="~/images/icons/addButton.png" />
             </button>

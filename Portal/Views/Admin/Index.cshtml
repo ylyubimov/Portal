@@ -1,17 +1,12 @@
 ﻿@model Portal.Controllers.MyViewModel
 
 
-@using (Html.BeginForm("Save", "admin", new { id = Model.personId }, FormMethod.Post))
-{
-    foreach (Portal.Models.Course c in Model.courses)
-    {
-        if (Model.checkedIds.Contains(c.ID))
-        {
+@using( Html.BeginForm( "Save", "admin", new { id = Model.personId }, FormMethod.Post ) ) {
+    foreach( Portal.Models.Course c in Model.courses ) {
+        if( Model.checkedIds.Contains( c.ID ) ) {
             <label><input type="checkbox" checked="checked" name="checkedCourses" value="@c.Name">@c.Name</label>
-        }
-        else
-        {
-            <label><input type="checkbox" name="checkedCourses" value="@c.Name">@c.Name</label><br/>
+        } else {
+            <label><input type="checkbox" name="checkedCourses" value="@c.Name">@c.Name</label><br />
         }
 
     }

@@ -3,26 +3,24 @@
 
 @{
     ViewBag.Title = Model.Name;
-    Person currentPerson = Portal.Models.ApplicationDbContext.Create().Users.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+    Person currentPerson = Portal.Models.ApplicationDbContext.Create().Users.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault();
 }
 
 <div class="container-fluid">
     <div class="container article-wrap">
         <div class="blog-header">
-            <h3 class="blog-title">@Html.ActionLink(Model.Blogs.First().Name, "blog", "blogs", new { @id = Model.Blogs.First().ID }, new { @class = "no-link-attributes" })</h3>
+            <h3 class="blog-title">@Html.ActionLink( Model.Blogs.First().Name, "blog", "blogs", new { @id = Model.Blogs.First().ID }, new { @class = "no-link-attributes" } )</h3>
         </div>
         <div class="article">
             <div class="article-header">
-                <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id }) >
+                <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id })>
                     <img class="img-circle" src=@Model.Author.Picture.URL />
                     @Model.Author.First_Name @Model.Author.Second_Name
                 </a>
                 <div class="date">@Model.Date_of_Creation</div>
                 <div class="article-actions">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        if (Model.Dislikes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
-                        {
+                    @if( User.Identity.IsAuthenticated ) {
+                        if( Model.Dislikes_Authors.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                             <div class="rating">
                                 <div class="rating-plus" style="opacity: 0.4;cursor: default;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
                                     <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
@@ -31,9 +29,7 @@
                                     <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                                 </div>
                             </div>
-                        }
-                        else if (Model.Likes_Authors.Where(p => p.UserName == User.Identity.Name).FirstOrDefault() != null)
-                        {
+                        } else if( Model.Likes_Authors.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                             <div class="rating">
                                 <div class="rating-plus" style="opacity: 1;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
                                     <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
@@ -42,9 +38,7 @@
                                     <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
                                 </div>
                             </div>
-                        }
-                        else
-                        {
+                        } else {
                             <div class="rating">
                                 <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
                                     <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
@@ -54,11 +48,9 @@
                                 </div>
                             </div>
                         }
-                    }
-                    else
-                    {
+                    } else {
                         <div class="rating">
-                            <div class="rating-plus" style="opacity: 0.4;cursor: default;"  id=@("LikesCountOnClick" + Model.ID)>
+                            <div class="rating-plus" style="opacity: 0.4;cursor: default;" id=@("LikesCountOnClick" + Model.ID)>
                                 <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
                             </div>
                             <div class="rating-minus" style="opacity: 0.4;cursor: default;" id=@("DislikesCountOnClick" + Model.ID)>
@@ -66,23 +58,22 @@
                             </div>
                         </div>
                     }
-                    @if (User.Identity.Name == Model.Author.UserName || User.IsInRole("admin"))
-                    {
-                    <div class="article-settings dropdown">
-                        <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png"/>Действия</div>
-                        <ul class="dropdown-menu article-settings-menu">
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Удалить", "Delete", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" })</li>
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink("Редактировать", "Edit", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" })</li>
-                        </ul>
-                    </div>
+                    @if( User.Identity.Name == Model.Author.UserName || User.IsInRole( "admin" ) ) {
+                        <div class="article-settings dropdown">
+                            <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
+                            <ul class="dropdown-menu article-settings-menu">
+                                <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" } )</li>
+                                <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" } )</li>
+                            </ul>
+                        </div>
                     }
                 </div>
             </div>
             <h2>@Model.Name</h2>
             <p style="white-space:pre; word-wrap: break-word;">@Model.Text</p>
         </div>
-        
-        @foreach (Portal.Models.Comment comment in Model.Comments) {
+
+        @foreach( Portal.Models.Comment comment in Model.Comments ) {
             <div class="comment">
                 <div class="comment-header">
                     <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = comment.Author.Id })>
@@ -90,41 +81,34 @@
                         @comment.Author.First_Name @comment.Author.Second_Name
                     </a>
                     <div class="date">написал @comment.Create_Time</div>
-                    @if (User.Identity.Name == comment.Author.UserName || User.IsInRole("admin"))
-                    {
-                        using (Html.BeginForm("DeleteComment", "Articles", new { id = Model.ID, idComment = comment.ID }, FormMethod.Post))
-                        {
+                    @if( User.Identity.Name == comment.Author.UserName || User.IsInRole( "admin" ) ) {
+                        using( Html.BeginForm( "DeleteComment", "Articles", new { id = Model.ID, idComment = comment.ID }, FormMethod.Post ) ) {
                             <input class="btn delete-comment-button" type="submit" value="X" />
                         }
                     }
                 </div>
-                    <p>@comment.Text</p>
+                <p>@comment.Text</p>
             </div>
         }
-        @if (User.Identity.IsAuthenticated)
-        {
-        <div class="add-comment comment">
-            <div class="comment-header">
-                <div class="author">
-                    <img class="img-circle" src=@currentPerson.Picture.URL />
-                    @currentPerson.First_Name @currentPerson.Second_Name
+        @if( User.Identity.IsAuthenticated ) {
+            <div class="add-comment comment">
+                <div class="comment-header">
+                    <div class="author">
+                        <img class="img-circle" src=@currentPerson.Picture.URL />
+                        @currentPerson.First_Name @currentPerson.Second_Name
+                    </div>
                 </div>
-            </div>
 
-            @using (Html.BeginForm("AddComment", "Articles", new { id = Model.ID }, FormMethod.Post))
-            {
-                if (ViewBag.EmptyComment == true)
-                {
-                    <input class="add-comment-input input-validation-error" type="text" placeholder="Оставьте комментарий..." name="comment" />
-                    <span class="field-validation-error" data-valmsg-for="comment" data-valmsg-replace="true">Напишите непустой комментарий</span>
+                @using( Html.BeginForm( "AddComment", "Articles", new { id = Model.ID }, FormMethod.Post ) ) {
+                    if( ViewBag.EmptyComment == true ) {
+                        <input class="add-comment-input input-validation-error" type="text" placeholder="Оставьте комментарий..." name="comment" />
+                        <span class="field-validation-error" data-valmsg-for="comment" data-valmsg-replace="true">Напишите непустой комментарий</span>
+                    } else {
+                        <input class="add-comment-input" type="text" placeholder="Оставьте комментарий..." name="comment" />
+                    }
+                    <input class="btn add-comment-button" type="submit" value="Отправить" />
                 }
-                else
-                {
-                    <input class="add-comment-input" type="text" placeholder="Оставьте комментарий..." name="comment" />
-                }
-                <input class="btn add-comment-button" type="submit" value="Отправить"/>
-            }
-        </div>
+            </div>
         }
     </div>
 </div>

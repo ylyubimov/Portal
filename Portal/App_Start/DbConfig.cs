@@ -17,7 +17,7 @@ namespace Portal
         public static void ConfigDataBase()
         {
             var db = new ApplicationDbContext();
-            db.Database.Initialize(false);
+            db.Database.Initialize( false );
         }
     }
 }

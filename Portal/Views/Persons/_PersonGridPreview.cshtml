@@ -1,26 +1,21 @@
 ﻿@using Portal.Models
 @model Person
-
 <div class="person-grid-preview">
     <a href=@Url.Action("person", new { @id=Model.Id })>
         <div class="person-grid-preview-image">
             <img src=@Model.Picture.URL />
         </div>
     </a>
-    @Html.ActionLink(Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" })
-    @if (Model.Person_Type ==  "Teacher")
-    {
+    @Html.ActionLink( Model.First_Name + " " + Model.Second_Name, "person", new { id = Model.Id }, new { @class = "person-name" } )
+    @if( Model.Person_Type == "Teacher" ) {
         <div class="person-type">Преподаватель</div>
-    }
-    else
-    {
+    } else {
         <div class="person-type">Студент</div>
     }
     <div class="person-info">
         <div class="person-contacts">
             <a href="mailto:@Model.UserName"><span>@Model.UserName</span></a>
-            @if (Model.PhoneNumber.IsEmpty())
-            {
+            @if( Model.PhoneNumber.IsEmpty() ) {
                 <span class="person-contacts-no-phone" />
             } else {
                 <a href="tel:@Model.PhoneNumber"><span>@Model.PhoneNumber</span></a>

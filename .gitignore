@@ -6,3 +6,5 @@
 /Portal/App_Data/*.mdf
 /Portal/App_Data/*.ldf
 /.vs
+
+UpgradeLog.htm

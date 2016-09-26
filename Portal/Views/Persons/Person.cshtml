@@ -1,22 +1,17 @@
 ﻿@using Portal.Models
 @model Person
-
 @{
     ViewBag.Title = Model.First_Name + " " + Model.Second_Name;
 }
-
 <div class="container person-wrap">
     <div class="person">
         <div class="person-general-info">
             <div class="person-general-info-image"><img src=@Model.Picture.URL /></div>
             <div class="person-info-text">
-                @if (Model.Person_Type == "Teacher")
-                {
+                @if( Model.Person_Type == "Teacher" ) {
                     <div class="person-name">@Model.First_Name @Model.Middle_Name @Model.Second_Name</div>
                     <div class="person-type">Преподаватель</div>
-                }
-                else
-                {
+                } else {
                     <div class="person-name">@Model.First_Name @Model.Second_Name</div>
                     <div class="person-type">Студент</div>
                 }
@@ -25,45 +20,36 @@
                     <a href="mailto:@Model.Email"><span>@Model.Email</span></a>
                 </div>
             </div>
-            @if (User.Identity.Name == Model.UserName || User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Редактировать", "edit", "persons", new { @id = Model.Id }, new { @class = "btn person-goto-edit-button" })
+            @if( User.Identity.Name == Model.UserName || User.IsInRole( "admin" ) ) {
+                @Html.ActionLink( "Редактировать", "edit", "persons", new { @id = Model.Id }, new { @class = "btn person-goto-edit-button" } )
             }
         </div>
-        @if (Model.Person_Type == "Teacher")
-        {
+        @if( Model.Person_Type == "Teacher" ) {
             <div class="person-blogs">
                 <h4>Блоги</h4>
-                @foreach (Blog blog in Model.Blogs)
-                {
+                @foreach( Blog blog in Model.Blogs ) {
                     <div class="person-blog">
-                        @Html.ActionLink(blog.Name, "blog", "blogs", new { @id = blog.ID }, null)
+                        @Html.ActionLink( blog.Name, "blog", "blogs", new { @id = blog.ID }, null )
                     </div>
                 }
             </div>
         }
         <div class="person-courses">
-            @if (Model.Person_Type == "Teacher")
-            {
+            @if( Model.Person_Type == "Teacher" ) {
                 <h4>Преподаваемые курсы</h4>
-                foreach (Course course in Model.Taught_Courses)
-                {
+                foreach( Course course in Model.Taught_Courses ) {
                     <div class="person-course">
-                        @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                        @Html.ActionLink( course.Name, "course", "courses", new { @id = course.ID }, null )
                     </div>
                 }
-            }
-            else
-            {
+            } else {
                 <h4>Посещаемые курсы</h4>
-                foreach (Course course in Model.Subscribed_Courses)
-                {
+                foreach( Course course in Model.Subscribed_Courses ) {
                     <div class="person-course">
-                        @Html.ActionLink(course.Name, "course", "courses", new { @id = course.ID }, null)
+                        @Html.ActionLink( course.Name, "course", "courses", new { @id = course.ID }, null )
                     </div>
                 }
             }
         </div>
     </div>
 </div>
-

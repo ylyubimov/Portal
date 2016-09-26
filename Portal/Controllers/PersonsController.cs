@@ -9,139 +9,120 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Portal.Controllers
 {
-    [RoutePrefix("persons")]
+    [RoutePrefix( "persons" )]
     public class PersonsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
-        private Person[] getTeachers(Person[] persons)
+        private Person[] getTeachers( Person[] persons )
         {
-            return persons.Where(p => p.Person_Type == "Teacher").ToArray();
+            return persons.Where( p => p.Person_Type == "Teacher" ).ToArray();
         }
 
-        private Person[] getStudents(Person[] persons)
+        private Person[] getStudents( Person[] persons )
         {
-            return persons.Where(p => p.Person_Type == "Student").ToArray();
+            return persons.Where( p => p.Person_Type == "Student" ).ToArray();
         }
 
         // GET: Articles
         [HttpGet]
-        [Route("")]
-        public ActionResult Index(string view, string type)
+        [Route( "" )]
+        public ActionResult Index( string view, string type )
         {
-            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr =>  new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var list = db.Roles.OrderBy( r => r.Name ).ToList().Select( rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name } ).ToList();
             ViewBag.Roles = list;
             ViewBag.Title = "People";
             ViewBag.ExtendType = "person";
             Person[] AllPersons = db.Users.ToArray();
-            Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
+            Person[][] persons = new Person[][] { getTeachers( AllPersons ), getStudents( AllPersons ) };
             ViewBag.Type = type;
-            
-            if (view != null && view == "grid")
-            {
+
+            if( view != null && view == "grid" ) {
                 ViewBag.View = "grid";
             }
-            return View(persons);
+            return View( persons );
         }
 
-        [Route("{id}")]
-        public ActionResult Person(string id)
+        [Route( "{id}" )]
+        public ActionResult Person( string id )
         {
-            if (id  != "")
-            {
-                Person person = db.Users.Where(p => id == p.Id).FirstOrDefault();
-                if (person != null)
-                {
-                    return View(person);
-                }
-                else
-                {
+            if( id != "" ) {
+                Person person = db.Users.Where( p => id == p.Id ).FirstOrDefault();
+                if( person != null ) {
+                    return View( person );
+                } else {
                     return HttpNotFound();
                 }
-            }
-            else
-            {
+            } else {
                 return HttpNotFound();
             }
         }
 
         [HttpPost]
-        [Route("")]
-        public ActionResult Index(string SearchFor)
+        [Route( "" )]
+        public ActionResult Index( string SearchFor )
         {
-            if (SearchFor != "")
-            {
+            if( SearchFor != "" ) {
                 ViewBag.Title = "People";
                 ViewBag.SearchValue = SearchFor;
-                var PersonList = db.Users.Where(x => (x.First_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0 ||
-                                                       (x.First_Name + " " + x.Middle_Name + " " + x.Second_Name).ToUpper().IndexOf(SearchFor.ToUpper()) >= 0
-                                                       ).Take(50).ToArray();
-                Person[][] persons = new Person[][] { getTeachers(PersonList), getStudents(PersonList) };
-                return View(persons);
-            }
-            else
-            {
-                var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                var PersonList = db.Users.Where( x => ( x.First_Name + " " + x.Second_Name ).ToUpper().IndexOf( SearchFor.ToUpper() ) >= 0 ||
+                                                        ( x.First_Name + " " + x.Middle_Name + " " + x.Second_Name ).ToUpper().IndexOf( SearchFor.ToUpper() ) >= 0
+                                                       ).Take( 50 ).ToArray();
+                Person[][] persons = new Person[][] { getTeachers( PersonList ), getStudents( PersonList ) };
+                return View( persons );
+            } else {
+                var list = db.Roles.OrderBy( r => r.Name ).ToList().Select( rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name } ).ToList();
                 ViewBag.Roles = list;
                 ViewBag.Title = "People";
                 ViewBag.ExtendType = "person";
                 Person[] AllPersons = db.Users.ToArray();
-                Person[][] persons = new Person[][] { getTeachers(AllPersons), getStudents(AllPersons) };
-                return View(persons);
+                Person[][] persons = new Person[][] { getTeachers( AllPersons ), getStudents( AllPersons ) };
+                return View( persons );
             }
         }
 
         [HttpGet]
-        [Route("{id}/edit")]
+        [Route( "{id}/edit" )]
         [Authorize]
-        public ActionResult Edit(string id)
+        public ActionResult Edit( string id )
         {
-            Person person = db.Users.Where(x => x.Id == id).First();
-            if (person == null || !User.IsInRole("admin") && User.Identity.Name != person.UserName)
-            {
+            Person person = db.Users.Where( x => x.Id == id ).First();
+            if( person == null || !User.IsInRole( "admin" ) && User.Identity.Name != person.UserName ) {
                 return HttpNotFound();
             }
-            if (person.Picture == null || person.Picture.Name == "DefaultPicture")
-            {
-                person.Picture = new Picture
-                {
+            if( person.Picture == null || person.Picture.Name == "DefaultPicture" ) {
+                person.Picture = new Picture {
                     URL = null
                 };
             }
-            return View(person);
+            return View( person );
         }
 
         [HttpPost]
-        [Route("{id}/edit")]
+        [Route( "{id}/edit" )]
         [Authorize]
-        public ActionResult Edit(string id, Person editedPerson)
+        public ActionResult Edit( string id, Person editedPerson )
         {
-            Person person = db.Users.Where(p => p.Id == id).FirstOrDefault();
-            if (person != null)
-            {
-                if (person.UserName == User.Identity.Name || User.IsInRole("admin"))
-                {
+            Person person = db.Users.Where( p => p.Id == id ).FirstOrDefault();
+            if( person != null ) {
+                if( person.UserName == User.Identity.Name || User.IsInRole( "admin" ) ) {
                     person.First_Name = editedPerson.First_Name;
                     person.Middle_Name = editedPerson.Middle_Name;
                     person.Second_Name = editedPerson.Second_Name;
                     person.PhoneNumber = editedPerson.PhoneNumber;
                     person.Email = editedPerson.Email;
-                    if (editedPerson.Picture.URL != null)
-                    {
-                        person.Picture = new Picture
-                        {
+                    if( editedPerson.Picture.URL != null ) {
+                        person.Picture = new Picture {
                             URL = editedPerson.Picture.URL,
                             Name = person.UserName + "picture"
                         };
-                    }
-                    else
-                    {
-                        person.Picture = db.Picture.Where(p => p.Name == "DefaultPicture").First();
+                    } else {
+                        person.Picture = db.Picture.Where( p => p.Name == "DefaultPicture" ).First();
                     }
                 }
             }
             db.SaveChanges();
-            return RedirectToAction("person", new { @id=id } );
+            return RedirectToAction( "person", new { @id = id } );
         }
     }
 }

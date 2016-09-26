@@ -31,7 +31,7 @@ function OnDislikeClick(url, id) {
         method: 'POST',
         dataType: 'json',
         success: function (data) {
-            
+
             var dislikesCount = document.getElementById("DislikesCount" + id);
             dislikesCount.innerText = data.dislikesCount;
             var dislikesCountLink = document.getElementById("DislikesCountOnClick" + id);

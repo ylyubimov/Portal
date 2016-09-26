@@ -3,12 +3,9 @@
         <div class="search-general" style=@(ViewBag.ExtendType == "person" ? "width:60%" : "")>
             <div class="input-group search-input" style=@(ViewBag.ExtendType == "person" ? "width:100%" : "")>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                @if (ViewBag.SearchValue != null)
-                {
+                @if( ViewBag.SearchValue != null ) {
                     <input class="form-control" value="@ViewBag.SearchValue" type="text" name="SearchFor">
-                }
-                else
-                {
+                } else {
                     <input class="form-control" placeholder="Поиск" type="text" name="SearchFor">
                 }
             </div>
@@ -22,20 +19,14 @@
             <div class="search-person-select">
                 <select onchange="location = this.options[this.selectedIndex].value;">
                     <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "all" })>Все</option>
-                    @if (ViewBag.Type == "teachers")
-                    {
+                    @if( ViewBag.Type == "teachers" ) {
                         <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" }) selected>Преподаватель</option>
-                    }
-                    else
-                    {
+                    } else {
                         <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "teachers" })>Преподаватель</option>
                     }
-                    @if (ViewBag.Type == "students")
-                    {
+                    @if( ViewBag.Type == "students" ) {
                         <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" }) selected>Студент</option>
-                    }
-                    else
-                    {
+                    } else {
                         <option value=@Url.Action("index", "persons", new { view = ViewBag.View, type = "students" })>Студент</option>
                     }
                 </select>

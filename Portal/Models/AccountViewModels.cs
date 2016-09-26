@@ -5,71 +5,71 @@ namespace Portal.Models
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display( Name = "Email" )]
         public string UserName { get; set; }
     }
 
     public class ManageUserViewModel
     {
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [DataType( DataType.Password )]
+        [Display( Name = "Current password" )]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [StringLength( 100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6 )]
+        [DataType( DataType.Password )]
+        [Display( Name = "New password" )]
         public string NewPassword { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [DataType( DataType.Password )]
+        [Display( Name = "Confirm new password" )]
+        [Compare( "NewPassword", ErrorMessage = "The new password and confirmation password do not match." )]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display( Name = "Email" )]
         public string UserName { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [DataType( DataType.Password )]
+        [Display( Name = "Password" )]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display( Name = "Remember me?" )]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display( Name = "Email" )]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [StringLength( 100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6 )]
+        [DataType( DataType.Password )]
+        [Display( Name = "Password" )]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [DataType( DataType.Password )]
+        [Display( Name = "Confirm password" )]
+        [Compare( "Password", ErrorMessage = "The password and confirmation password do not match." )]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "Имя")]
+        [Display( Name = "Имя" )]
         public string First_Name { get; set; }
-        [Display(Name = "Фамилия")]
+        [Display( Name = "Фамилия" )]
         public string Second_Name { get; set; }
-        [Display(Name = "Отчество")]
+        [Display( Name = "Отчество" )]
         public string Middle_Name { get; set; }
         public string PhoneNumber { get; set; }
         [Required]
-        [Display(Name = "Ваш Статус")]
-        public string Person_Type { get; set; } 
+        [Display( Name = "Ваш Статус" )]
+        public string Person_Type { get; set; }
         public virtual Picture Picture { get; set; }
     }
 }

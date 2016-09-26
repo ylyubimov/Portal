@@ -1,38 +1,37 @@
 ﻿@model Portal.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
-    @Styles.Render("~/Content/LoginStyles.css")
+    @Styles.Render( "~/Content/LoginStyles.css" )
 }
 
 <div class="register-page-wrap">
     <div class="register-form-wrap">
         <div class="login-form">
             <h2>Приветствуем на портале ABBYY</h2>
-            @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" }))
-            {
+            @using( Html.BeginForm( "Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @role = "form" } ) ) {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
 
-                @Html.TextBoxFor(m => m.UserName, new { @class = "register-text-input", placeholder = "электронная почта" })
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor( m => m.UserName, new { @class = "register-text-input", placeholder = "электронная почта" } )
+                @Html.ValidationMessageFor( m => m.UserName )
 
-                @Html.PasswordFor(m => m.Password, new { @class = "register-text-input", placeholder = "пароль" })
-                @Html.ValidationMessageFor(m => m.Password)
+                @Html.PasswordFor( m => m.Password, new { @class = "register-text-input", placeholder = "пароль" } )
+                @Html.ValidationMessageFor( m => m.Password )
 
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "register-text-input", placeholder = "подтверждение пароля" })
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                @Html.PasswordFor( m => m.ConfirmPassword, new { @class = "register-text-input", placeholder = "подтверждение пароля" } )
+                @Html.ValidationMessageFor( m => m.ConfirmPassword )
 
-                @Html.TextBoxFor(m => m.First_Name, new { @class = "register-text-input", placeholder = "имя" })
-                @Html.ValidationMessageFor(m => m.First_Name)
+                @Html.TextBoxFor( m => m.First_Name, new { @class = "register-text-input", placeholder = "имя" } )
+                @Html.ValidationMessageFor( m => m.First_Name )
 
-                @Html.TextBoxFor(m => m.Second_Name, new { @class = "register-text-input", placeholder = "фамилия" })
-                @Html.ValidationMessageFor(m => m.Second_Name)
+                @Html.TextBoxFor( m => m.Second_Name, new { @class = "register-text-input", placeholder = "фамилия" } )
+                @Html.ValidationMessageFor( m => m.Second_Name )
 
-                @Html.TextBoxFor(m => m.Middle_Name, new { @class = "register-text-input", placeholder = "отчество" })
-                @Html.ValidationMessageFor(m => m.Middle_Name)
+                @Html.TextBoxFor( m => m.Middle_Name, new { @class = "register-text-input", placeholder = "отчество" } )
+                @Html.ValidationMessageFor( m => m.Middle_Name )
 
-                @Html.DropDownListFor(m => m.Person_Type, new List<SelectListItem>(){ new SelectListItem() { Text = "Студент", Value = "Student" }, new SelectListItem() { Text = "Преподаватель", Value = "Teacher" } }, new { @class = "register-select-input" })
-                <br/>
+                @Html.DropDownListFor( m => m.Person_Type, new List<SelectListItem>() { new SelectListItem() { Text = "Студент", Value = "Student" }, new SelectListItem() { Text = "Преподаватель", Value = "Teacher" } }, new { @class = "register-select-input" } )
+                <br />
                 <input type="submit" value="Регистрация" class="btn login-form-button login-sign-up-button" />
             }
         </div>
@@ -40,5 +39,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render( "~/bundles/jqueryval" )
 }

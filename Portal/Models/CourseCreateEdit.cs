@@ -9,23 +9,23 @@ namespace Portal.Models
     public class CourseCreateEdit
     {
         public int ID { get; set; }
-        [Required(ErrorMessage = "Введите имя курса")]
+        [Required( ErrorMessage = "Введите имя курса" )]
         public string Name { get; set; }
         public DateTime? Date_and_Time { get; set; }
         public string Report_Type { get; set; }
         public DateTime? Report_Date { get; set; }
         public string Place { get; set; }
-        [Required(ErrorMessage = "Необходимо описание курса")]
+        [Required( ErrorMessage = "Необходимо описание курса" )]
         public string Description { get; set; }
-        [Range(0,1000,ErrorMessage = "Не может быть отрицательным")]
+        [Range( 0, 1000, ErrorMessage = "Не может быть отрицательным" )]
         public int? Number_of_Hours { get; set; }
-        [Range(0, 1000, ErrorMessage = "Не модет быть отрицательным")]
+        [Range( 0, 1000, ErrorMessage = "Не модет быть отрицательным" )]
         public int? Number_of_Classes { get; set; }
 
         public Person[] Students { get; set; }
         public bool[] Chosen_Students { get; set; }
         public Person[] Teachers { get; set; }
-        public bool[] Chosen_Teachers { get; set;}
+        public bool[] Chosen_Teachers { get; set; }
         public Program[] Programs { get; set; }
         public bool[] Chosen_Programs { get; set; }
         public string Base_Part { get; set; }

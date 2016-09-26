@@ -3,92 +3,69 @@
 @using Microsoft.AspNet.Identity.EntityFramework;
 @model Person[]
 
-@{ 
+@{
     ApplicationDbContext db = new ApplicationDbContext();
-    var userManager = new ApplicationUserManager(new UserStore<Person>(db));
+    var userManager = new ApplicationUserManager( new UserStore<Person>( db ) );
 }
 
-@Html.Partial("_Search", @"Persons")
+@Html.Partial( "_Search", @"Persons" )
 <h2>@ViewBag.Title</h2>
 
 <table class="table table-hover">
     <tbody>
 
-        @foreach (Portal.Models.Person p in Model)
-        {
+        @foreach( Portal.Models.Person p in Model ) {
             <tr>
-                
-                @if (p.Person_Type == "Student")
-                {
-                    <td>@Html.ActionLink(p.Second_Name + ' ' + p.First_Name, "index", "admin", new { @id = p.Id }, null)</td>
-                }
-                else
-                {
+
+                @if( p.Person_Type == "Student" ) {
+                    <td>@Html.ActionLink( p.Second_Name + ' ' + p.First_Name, "index", "admin", new { @id = p.Id }, null )</td>
+                } else {
                     <td>@p.Second_Name @p.First_Name</td>
                 }
-                
-                
-                @using (Html.BeginForm("ChangeType", "Admin", new { id = p.Id }, FormMethod.Post))
-                {
-                    <td><input class="change-button" type="submit" value=@p.Person_Type /></td>                    
+
+
+                @using( Html.BeginForm( "ChangeType", "Admin", new { id = p.Id }, FormMethod.Post ) ) {
+                    <td><input class="change-button" type="submit" value=@p.Person_Type /></td>
                 }
 
-                @using (Html.BeginForm("ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post))
-                {
-                    if (userManager.IsInRole(p.Id, "editor"))
-                    {
+                @using( Html.BeginForm( "ChangeRole", "Admin", new { id = p.Id }, FormMethod.Post ) ) {
+                    if( userManager.IsInRole( p.Id, "editor" ) ) {
                         <td><input class="change-button" type="submit" value="editor" /></td>
                     }
-                    if (userManager.IsInRole(p.Id, "admin"))
-                    {
+                    if( userManager.IsInRole( p.Id, "admin" ) ) {
                         var countAdmin = 0;
-                        var allPersons = db.Users.Where(pp => true == pp.Exists).ToArray();
-                        foreach (var _p in allPersons)
-                        {
-                            if (userManager.IsInRole(_p.Id, "admin"))
-                            {
+                        var allPersons = db.Users.Where( pp => true == pp.Exists ).ToArray();
+                        foreach( var _p in allPersons ) {
+                            if( userManager.IsInRole( _p.Id, "admin" ) ) {
                                 countAdmin += 1;
                             }
                         }
-                        if (countAdmin == 1)
-                        {
-                            <td><input class="change-button" type="submit" disabled value="admin" style="cursor: not-allowed"/></td>
-                        }
-                        else
-                        {
+                        if( countAdmin == 1 ) {
+                            <td><input class="change-button" type="submit" disabled value="admin" style="cursor: not-allowed" /></td>
+                        } else {
                             <td><input class="change-button" type="submit" value="admin" /></td>
                         }
 
                     }
-                    if (userManager.IsInRole(p.Id, "user"))
-                    {
+                    if( userManager.IsInRole( p.Id, "user" ) ) {
                         <td><input class="change-button" type="submit" value="user" /></td>
                     }
                 }
 
-                @using (Html.BeginForm("Delete", "Admin", new { id = p.Id }, FormMethod.Post))
-                {
-                    if (p.UserName == User.Identity.Name)
-                    {
-                        <td><input class="delete-button" type="submit" disabled value="Delete" style="cursor: not-allowed"/></td>
-                    }
-                    else
-                    {
+                @using( Html.BeginForm( "Delete", "Admin", new { id = p.Id }, FormMethod.Post ) ) {
+                    if( p.UserName == User.Identity.Name ) {
+                        <td><input class="delete-button" type="submit" disabled value="Delete" style="cursor: not-allowed" /></td>
+                    } else {
                         var countAdmin = 0;
-                        var allPersons = db.Users.Where(pp => true == pp.Exists).ToArray();
-                        foreach (var _p in allPersons)
-                        {
-                            if (userManager.IsInRole(_p.Id, "admin"))
-                            {
+                        var allPersons = db.Users.Where( pp => true == pp.Exists ).ToArray();
+                        foreach( var _p in allPersons ) {
+                            if( userManager.IsInRole( _p.Id, "admin" ) ) {
                                 countAdmin += 1;
                             }
                         }
-                        if ((countAdmin == 1) && (userManager.IsInRole(p.Id, "admin")))
-                        {
+                        if( ( countAdmin == 1 ) && ( userManager.IsInRole( p.Id, "admin" ) ) ) {
                             <td><input class="change-button" type="submit" disabled value="Delete" style="cursor: not-allowed" /></td>
-                        }
-                        else
-                        {
+                        } else {
                             <td><input class="change-button" type="submit" value="Delete" /></td>
                         }
                     }

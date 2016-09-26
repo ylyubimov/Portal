@@ -20,21 +20,21 @@ namespace Portal.Models
 
     public class ApplicationUserManager : UserManager<Person>
     {
-        public ApplicationUserManager(IUserStore<Person> store)
-                : base(store)
+        public ApplicationUserManager( IUserStore<Person> store )
+                : base( store )
         {
-            UserValidator = new UserValidator<Person>(this) { 
+            UserValidator = new UserValidator<Person>( this ) {
                 AllowOnlyAlphanumericUserNames = false,
-            }; 
+            };
         }
     }
 
     public class ApplicationDbContext : IdentityDbContext<Person>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base( "DefaultConnection" )
         {
-            Database.SetInitializer(new Initializer());
+            Database.SetInitializer( new Initializer() );
         }
 
         public static ApplicationDbContext Create()
@@ -43,63 +43,59 @@ namespace Portal.Models
         }
 
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating( DbModelBuilder modelBuilder )
         {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Entity<Person>()
-            .HasMany(c => c.Written_Articles)
-            .WithRequired(c => c.Author);
+            .HasMany( c => c.Written_Articles )
+            .WithRequired( c => c.Author );
 
             //modelBuilder.
 
             modelBuilder.Entity<Course>()
-            .HasMany(c => c.Students)
-            .WithMany(p => p.Subscribed_Courses)
-            .Map(m =>
-            {
+            .HasMany( c => c.Students )
+            .WithMany( p => p.Subscribed_Courses )
+            .Map( m => {
                 // Ссылка на промежуточную таблицу
-                m.ToTable("StudentsCourses");
+                m.ToTable( "StudentsCourses" );
 
                 // Настройка внешних ключей промежуточной таблицы
-                m.MapLeftKey("StudentId");
-                m.MapRightKey("CourseId");
-            });
+                m.MapLeftKey( "StudentId" );
+                m.MapRightKey( "CourseId" );
+            } );
             modelBuilder.Entity<Course>()
-            .HasMany(c => c.Teachers)
-            .WithMany(p => p.Taught_Courses)
-            .Map(m =>
-            {
-                   // Ссылка на промежуточную таблицу
-                   m.ToTable("TeachersCourses");
-
-                   // Настройка внешних ключей промежуточной таблицы
-                   m.MapLeftKey("TeacherId");
-                m.MapRightKey("CourseId");
-            });
-            modelBuilder.Entity<Program>()
-            .HasMany(c => c.Students)
-            .WithMany(p => p.Subscribed_Programs)
-            .Map(m =>
-            {
+            .HasMany( c => c.Teachers )
+            .WithMany( p => p.Taught_Courses )
+            .Map( m => {
                 // Ссылка на промежуточную таблицу
-                m.ToTable("StudentsPrograms");
+                m.ToTable( "TeachersCourses" );
 
                 // Настройка внешних ключей промежуточной таблицы
-                m.MapLeftKey("StudentId");
-                m.MapRightKey("ProgramId");
-            });
+                m.MapLeftKey( "TeacherId" );
+                m.MapRightKey( "CourseId" );
+            } );
             modelBuilder.Entity<Program>()
-            .HasMany(c => c.Teachers)
-            .WithMany(p => p.Taught_Programs)
-            .Map(m =>
-            {
+            .HasMany( c => c.Students )
+            .WithMany( p => p.Subscribed_Programs )
+            .Map( m => {
                 // Ссылка на промежуточную таблицу
-                m.ToTable("TeachersPrograms");
+                m.ToTable( "StudentsPrograms" );
+
                 // Настройка внешних ключей промежуточной таблицы
-                m.MapLeftKey("TeacherId");
-                m.MapRightKey("ProgramId");
-            });
-            base.OnModelCreating(modelBuilder);
+                m.MapLeftKey( "StudentId" );
+                m.MapRightKey( "ProgramId" );
+            } );
+            modelBuilder.Entity<Program>()
+            .HasMany( c => c.Teachers )
+            .WithMany( p => p.Taught_Programs )
+            .Map( m => {
+                // Ссылка на промежуточную таблицу
+                m.ToTable( "TeachersPrograms" );
+                // Настройка внешних ключей промежуточной таблицы
+                m.MapLeftKey( "TeacherId" );
+                m.MapRightKey( "ProgramId" );
+            } );
+            base.OnModelCreating( modelBuilder );
         }
         public DbSet<Picture> Picture { get; set; }
         public DbSet<Article> Article { get; set; }
@@ -108,11 +104,10 @@ namespace Portal.Models
         public DbSet<Course> Course { get; set; }
         public DbSet<Program> Program { get; set; }
         public DbSet<Group> Group { get; set; }
-        public DbSet<Faculty> Faculty{ get; set; }
+        public DbSet<Faculty> Faculty { get; set; }
         public DbSet<Base_Company> Base_Company { get; set; }
         public DbSet<Base_Part> Base_Part { get; set; }
         public DbSet<Lesson> Lesson { get; set; }
     }
 }
 
-    

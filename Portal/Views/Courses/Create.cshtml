@@ -7,48 +7,46 @@
 
 <div class="container-fluid">
     <div class="container course-create-wrap">
-        @using (Html.BeginForm("Create", "Courses", null, FormMethod.Post))
-        {
+        @using( Html.BeginForm( "Create", "Courses", null, FormMethod.Post ) ) {
             <h4>Название курса</h4>
-            @Html.EditorFor(m => m.Name)
-            @Html.ValidationMessageFor(m => m.Name)
+            @Html.EditorFor( m => m.Name )
+            @Html.ValidationMessageFor( m => m.Name )
 
             <h4>Описание курса</h4>
-            @Html.EditorFor(m => m.Description)
-            @Html.ValidationMessageFor(m => m.Description)
+            @Html.EditorFor( m => m.Description )
+            @Html.ValidationMessageFor( m => m.Description )
 
             <h4>Выберите базовую кафедру</h4>
-            @Html.DropDownListFor(m => m.Base_Part, new SelectList((new List<string> { "KL", "RIOT" })), "Все")
+            @Html.DropDownListFor( m => m.Base_Part, new SelectList( ( new List<string> { "KL", "RIOT" } ) ), "Все" )
 
             <h4>Число занятий</h4>
-            @Html.EditorFor(m => m.Number_of_Classes)
-            @Html.ValidationMessageFor(m => m.Number_of_Classes)
+            @Html.EditorFor( m => m.Number_of_Classes )
+            @Html.ValidationMessageFor( m => m.Number_of_Classes )
 
             <h4>Количество часов</h4>
-            @Html.EditorFor(m => m.Number_of_Hours)
-            @Html.ValidationMessageFor(m => m.Number_of_Hours)
+            @Html.EditorFor( m => m.Number_of_Hours )
+            @Html.ValidationMessageFor( m => m.Number_of_Hours )
 
             <h4>Место проведения</h4>
-            @Html.EditorFor(m => m.Place)
-            @Html.ValidationMessageFor(m => m.Place)
+            @Html.EditorFor( m => m.Place )
+            @Html.ValidationMessageFor( m => m.Place )
 
             <h4>Тип отчетности</h4>
-            @Html.EditorFor(m => m.Report_Type);
-            @Html.ValidationMessageFor(m => m.Report_Type)
+            @Html.EditorFor( m => m.Report_Type );
+            @Html.ValidationMessageFor( m => m.Report_Type )
 
             <h4>Дата зачета/экзамена </h4>
-            @Html.EditorFor(m => m.Report_Date);
-            @Html.ValidationMessageFor(m => m.Report_Date)
-            @Html.HiddenFor(m => m.ID)
+            @Html.EditorFor( m => m.Report_Date );
+            @Html.ValidationMessageFor( m => m.Report_Date )
+            @Html.HiddenFor( m => m.ID )
             <div>
                 <h4>Выберите учителей</h4>
                 <table class="table">
                     <tbody>
-                        @for (int i = 0; i < Model.Teachers.Count(); i++)
-                        {
+                        @for( int i = 0; i < Model.Teachers.Count(); i++ ) {
                             <tr>
                                 <th>
-                                    @Html.CheckBoxFor(m => m.Chosen_Teachers[i])
+                                    @Html.CheckBoxFor( m => m.Chosen_Teachers[i] )
                                 </th>
                                 <th>
                                     <img src=@Model.Teachers[i].Picture.URL>
@@ -58,12 +56,12 @@
                                 </th>
                                 <th>
                                     @Model.Teachers[i].UserName
-                                    @Html.HiddenFor(m => m.Teachers[i].Id)
-                                    @Html.HiddenFor(m => m.Teachers[i].First_Name)
-                                    @Html.HiddenFor(m => m.Teachers[i].Second_Name)
-                                    @Html.HiddenFor(m => m.Teachers[i].Middle_Name)
-                                    @Html.HiddenFor(m => m.Teachers[i].UserName)
-                                    @Html.HiddenFor(m => m.Teachers[i].Picture.URL)
+                                    @Html.HiddenFor( m => m.Teachers[i].Id )
+                                    @Html.HiddenFor( m => m.Teachers[i].First_Name )
+                                    @Html.HiddenFor( m => m.Teachers[i].Second_Name )
+                                    @Html.HiddenFor( m => m.Teachers[i].Middle_Name )
+                                    @Html.HiddenFor( m => m.Teachers[i].UserName )
+                                    @Html.HiddenFor( m => m.Teachers[i].Picture.URL )
                                 </th>
                             </tr>
                         }
@@ -74,26 +72,25 @@
                 <h4>Выберите студентов</h4>
                 <table class="table">
                     <tbody>
-                        @for (int i = 0; i < Model.Students.Count(); i++)
-                {
+                        @for( int i = 0; i < Model.Students.Count(); i++ ) {
                             <tr>
                                 <th>
-                                    @Html.CheckBoxFor(m => m.Chosen_Students[i])
+                                    @Html.CheckBoxFor( m => m.Chosen_Students[i] )
                                 </th>
                                 <th>
                                     <img src=@Model.Students[i].Picture.URL>
                                 </th>
                                 <th>
-                                     @Model.Students[i].First_Name @Model.Students[i].Middle_Name @Model.Students[i].Second_Name
+                                    @Model.Students[i].First_Name @Model.Students[i].Middle_Name @Model.Students[i].Second_Name
                                 </th>
                                 <th>
                                     @Model.Students[i].UserName
-                                    @Html.HiddenFor(m => m.Students[i].Id)
-                                    @Html.HiddenFor(m => m.Students[i].First_Name)
-                                    @Html.HiddenFor(m => m.Students[i].Second_Name)
-                                    @Html.HiddenFor(m => m.Students[i].Middle_Name)
-                                    @Html.HiddenFor(m => m.Students[i].UserName)
-                                    @Html.HiddenFor(m => m.Students[i].Picture.URL)
+                                    @Html.HiddenFor( m => m.Students[i].Id )
+                                    @Html.HiddenFor( m => m.Students[i].First_Name )
+                                    @Html.HiddenFor( m => m.Students[i].Second_Name )
+                                    @Html.HiddenFor( m => m.Students[i].Middle_Name )
+                                    @Html.HiddenFor( m => m.Students[i].UserName )
+                                    @Html.HiddenFor( m => m.Students[i].Picture.URL )
                                 </th>
                             </tr>
                         }
@@ -104,16 +101,15 @@
                 <h4>Выберите программы</h4>
                 <table class="table">
                     <tbody>
-                        @for (int i = 0; i < Model.Programs.Count(); i++)
-                        {
+                        @for( int i = 0; i < Model.Programs.Count(); i++ ) {
                             <tr>
                                 <th style="width: 30px;">
-                                    @Html.CheckBoxFor(m => m.Chosen_Programs[i])
+                                    @Html.CheckBoxFor( m => m.Chosen_Programs[i] )
                                 </th>
                                 <th>
                                     @Model.Programs[i].Name
-                                    @Html.HiddenFor(m => m.Programs[i].ID)
-                                    @Html.HiddenFor(m => m.Programs[i].Name)
+                                    @Html.HiddenFor( m => m.Programs[i].ID )
+                                    @Html.HiddenFor( m => m.Programs[i].Name )
                                 </th>
                             </tr>
                         }
@@ -125,20 +121,19 @@
                 <h4>Выберите блог</h4>
                 <table class="table">
                     <tbody>
-                        @for (int i = 0; i < Model.Blogs.Count(); i++)
-                        {
+                        @for( int i = 0; i < Model.Blogs.Count(); i++ ) {
                             <tr>
                                 <th style="width: 30px;">
-                                    @Html.CheckBoxFor(m => m.Chosen_Blogs[i]) 
+                                    @Html.CheckBoxFor( m => m.Chosen_Blogs[i] )
                                 </th>
                                 <th>
                                     @Model.Blogs[i].Name
-                                    @Html.HiddenFor(m => m.Blogs[i].ID)
-                                    @Html.HiddenFor(m => m.Blogs[i].Name)
+                                    @Html.HiddenFor( m => m.Blogs[i].ID )
+                                    @Html.HiddenFor( m => m.Blogs[i].Name )
                                 </th>
                             </tr>
                         }
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
 
