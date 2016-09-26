@@ -1,0 +1,50 @@
+﻿.delete-button {
+    display: inline-block;
+    color: white;
+    border-radius: 30px;
+    background: #FF0F0F;
+    width: 150px;
+}
+
+.delete-button:hover {
+    color: #FF8D8D;
+}
+
+.role-edit-button {
+    display: inline-block;
+    background: #ffffff;
+    border-radius: 30px;
+    color: #FF8D8D;
+    width: 150px;
+}
+
+.admin-form {
+     display: inline;
+     margin: 0px;
+     padding: 0px;
+}
+
+.person-admin-name {
+    color: black;
+    font-size: 17px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.person-admin-name:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.person-student-name {
+    color: black;
+    font-size: 17px;
+    margin-top: 10px;
+    text-decoration: underline;
+    display: inline-block;
+}
+
+.person-student-name:hover {
+    color: #FF0F0F;
+    text-decoration: none;
+}
