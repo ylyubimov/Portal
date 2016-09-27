@@ -50,14 +50,14 @@ namespace Portal.Controllers
         [Route( "{id:int}" )]
         public ActionResult Course( int id )
         {
-            Course course = db.Course.Include( "Lessons" ).Where( p => id == p.ID ).FirstOrDefault();
+            Course course = db.Course.Include( "CourseInstances" ).Where( p => id == p.ID ).FirstOrDefault();
             if( course == null ) {
                 return HttpNotFound();
             }
             ViewBag.MailToAll = "";
-            foreach( Person student in course.Students.ToArray() ) {
-                ViewBag.MailToAll += "<" + student.Email + ">,";
-            }
+            //foreach( Person student in course.Students.ToArray() ) {
+            //    ViewBag.MailToAll += "<" + student.Email + ">,";
+            //}
             return View( course );
         }
 
@@ -83,8 +83,8 @@ namespace Portal.Controllers
             if( !course.Teachers.Contains( author ) ) {
                 return View( "Error", "У вас нет прав на редактирование этих материалов" );
             }
-            var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
-            course.Lessons.Add( lesson );
+            //var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
+            //course.Lessons.Add( lesson );
 
             db.SaveChanges();
             return RedirectToAction( "Course", id );
@@ -116,15 +116,15 @@ namespace Portal.Controllers
                 blogsList.Add( b );
             }
             c.Chosen_Teachers = new bool[teachersList.Count];
-            c.Chosen_Students = new bool[studentsList.Count];
+            //c.Chosen_Students = new bool[studentsList.Count];
             c.Chosen_Programs = new bool[programsList.Count];
             c.Chosen_Blogs = new bool[blogsList.Count];
             for( int i = 0; i < teachersList.Count; i++ ) {
                 c.Chosen_Teachers[i] = false;
             }
-            for( int i = 0; i < studentsList.Count; i++ ) {
-                c.Chosen_Students[i] = false;
-            }
+            //for( int i = 0; i < studentsList.Count; i++ ) {
+            //    c.Chosen_Students[i] = false;
+            //}
             for( int i = 0; i < programsList.Count; i++ ) {
                 c.Chosen_Programs[i] = false;
             }
@@ -133,7 +133,7 @@ namespace Portal.Controllers
             }
             c.Blogs = blogsList.ToArray();
             c.Teachers = teachersList.ToArray();
-            c.Students = studentsList.ToArray();
+            //c.Students = studentsList.ToArray();
             c.Programs = programsList.ToArray();
             return View( c );
         }
@@ -151,13 +151,13 @@ namespace Portal.Controllers
             List<Person> teachersList = new List<Person>();
             List<Program> programList = new List<Program>();
             List<Blog> blogsList = new List<Blog>();
-            for( int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
-                if( newCourse.Chosen_Students[i] ) {
-                    string id = newCourse.Students[i].Id;
-                    Person student = db.Users.Where( p => p.Id == id ).FirstOrDefault();
-                    studentsList.Add( student );
-                }
-            }
+            //for( int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
+            //    if( newCourse.Chosen_Students[i] ) {
+            //        string id = newCourse.Students[i].Id;
+            //        Person student = db.Users.Where( p => p.Id == id ).FirstOrDefault();
+            //        studentsList.Add( student );
+            //    }
+            //}
             for( int i = 0; i < newCourse.Chosen_Teachers.Count(); i++ ) {
                 if( newCourse.Chosen_Teachers[i] ) {
                     string id = newCourse.Teachers[i].Id;
@@ -186,12 +186,12 @@ namespace Portal.Controllers
                 Description = newCourse.Description,
                 BasePart = newCourse.Base_Part,
                 Date_and_Time = newCourse.Date_and_Time,
-                Place = newCourse.Place,
+                //Place = newCourse.Place,
                 Number_of_Classes = newCourse.Number_of_Classes,
                 Number_of_Hours = newCourse.Number_of_Hours,
                 Report_Type = newCourse.Report_Type,
-                Report_Date = newCourse.Report_Date,
-                Students = studentsList,
+                //Report_Date = newCourse.Report_Date,
+                //Students = studentsList,
                 Teachers = teachersList,
                 Programs = programList,
                 Blogs = blogsList
@@ -213,9 +213,9 @@ namespace Portal.Controllers
             if( course == null ) {
                 return HttpNotFound();
             }
-            course.Students.Clear();
+            //course.Students.Clear();
             course.Teachers.Clear();
-            course.Lessons.Clear();
+            //course.Lessons.Clear();
             course.Programs.Clear();
             course.Blogs.Clear();
             db.Course.Remove( course );
@@ -237,8 +237,8 @@ namespace Portal.Controllers
             c.Description = course.Description;
             c.Number_of_Classes = course.Number_of_Classes;
             c.Number_of_Hours = course.Number_of_Hours;
-            c.Place = course.Place;
-            c.Report_Date = course.Report_Date;
+            //c.Place = course.Place;
+            //c.Report_Date = course.Report_Date;
             c.Report_Type = course.Report_Type;
             c.Base_Part = course.BasePart;
             List<Person> students = new List<Person>();
@@ -259,11 +259,11 @@ namespace Portal.Controllers
                 programs.Add( p );
             }
             c.Chosen_Teachers = new bool[teachers.Count];
-            c.Chosen_Students = new bool[students.Count];
+            //c.Chosen_Students = new bool[students.Count];
             c.Chosen_Programs = new bool[programs.Count];
             c.Chosen_Blogs = new bool[blogs.Count];
             c.Teachers = teachers.ToArray();
-            c.Students = students.ToArray();
+            //c.Students = students.ToArray();
             c.Programs = programs.ToArray();
             c.Blogs = blogs.ToArray();
             for( int i = 0; i < teachers.Count; i++ ) {
@@ -277,17 +277,17 @@ namespace Portal.Controllers
                     c.Chosen_Teachers[i] = false;
                 }
             }
-            for( int i = 0; i < students.Count; i++ ) {
-                if( course.Students != null ) {
-                    if( course.Students.Where( t => t.Id == c.Students[i].Id ).FirstOrDefault() != null ) {
-                        c.Chosen_Students[i] = true;
-                    } else {
-                        c.Chosen_Students[i] = false;
-                    }
-                } else {
-                    c.Chosen_Students[i] = false;
-                }
-            }
+            //for( int i = 0; i < students.Count; i++ ) {
+            //    if( course.Students != null ) {
+            //        if( course.Students.Where( t => t.Id == c.Students[i].Id ).FirstOrDefault() != null ) {
+            //            c.Chosen_Students[i] = true;
+            //        } else {
+            //            c.Chosen_Students[i] = false;
+            //        }
+            //    } else {
+            //        c.Chosen_Students[i] = false;
+            //    }
+            //}
             for( int i = 0; i < course.Programs.Count; i++ ) {
                 if( course.Programs != null ) {
                     if( course.Programs.Where( t => t.ID == c.Programs[i].ID ).FirstOrDefault() != null ) {
@@ -325,13 +325,13 @@ namespace Portal.Controllers
             List<Person> teachersList = new List<Person>();
             List<Program> programList = new List<Program>();
             List<Blog> blogsList = new List<Blog>();
-            for( int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
-                if( newCourse.Chosen_Students[i] ) {
-                    string id = newCourse.Students[i].Id;
-                    Person student = db.Users.Where( p => p.Id == id ).FirstOrDefault();
-                    studentsList.Add( student );
-                }
-            }
+            //for( int i = 0; i < newCourse.Chosen_Students.Count(); i++ ) {
+            //    if( newCourse.Chosen_Students[i] ) {
+            //        string id = newCourse.Students[i].Id;
+            //        Person student = db.Users.Where( p => p.Id == id ).FirstOrDefault();
+            //        studentsList.Add( student );
+            //    }
+            //}
             for( int i = 0; i < newCourse.Chosen_Teachers.Count(); i++ ) {
                 if( newCourse.Chosen_Teachers[i] ) {
                     string id = newCourse.Teachers[i].Id;
@@ -362,15 +362,15 @@ namespace Portal.Controllers
             course.Description = newCourse.Description;
             course.BasePart = newCourse.Base_Part;
             course.Date_and_Time = newCourse.Date_and_Time;
-            course.Place = newCourse.Place;
+            //course.Place = newCourse.Place;
             course.Number_of_Classes = newCourse.Number_of_Classes;
             course.Number_of_Hours = newCourse.Number_of_Hours;
             course.Report_Type = newCourse.Report_Type;
-            course.Report_Date = newCourse.Report_Date;
-            course.Students.Clear();
+            //course.Report_Date = newCourse.Report_Date;
+            //course.Students.Clear();
             course.Teachers.Clear();
             course.Programs.Clear();
-            course.Students = studentsList;
+            //course.Students = studentsList;
             course.Teachers = teachersList;
             course.Programs = programList;
             course.Blogs = blogsList;
@@ -441,7 +441,7 @@ namespace Portal.Controllers
                 return View( "Error", "У вас нет прав на редактирование этих материалов" );
             }
 
-            course.Lessons.Remove( lesson );
+            //course.Lessons.Remove( lesson );
             db.Lesson.Remove( lesson );
 
             db.SaveChanges();

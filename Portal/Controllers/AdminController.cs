@@ -43,7 +43,7 @@ namespace Portal.Controllers
             person.Subscribed_Courses.Clear();
             if( checkedCourses != null ) {
                 foreach( string name in checkedCourses ) {
-                    person.Subscribed_Courses.Add( db.Course.Where( c => name == c.Name ).FirstOrDefault() );
+                    person.Subscribed_Courses.Add( db.CourseInstance.Where( c => name == c.BaseCourse.Name ).FirstOrDefault() );
                 }
             }
             db.SaveChanges();
@@ -57,10 +57,10 @@ namespace Portal.Controllers
         {
             Course[] allCourses = db.Course.ToArray();
             Person person = db.Users.Where( p => id == p.Id ).FirstOrDefault();
-            Course[] studentCourses = person.Subscribed_Courses.ToArray();
+            CourseInstance[] studentCourses = person.Subscribed_Courses.ToArray();
             HashSet<int> idCoursesSet = new HashSet<int>();
             if( studentCourses != null ) {
-                foreach( Course c in studentCourses ) {
+                foreach( CourseInstance c in studentCourses ) {
                     idCoursesSet.Add( c.ID );
                 }
             }
