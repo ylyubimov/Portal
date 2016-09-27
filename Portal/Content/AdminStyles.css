@@ -28,7 +28,7 @@
 
 .person-admin-name {
     float: left;
-    color: black;
+    color: #808080;
     font-size: 17px;
     margin-top: 10px;
 }
@@ -38,16 +38,28 @@
     text-decoration: none;
 }
 
-.person-student-name {
+.person-student-name{
     float: left;
-    color: black;
+    color: #808080;
     font-size: 17px;
-    margin-top: 10px;
-    text-decoration: underline;
+    border-bottom: 1px dotted;
+    border-bottom-color: #808080;
 }
 
 .person-student-name:hover {
-    color: #FF0F0F;
+    color: #000000;
+    border-bottom: none;
+}
+
+.person-student-name-text {
+    float: left;
+    color: #808080;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.person-student-name-text:hover {
+    color: #808080;
     text-decoration: none;
 }
 

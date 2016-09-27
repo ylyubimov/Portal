@@ -17,7 +17,9 @@
 
         <div class="person-preview">
             @if( person.Person_Type == "Student" ) {
-                @Html.ActionLink( person.Second_Name + ' ' + person.First_Name, "index", "admin", new { @id = person.Id }, new { @class = "person-student-name" } )
+                <div class="person-student-name">
+                    @Html.ActionLink( person.Second_Name + ' ' + person.First_Name, "index", "admin", new { @id = person.Id }, new { @class = "person-student-name-text" } )
+                </div>
             } else {
                 <a class="person-admin-name">
                     @person.Second_Name @person.First_Name
