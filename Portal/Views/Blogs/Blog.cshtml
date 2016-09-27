@@ -20,7 +20,7 @@
             }
         </div>
     </div>
-    @Html.Partial( "../Articles/_ArticlePreViewList", Model.Articles.ToArray() )
+    @Html.Partial( "../Articles/_ArticlePreViewList", new Portal.Models.ArticleListWithPosition{ ArticleInfo = Model.Articles.ToArray(), Position = 1 } )
     @if( User.Identity.Name == Model.Author.UserName ) {
         using( Html.BeginForm( Model.ID.ToString() + "/Create", "Articles", FormMethod.Get ) ) {
             <button type="submit" class="add-article-button">

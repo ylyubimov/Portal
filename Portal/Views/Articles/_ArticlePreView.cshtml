@@ -1,71 +1,71 @@
-﻿@model Portal.Models.Article
+﻿@model Portal.Models.ArticleWithPosition
 <div class="container article-wrap">
     <div class="article-preview">
         <div class="article-header">
-            <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.Author.Id})>
-                <div class="author-image"><img src=@Model.Author.Picture.URL /></div>
-                @Model.Author.First_Name @Model.Author.Second_Name
+            <a class="author no-link-attributes" href=@Url.Action("person", "persons", new { @id = Model.ArticleInfo.Author.Id})>
+                <div class="author-image"><img src=@Model.ArticleInfo.Author.Picture.URL /></div>
+                @Model.ArticleInfo.Author.First_Name @Model.ArticleInfo.Author.Second_Name
             </a>
-            <div class="date">@Model.Date_of_Creation</div>
+            <div class="date">@Model.ArticleInfo.Date_of_Creation</div>
             <div class="article-actions">
                 @if( User.Identity.Name != "" ) {
-                    if( Model.Dislikes_Authors.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
+                    if( Model.ArticleInfo.Dislikes_Authors.Where(  p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                         <div class="rating">
-                            <div class="rating-plus" style="opacity: 0.4;cursor: default;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            <div class="rating-plus" style="opacity: 0.4;cursor: default;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("LikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Likes_Count</span>
                             </div>
-                            <div class="rating-minus" style="opacity: 1;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            <div class="rating-minus" style="opacity: 1;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("DislikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Dislikes_Count</span>
                             </div>
                         </div>
-                    } else if( Model.Likes_Authors.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
+                    } else if( Model.ArticleInfo.Likes_Authors.Where( p => p.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                         <div class="rating">
-                            <div class="rating-plus" style="opacity: 1;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            <div class="rating-plus" style="opacity: 1;" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("LikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Likes_Count</span>
                             </div>
-                            <div class="rating-minus" style="opacity: 0.4;cursor: default;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            <div class="rating-minus" style="opacity: 0.4;cursor: default;" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("DislikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Dislikes_Count</span>
                             </div>
                         </div>
                     } else {
                         <div class="rating">
-                            <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("LikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                            <div class="rating-plus" onClick="OnLikeClick('@Url.Action("LikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("LikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Likes_Count</span>
                             </div>
-                            <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ID })', '@Model.ID')" id=@("DislikesCountOnClick" + Model.ID)>
-                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                            <div class="rating-minus" onClick="OnDislikeClick('@Url.Action("DislikeArticle", "Articles", new { @id = Model.ArticleInfo.ID })', '@Model.ArticleInfo.ID')" id=@("DislikesCountOnClick" + Model.ArticleInfo.ID)>
+                                <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Dislikes_Count</span>
                             </div>
                         </div>
                     }
                 } else {
                     <div class="rating">
-                        <div class="rating-plus" style="opacity: 0.4;cursor: default;" id=@("LikesCountOnClick" + Model.ID)>
-                            <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ID)>@Model.Likes_Count</span>
+                        <div class="rating-plus" style="opacity: 0.4;cursor: default;" id=@("LikesCountOnClick" + Model.ArticleInfo.ID)>
+                            <img class="icon" src="~/images/icons/plusIcon.png" /><span id=@("LikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Likes_Count</span>
                         </div>
-                        <div class="rating-minus" style="opacity: 0.4;cursor: default;" id=@("DislikesCountOnClick" + Model.ID)>
-                            <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ID)>@Model.Dislikes_Count</span>
+                        <div class="rating-minus" style="opacity: 0.4;cursor: default;" id=@("DislikesCountOnClick" + Model.ArticleInfo.ID)>
+                            <img class="icon" src="~/images/icons/minusIcon.png" /><span id=@("DislikesCount" + Model.ArticleInfo.ID)>@Model.ArticleInfo.Dislikes_Count</span>
                         </div>
                     </div>
                 }
-                @if( User.Identity.Name == Model.Author.UserName || User.IsInRole( "admin" ) ) {
+                @if( User.Identity.Name == Model.ArticleInfo.Author.UserName || User.IsInRole( "admin" ) ) {
                     <div class="article-settings dropdown">
                         <div class="article-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
                         <ul class="dropdown-menu article-settings-menu">
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" } )</li>
-                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", "Articles", new { @id = Model.ID }, new { @class = "article-menu-item" } )</li>
+                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Articles", new { @id = Model.ArticleInfo.ID, @articlePosition = Model.Position }, new { @class = "article-menu-item" } )</li>
+                            <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", "Articles", new { @id = Model.ArticleInfo.ID }, new { @class = "article-menu-item" } )</li>
                         </ul>
                     </div>
                 }
             </div>
         </div>
-        <h3>@Model.Name</h3>
-        @if( @Model.Text != null ) {
-            if( Model.Text.Length > 500 ) {
-                <p style="word-wrap: break-word;">@Model.Text.Substring( 0, ( Model.Text.Length > 500 ) ? 500 : Model.Text.Length )...</p>
+        <h3>@Model.ArticleInfo.Name</h3>
+        @if( @Model.ArticleInfo.Text != null ) {
+            if( Model.ArticleInfo.Text.Length > 500 ) {
+                <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
             } else {
-                <p style="word-wrap: break-word;">@Model.Text.Substring( 0, ( Model.Text.Length > 500 ) ? 500 : Model.Text.Length )</p>
+                <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )</p>
             }
         }
-        <a>@Html.ActionLink( "Читать далее...", "Index", "Articles", new { @id = Model.ID }, new { @class = "" } )</a>
+        <a>@Html.ActionLink( "Читать далее...", "Index", "Articles", new { @id = Model.ArticleInfo.ID, @position = Model.Position }, new { @class = "" } )</a>
     </div>
 </div>

@@ -20,14 +20,14 @@ namespace Portal.Controllers
         // GET: Articles
 
         [Route( "{id:int}" )]
-        public ActionResult Index( int id )
+        public ActionResult Index( int id, int? position )
         {
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
             if( article == null ) {
                 return HttpNotFound();
             }
 
-            return View( article );
+            return View( new ArticleWithPosition() { ArticleInfo = article, Position = position } );
         }
 
 
@@ -118,7 +118,7 @@ namespace Portal.Controllers
         [Authorize( Roles = "editor, admin" )]
         [HttpGet]
         [Route( "Delete/{id:int}" )]
-        public ActionResult Delete( int id )
+        public ActionResult Delete( int id, int articlePosition )
         {
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
 
@@ -128,6 +128,7 @@ namespace Portal.Controllers
             Person author = article.Author;
             author.Written_Articles.Remove( article );
             Blog[] blogs = article.Blogs.ToArray();
+            int blogIdToRedirect = article.Blogs.First().ID;
             foreach( Blog blog in blogs ) {
                 blog.Articles.Remove( article );
             }
@@ -138,7 +139,11 @@ namespace Portal.Controllers
             }
 
             db.SaveChanges();
-            return RedirectToAction( "index", "home" );
+            if( articlePosition == 1 ) {
+                return RedirectToAction( "blog", "Blogs", new { id = blogIdToRedirect } );
+            } else {
+                return RedirectToAction( "index", "home" );
+            }
         }
 
         [Authorize]
