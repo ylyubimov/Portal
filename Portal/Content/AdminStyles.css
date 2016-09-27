@@ -2,6 +2,7 @@
     display: inline-block;
     color: white;
     border-radius: 30px;
+    margin-top: 10px;
     background: #FF0F0F;
     width: 150px;
 }
@@ -14,6 +15,7 @@
     display: inline-block;
     background: #ffffff;
     border-radius: 30px;
+    margin-top: 10px;
     color: #FF8D8D;
     width: 150px;
 }
@@ -25,10 +27,10 @@
 }
 
 .person-admin-name {
+    float: left;
     color: black;
     font-size: 17px;
     margin-top: 10px;
-    display: inline-block;
 }
 
 .person-admin-name:hover {
@@ -37,14 +39,20 @@
 }
 
 .person-student-name {
+    float: left;
     color: black;
     font-size: 17px;
     margin-top: 10px;
     text-decoration: underline;
-    display: inline-block;
 }
 
 .person-student-name:hover {
     color: #FF0F0F;
     text-decoration: none;
+}
+
+.admin-buttons {
+    vertical-align: top;
+    text-align: right;
+    margin-left: 50px;
 }

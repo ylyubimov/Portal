@@ -24,7 +24,7 @@
                 </a>
             }
 
-            <div class="person-info-text">
+            <div class="admin-buttons">
                 @using( Html.BeginForm( "ChangeType", "Admin", new { id = person.Id }, FormMethod.Post, new { @class = "admin-form" } ) ) {
                     <input class="role-edit-button" type="submit" value=@person.Person_Type />
                 }
