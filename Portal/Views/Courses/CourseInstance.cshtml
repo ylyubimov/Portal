@@ -8,7 +8,7 @@
     <div class="container course-wrap">
         <div class="course">
             <div class="course-header">
-                <h2>@Model.BaseCourse.Name + " " + Model.Year</h2>
+                <h2>@Model.BaseCourse.Name @Model.Year</h2>
                 @if (User.IsInRole("admin") || Model.BaseCourse.Teachers.Where(t => t.UserName == User.Identity.Name).FirstOrDefault() != null)
                 {
                     <div class="course-actions">

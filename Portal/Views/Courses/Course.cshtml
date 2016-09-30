@@ -61,7 +61,7 @@
                     @foreach (Portal.Models.CourseInstance courseInstance in Model.CourseInstances)
                     {
                         <tr>
-                            <td style="word-break"><a>@Html.ActionLink(@courseInstance.Year.ToString(), "courseInstance", new { @id = courseInstance.ID })</a></td>
+                            <td style="word-break: break-word;"><a>@Html.ActionLink(@courseInstance.Year.ToString(), "CourseInstance", "course", new { @year = courseInstance.Year, @id = courseInstance.ID }, null)</a></td>
                             <td>@courseInstance.AdditionalDescription</td>
                             @if (Model.Teachers.Where(t => User.Identity.Name == t.UserName).FirstOrDefault() != null || User.IsInRole("admin"))
                             {

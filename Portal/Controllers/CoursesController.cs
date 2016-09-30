@@ -61,6 +61,17 @@ namespace Portal.Controllers
             return View( course );
         }
 
+        [Route("CourseInstance/{id:int}")]
+        public ActionResult CourseInstance( int id, int year )
+        {
+            CourseInstance courseInstance = db.CourseInstance.Where(p => id == p.ID).FirstOrDefault();
+            if (courseInstance == null)
+            {
+                return HttpNotFound();
+            }
+            return View( courseInstance );
+        }
+
         [HttpPost]
         [Route( "" )]
         public ActionResult Index( string SearchFor )
