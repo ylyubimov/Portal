@@ -38,6 +38,17 @@
     text-decoration: none;
 }
 
+.course-name {
+    margin-left: 10px;
+    color: #808080;
+    font-size: 17px;
+}
+
+.course-name:hover {
+    color: black;
+    text-decoration: none;
+}
+
 .person-student-name{
     float: left;
     color: #808080;

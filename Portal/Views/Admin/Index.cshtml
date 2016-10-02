@@ -1,14 +1,29 @@
 ﻿@model Portal.Controllers.MyViewModel
+@using Portal.Models
+@using Microsoft.AspNet.Identity.EntityFramework;
 
-
-@using( Html.BeginForm( "Save", "admin", new { id = Model.personId }, FormMethod.Post ) ) {
-    foreach( Portal.Models.Course c in Model.courses ) {
-        if( Model.checkedIds.Contains( c.ID ) ) {
-            <label><input type="checkbox" checked="checked" name="checkedCourses" value="@c.Name">@c.Name</label>
-        } else {
-            <label><input type="checkbox" name="checkedCourses" value="@c.Name">@c.Name</label><br />
-        }
-
-    }
-    <input type="submit" value="Save">
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    var userManager = new ApplicationUserManager( new UserStore<Person>( db ) );
+    var person = db.Users.Find( Model.personId );
 }
+
+<div class="container person-wrap"> 
+    <div class="person-part-name"><b>@person.First_Name @person.Second_Name</b>'s course management page </div>
+    <div class="person-preview">
+        @using( Html.BeginForm( "Save", "admin", new { id = Model.personId }, FormMethod.Post ) ) {
+            foreach( Portal.Models.Course c in Model.courses ) {
+                <div>
+                    @if( Model.checkedIds.Contains( c.ID ) ) {
+                    <label><input type="checkbox" checked="checked" name="checkedCourses" value="@c.Name"><a class="course-name">@c.Name</a></label>
+                    } else {
+                    <label><input type="checkbox" name="checkedCourses" value="@c.Name"><a class="course-name">@c.Name</a></label>
+                    }
+                </div>
+            }
+            <div>
+                <input type="submit" class="role-edit-button" value="Save">
+            </div>
+        }
+    </div>
+</div>
