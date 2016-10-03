@@ -58,14 +58,22 @@
                 }
             </div>
         </div>
-        <h3>@Model.ArticleInfo.Name</h3>
-        @if( @Model.ArticleInfo.Text != null ) {
-            if( Model.ArticleInfo.Text.Length > 500 ) {
-                <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
-            } else {
-                <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )</p>
-            }
+        
+            <a class="article-title no-link-attributes" href=@Url.Action("Index", "Articles", new { @id = Model.ArticleInfo.ID, @position = Model.Position } )>
+                @Model.ArticleInfo.Name
+            </a>
+        @if (Model.Position == 0) {
+        <p>
+            <a>@Html.ActionLink( Model.ArticleInfo.Blogs.First().Name, "Blog", "Blogs", new { @id = Model.ArticleInfo.Blogs.First().ID }, new { @class = "" } )</a>
+        </p> 
         }
-        <a>@Html.ActionLink( "Читать далее...", "Index", "Articles", new { @id = Model.ArticleInfo.ID, @position = Model.Position }, new { @class = "" } )</a>
-    </div>
+           @if( @Model.ArticleInfo.Text != null ) {
+                if( Model.ArticleInfo.Text.Length > 500 ) {
+                    <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
+                } else {
+                    <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )</p>
+                }
+            }
+            <a>@Html.ActionLink( "Читать далее...", "Index", "Articles", new { @id = Model.ArticleInfo.ID, @position = Model.Position }, new { @class = "" } )</a>
+        </div>
 </div>
