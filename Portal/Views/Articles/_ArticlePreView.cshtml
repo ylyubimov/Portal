@@ -69,6 +69,7 @@
         }
            @if( @Model.ArticleInfo.Text != null ) {
                 if( Model.ArticleInfo.Text.Length > 500 ) {
+                   
                     <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
                 } else {
                     <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )</p>

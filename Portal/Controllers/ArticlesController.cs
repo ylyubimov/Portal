@@ -84,7 +84,7 @@ namespace Portal.Controllers
             var author = um.FindByName( User.Identity.Name );
             if( author == null )
                 return View( "Can't find your account in persons" );
-            return View( new Article() { Name = "Name", Text = "Text", Author = author } );
+            return View( new Article() { Name = "", Text = "", Author = author } );
         }
 
         [HttpPost]

@@ -85,7 +85,7 @@
     font-size: 24px;
     margin-top: 20px;
     margin-bottom: 10px;
-    display: inline;
+    display: inline-;
 }
 
 .date {
@@ -290,8 +290,8 @@
 
 .add-article-button {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    top: 25%;
+    right: 10%;
     border: none;
     font-size: 20px;
     background-color: transparent;
