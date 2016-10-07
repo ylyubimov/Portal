@@ -29,17 +29,17 @@
             @Html.EditorFor( m => m.Number_of_Hours )
             @Html.ValidationMessageFor( m => m.Number_of_Hours )
 
-            <h4>Место проведения</h4>
-            @Html.EditorFor( m => m.Place )
-            @Html.ValidationMessageFor( m => m.Place )
+            @*<h4>Место проведения</h4>
+                @Html.EditorFor( m => m.Place )
+                @Html.ValidationMessageFor( m => m.Place )*@
 
             <h4>Тип отчетности</h4>
             @Html.EditorFor( m => m.Report_Type );
             @Html.ValidationMessageFor( m => m.Report_Type )
 
-            <h4>Дата зачета/экзамена </h4>
-            @Html.EditorFor( m => m.Report_Date );
-            @Html.ValidationMessageFor( m => m.Report_Date )
+            @*<h4>Дата зачета/экзамена </h4>
+                @Html.EditorFor( m => m.Report_Date );
+                @Html.ValidationMessageFor( m => m.Report_Date )*@
             @Html.HiddenFor( m => m.ID )
             <div>
                 <h4>Выберите учителей</h4>
@@ -54,7 +54,7 @@
                                     <img src=@Model.Teachers[i].Picture.URL>
                                 </th>
                                 <th>
-                                    @Model.Teachers[i].First_Name @Model.Teachers[i].Middle_Name @Model.Teachers
+                                    @Model.Teachers[i].First_Name @Model.Teachers[i].Middle_Name @Model.Teachers[i].Second_Name
                                 </th>
                                 <th>
                                     @Model.Teachers[i].UserName
@@ -70,36 +70,36 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <h4>Выберите студентов</h4>
+            @*<div>
+                        <h4>Выберите студентов</h4>
 
-                <table class="table">
-                    <tbody>
-                        @for( int i = 0; i < Model.Students.Count(); i++ ) {
-                            <tr>
-                                <th>
-                                    @Html.CheckBoxFor( m => m.Chosen_Students[i] )
-                                </th>
-                                <th>
-                                    <img src=@Model.Students[i].Picture.URL>
-                                </th>
-                                <th>
-                                    @Model.Students[i].First_Name @Model.Students[i].Middle_Name @Model.Students[i].Second_Name
-                                </th>
-                                <th>
-                                    @Model.Students[i].UserName
-                                    @Html.HiddenFor( m => m.Students[i].Id )
-                                    @Html.HiddenFor( m => m.Students[i].First_Name )
-                                    @Html.HiddenFor( m => m.Students[i].Second_Name )
-                                    @Html.HiddenFor( m => m.Students[i].Middle_Name )
-                                    @Html.HiddenFor( m => m.Students[i].UserName )
-                                    @Html.HiddenFor( m => m.Students[i].Picture.URL )
-                                </th>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        <table class="table">
+                            <tbody>
+                                @for( int i = 0; i < Model.Students.Count(); i++ ) {
+                                    <tr>
+                                        <th>
+                                            @Html.CheckBoxFor( m => m.Chosen_Students[i] )
+                                        </th>
+                                        <th>
+                                            <img src=@Model.Students[i].Picture.URL>
+                                        </th>
+                                        <th>
+                                            @Model.Students[i].First_Name @Model.Students[i].Middle_Name @Model.Students[i].Second_Name
+                                        </th>
+                                        <th>
+                                            @Model.Students[i].UserName
+                                            @Html.HiddenFor( m => m.Students[i].Id )
+                                            @Html.HiddenFor( m => m.Students[i].First_Name )
+                                            @Html.HiddenFor( m => m.Students[i].Second_Name )
+                                            @Html.HiddenFor( m => m.Students[i].Middle_Name )
+                                            @Html.HiddenFor( m => m.Students[i].UserName )
+                                            @Html.HiddenFor( m => m.Students[i].Picture.URL )
+                                        </th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                </div>*@
             <div>
                 <h4>Выберите программы</h4>
                 @for( int i = 0; i < Model.Programs.Count(); i++ ) {
