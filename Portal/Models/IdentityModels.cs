@@ -53,8 +53,8 @@ namespace Portal.Models
             //modelBuilder.
 
             modelBuilder.Entity<Course>()
-            .HasMany(c => c.CourseInstances)
-            .WithRequired(c => c.BaseCourse);
+            .HasMany( c => c.CourseInstances )
+            .WithRequired( c => c.BaseCourse );
 
             modelBuilder.Entity<CourseInstance>()
             .HasMany( c => c.Students )

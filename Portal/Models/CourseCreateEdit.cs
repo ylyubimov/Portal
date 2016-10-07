@@ -13,8 +13,8 @@ namespace Portal.Models
         public string Name { get; set; }
         public DateTime? Date_and_Time { get; set; }
         public string Report_Type { get; set; }
-//        public DateTime? Report_Date { get; set; }
-//        public string Place { get; set; }
+        //        public DateTime? Report_Date { get; set; }
+        //        public string Place { get; set; }
         [Required( ErrorMessage = "Необходимо описание курса" )]
         public string Description { get; set; }
         [Range( 0, 1000, ErrorMessage = "Не может быть отрицательным" )]
@@ -22,8 +22,8 @@ namespace Portal.Models
         [Range( 0, 1000, ErrorMessage = "Не модет быть отрицательным" )]
         public int? Number_of_Classes { get; set; }
 
- //       public Person[] Students { get; set; }
- //       public bool[] Chosen_Students { get; set; }
+        //       public Person[] Students { get; set; }
+        //       public bool[] Chosen_Students { get; set; }
         public Person[] Teachers { get; set; }
         public bool[] Chosen_Teachers { get; set; }
         public Program[] Programs { get; set; }

@@ -14,23 +14,23 @@ namespace Portal.Models
 {
     public class Initializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
-        protected override void Seed(ApplicationDbContext db)
+        protected override void Seed( ApplicationDbContext db )
         {
             // Добавление Факультетов
-            Faculty fivt = db.Faculty.Add(new Faculty { Name = "Fivt" });
-            Faculty fupm = db.Faculty.Add(new Faculty { Name = "Fupm" });
+            Faculty fivt = db.Faculty.Add( new Faculty { Name = "Fivt" } );
+            Faculty fupm = db.Faculty.Add( new Faculty { Name = "Fupm" } );
             db.SaveChanges();
             // Добавление базовых кафедр
-            Base_Company basefivt = db.Base_Company.Add(new Base_Company { Name = "Abbyy", Faculty = fivt });
-            Base_Company basefupm = db.Base_Company.Add(new Base_Company { Name = "Data processing", Faculty = fupm });
+            Base_Company basefivt = db.Base_Company.Add( new Base_Company { Name = "Abbyy", Faculty = fivt } );
+            Base_Company basefupm = db.Base_Company.Add( new Base_Company { Name = "Data processing", Faculty = fupm } );
             db.SaveChanges();
             // Добавление подразделений базовых кафедр
-            Base_Part base_part_abbyy1 = db.Base_Part.Add(new Base_Part { Name = "RIOT", Base_Сompany = basefivt });
-            Base_Part base_part_abbyy2 = db.Base_Part.Add(new Base_Part { Name = "RIOT", Base_Сompany = basefivt });
+            Base_Part base_part_abbyy1 = db.Base_Part.Add( new Base_Part { Name = "RIOT", Base_Сompany = basefivt } );
+            Base_Part base_part_abbyy2 = db.Base_Part.Add( new Base_Part { Name = "RIOT", Base_Сompany = basefivt } );
             db.SaveChanges();
             // Добавление групп
-            Group group1 = db.Group.Add(new Group { Name = "292", Faculty = fivt });
-            Group group2 = db.Group.Add(new Group { Name = "271", Faculty = fupm });
+            Group group1 = db.Group.Add( new Group { Name = "292", Faculty = fivt } );
+            Group group2 = db.Group.Add( new Group { Name = "271", Faculty = fupm } );
 
             //Video v1 = db.Video.Add(new Video { URL = "http://www.youtube.com/watch?v=LUbPgWF8T64", Name = "AngryBirdsTrailer" });
             //Video v2 = db.Video.Add(new Video { URL = "http://www.youtube.com/watch?v=Iz8wdHTufQc", Name = "GubkaBob" });
@@ -45,28 +45,28 @@ namespace Portal.Models
             Picture p6 = new Picture { Name = "ava3", URL = "http://www.yaom.ru/wp-content/uploads/will-smith.jpeg" };
             Picture def = new Picture { Name = "DefaultPicture", URL = "/images/genel.jpg" };
 
-            p1 = db.Picture.Add(p1);
-            p2 = db.Picture.Add(p2);
-            p3 = db.Picture.Add(p3);
-            p4 = db.Picture.Add(p4);
-            p5 = db.Picture.Add(p5);
-            p6 = db.Picture.Add(p6);
-            db.Picture.Add(def);
+            p1 = db.Picture.Add( p1 );
+            p2 = db.Picture.Add( p2 );
+            p3 = db.Picture.Add( p3 );
+            p4 = db.Picture.Add( p4 );
+            p5 = db.Picture.Add( p5 );
+            p6 = db.Picture.Add( p6 );
+            db.Picture.Add( def );
             db.SaveChanges();
 
             // добавление ролей
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var roleManager = new RoleManager<IdentityRole>( new RoleStore<IdentityRole>( db ) );
             var role1 = new IdentityRole { Name = "admin" };
             var role2 = new IdentityRole { Name = "editor" };
             var role3 = new IdentityRole { Name = "user" };
-            roleManager.Create(role1);
-            roleManager.Create(role2);
-            roleManager.Create(role3);
+            roleManager.Create( role1 );
+            roleManager.Create( role2 );
+            roleManager.Create( role3 );
             db.SaveChanges();
 
 
             //доавление юзеров 
-            var user = new ApplicationUserManager(new UserStore<Person>(db));
+            var user = new ApplicationUserManager( new UserStore<Person>( db ) );
             List<Person> Persons = new List<Person>
             {
                 new Person{ Person_Type = "Student", Exists = true,  UserName =    "qr@yandex.ru", Email =   "qr@yandex.ru", PhoneNumber="+7(912)2345678", First_Name = "Gosha", Second_Name ="Kuzenko", Middle_Name = "Sergeevich",   Group = group1, Faculty = fivt, Base_Company = basefivt, Base_Part = base_part_abbyy1, Year_of_Graduating = 2015 , Picture = p1   },
@@ -77,12 +77,10 @@ namespace Portal.Models
                 new Person{ Person_Type = "Teacher", Exists = true,  UserName = "qradz@yandex.ru", Email ="qradz@yandex.ru", First_Name = "Konstantin", Second_Name = "Kobalt", Middle_Name = "Borisovich",  Base_Company = basefivt , Picture = p6 },
                 new Person{ Person_Type = "Fake", Exists = false, UserName = "Deleted", Email = "Deleted", First_Name = "Deleted", Second_Name = "Deleted" , Middle_Name = "Deleted", PhoneNumber = "Deleted", Picture = def  }
             };
-            foreach (Person u in Persons)
-            {
-                var result = user.Create(u, "qwerty");
-                if (result.Succeeded)
-                {
-                    user.AddToRole(u.Id, "editor");
+            foreach( Person u in Persons ) {
+                var result = user.Create( u, "qwerty" );
+                if( result.Succeeded ) {
+                    user.AddToRole( u.Id, "editor" );
                 }
                 db.SaveChanges();
             }
@@ -91,33 +89,29 @@ namespace Portal.Models
 
             Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4 };
 
-            user.Create(t, "qwerty");
+            user.Create( t, "qwerty" );
             db.SaveChanges();
-            user.AddToRole(t.Id, "admin");
+            user.AddToRole( t.Id, "admin" );
             db.SaveChanges();
 
             List<Person> NewTeachers = new List<Person>();
-            foreach (Person p in db.Users)
-                if (p.Person_Type == "Teacher")
-                {
-                    NewTeachers.Add(p);
+            foreach( Person p in db.Users )
+                if( p.Person_Type == "Teacher" ) {
+                    NewTeachers.Add( p );
                 }
 
             List<Person> NewStudents = new List<Person>();
-            foreach (Person p in db.Users)
-            {
-                if (p.Person_Type == "Student")
-                {
-                    NewStudents.Add(p);
+            foreach( Person p in db.Users ) {
+                if( p.Person_Type == "Student" ) {
+                    NewStudents.Add( p );
                 }
             }
 
             // Получение сущностей с ID
             List<Person> authors = new List<Person>();
-            foreach (Person p in db.Users)
-            {
-                if (p.Person_Type == "Teacher")
-                    authors.Add(p);
+            foreach( Person p in db.Users ) {
+                if( p.Person_Type == "Teacher" )
+                    authors.Add( p );
             }
 
             // Добавление статей
@@ -140,20 +134,20 @@ namespace Portal.Models
                 new Article { Name = "Витамин A",  Text = "Антиинфекционный витамин, антиксерофтальмический витамин, ретинол, дегидроретинол Витамин А включает значительное число жирорастворимых соединений, важнейшими среди которых являются ретинол, ретиналь, ретиноевая кислота и эфиры ретинола. Витамин А выполняет множество функций в организме: способствует росту и регенерации тканей, обеспечивает эластичность кожи и волос.Оказывает антиоксидантное действие, повышает иммунитет, усиливает сопротивляемость организма к инфекциям. Витамин А нормализует деятельность половых желез, необходим для образования спермы и развития яйцеклетки. Одна из важных функций витамина А -предотвращение куриной слепоты -гемералопатия(нарушение сумеречного зрения).",
                      Likes_Count = 0, Dislikes_Count = 0, Author = authors.ToArray()[0], Date_of_Creation = DateTime.Parse("2015-05-10")}
             };
-            foreach (Article a in articles)
-                db.Article.Add(a);
+            foreach( Article a in articles )
+                db.Article.Add( a );
 
             db.SaveChanges();
 
             // Получение Articles c ID 
             List<Article> NewArticles = new List<Article>();
-            foreach (Article a in db.Article)
-                NewArticles.Add(a);
+            foreach( Article a in db.Article )
+                NewArticles.Add( a );
             ////
 
             // Добавление блогов
-            Blog b1 = db.Blog.Add(new Blog { Name = "PPS_Blog", Articles = NewArticles, Author = authors.ToArray()[0] });
-            Blog b2 = db.Blog.Add(new Blog { Name = "Funkan_Blog", Articles = NewArticles, Author = authors.ToArray()[0] });
+            Blog b1 = db.Blog.Add( new Blog { Name = "PPS_Blog", Articles = NewArticles, Author = authors.ToArray()[0] } );
+            Blog b2 = db.Blog.Add( new Blog { Name = "Funkan_Blog", Articles = NewArticles, Author = authors.ToArray()[0] } );
             db.SaveChanges();
 
             List<Lesson> lessons = new List<Lesson>
@@ -185,15 +179,15 @@ namespace Portal.Models
             db.SaveChanges();
 
             // Добавление программы
-            db.Program.Add(new Program { Name = "3 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
-            db.Program.Add(new Program { Name = "4 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
-            db.Program.Add(new Program { Name = "5 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
-            db.Program.Add(new Program { Name = "6 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents });
-            db.Comment.Add(new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-09-06") });
-            db.Comment.Add(new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse("2015-05-06") });
-            db.Comment.Add(new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse("2015-09-16") });
+            db.Program.Add( new Program { Name = "3 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents } );
+            db.Program.Add( new Program { Name = "4 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents } );
+            db.Program.Add( new Program { Name = "5 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents } );
+            db.Program.Add( new Program { Name = "6 курс", Courses = courses, Teachers = NewTeachers, Students = NewStudents } );
+            db.Comment.Add( new Comment { Author = authors.ToArray()[1], Text = "Хм................... не думал, что с глобусом связано так много интересного", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse( "2015-09-06" ) } );
+            db.Comment.Add( new Comment { Author = authors.ToArray()[0], Text = "Глобуууууууууууууууууууууууууууууууууууууууууууууууууууууууууууууус дарагоооооооооооооооооооооооой", Article = db.Article.ToArray()[0], Create_Time = DateTime.Parse( "2015-05-06" ) } );
+            db.Comment.Add( new Comment { Author = authors.ToArray()[2], Text = "Сам читаю книги и всем лодырям советую, ))))))))))))))))))))))))))))))))))))", Article = db.Article.ToArray()[1], Create_Time = DateTime.Parse( "2015-09-16" ) } );
 
-            base.Seed(db);
+            base.Seed( db );
         }
     }
 }
