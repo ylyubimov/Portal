@@ -61,15 +61,6 @@ namespace Portal.Controllers
             return View( course );
         }
 
-        [Route( "{course_id:int}/{id:int}" )]
-        public ActionResult CourseInstance( int id )
-        {
-            CourseInstance courseInstance = db.CourseInstance.Where( p => id == p.ID ).FirstOrDefault();
-            if( courseInstance == null ) {
-                return HttpNotFound();
-            }
-            return View( courseInstance );
-        }
 
         [HttpPost]
         [Route( "" )]
@@ -80,27 +71,6 @@ namespace Portal.Controllers
             var CourseList = db.Course.Where( x => x.Name.ToUpper().IndexOf( SearchFor.ToUpper() ) >= 0 ).Take( 50 ).ToArray();
             return View( CourseList );
         }
-
-        [Authorize]
-        [HttpPost]
-        public ActionResult AddLesson( string Name, string Description, string Links, int id )
-        {
-            if( Name == null || Name == "" ) {
-                Name = "Урок";
-            }
-            Course course = db.Course.Where( p => id == p.ID ).FirstOrDefault();
-            Person author = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
-            if( !course.Teachers.Contains( author ) ) {
-                ViewBag.Message = "У вас нет прав на редактирование этих материалов";
-                return View( "Error" );
-            }
-            //var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
-            //course.Lessons.Add( lesson );
-
-            db.SaveChanges();
-            return RedirectToAction( "Course", id );
-        }
-
 
         [HttpGet]
         [Route( "Create" )]
@@ -389,78 +359,5 @@ namespace Portal.Controllers
             return RedirectToAction( "Index", "Courses" );
         }
 
-        [HttpGet]
-        [Route( "{id:int}/EditLesson" )]
-        [Authorize( Roles = "editor, admin" )]
-        public ActionResult EditLesson( int id, int courseId )
-        {
-            Lesson lesson = db.Lesson.Where( l => l.ID == id ).First();
-            if( lesson == null ) {
-                return HttpNotFound();
-            }
-
-            Course course = db.Course.Where( c => c.ID == courseId ).First();
-            if( course.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() == null && !User.IsInRole( "admin" ) ) {
-                ViewBag.Message = "У вас нет прав на редактирование этих материалов";
-                return View( "Error" );
-            }
-            ViewBag.CourseId = courseId;
-            return View( lesson );
-        }
-
-        [HttpPost]
-        [Route( "{id:int}/EditLesson" )]
-        [Authorize( Roles = "editor, admin" )]
-        public ActionResult EditLesson( int courseId, int id, Lesson editedLesson )
-        {
-            Lesson lesson = db.Lesson.Where( l => l.ID == id ).First();
-            if( lesson == null ) {
-                return HttpNotFound();
-            }
-
-            Course course = db.Course.Where( c => c.ID == courseId ).First();
-            if( course.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() == null && !User.IsInRole( "admin" ) ) {
-                ViewBag.Message = "У вас нет прав на редактирование этих материалов";
-                return View( "Error" );
-            }
-
-            lesson.Name = editedLesson.Name;
-            lesson.Description = editedLesson.Description;
-            lesson.Links = editedLesson.Links;
-
-            if( !ModelState.IsValid ) {
-                ViewBag.CourseId = courseId;
-                return View( lesson );
-            }
-
-            db.SaveChanges();
-
-            return RedirectToAction( "course", new { id = courseId } );
-        }
-
-        [HttpGet]
-        [Route( "{lessonId:int}/RemoveLesson" )]
-        [Authorize( Roles = "editor, admin" )]
-        public ActionResult RemoveLesson( int courseId, int lessonId )
-        {
-            Lesson lesson = db.Lesson.Where( l => l.ID == lessonId ).First();
-            if( lesson == null ) {
-                return HttpNotFound();
-            }
-
-            Course course = db.Course.Where( c => c.ID == courseId ).First();
-
-            if( course.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() == null && !User.IsInRole( "admin" ) ) {
-                ViewBag.Message = "У вас нет прав на редактирование этих материалов";
-                return View( "Error" );
-            }
-
-            //course.Lessons.Remove( lesson );
-            db.Lesson.Remove( lesson );
-
-            db.SaveChanges();
-
-            return RedirectToAction( "course", new { id = courseId } );
-        }
     }
 }

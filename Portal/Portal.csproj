@@ -181,6 +181,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CourseInstancesController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\CourseInstance.cs" />
+    <Compile Include="Models\CourseInstanceCreateEdit.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CourseCreateEdit.cs" />
@@ -305,9 +307,11 @@
     <Content Include="Views\Blogs\Edit.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Persons\Edit.cshtml" />
-    <Content Include="Views\Courses\EditLesson.cshtml" />
+    <Content Include="Views\CourseInstances\EditLesson.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
-    <Content Include="Views\Courses\CourseInstance.cshtml" />
+    <Content Include="Views\CourseInstances\CourseInstance.cshtml" />
+    <Content Include="Views\CourseInstances\Edit.cshtml" />
+    <Content Include="Views\CourseInstances\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

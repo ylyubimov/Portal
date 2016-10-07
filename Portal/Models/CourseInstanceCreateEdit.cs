@@ -4,20 +4,21 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Portal.Models
 {
-    public class CourseInstance
+    public class CourseInstanceCreateEdit
     {
-        [Key]
         public int ID { get; set; }
-        [Required]
+        [Required( ErrorMessage = "Необходимо указать год проведения" )]
         public int Year { get; set; }
-        [Required]
+        [Required( ErrorMessage = "Необходимо указать курс" )]
         public virtual Course BaseCourse { get; set; }
         public string Place { get; set; }
         public string AdditionalDescription { get; set; }
         public DateTime? Report_Date { get; set; }
-        public virtual ICollection<Person> Students { get; set; }
-        public virtual ICollection<Lesson> Lessons { get; set; }
+        public Person[] Students { get; set; }
+        public bool[] Chosen_Students { get; set; }
+
     }
 }
