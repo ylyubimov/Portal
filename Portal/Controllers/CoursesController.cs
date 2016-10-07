@@ -401,7 +401,7 @@ namespace Portal.Controllers
 
             Course course = db.Course.Where( c => c.ID == courseId ).First();
             if( course.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() == null && !User.IsInRole( "admin" ) ) {
-                ViewBag.Message = "У вас нет прав на редактирование этих материалов" );
+                ViewBag.Message = "У вас нет прав на редактирование этих материалов";
                 return View( "Error" );
             }
             ViewBag.CourseId = courseId;
