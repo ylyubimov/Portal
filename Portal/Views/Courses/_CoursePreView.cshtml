@@ -4,7 +4,7 @@
 
     <div class="course-preview">
         <div class="course-header">
-            <h2>@Model.Name</h2>
+            <h2>@Html.ActionLink( @Model.Name, "course", new { @id = Model.ID } )</h2>
             @if( User.IsInRole( "admin" ) || Model.Teachers.Where( t => t.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
                 <div class="course-actions">
                     <div class="course-settings dropdown">
@@ -19,6 +19,14 @@
                 </div>
             }
         </div>
+        @if( Model.Blogs.Count != 0 ) {
+            <div class="course-blogs">
+                Блоги:
+                @foreach( Blog blog in @Model.Blogs ) {
+                    @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+                }
+            </div>
+        }
         <div class="course-description">
             @if( Model.Description != null ) {
                 <p>@Model.Description.Substring( 0, ( Model.Description.Length > 500 ) ? 500 : Model.Description.Length )...</p>
