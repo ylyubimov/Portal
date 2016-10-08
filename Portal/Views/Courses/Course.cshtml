@@ -26,7 +26,7 @@
                 <div class="course-blogs">
                     Блоги:
                     @foreach( Blog blog in Model.Blogs ) {
-                        @Html.ActionLink( blog.Name, "blog", "blogs", null, null )
+                        @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
                     }
                 </div>
                 @Model.Description
@@ -46,9 +46,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Название</th>
+                        <th>Год</th>
                         <th>Описание</th>
-                        <th>Ссылка</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -60,7 +59,7 @@
                             <td>@courseInstance.AdditionalDescription</td>
                             @if( Model.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
                                 <td><a href=@Url.Action("Edit", "CourseInstances", new { @id = courseInstance.ID, courseId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
-                                <td><a href=@Url.Action("Remove", "CourseInstances", new { @courseInstanceId = courseInstance.ID, courseId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
+                                <td><a href=@Url.Action("Remove", "CourseInstances", new { @id = courseInstance.ID, courseId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
                             }
                         </tr>
 

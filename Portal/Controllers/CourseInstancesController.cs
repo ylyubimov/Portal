@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Validation;
 
 namespace Portal.Controllers
 {
@@ -99,13 +100,15 @@ namespace Portal.Controllers
             }
             courseInstance.Year = editedCourseInstance.Year;
             courseInstance.AdditionalDescription = editedCourseInstance.AdditionalDescription;
-            courseInstance.BaseCourse = editedCourseInstance.BaseCourse;
+            courseInstance.BaseCourse = db.Course.Where( c => c.ID == editedCourseInstance.BaseCourse.ID ).First();
             courseInstance.Place = editedCourseInstance.Place;
             courseInstance.Report_Date = editedCourseInstance.Report_Date;
+            
             courseInstance.Students.Clear();
             courseInstance.Students = studentsList;
+
             db.SaveChanges();
-            return RedirectToAction( "CourseInstance", new { id = id } );
+            return RedirectToAction( "course", "Courses", new { id = courseId } );
         }
 
         [HttpGet]
@@ -119,17 +122,16 @@ namespace Portal.Controllers
             }
 
             Course course = db.Course.Where( c => c.ID == courseId ).First();
-
             if( course.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() == null && !User.IsInRole( "admin" ) ) {
                 ViewBag.Message = "У вас нет прав на редактирование этих материалов";
                 return View( "Error" );
             }
 
+            courseInstance.Students.Clear();
+            courseInstance.Lessons.Clear();
             db.CourseInstance.Remove( courseInstance );
-
             db.SaveChanges();
-
-            return RedirectToAction( "course", new { id = courseId } );
+            return RedirectToAction( "course", "Courses", new { id = courseId } );
         }
 
         [HttpGet]
@@ -183,7 +185,7 @@ namespace Portal.Controllers
 
             db.CourseInstance.Add( courseInstance );
             db.SaveChanges();
-            return RedirectToAction( courseId.ToString(), "course" );
+            return RedirectToAction( "course", "Courses", new { id = courseId } );
         }
 
         [Authorize]
@@ -203,7 +205,7 @@ namespace Portal.Controllers
             courseInstance.Lessons.Add( lesson );
 
             db.SaveChanges();
-            return RedirectToAction( "CourseInstance", id );
+            return RedirectToAction( "CourseInstance", new { id = id } );
         }
 
         [HttpGet]

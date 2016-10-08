@@ -194,9 +194,7 @@ namespace Portal.Controllers
             if( course == null ) {
                 return HttpNotFound();
             }
-            //course.Students.Clear();
             course.Teachers.Clear();
-            //course.Lessons.Clear();
             course.Programs.Clear();
             course.Blogs.Clear();
             db.Course.Remove( course );

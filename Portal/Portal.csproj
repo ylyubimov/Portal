@@ -241,6 +241,7 @@
     <Content Include="fonts\SF-UI-Text-Regular.otf" />
     <Content Include="fonts\SF-UI-Text-Semibold.otf" />
     <Content Include="fonts\SF-UI-Text-SemiboldItalic.otf" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
