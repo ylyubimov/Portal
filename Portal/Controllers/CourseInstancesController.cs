@@ -33,9 +33,10 @@ namespace Portal.Controllers
         [HttpGet]
         [Route( "{id:int}/Edit" )]
         [Authorize( Roles = "editor, admin" )]
-        public ActionResult Edit( int courseId, int id )
+        public ActionResult Edit( int courseId, int id, bool cameFromCoursePage )
         {
             ViewBag.CourseID = courseId;
+            ViewBag.CameFromCoursePage = cameFromCoursePage;
             CourseInstance courseInstance = db.CourseInstance.Where( ci => ci.ID == id ).First();
             if( courseInstance == null ) {
                 return HttpNotFound();
@@ -79,7 +80,7 @@ namespace Portal.Controllers
         [HttpPost]
         [Route( "{id:int}/Edit" )]
         [Authorize( Roles = "editor, admin" )]
-        public ActionResult Edit( int courseId, int id, CourseInstanceCreateEdit editedCourseInstance )
+        public ActionResult Edit( int courseId, int id, bool cameFromCoursePage, CourseInstanceCreateEdit editedCourseInstance )
         {
             if( editedCourseInstance.Year < 0 || editedCourseInstance.BaseCourse == null ) {
                 return View( editedCourseInstance );
@@ -108,13 +109,17 @@ namespace Portal.Controllers
             courseInstance.Students = studentsList;
 
             db.SaveChanges();
-            return RedirectToAction( "course", "Courses", new { id = courseId } );
+            if( cameFromCoursePage ) {
+                return RedirectToAction( "course", "Courses", new { id = courseId } );
+            } else {
+                return RedirectToAction( "CourseInstance", new { id = id } );
+            }
         }
 
         [HttpGet]
         [Route( "{id:int}/Remove" )]
         [Authorize( Roles = "editor, admin" )]
-        public ActionResult Remove( int courseId, int id )
+        public ActionResult Remove( int courseId, int id, bool cameFromCoursePage )
         {
             CourseInstance courseInstance = db.CourseInstance.Where( c => c.ID == id ).First();
             if( courseInstance == null ) {
@@ -131,7 +136,11 @@ namespace Portal.Controllers
             courseInstance.Lessons.Clear();
             db.CourseInstance.Remove( courseInstance );
             db.SaveChanges();
-            return RedirectToAction( "course", "Courses", new { id = courseId } );
+            if( cameFromCoursePage ) {
+                return RedirectToAction( "course", "Courses", new { id = courseId } );
+            } else {
+                return RedirectToAction( "CourseInstance", new { id = id } );
+            }
         }
 
         [HttpGet]

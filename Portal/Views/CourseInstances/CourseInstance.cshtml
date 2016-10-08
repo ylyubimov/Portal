@@ -15,9 +15,9 @@
                             <div class="course-settings-btn" data-toggle="dropdown"><img class="icon" src="~/images/icons/settingsIcon.png" />Действия</div>
                             <ul class="dropdown-menu course-settings-menu">
                                 @if( User.IsInRole( "admin" ) ) {
-                                    <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Delete", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" } )</li>
+                                    <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Удалить", "Remove", new { @id = Model.ID, @courseId = Model.BaseCourse.ID, cameFromCoursePage = false }, new { @class = "course-menu-item" } )</li>
                                 }
-                                <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", "Courses", new { @id = Model.ID }, new { @class = "course-menu-item" } )</li>
+                                <li><img class="icon" src="/images/icons/settignsPointIcon.png" />@Html.ActionLink( "Редактировать", "Edit", new { @id = Model.ID, @courseId = Model.BaseCourse.ID, cameFromCoursePage = false }, new { @class = "course-menu-item" } )</li>
                             </ul>
                         </div>
                     </div>
@@ -32,16 +32,6 @@
                 </div>
                 @Model.AdditionalDescription
             </div>
-            @*<h4>Учителя:</h4>
-                <div class="course-teachers">
-                    @foreach (Person teacher in Model.Teachers)
-                    {
-                        <a class="course-teacher no-link-attributes" href=@Url.Action("person", "persons", new { @id = teacher.Id })>
-                            <div class="course-teacher-image"><img src=@teacher.Picture.URL /></div>
-                            <div>@teacher.First_Name @teacher.Second_Name</div>
-                        </a>
-                    }
-                </div>*@
         </div>
 
         <div class="course-lesson-list">

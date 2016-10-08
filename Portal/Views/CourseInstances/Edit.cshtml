@@ -7,7 +7,7 @@
 
 <div class="container-fluid">
     <div class="container course-create-wrap">
-        @using( Html.BeginForm( "Edit", "CourseInstances", new { @courseId = ViewBag.CourseId }, FormMethod.Post ) ) {
+        @using( Html.BeginForm( "Edit", "CourseInstances", new { @courseId = ViewBag.CourseId, cameFromCoursePage = ViewBag.CameFromCoursePage }, FormMethod.Post ) ) {
             @Html.HiddenFor( m => m.ID )
             @Html.HiddenFor( m => m.BaseCourse.ID )
 
