@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Portal.Models;
+using System.Net.Mail;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace Portal.Controllers
 {
@@ -74,6 +75,49 @@ namespace Portal.Controllers
             return View();
         }
 
+        protected void SendVerificationEmail( Person user )
+        {
+            try {
+                NameValueCollection mailingSection = ( NameValueCollection )ConfigurationManager.GetSection( "adminMailingSettings" );
+                string adminEmail = mailingSection["TargetEmailAddress"].ToString(); // address receiving the confirmation request
+
+                string senderEmail = mailingSection["FromEmailAddress"].ToString(); // address that makes all the mailing
+                string senderPasswd = mailingSection["FromEmailPassword"].ToString();
+                string senderDisplayName = mailingSection["FromEmailDisplayName"].ToString();
+
+                MailMessage mail = new MailMessage();
+                mail.To.Add( adminEmail );
+                mail.From = new MailAddress( senderEmail, senderDisplayName, System.Text.Encoding.UTF8 );
+                mail.Subject = "[ABBYY Portal] New teacher is waiting for approval";
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                string bodyTemplate = "Hello!\r\n\r\n" +
+                "User {0} has just registered as a teacher and wants to be verified to start working on courses.\r\n\r\n" +
+                "If you are sure that you know the user, please, approve it by admin interface. Otherwise you may contact the user at email {1}. \r\n\r\n" +
+                "Yours, ABBYY Portal Team.";
+                string fullName = String.Format( "{0} {1} {2}", user.First_Name, user.Middle_Name, user.Second_Name );
+
+                mail.Body = String.Format( bodyTemplate, fullName, user.Email );
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                mail.IsBodyHtml = false;
+                mail.Priority = MailPriority.High;
+                SmtpClient client = new SmtpClient();
+                client.Credentials = new System.Net.NetworkCredential( senderEmail, senderPasswd );
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+            
+                client.Send( mail );
+            } catch( Exception ex ) {
+                Exception ex2 = ex;
+                string errorMessage = string.Empty;
+                while( ex2 != null ) {
+                    errorMessage += ex2.ToString();
+                    ex2 = ex2.InnerException;
+                }
+            }
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -102,6 +146,15 @@ namespace Portal.Controllers
                     userManager.AddToRole( pers.Id, "user" );
                     db.SaveChanges();
                     await SignInAsync( user, isPersistent: false );
+
+                    // Here mail admins if teacher needs to be approved
+                    if( user.Person_Type == "Teacher" ) {
+                        pers.Person_Type = "Student"; // roll the status back before the confirmation
+                        db.SaveChanges();
+
+                        SendVerificationEmail( user );
+                    }
+
                     return RedirectToAction( "Index", "Home" );
                 } else {
                     AddErrors( result );
