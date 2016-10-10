@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Portal.Models;
+
 namespace Portal.Controllers
 {
+    [RoutePrefix( "" )]
     public class HomeController : Controller
     {
         Models.ApplicationDbContext db = new Models.ApplicationDbContext();
@@ -29,6 +29,22 @@ namespace Portal.Controllers
                 var ArticleList = db.Article.OrderByDescending( x => x.Date_of_Creation ).Take( 5 ).ToArray();
                 return View( ArticleList );
             }
+        }
+
+    }
+
+    public class ErrorController : Controller
+    {
+        Models.ApplicationDbContext db = new Models.ApplicationDbContext();
+
+        [HttpGet]
+        [Route( "Error" )]
+        public ActionResult Error( TempDataDictionary data )
+        {
+            List<ModelError> errorList = TempData["errors"] as List<ModelError>;
+
+            ViewBag.Title = "Something went wrong";
+            return View( errorList );
         }
 
     }

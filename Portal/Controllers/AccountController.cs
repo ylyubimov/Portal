@@ -10,6 +10,7 @@ using Portal.Models;
 using System.Net.Mail;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 
 namespace Portal.Controllers
 {
@@ -110,11 +111,13 @@ namespace Portal.Controllers
                 client.Send( mail );
             } catch( Exception ex ) {
                 Exception ex2 = ex;
-                string errorMessage = string.Empty;
+                List<string> errorMessages = new List<string>();
                 while( ex2 != null ) {
-                    errorMessage += ex2.ToString();
+                    errorMessages.Add( ex2.ToString() );
                     ex2 = ex2.InnerException;
                 }
+                IdentityResult result = new IdentityResult( errorMessages );
+                AddErrors( result );
             }
         }
 
@@ -153,6 +156,18 @@ namespace Portal.Controllers
                         db.SaveChanges();
 
                         SendVerificationEmail( user );
+                    }
+
+                    List<ModelError> errors = new List<ModelError>();
+                    foreach( ModelState modelState in ViewData.ModelState.Values ) {
+                        foreach( ModelError error in modelState.Errors ) {
+                            errors.Add( error );
+                        }
+                    }
+
+                    TempData["errors"] = errors;
+                    if ( errors.Count() != 0 ) {
+                        return RedirectToAction( "Index", "Error" );
                     }
 
                     return RedirectToAction( "Index", "Home" );

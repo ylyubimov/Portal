@@ -1,9 +1,26 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
+﻿@model List<ModelError>
 @{
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="error-page-wrap">
+    @if( Model != null && Model.Count() > 0 ) {
+        <div class="container search-error-wrap">
+            <div class="search-error">
+                Some errors occurred while processing your request:
+            </div>
 
+            @foreach( ModelError error in Model ) {
+                <div class="search-error">
+                    @error.ErrorMessage
+                </div>
+            }
+        </div>
+    } else {
+        <div class="container search-error-wrap">
+            <div class="search-error">
+                You were redirected to error page, but everything seems to be OK. <br/>Please, contact site administrator if you do think something's going wrong.
+            </div>
+        </div>
+    }
+</div>

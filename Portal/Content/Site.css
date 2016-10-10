@@ -228,3 +228,10 @@ input.input-validation-error {
     text-align: center;
     font-size: 18px;
 }
+
+.error-page-wrap {
+    width: 100%;
+    align-content: center;
+    padding-top: 15px;
+    margin-top: 15px;
+}
