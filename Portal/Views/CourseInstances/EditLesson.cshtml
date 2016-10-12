@@ -6,7 +6,7 @@
 
 
 <div class="container course-wrap">
-    @using( Html.BeginForm( "EditLesson", "Courses", new { @courseId = ViewBag.CourseId, @id = Model.ID }, FormMethod.Post ) ) {
+    @using( Html.BeginForm( "EditLesson", "CourseInstances", new { @courseInstanceId = ViewBag.CourseInstanceId, @id = Model.ID }, FormMethod.Post ) ) {
         <div class="course-add-lesson">
             <h4>Редактировать урок:</h4>
             @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Название" } } ) @Html.ValidationMessageFor( m => m.Name )
@@ -15,7 +15,7 @@
         </div>
         <div class="person-edit-buttons">
             <input class="btn person-edit-button" type="submit" value="Сохранить" />
-            @Html.ActionLink( "Отменить", "course", new { @id = ViewBag.CourseId }, new { @class = "btn person-edit-cancel-button" } )
+            @Html.ActionLink( "Отменить", "course", new { @courseInstanceId = ViewBag.CourseInstanceId }, new { @class = "btn person-edit-cancel-button" } )
         </div>
     }
 </div>

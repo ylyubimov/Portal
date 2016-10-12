@@ -15,18 +15,19 @@ namespace Portal.Models
         public string Present { get; set; }
         public DateTime? Date_and_Time { get; set; }
         public string Report_Type { get; set; }
-        public string Place { get; set; }
+        //public string Place { get; set; }
         public string Description { get; set; }
-        public DateTime? Report_Date { get; set; }
+        //public DateTime? Report_Date { get; set; }
         public int? Number_of_Hours { get; set; }
         public int? Number_of_Classes { get; set; }
-        public virtual ICollection<Person> Students { get; set; }
+        //public virtual ICollection<Person> Students { get; set; }
         [Required]
         public virtual ICollection<Person> Teachers { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
         public virtual Faculty Faculty { get; set; }
-        public virtual ICollection<Lesson> Lessons { get; set; }
+        //public virtual ICollection<Lesson> Lessons { get; set; }
+        public virtual ICollection<CourseInstance> CourseInstances { get; set; }
 
         public int? Grade { get; set; }
         public string BasePart { get; set; }
