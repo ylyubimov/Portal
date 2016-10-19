@@ -53,6 +53,10 @@ input.input-validation-error {
     color: #b94a48;
 }
 
+.validation-summary-errors ul {
+    list-style: none;
+}
+
 .validation-summary-valid {
     display: none;
 }
