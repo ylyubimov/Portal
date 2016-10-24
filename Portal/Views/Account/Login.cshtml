@@ -19,6 +19,11 @@
                 @Html.PasswordFor( m => m.Password, new { @class = "login-text-input", placeholder = "пароль" } )
                 @Html.ValidationMessageFor( m => m.Password )
 
+                <div class="checkbox checkbox-danger checkbox-circle">
+                    @Html.CheckBoxFor(m => m.RememberMe, null)
+                    <label for="RememberMe">Remember me for 30 days!</label>
+                </div>
+
                 <input type="submit" value="Вход на сайт" class="btn login-form-button login-sign-in-button" />
                     <a href=@Url.Action("register", "account") class="btn login-form-button login-sign-up-button">Регистрация</a>
             }

@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Web.Security;
 
 namespace Portal.Controllers
 {
@@ -56,7 +57,29 @@ namespace Portal.Controllers
             if( ModelState.IsValid ) {
                 var user = await userManager.FindAsync( model.UserName, model.Password );
                 if( user != null ) {
-                    //TODO вернуть флаг запонмить
+                    // if checkbox is ticked
+                    if (model.RememberMe)
+                    {
+                        // Clear any other tickets that are already in the response
+                        Response.Cookies.Clear();
+
+                        // Set the new expiry date - to thirty days from now
+                        DateTime expiryDate = DateTime.Now.AddDays(30);
+
+                        // Create a new forms auth ticket
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, model.UserName, DateTime.Now, expiryDate, true, String.Empty);
+
+                        // Encrypt the ticket
+                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                        // Create a new authentication cookie - and set its expiration date
+                        HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                        authenticationCookie.Expires = ticket.Expiration;
+
+                        // Add the cookie to the response.
+                        Response.Cookies.Add(authenticationCookie);
+                    }
+
                     await SignInAsync( user, true );
                     return RedirectToLocal( returnUrl );
                 } else {
@@ -350,6 +373,7 @@ namespace Portal.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session.Abandon();
             return RedirectToAction( "Index", "Home" );
         }
 

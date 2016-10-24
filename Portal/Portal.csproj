@@ -208,6 +208,7 @@
     <Content Include="Content\BlogStyles.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\checkboxes.css" />
     <Content Include="Content\CourseStyles.css" />
     <Content Include="Content\Icons.css" />
     <Content Include="Content\LoginStyles.css" />
