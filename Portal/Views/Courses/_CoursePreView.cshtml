@@ -19,14 +19,43 @@
                 </div>
             }
         </div>
-        @if( Model.Blogs.Count != 0 ) {
-            <div class="course-blogs">
-                Блоги:
-                @foreach( Blog blog in @Model.Blogs ) {
-                    @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+        <div class="course-blogs">
+            @if( Model.Blogs.Count != 0 ) {
+                <div>
+                    Блоги:
+                    @foreach( Blog blog in @Model.Blogs ) {
+                        @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+                    }
+                </div>
+            }
+        </div>
+        <div class="course-programm">
+            <div class="course-grade">
+                @if( Model.Grade != null ) {
+                    <div>
+                        @Model.Grade курс
+                    </div>
                 }
             </div>
-        }
+            <div class="course-basepart">
+                @if( @Model.BasePart == "KL" ) {
+                    <div>
+                        КЛ
+                    </div>
+                }
+                @if( @Model.BasePart == "RIOT" ) {
+                    <div>
+                        РИОТ
+                    </div>
+                }
+                @if( @Model.BasePart == null ) {
+                    <div>
+                        КЛ и РИОТ
+                    </div>
+                }
+            </div>
+        </div>
+
         <div class="course-description">
             @if( Model.Description != null ) {
                 <p>@Model.Description.Substring( 0, ( Model.Description.Length > 500 ) ? 500 : Model.Description.Length )...</p>

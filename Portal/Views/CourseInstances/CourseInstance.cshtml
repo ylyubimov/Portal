@@ -23,15 +23,43 @@
                     </div>
                 }
             </div>
-            <div class="course-description">
+            <div class="course-blogs">
                 @if( Model.BaseCourse.Blogs.Count != 0 ) {
-                    <div class="course-blogs">
+                    <div>
                         Блоги:
-                        @foreach( Blog blog in Model.BaseCourse.Blogs ) {
+                        @foreach( Blog blog in @Model.BaseCourse.Blogs ) {
                             @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
                         }
                     </div>
                 }
+            </div>
+            <div class="course-programm">
+                <div class="course-grade">
+                    @if( Model.BaseCourse.Grade != null ) {
+                        <div>
+                            @Model.BaseCourse.Grade курс
+                        </div>
+                    }
+                </div>
+                <div class="course-basepart">
+                    @if( @Model.BaseCourse.BasePart == "KL" ) {
+                        <div>
+                            КЛ
+                        </div>
+                    }
+                    @if( @Model.BaseCourse.BasePart == "RIOT" ) {
+                        <div>
+                            РИОТ
+                        </div>
+                    }
+                    @if( @Model.BaseCourse.BasePart == null ) {
+                        <div>
+                            КЛ и РИОТ
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="course-description">
                 @Model.AdditionalDescription
             </div>
 
