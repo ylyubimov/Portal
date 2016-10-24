@@ -53,6 +53,10 @@ namespace Portal.Models
             //modelBuilder.
 
             modelBuilder.Entity<Course>()
+            .HasMany( c => c.CourseInstances )
+            .WithRequired( c => c.BaseCourse );
+
+            modelBuilder.Entity<CourseInstance>()
             .HasMany( c => c.Students )
             .WithMany( p => p.Subscribed_Courses )
             .Map( m => {
@@ -63,6 +67,7 @@ namespace Portal.Models
                 m.MapLeftKey( "StudentId" );
                 m.MapRightKey( "CourseId" );
             } );
+
             modelBuilder.Entity<Course>()
             .HasMany( c => c.Teachers )
             .WithMany( p => p.Taught_Courses )
@@ -102,6 +107,7 @@ namespace Portal.Models
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Course> Course { get; set; }
+        public DbSet<CourseInstance> CourseInstance { get; set; }
         public DbSet<Program> Program { get; set; }
         public DbSet<Group> Group { get; set; }
         public DbSet<Faculty> Faculty { get; set; }

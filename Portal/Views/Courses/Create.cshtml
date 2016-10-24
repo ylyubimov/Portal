@@ -27,17 +27,17 @@
             @Html.EditorFor( m => m.Number_of_Hours )
             @Html.ValidationMessageFor( m => m.Number_of_Hours )
 
-            <h4>Место проведения</h4>
+            @*<h4>Место проведения</h4>
             @Html.EditorFor( m => m.Place )
-            @Html.ValidationMessageFor( m => m.Place )
+            @Html.ValidationMessageFor( m => m.Place )*@
 
             <h4>Тип отчетности</h4>
             @Html.EditorFor( m => m.Report_Type );
             @Html.ValidationMessageFor( m => m.Report_Type )
 
-            <h4>Дата зачета/экзамена </h4>
+            @*<h4>Дата зачета/экзамена </h4>
             @Html.EditorFor( m => m.Report_Date );
-            @Html.ValidationMessageFor( m => m.Report_Date )
+            @Html.ValidationMessageFor( m => m.Report_Date )*@
             @Html.HiddenFor( m => m.ID )
             <div>
                 <h4>Выберите учителей</h4>
@@ -68,7 +68,7 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+            @*<div>
                 <h4>Выберите студентов</h4>
                 <table class="table">
                     <tbody>
@@ -96,7 +96,7 @@
                         }
                     </tbody>
                 </table>
-            </div>
+            </div>*@
             <div>
                 <h4>Выберите программы</h4>
                 <table class="table">

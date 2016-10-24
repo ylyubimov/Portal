@@ -35,7 +35,7 @@ namespace Portal.Models
         public virtual Faculty Faculty { get; set; }
         public virtual Group Group { get; set; }
         public virtual Base_Part Base_Part { get; set; }
-        public virtual ICollection<Course> Subscribed_Courses { get; set; }
+        public virtual ICollection<CourseInstance> Subscribed_Courses { get; set; }
         public virtual ICollection<Program> Subscribed_Programs { get; set; }
         //
 

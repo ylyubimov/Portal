@@ -161,11 +161,20 @@ namespace Portal.Models
             // Добавление курсов
             List<Course> courses = new List<Course>
             {
-                db.Course.Add(new Course { Name = "PPS", Students = NewStudents, Teachers = NewTeachers, Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48, Grade = 4, BasePart = "KL", Lessons = lessons }),
-                db.Course.Add(new Course { Name = "Funkan",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 5, BasePart = "RIOT" }),
-                db.Course.Add(new Course { Name = ".Net", Students = NewStudents, Teachers = NewTeachers, Blogs = new List<Blog> {}, Description = "Самый лучший курс на свете", Number_of_Classes = 10, Number_of_Hours = 40, Grade = 6 }),
-                db.Course.Add(new Course { Name = "TPS",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "Тестирование - очень важная часть разработки", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 3 }),
-                db.Course.Add(new Course { Name = "Physics",  Students = NewStudents, Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "^_^", Number_of_Hours = 4, Number_of_Classes = 6 })
+                db.Course.Add(new Course { Name = "PPS", /*Students = NewStudents,*/ Teachers = NewTeachers, Blogs = new List<Blog> { b1 }, Description = "В данном курсе даются основы проектирования систем по принципу ООП", Number_of_Classes = 12, Number_of_Hours = 48, Grade = 4, BasePart = "KL", /*Lessons = lessons*/ }),
+                db.Course.Add(new Course { Name = "Funkan",  /*Students = NewStudents,*/ Teachers =NewTeachers, Blogs = new List<Blog> { b2 }, Description = "Данных курс расширяет понятия используемые в матанализе, тем самым усиливая математический аппарат", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 5, BasePart = "RIOT" }),
+                db.Course.Add(new Course { Name = ".Net", /*Students = NewStudents,*/ Teachers = NewTeachers, Blogs = new List<Blog> {}, Description = "Самый лучший курс на свете", Number_of_Classes = 10, Number_of_Hours = 40, Grade = 6 }),
+                db.Course.Add(new Course { Name = "TPS",  /*Students = NewStudents,*/ Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "Тестирование - очень важная часть разработки", Number_of_Hours = 64, Number_of_Classes = 16, Grade = 3 }),
+                db.Course.Add(new Course { Name = "Physics", /* Students = NewStudents,*/ Teachers =NewTeachers, Blogs = new List<Blog> {}, Description = "^_^", Number_of_Hours = 4, Number_of_Classes = 6 })
+            };
+
+            db.SaveChanges();
+
+            // Создание экземпляров курсов
+            List<CourseInstance> ppsCourses = new List<CourseInstance>
+            {
+                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses.ToArray()[0], Lessons = lessons, Place = "7-01", Year = 2016, AdditionalDescription = "курс 2016 года", Report_Date = new DateTime(2016, 12, 5), Students = NewStudents } ),
+                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses.ToArray()[0], Place = "7-01", Year = 2015, Report_Date = new DateTime(2015, 12, 10), Students = NewStudents })
             };
             db.SaveChanges();
 
