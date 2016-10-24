@@ -79,6 +79,10 @@ namespace Portal.Models
                 m.MapLeftKey( "TeacherId" );
                 m.MapRightKey( "CourseId" );
             } );
+
+            modelBuilder.Entity<Course>()
+            .HasMany( c => c.Blogs );
+
             modelBuilder.Entity<Program>()
             .HasMany( c => c.Students )
             .WithMany( p => p.Subscribed_Programs )

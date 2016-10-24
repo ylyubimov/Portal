@@ -194,7 +194,6 @@ namespace Portal.Controllers
         [Authorize( Roles = "editor, admin" )]
         public ActionResult Edit( int id )
         {
-
             Course course = db.Course.Where( crse => crse.ID == id ).FirstOrDefault();
             CourseCreateEdit c = new Models.CourseCreateEdit();
             c.ID = course.ID;
@@ -239,7 +238,7 @@ namespace Portal.Controllers
                     c.Chosen_Teachers[i] = false;
                 }
             }
-            for( int i = 0; i < course.Programs.Count; i++ ) {
+            for( int i = 0; i < programs.Count; i++ ) {
                 if( course.Programs != null ) {
                     if( course.Programs.Where( t => t.ID == c.Programs[i].ID ).FirstOrDefault() != null ) {
                         c.Chosen_Programs[i] = true;
@@ -250,7 +249,7 @@ namespace Portal.Controllers
                     c.Chosen_Programs[i] = false;
                 }
             }
-            for( int i = 0; i < course.Blogs.Count; i++ ) {
+            for( int i = 0; i < blogs.Count; i++ ) {
                 if( course.Blogs != null ) {
                     if( course.Blogs.Where( t => t.ID == c.Blogs[i].ID ).FirstOrDefault() != null ) {
                         c.Chosen_Blogs[i] = true;
@@ -292,7 +291,7 @@ namespace Portal.Controllers
             }
             for( int i = 0; i < newCourse.Chosen_Blogs.Count(); i++ ) {
                 if( newCourse.Chosen_Blogs[i] ) {
-                    int id = newCourse.Programs[i].ID;
+                    int id = newCourse.Blogs[i].ID;
                     Blog blog = db.Blog.Where( p => p.ID == id ).FirstOrDefault();
                     blogsList.Add( blog );
                 }
@@ -311,6 +310,7 @@ namespace Portal.Controllers
             course.Report_Type = newCourse.Report_Type;
             course.Teachers.Clear();
             course.Programs.Clear();
+            course.Blogs.Clear();
             course.Teachers = teachersList;
             course.Programs = programList;
             course.Blogs = blogsList;

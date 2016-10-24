@@ -20,7 +20,7 @@
             }
         </div>
         <div class="course-blogs">
-            @if( Model.Blogs.Count != 0 ) {
+            @if( @Model.Blogs.Count != 0 ) {
                 <div>
                     Блоги:
                     @foreach( Blog blog in @Model.Blogs ) {
