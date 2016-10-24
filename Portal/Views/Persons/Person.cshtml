@@ -44,9 +44,9 @@
                 }
             } else {
                 <h4>Посещаемые курсы</h4>
-                foreach( Course course in Model.Subscribed_Courses ) {
+                foreach( CourseInstance courseInstance in Model.Subscribed_Courses ) {
                     <div class="person-course">
-                        @Html.ActionLink( course.Name, "course", "courses", new { @id = course.ID }, null )
+                        @Html.ActionLink( courseInstance.BaseCourse.Name + " " +  courseInstance.Year, "courseInstance", "courseInstances", new { @id = courseInstance.ID }, null )
                     </div>
                 }
             }

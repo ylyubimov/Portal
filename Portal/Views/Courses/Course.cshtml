@@ -23,12 +23,14 @@
                 }
             </div>
             <div class="course-description">
-                <div class="course-blogs">
-                    Блоги:
-                    @foreach( Blog blog in Model.Blogs ) {
-                        @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
-                    }
-                </div>
+                @if( Model.Blogs.Count != 0 ) {
+                    <div class="course-blogs">
+                        Блоги:
+                        @foreach( Blog blog in Model.Blogs ) {
+                            @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+                        }
+                    </div>
+                }
                 @Model.Description
             </div>
             <h4>Учителя:</h4>
@@ -71,7 +73,7 @@
 </div>
 
 @if( User.IsInRole( "admin" ) || Model.Teachers.Where( t => t.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
-    using( Html.BeginForm(  Model.ID.ToString() + "/Create", "CourseInstances", FormMethod.Get ) ) {
+    using( Html.BeginForm( Model.ID.ToString() + "/Create", "CourseInstances", FormMethod.Get ) ) {
         <button type="submit" class="add-course-button" value="+">
             <img src="~/images/icons/addButton.png" />
         </button>

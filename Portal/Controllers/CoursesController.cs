@@ -24,7 +24,7 @@ namespace Portal.Controllers
             if( grade != null && basePart != null ) {
                 var prog = db.Program.Where( p => p.Name == grade.ToString() + " курс" ).FirstOrDefault();
                 if( prog != null )
-                    courses = prog.Courses.Where( p => p.BasePart == basePart ).ToArray();
+                    courses = prog.Courses.Where( p => p.BasePart == basePart || p.BasePart == null ).ToArray();
                 else
                     courses = db.Course.ToArray();
             } else {
@@ -37,7 +37,7 @@ namespace Portal.Controllers
                         courses = db.Course.ToArray();
                 } else {
                     if( basePart != null ) {
-                        courses = db.Course.Where( p => p.BasePart == basePart ).ToArray();
+                        courses = db.Course.Where( p => p.BasePart == basePart || p.BasePart == null ).ToArray();
                     } else {
                         courses = db.Course.ToArray();
                     }
