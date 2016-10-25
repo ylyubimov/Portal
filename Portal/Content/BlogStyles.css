@@ -230,6 +230,13 @@
     width: 100%;
     border: none;
 }
+.errorArticleMsg {
+    color:red;
+}
+
+.invalidElem {
+    border: medium solid red
+}
 
 .delete-comment-button {
     display: block;
