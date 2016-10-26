@@ -22,13 +22,43 @@
                     </div>
                 }
             </div>
-            <div class="course-description">
-                <div class="course-blogs">
-                    Блоги:
-                    @foreach( Blog blog in Model.Blogs ) {
-                        @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+            <div class="course-blogs">
+                @if( Model.Blogs.Count != 0 ) {
+                    <div>
+                        Блоги:
+                        @foreach( Blog blog in @Model.Blogs ) {
+                            @Html.ActionLink( blog.Name + " ", "blog", "blogs", null, null )
+                        }
+                    </div>
+                }
+            </div>
+            <div class="course-programm">
+                <div class="course-grade">
+                    @if( Model.Grade != null ) {
+                        <div>
+                            @Model.Grade курс
+                        </div>
                     }
                 </div>
+                <div class="course-basepart">
+                    @if( @Model.BasePart == "KL" ) {
+                        <div>
+                            КЛ
+                        </div>
+                    }
+                    @if( @Model.BasePart == "RIOT" ) {
+                        <div>
+                            РИОТ
+                        </div>
+                    }
+                    @if( @Model.BasePart == null ) {
+                        <div>
+                            КЛ и РИОТ
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="course-description">
                 @Model.Description
             </div>
             <h4>Учителя:</h4>
@@ -71,7 +101,7 @@
 </div>
 
 @if( User.IsInRole( "admin" ) || Model.Teachers.Where( t => t.UserName == User.Identity.Name ).FirstOrDefault() != null ) {
-    using( Html.BeginForm(  Model.ID.ToString() + "/Create", "CourseInstances", FormMethod.Get ) ) {
+    using( Html.BeginForm( Model.ID.ToString() + "/Create", "CourseInstances", FormMethod.Get ) ) {
         <button type="submit" class="add-course-button" value="+">
             <img src="~/images/icons/addButton.png" />
         </button>

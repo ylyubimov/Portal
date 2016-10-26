@@ -97,8 +97,21 @@
 }
 
 .course-blogs {
+    display: inline-block;
     padding: 5px 0 15px;
     font-size: 18px;
+}
+
+.course-programm {
+    display: inline-block;
+    text-align : right;
+    float : right;
+}
+
+.course-grade{
+}
+
+.course-basepart {
 }
 
 .hide {
