@@ -1,4 +1,5 @@
-﻿@model Portal.Models.ArticleWithPosition
+﻿@using Portal.Models
+@model Portal.Models.ArticleWithPosition
 
 <div class="container article-wrap">
     <div class="article-preview">
@@ -65,13 +66,15 @@
             </a>
         @if (Model.Position == 0) {
         <p>
-            <a>@Html.ActionLink( Model.ArticleInfo.Blogs.First().Name, "Blog", "Blogs", new { @id = Model.ArticleInfo.Blogs.First().ID }, new { @class = "" } )</a>
+            @foreach( Blog blog in @Model.ArticleInfo.Blogs ) {
+                @Html.ActionLink( blog.Name, "Blog", "Blogs", new { @id = blog.ID }, new { @class = "" } )
+                <br/>
+            }
         </p> 
         }
            @if( @Model.ArticleInfo.Text != null ) {
                 if( Model.ArticleInfo.Text.Length > 500 ) {
-                   
-                    <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
+                    <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 00 ) ? 500 : Model.ArticleInfo.Text.Length )...</p>
                 } else {
                     <p style="word-wrap: break-word;">@Model.ArticleInfo.Text.Substring( 0, ( Model.ArticleInfo.Text.Length > 500 ) ? 500 : Model.ArticleInfo.Text.Length )</p>
                 }
