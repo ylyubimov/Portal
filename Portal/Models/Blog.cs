@@ -13,6 +13,7 @@ namespace Portal.Models
         public int? Likes_Count { get; set; }
         public int? Dislikes_Count { get; set; }
         [Required( ErrorMessage = "Заполните название блога" )]
+        [StringLength( 127, MinimumLength = 1, ErrorMessage = "Длина названия не должна превышать 127 символов" )]
         public string Name { get; set; }
         public int? Rating { get; set; }
         [Required]

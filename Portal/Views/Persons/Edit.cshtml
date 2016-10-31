@@ -3,43 +3,91 @@
 @{
     ViewBag.Title = Model.First_Name + " " + Model.Second_Name + " edit";
 }
-@using( Html.BeginForm( "edit", "persons", new { @id = Model.Id }, FormMethod.Post ) ) {
-    <div class="container person-wrap">
+
+<div class="container person-wrap">
+@using( Html.BeginForm( "edit", "persons", new { @id = Model.Id }, FormMethod.Post, new { @style = "display:inline" } ) ) {
         <div class="person">
-            <div class="person-general-info">
-                <div class="person-general-info-image">
+
+        <div class="person-general-info">
+            <div class="person-general-info-image" style="cursor:pointer" >
+                    
                     @if( Model.Picture.URL == null ) {
                         <img src="/images/genel.jpg" />
                     } else {
                         <img src=@Model.Picture.URL />
                     }
+                        
+                    <input type="file" name="upload" id=@Model.Id />
+                   
+            </div> 
+        
+            <div class="person-info-text">
+                <div class="person-edit-field">
+                    @Html.EditorFor( m => m.First_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Имя" } } )
                 </div>
-                <div class="person-info-text">
-                    <div class="person-edit-field">
-                        @Html.EditorFor( m => m.First_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Имя" } } )
-                    </div>
-                    <div class="person-edit-field">
-                        @Html.EditorFor( m => m.Middle_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Отчество" } } )
-                    </div>
-                    <div class="person-edit-field">
-                        @Html.EditorFor( m => m.Second_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Фамилия" } } )
-                    </div>
-                    @if( Model.Person_Type == "Teacher" ) {
-                        <div class="person-type">Преподаватель</div>
-                    } else {
-                        <div class="person-type">Студент</div>
-                    }
-                    <div class="person-contacts">
-                        @Html.EditorFor( m => m.PhoneNumber, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Номер телефона" } } )<br />
-                        @Html.EditorFor( m => m.Email, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Электронная почта" } } )
-                    </div>
+                <div class="person-edit-field">
+                    @Html.EditorFor( m => m.Middle_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Отчество" } } )
+                </div>
+                <div class="person-edit-field">
+                    @Html.EditorFor( m => m.Second_Name, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Фамилия" } } )
+                </div>
+                @if( Model.Person_Type == "Teacher" ) {
+                    <div class="person-type">Преподаватель</div>
+                } else {
+                    <div class="person-type">Студент</div>
+                }
+                <div class="person-contacts">
+                    @Html.EditorFor( m => m.PhoneNumber, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Номер телефона" } } )<br />
+                    @Html.EditorFor( m => m.Email, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "Электронная почта" } } )
                 </div>
             </div>
-            <div>@Html.EditorFor( m => m.Picture.URL, new { htmlAttributes = new { @class = "person-edit-name-input", @placeholder = "URL фотографии" } } )</div>
-        </div>
-        <div class="person-edit-buttons">
-            <input class="btn person-edit-button" type="submit" value="Сохранить" />
-            @Html.ActionLink( "Отменить", "person", "persons", new { @id = Model.Id }, new { @class = "btn person-edit-cancel-button" } )
+
         </div>
     </div>
+    }
+    <div class="person-edit-buttons">
+        <input class="btn person-edit-button" type="submit" value="Сохранить" />
+        @Html.ActionLink( "Отменить", "person", "persons", new { @id = Model.Id }, new { @class = "btn person-edit-cancel-button" } )
+    </div>
+</div>
+@section scripts{
+<script type="text/javascript">
+    //Переводим на нажатие input
+    $('.person-general-info-image img').on('click', function () {
+        $('input').click();
+    });
+
+
+    $("input").on('change', function Send() {
+        var files = this.files;
+        if (files.length == 1) {
+            if (window.FormData !== undefined) {
+                var imgData = new FormData();
+                imgData.append("file", files[0]);
+
+                imgData.append("success", "Файл успешно загружен!");
+                imgData.append("id", this.id);
+                //Ajax запрос
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("upload","persons")',
+                    contentType: false,
+                    processData: false,
+                    data: imgData, //передаем файл на сервер
+                    success: function (data) {
+                        $('.person-general-info-image img').attr('src', '/personsImages/' + data[0]);
+                        $('.login-user-img-link-image img').attr('src', '/personsImages/' + data[0]);
+                        $('.person-image-url input').attr('value', '/personsImages/' + data[0])
+                    },
+                    error: function (xhr, status, p3) {
+                        alert(xhr.responseText);
+                    }
+                });
+            } else {
+                alert("Ваш браузер не поддерживает Html5!");
+            }
+        }
+    })
+</script>
+
 }

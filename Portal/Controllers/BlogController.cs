@@ -48,7 +48,7 @@ namespace Portal.Controllers
         [Authorize( Roles = "editor, admin" )]
         public ActionResult Create()
         {
-            return View( new Blog() { Name = "Name" } );
+            return View( new Blog() { Name = "" } );
         }
 
         [HttpPost]

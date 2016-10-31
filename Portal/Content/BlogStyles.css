@@ -81,6 +81,13 @@
     margin-top: 15px;
 }
 
+.article-title {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: inline-;
+}
+
 .date {
     color: #9B9B9B;
     display: inline-block;
@@ -223,6 +230,13 @@
     width: 100%;
     border: none;
 }
+.errorArticleMsg {
+    color:red;
+}
+
+textarea .error {
+    border: medium solid red
+}
 
 .delete-comment-button {
     display: block;
@@ -283,8 +297,8 @@
 
 .add-article-button {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    top: 25%;
+    right: 10%;
     border: none;
     font-size: 20px;
     background-color: transparent;

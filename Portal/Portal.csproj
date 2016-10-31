@@ -192,6 +192,7 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\CourseInstance.cs" />
     <Compile Include="Models\CourseInstanceCreateEdit.cs" />
+    <Compile Include="Models\ArticleWithPosition.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\CourseCreateEdit.cs" />
@@ -245,6 +246,7 @@
     <Content Include="fonts\SF-UI-Text-SemiboldItalic.otf" />
     <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\imageUpload.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -256,6 +258,7 @@
     <Content Include="Scripts\ratingClick.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\validate.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Persons\1.jpg" />
     <Content Include="Web.config">

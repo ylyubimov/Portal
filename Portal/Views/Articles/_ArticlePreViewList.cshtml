@@ -1,11 +1,11 @@
-﻿@if( Model.Length != 0 ) {
-    foreach( var i in Model ) {
-        @Html.Partial( "../Articles/_ArticlePreView", ( Portal.Models.Article )i )
+﻿@if( Model.ArticleInfo.Length != 0 ) {
+    foreach( var i in Model.ArticleInfo ) {
+        @Html.Partial( "../Articles/_ArticlePreView", new Portal.Models.ArticleWithPosition() { ArticleInfo = ( Portal.Models.Article )i, Position = Model.Position } )
     }
 } else {
-    <div class="container search-error-wrap">
-        <div class="search-error">
-            К сожалению, статей нет
-        </div>
+<div class="container search-error-wrap">
+    <div class="search-error">
+        К сожалению, статей нет
     </div>
+</div>
 }

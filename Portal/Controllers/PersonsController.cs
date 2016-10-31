@@ -124,5 +124,29 @@ namespace Portal.Controllers
             db.SaveChanges();
             return RedirectToAction( "person", new { @id = id } );
         }
+
+        [HttpPost]
+        [Route( "upload" )]
+        public JsonResult Upload()
+        {
+            string numberImg = Request.Form[0];
+            string id = Request.Form[1];
+            string imgPath = null;
+            foreach( string file in Request.Files ) {
+                var upload = Request.Files[file];
+                if( upload != null ) {
+                    imgPath = System.IO.Path.GetFileName( upload.FileName );
+                    upload.SaveAs( Server.MapPath( "~/personsImages/" + imgPath ) );
+                    Person person = db.Users.Where( p => p.Id == id ).FirstOrDefault();
+                    person.Picture = new Picture {
+                        URL = "/personsImages/" + imgPath,
+                        Name = person.UserName + "picture"
+                    };
+                }
+            }
+            db.SaveChanges();
+            string[] imageData = { imgPath, numberImg };
+            return Json( imageData );
+        }
     }
 }
