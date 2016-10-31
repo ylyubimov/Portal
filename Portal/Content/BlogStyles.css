@@ -234,7 +234,7 @@
     color:red;
 }
 
-.invalidElem {
+textarea .error {
     border: medium solid red
 }
 

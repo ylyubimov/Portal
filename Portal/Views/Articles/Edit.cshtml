@@ -16,7 +16,7 @@
             </div>
 
             <form action="~/Articles/@Model.ID/Edit" method="post" id="article">
-                @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input", @name="aricleName", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
+                @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "required h2 add-comment-input", @name="articleName", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "required add-comment-input",@name="articleText", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
                 <span id="symbolsCounter">@Model.Text.Length /4000 symbols</span>
                 <input class="btn add-comment-button" type="submit" value="Редактировать" />
@@ -34,34 +34,6 @@
             $("span[id ='symbolsCounter']").text(number + "/4000 symbols");
            
         });
-    });
-    $(document).ready(function () {
-        $("#article").validate();
-    });
-    $("#article").validate({
-        higlight: function (element, errorClass) {
-            $(element).addClass("invalidElem");
-        },
-        unhiglight: function (element, errorClass) {
-            $(element).removeClass("invalidElem");
-        },
-       
-        errorClass: "errorArticleMsg",
-        rules: {
-            articleText: {  // поле, для которого задается правило
-                required: true, // обязательно для заполнения
-                minlength: 1, // минимальная длина
-                maxlength: 4000 // максимальная длина
-            }
-        },
-
-        messages: {
-            articleText: {
-                required: "Введите текст статьи",
-                minlength: "Тело статьи не может быть пустым",
-                maxlength: "Максимальное число символов - 4000"
-            }
-        }
     });
     </script>
 }

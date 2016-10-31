@@ -16,6 +16,7 @@ namespace Portal.Models
         public int? Dislikes_Count { get; set; }
         [DataType( DataType.MultilineText )]
         [Required( ErrorMessage = "Текст статьи обязателен" )]
+        [StringLength(4000, MinimumLength = 1, ErrorMessage = "Длина статьи не должна превышать 4000 символов")]
         public string Text { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
         [Required]
