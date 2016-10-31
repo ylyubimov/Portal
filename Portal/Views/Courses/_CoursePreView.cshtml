@@ -31,9 +31,13 @@
         </div>
         <div class="course-programm">
             <div class="course-grade">
-                @if( Model.Grade != null ) {
+                @if( Model.Programs != null ) {
                     <div>
-                        @Model.Grade курс
+                        @foreach( Program program in Model.Programs ) {
+                            <div>
+                                @program.Name
+                            </div>
+                        }
                     </div>
                 }
             </div>
