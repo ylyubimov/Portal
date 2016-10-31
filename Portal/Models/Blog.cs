@@ -18,5 +18,6 @@ namespace Portal.Models
         [Required]
         public virtual Person Author { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Course> Included_Courses { get; set; }
     }
 }

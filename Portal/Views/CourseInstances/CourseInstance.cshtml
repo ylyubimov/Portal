@@ -82,7 +82,7 @@
                                 <td style="word-break: break-word;"><a href="@lesson.Links">@lesson.Links</a></td>
                                 @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
                                     <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
-                                        <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
+                                    <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
                                 }
                             </tr>
                         }

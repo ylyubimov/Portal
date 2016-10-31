@@ -17,7 +17,7 @@ namespace Portal.Models
         public string Description { get; set; }
         [Range( 0, 1000, ErrorMessage = "Не может быть отрицательным" )]
         public int? Number_of_Hours { get; set; }
-        [Range( 0, 1000, ErrorMessage = "Не модет быть отрицательным" )]
+        [Range( 0, 1000, ErrorMessage = "Не может быть отрицательным" )]
         public int? Number_of_Classes { get; set; }
         public Person[] Teachers { get; set; }
         public bool[] Chosen_Teachers { get; set; }

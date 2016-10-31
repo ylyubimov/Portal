@@ -81,6 +81,19 @@ namespace Portal.Models
             } );
 
             modelBuilder.Entity<Course>()
+            .HasMany( c => c.Blogs )
+            .WithMany( p => p.Included_Courses )
+            .Map( m => {
+                // Ссылка на промежуточную таблицу
+                m.ToTable( "BlogsCourses" );
+
+                // Настройка внешних ключей промежуточной таблицы
+                m.MapLeftKey( "BlogId" );
+                m.MapRightKey( "CourseId" );
+            } );
+
+
+            modelBuilder.Entity<Course>()
             .HasMany( c => c.Blogs );
 
             modelBuilder.Entity<Program>()
