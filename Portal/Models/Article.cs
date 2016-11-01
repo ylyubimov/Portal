@@ -19,6 +19,7 @@ namespace Portal.Models
         [StringLength(4000, MinimumLength = 1, ErrorMessage = "Длина статьи не должна превышать 4000 символов")]
         public string Text { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
         [Required]
         public virtual Person Author { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

@@ -29,6 +29,19 @@ namespace Portal.Models
         public virtual ICollection<Article> Articles { get; set; }
 
     }
+
+    public class Document
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        [Required]
+        public string URL { get; set; }
+        public DateTime? Date_Of_Uploading { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+
+    }
     public class Video
     {
         [Key]
@@ -40,7 +53,7 @@ namespace Portal.Models
         public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
     }
-    public class Document
+  /*  public class Document
     {
         [Key]
         public int ID { get; set; }
@@ -50,5 +63,5 @@ namespace Portal.Models
         public DateTime? Date_Of_Uploading { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
-    }
+    }*/
 }

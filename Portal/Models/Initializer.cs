@@ -54,6 +54,14 @@ namespace Portal.Models
             db.Picture.Add( def );
             db.SaveChanges();
 
+            Document doc = new Document { Name = "useful", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg" };
+
+            db.Document.Add( doc );
+            db.SaveChanges();
+
+            List<Document> docs = new List<Document>();
+            docs.Add( doc );
+
             // добавление ролей
             var roleManager = new RoleManager<IdentityRole>( new RoleStore<IdentityRole>( db ) );
             var role1 = new IdentityRole { Name = "admin" };
@@ -87,7 +95,7 @@ namespace Portal.Models
             db.SaveChanges();
 
 
-            Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4 };
+            Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4, Uploaded_Documents =docs };
 
             user.Create( t, "qwerty" );
             db.SaveChanges();

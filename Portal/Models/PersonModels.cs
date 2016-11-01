@@ -24,6 +24,7 @@ namespace Portal.Models
         public virtual Picture Picture { get; set; }
         public virtual ICollection<Article> Written_Articles { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Document> Uploaded_Documents { get; set; }
 
         // Кафедра есть и у студенета и у учителя
         public virtual Base_Company Base_Company { get; set; }

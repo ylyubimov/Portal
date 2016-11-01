@@ -50,7 +50,16 @@ namespace Portal.Models
             .HasMany( c => c.Written_Articles )
             .WithRequired( c => c.Author );
 
-            //modelBuilder.
+            modelBuilder.Entity<Document>()
+                .HasMany( c => c.Articles )
+                .WithMany( p => p.Documents )
+                .Map( m => {
+                    m.ToTable( "DocumentsArticles" );
+
+                    m.MapLeftKey( "ArticleId" );
+                    m.MapRightKey( "DocumentId" );
+                } );
+
 
             modelBuilder.Entity<Course>()
             .HasMany( c => c.CourseInstances )
@@ -107,6 +116,7 @@ namespace Portal.Models
             base.OnModelCreating( modelBuilder );
         }
         public DbSet<Picture> Picture { get; set; }
+        public DbSet<Document> Document { get; set; }
         public DbSet<Article> Article { get; set; }
         public DbSet<Blog> Blog { get; set; }
         public DbSet<Comment> Comment { get; set; }
