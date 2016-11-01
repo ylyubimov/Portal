@@ -351,3 +351,15 @@ textarea .error {
     width: 50%;
     border: none;
 }
+
+.symbolsCounter{
+    text-align:right;
+}
+
+.documents-upload p:hover {
+    text-decoration:underline;
+}
+
+.documents-upload input {
+    display:none;
+}

@@ -140,6 +140,7 @@
     border-top: solid 1px #9B9B9B;
 }
 
+
 .person-courses a {
     color: #9B9B9B;
     text-decoration: none;
@@ -148,6 +149,10 @@
 
 .person-course {
     padding: 5px 0;
+}
+
+.person-files {
+    border-top: solid 1px #9B9B9B;
 }
 
 .person-preview {

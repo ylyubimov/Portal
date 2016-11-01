@@ -18,7 +18,11 @@
             <form action="~/Articles/@Model.ID/Edit" method="post" id="article">
                 @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "required h2 add-comment-input", @name="articleName", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "required add-comment-input",@name="articleText", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
-                <span id="symbolsCounter">@Model.Text.Length /4000 symbols</span>
+                <div class="symbolsCounter">@Model.Text.Length /4000 symbols</div>
+                <div class="documents-upload" style="cursor:pointer">
+                    <p>Прикрепить файлы</p>
+                    <input type="file" name="upload-doc" id=@Model.ID />
+                </div> 
                 <input class="btn add-comment-button" type="submit" value="Редактировать" />
             </form>
         </div>
@@ -31,9 +35,16 @@
     $(function () {
         $("textarea[id='Text']").keydown(function count() {
             number = $("textarea[id='Text']").val().length;
-            $("span[id ='symbolsCounter']").text(number + "/4000 symbols");
+            $("div[class ='symbolsCounter']").text(number + "/4000 symbols");
            
         });
+    });
+</script>
+
+    <script type="text/javascript">
+    //Переводим на нажатие input
+        $('.documents-upload p').on('click', function () {
+            $('input[name="upload-doc"]').click();
     });
     </script>
 }
