@@ -54,13 +54,7 @@ namespace Portal.Models
             db.Picture.Add( def );
             db.SaveChanges();
 
-            Document doc = new Document { Name = "useful", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg" };
-
-            db.Document.Add( doc );
-            db.SaveChanges();
-
-            List<Document> docs = new List<Document>();
-            docs.Add( doc );
+       
 
             // добавление ролей
             var roleManager = new RoleManager<IdentityRole>( new RoleStore<IdentityRole>( db ) );
@@ -95,7 +89,7 @@ namespace Portal.Models
             db.SaveChanges();
 
 
-            Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4, Uploaded_Documents =docs };
+            Person t = new Person { Person_Type = "Admin", Exists = true, UserName = "Admin@admin.ru", Email = "Admin@admin.ru", First_Name = "Goal", Second_Name = "Freddy", Middle_Name = "Mercury", Picture = p4 };
 
             user.Create( t, "qwerty" );
             db.SaveChanges();
@@ -122,6 +116,13 @@ namespace Portal.Models
                     authors.Add( p );
             }
 
+            Document doc = new Document { Name = "useful", URL = "http://s019.radikal.ru/i626/1501/ad/9c9a041ff700.jpg", Person = db.Users.FirstOrDefault() };
+
+           db.Document.Add( doc );
+           db.SaveChanges();
+
+           List<Document> docs = new List<Document>();
+           docs.Add( db.Document.FirstOrDefault() );
             // Добавление статей
             List<Article> articles = new List<Article>
             {
@@ -130,7 +131,7 @@ namespace Portal.Models
                     "китах или слонах, прошло много лет. Человек за это время успел слетать в космос, а типографии – напечатать несколько" +
                     "миллионов экземпляров карт мира для изучения географии. Но гораздо большим спросом у школьников все же пользуется глобус." +
                     "Он и выглядит эффектнее, и материки на нем смотрятся более натурально. Самым оригинальным все же считается изделие от Andy " +
-                    "Yoder из разноцветных спичек.", Likes_Count = 0, Dislikes_Count = 0, Author = authors.ToArray()[1], Date_of_Creation = DateTime.Parse("2015-09-10")  },
+                    "Yoder из разноцветных спичек.", Likes_Count = 0, Dislikes_Count = 0, Author = authors.ToArray()[1], Date_of_Creation = DateTime.Parse("2015-09-10"), Documents = docs  },
                 new Article { Name = "Книга", Text = "один из видов печатной продукции: непериодическое издание, состоящее из сброшюрованных или отдельных бумажных листов (страниц) или тетрадей, на которых нанесена типографским или рукописным способом текстовая и графическая (иллюстрации) информация, имеющая объём более сорока восьми страниц и, как правило, твёрдый переплёт." +
                     "Также книгой может называться литературное или научное произведение, предназначенное для печати в виде отдельного сброшюрованного издания[2]." +
                     "Современные детские книги-картинки могут иметь нетрадиционную форму и быть представлены в виде отдельных листов или карточек с иллюстрациями и заданиями. Листы или карточки должны быть собраны вместе с помощью внешнего элемента (коробки, кольца, папки, суперобложки, зажима). При этом листы и карточки могут быть как скреплены между собой так и идти отдельно[3].",

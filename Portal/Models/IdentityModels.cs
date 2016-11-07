@@ -50,15 +50,19 @@ namespace Portal.Models
             .HasMany( c => c.Written_Articles )
             .WithRequired( c => c.Author );
 
-            modelBuilder.Entity<Document>()
-                .HasMany( c => c.Articles )
-                .WithMany( p => p.Documents )
+            modelBuilder.Entity<Article>()
+                .HasMany( c => c.Documents )
+                .WithMany( p => p.Articles )
                 .Map( m => {
-                    m.ToTable( "DocumentsArticles" );
+                    m.ToTable( "ArticlesDocuments" );
 
                     m.MapLeftKey( "ArticleId" );
                     m.MapRightKey( "DocumentId" );
                 } );
+
+            /*modelBuilder.Entity<Person>()
+                .HasMany( c => c.Uploaded_Documents )
+                .WithRequired( c => c.Person );*/
 
 
             modelBuilder.Entity<Course>()

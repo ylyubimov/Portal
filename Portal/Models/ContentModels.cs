@@ -38,6 +38,7 @@ namespace Portal.Models
         [Required]
         public string URL { get; set; }
         public DateTime? Date_Of_Uploading { get; set; }
+        
         public virtual Person Person { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
 

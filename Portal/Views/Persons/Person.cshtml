@@ -51,13 +51,15 @@
                 }
             }
         </div>
+        @if( User.Identity.Name == Model.UserName || User.IsInRole( "admin" ) ) {
         <div class="person-files">
             <h4>Загруженные файлы</h4>
-            @foreach (Document doc in Model.Uploaded_Documents) {
+            @foreach( Document doc in Model.Uploaded_Documents ) {
                 <div class="person-document">
-                   
+                   @doc.Name
                 </div>
             }
         </div>
+        }
     </div>
 </div>
