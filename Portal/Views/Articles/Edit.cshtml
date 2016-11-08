@@ -19,10 +19,20 @@
                 @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "required h2 add-comment-input", @name="articleName", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "required add-comment-input",@name="articleText", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
                 <div class="symbolsCounter">@Model.Text.Length /4000 symbols</div>
-                <div class="documents-upload" style="cursor:pointer">
+                <div class="documents" id="uploadedDocs">
+                        @foreach( Document doc in @Model.Documents ) {
+                            <div class="document">
+                                <a href="@doc.URL">@doc.Name</a>
+                                @Html.ActionLink( "x", "DeleteDocument", "articles", new { @actionType = "edit", @id = doc.Id, @articleId=Model.ID  }, new { @class = "delete-doc" } )
+                            </div>    
+                        }
+                </div>
+                <div class="documents-upload" id="Docs" style="cursor:pointer">
                     <p>Прикрепить файлы</p>
                     <input type="file" name="upload-doc" id=@Model.ID />
                 </div> 
+            
+
                 <input class="btn add-comment-button" type="submit" value="Редактировать" />
             </form>
         </div>
@@ -42,9 +52,58 @@
 </script>
 
     <script type="text/javascript">
-    //Переводим на нажатие input
+        //Переводим на нажатие input
         $('.documents-upload p').on('click', function () {
             $('input[name="upload-doc"]').click();
-    });
+        });
+
+        $('input[name="upload-doc"]').on('change', function Send() {
+            var files = this.files;
+            if (files.length == 1) {
+                if (window.FormData !== undefined) {
+                    var docData = new FormData();
+                    docData.append("file", files[0]);
+
+                    docData.append("success", "Файл успешно загружен!");
+                    docData.append("id", this.id);
+                    //Ajax запрос
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("upload","articles")',
+                        contentType: false,
+                        processData: false,
+                        data: docData, //передаем файл на сервер
+                        success: function (data) {
+
+
+                            var a = document.createElement("a");
+                            a.setAttribute("href", data[0]);
+                            a.textContent = data[1];
+                            var aDelete = document.createElement("a");
+                            aDelete.setAttribute("href", data[2]);
+                            aDelete.textContent = "x";
+                            aDelete.setAttribute("class", "delete-doc");
+                            var newDoc = document.createElement("div");
+                            newDoc.setAttribute("class", "document");
+                            newDoc.appendChild(a);
+                            newDoc.appendChild(aDelete);
+                            var result = 'Url.Action("EditPallet")';
+                            /*var link ='<%:  Html.ActionLink( "x", "DeleteDocument", "articles", new { actionType = "edit", id =' + data[0] +', articleId = ' + data[1] + ' }, new { class = "delete-doc" } ) %>';
+                            newDoc.appendChild(link);*/
+                           
+                            document.getElementById("uploadedDocs").appendChild(newDoc);
+                           
+
+
+                        },
+                        error: function (xhr, status, p3) {
+                            alert(xhr.responseText);
+                        }
+                    });
+                } else {
+                    alert("Ваш браузер не поддерживает Html5!");
+                }
+            }
+        })
     </script>
 }

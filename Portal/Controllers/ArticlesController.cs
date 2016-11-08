@@ -243,5 +243,59 @@ namespace Portal.Controllers
             };
             return Json( new { dislikesCount = dislikesCount } );
         }
+
+        [HttpPost]
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "Upload" )]
+        public JsonResult Upload()
+        {
+            string numberDoc = Request.Form[0];
+            string id = Request.Form[1];
+            string docPath = null;
+            int? docId = null;
+            string docURL = null;
+            foreach( string file in Request.Files ) {
+                var upload = Request.Files[file];
+                if( upload != null ) {
+                    docPath = System.IO.Path.GetFileName( upload.FileName );
+                    upload.SaveAs( Server.MapPath( "~/documents/" + docPath ) );
+                    Article article = db.Article.Where( p => p.ID.ToString() == id ).FirstOrDefault();
+                    Person articleAuthor = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
+                    Document uploadedDoc = new Document() {
+                        Date_Of_Uploading = DateTime.Now,
+                        Name = docPath,
+                        Person = articleAuthor,
+                        URL = "/documents/" + docPath
+                    };
+                    docURL = uploadedDoc
+                        .URL;
+                    article.Documents.Add(uploadedDoc);
+                }
+            }
+            db.SaveChanges();
+            docId = db.Document.Where( p => p.URL == docURL ).FirstOrDefault().Id;
+            string delete = "/articles/edit/" + id + "/DeleteDocument/" + docId;
+            string[] imageData = { "/documents/" + docPath, docPath, delete };
+            return Json( imageData );
+        }
+
+        [HttpGet]
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "{actionType}/{articleId:int}/DeleteDocument/{id:int}" )]
+        public ActionResult DeleteDocument(string actionType, int id, int articleId)
+        {
+            Article article = db.Article.Where( a => articleId == a.ID ).FirstOrDefault();
+            Document doc = db.Document.Where( d => d.Id == id ).FirstOrDefault();
+            if( doc == null )
+                return View( "error" );
+
+            article.Documents.Remove( doc );
+            //пользователь удалил документ из загруженных
+            if( doc.Person == null ) {
+                db.Document.Remove( doc );
+            }
+            db.SaveChanges();
+            return RedirectToAction( actionType, "articles", new { id = articleId } );
+        }
     }
 }

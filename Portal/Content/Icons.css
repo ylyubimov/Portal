@@ -10,4 +10,10 @@
     height: 20px;
     vertical-align: middle;
 }
+.icon-attached {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin: 5px;
+}
 

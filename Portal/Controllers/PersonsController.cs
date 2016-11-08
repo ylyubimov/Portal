@@ -148,5 +148,6 @@ namespace Portal.Controllers
             string[] imageData = { imgPath, numberImg };
             return Json( imageData );
         }
+
     }
 }

@@ -71,6 +71,17 @@
             </div>
             <h2>@Model.ArticleInfo.Name</h2>
             <p style="white-space:pre-wrap; word-wrap: break-word;">@Model.ArticleInfo.Text</p>
+            <div class="documents">
+                <p>
+                    @foreach( Document doc in @Model.ArticleInfo.Documents ) {
+                        <div class="document">
+                            <img class="icon-attached" src="/images/icons/attached.png"/>
+                            <a href="@doc.URL">@doc.Name</a>
+                        </div>
+                    }
+                </p>
+            </div>
+
         </div>
 
         @foreach( Portal.Models.Comment comment in Model.ArticleInfo.Comments ) {

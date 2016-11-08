@@ -363,3 +363,14 @@ textarea .error {
 .documents-upload input {
     display:none;
 }
+.delete-doc {
+    color:darkgray;
+}
+.delete-doc:hover {
+    color:dimgray;
+    text-decoration:none;
+}
+.delete-doc:focus {
+    color:dimgray;
+    text-decoration:none;
+}

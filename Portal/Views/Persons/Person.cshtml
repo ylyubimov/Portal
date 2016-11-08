@@ -54,9 +54,10 @@
         @if( User.Identity.Name == Model.UserName || User.IsInRole( "admin" ) ) {
         <div class="person-files">
             <h4>Загруженные файлы</h4>
-            @foreach( Document doc in Model.Uploaded_Documents ) {
-                <div class="person-document">
-                   @doc.Name
+            @foreach( Document doc in @Model.Uploaded_Documents ) {
+                <div class="document">
+                    <img class="icon-attached" src="/images/icons/attached.png" />
+                    <a href="@doc.URL">@doc.Name</a>
                 </div>
             }
         </div>

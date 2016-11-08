@@ -60,9 +60,16 @@ namespace Portal.Models
                     m.MapRightKey( "DocumentId" );
                 } );
 
-            /*modelBuilder.Entity<Person>()
-                .HasMany( c => c.Uploaded_Documents )
-                .WithRequired( c => c.Person );*/
+            /* modelBuilder.Entity<Person>()
+                 .HasMany( c => c.Uploaded_Documents )
+                 .WithRequired( c => c.Person )
+                 .Map( m => {
+                     m.ToTable( "PersonsDocuments" );
+                     m.MapKey( "PersonId" );
+                 } );*/
+          /*  modelBuilder.Entity<Person>()
+                            .HasMany( c => c.Uploaded_Documents )
+                            .WithRequired( c => c.Person );*/
 
 
             modelBuilder.Entity<Course>()
