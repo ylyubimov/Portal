@@ -92,10 +92,12 @@ namespace Portal.Controllers
             Person person = db.Users.Where( p => id == p.Id ).FirstOrDefault();
 
             if( person.Person_Type == "Teacher" ) {
+                person.Is_Waiting_Approval = false;
                 person.Person_Type = "Admin";
             } else if( person.Person_Type == "Admin" ) {
                 person.Person_Type = "Student";
             } else {
+                person.Is_Waiting_Approval = false;
                 person.Person_Type = "Teacher";
             }
             db.SaveChanges();
