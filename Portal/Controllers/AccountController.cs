@@ -81,6 +81,11 @@ namespace Portal.Controllers
                     }
 
                     await SignInAsync( user, true );
+
+                    if( user.Person_Type == "Teacher" )
+                    {
+                        return RedirectToAction("Index", "Courses");
+                    }
                     return RedirectToLocal( returnUrl );
                 } else {
                     ModelState.AddModelError( "", "Invalid username or password." );
