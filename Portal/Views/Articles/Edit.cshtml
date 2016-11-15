@@ -21,7 +21,7 @@
                 <div class="symbolsCounter">@Model.Text.Length /4000 symbols</div>
                 <div class="documents" id="uploadedDocs">
                         @foreach( Document doc in @Model.Documents ) {
-                            <div class="document">
+                            <div class="document" id=@doc.Name>
                                 <a href="@doc.URL">@doc.Name</a>
                                 @Html.ActionLink( "x", "DeleteDocument", "articles", new { @actionType = "edit", @id = doc.Id, @articleId=Model.ID  }, new { @class = "delete-doc" } )
                             </div>    

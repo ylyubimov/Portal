@@ -51,6 +51,7 @@ namespace Portal.Controllers
         [Route( "{id:int}/edit" )]
         public ActionResult Edit( int id, Article articleEdit )
         {
+            string name = Request.Form["Name"];
 
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
             if( article != null ) {
@@ -84,7 +85,7 @@ namespace Portal.Controllers
             var author = um.FindByName( User.Identity.Name );
             if( author == null )
                 return View( "Can't find your account in persons" );
-            return View( new Article() { Name = "", Text = "", Author = author } );
+            return View( new Article() { Name = "", Text = "", Author = author, Documents = new List<Document>() } );
         }
 
         [HttpPost]
@@ -93,6 +94,7 @@ namespace Portal.Controllers
         [Route( "{blogId:int}/Create" )]
         public ActionResult Create( int blogId, Article articleEdit )
         {
+            string name = Request.Form["Name"];
             articleEdit.Blogs = db.Blog.Where( p => p.ID == blogId ).ToArray();
             var um = new UserManager<Person>( new UserStore<Person>( db ) );
             var author = um.FindByName( User.Identity.Name );
@@ -254,12 +256,13 @@ namespace Portal.Controllers
             string docPath = null;
             int? docId = null;
             string docURL = null;
+            string delete = null;
             foreach( string file in Request.Files ) {
                 var upload = Request.Files[file];
                 if( upload != null ) {
                     docPath = System.IO.Path.GetFileName( upload.FileName );
                     upload.SaveAs( Server.MapPath( "~/documents/" + docPath ) );
-                    Article article = db.Article.Where( p => p.ID.ToString() == id ).FirstOrDefault();
+                   
                     Person articleAuthor = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
                     Document uploadedDoc = new Document() {
                         Date_Of_Uploading = DateTime.Now,
@@ -269,15 +272,61 @@ namespace Portal.Controllers
                     };
                     docURL = uploadedDoc
                         .URL;
-                    article.Documents.Add(uploadedDoc);
+                    articleAuthor.Uploaded_Documents.Add( uploadedDoc );
+                     if( !String.IsNullOrEmpty( id ) ) {
+                         Article article = db.Article.Where( p => p.ID.ToString() == id ).FirstOrDefault();
+                         article.Documents.Add( uploadedDoc );
+                        
+                         
+                     } 
+
                 }
             }
             db.SaveChanges();
             docId = db.Document.Where( p => p.URL == docURL ).FirstOrDefault().Id;
-            string delete = "/articles/edit/" + id + "/DeleteDocument/" + docId;
+            delete = "/articles/" + id + "/DeleteDocument/" + docId;
             string[] imageData = { "/documents/" + docPath, docPath, delete };
             return Json( imageData );
         }
+
+        [HttpPost]
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "UploadCreate" )]
+        public JsonResult UploadCreate()
+        {
+            string numberDoc = Request.Form[0];
+            string docPath = null;
+            int? docId = null;
+            string docURL = null;
+           
+            foreach( string file in Request.Files ) {
+                var upload = Request.Files[file];
+                if( upload != null ) {
+                    docPath = System.IO.Path.GetFileName( upload.FileName );
+                    upload.SaveAs( Server.MapPath( "~/documents/" + docPath ) );
+
+                    Person articleAuthor = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
+                    Document uploadedDoc = new Document() {
+                        Date_Of_Uploading = DateTime.Now,
+                        Name = docPath,
+                        Person = articleAuthor,
+                        URL = "/documents/" + docPath
+                    };
+                    docURL = uploadedDoc
+                        .URL;
+                    articleAuthor.Uploaded_Documents.Add( uploadedDoc );
+                   
+
+                }
+            }
+            db.SaveChanges();
+            docId = db.Document.Where( p => p.URL == docURL ).FirstOrDefault().Id;
+          
+            string[] imageData = { "/documents/" + docPath, docPath};
+            return Json( imageData );
+        }
+
+
 
         [HttpGet]
         [Authorize( Roles = "editor, admin" )]
@@ -296,6 +345,24 @@ namespace Portal.Controllers
             }
             db.SaveChanges();
             return RedirectToAction( actionType, "articles", new { id = articleId } );
+        }
+
+        [HttpGet]
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "DeleteDocumentOnCreate/{blogId:int}/{id:int}" )]
+        public ActionResult DeleteDocumentOnCreate( int id, int blogId)
+        {
+           
+            Document doc = db.Document.Where( d => d.Id == id ).FirstOrDefault();
+            if( doc == null )
+                return View( "error" );
+
+            //пользователь удалил документ из загруженных
+            if( doc.Person == null ) {
+                db.Document.Remove( doc );
+            }
+            db.SaveChanges();
+            return RedirectToAction( "create", "articles", new { blogId = blogId } );
         }
     }
 }
