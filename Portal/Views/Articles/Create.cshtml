@@ -19,8 +19,30 @@
             <form action="~/Articles/@ViewBag.BlodID/Create" method="post">
                 @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "add-comment-input", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
+                
+
                 <input class="btn add-comment-button" type="submit" value="Создать" />
             </form>
         </div>
     </div>
 </div>
+@section scripts{
+    @Scripts.Render( "~/bundles/jqueryval" )
+    @Scripts.Render( "~/Scripts/documentLoad.js" )
+    <script type="text/javascript">
+    $(function () {
+        $("textarea[id='Text']").keydown(function count() {
+            number = $("textarea[id='Text']").val().length;
+            $("div[class ='symbolsCounter']").text(number + "/4000 symbols");
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+    //Переводим на нажатие input
+    $('.documents-upload p').on('click', function () {
+        $('input[name="upload-doc"]').click();
+    });
+    </script>
+}

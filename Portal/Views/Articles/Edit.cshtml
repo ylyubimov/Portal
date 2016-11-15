@@ -29,19 +29,18 @@
                 </div>
                 <div class="documents-upload" id="Docs" style="cursor:pointer">
                     <p>Прикрепить файлы</p>
-                    <input type="file" name="upload-doc" id=@Model.ID />
-                </div> 
-            
-
+                    <input type="file" name="upload-doc" id=@("DocUpload" + Model.ID) onChange= "OnDocumentLoad('@Url.Action( "Upload", "Articles")','@Model.ID')" />
+                </div>                
                 <input class="btn add-comment-button" type="submit" value="Редактировать" />
             </form>
         </div>
     </div>
 </div>
+
 @section scripts{
 @Scripts.Render( "~/bundles/jqueryval" )
+@Scripts.Render( "~/Scripts/documentLoad.js" )
 <script type="text/javascript">
-
     $(function () {
         $("textarea[id='Text']").keydown(function count() {
             number = $("textarea[id='Text']").val().length;
@@ -51,59 +50,10 @@
     });
 </script>
 
-    <script type="text/javascript">
-        //Переводим на нажатие input
-        $('.documents-upload p').on('click', function () {
-            $('input[name="upload-doc"]').click();
-        });
-
-        $('input[name="upload-doc"]').on('change', function Send() {
-            var files = this.files;
-            if (files.length == 1) {
-                if (window.FormData !== undefined) {
-                    var docData = new FormData();
-                    docData.append("file", files[0]);
-
-                    docData.append("success", "Файл успешно загружен!");
-                    docData.append("id", this.id);
-                    //Ajax запрос
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("upload","articles")',
-                        contentType: false,
-                        processData: false,
-                        data: docData, //передаем файл на сервер
-                        success: function (data) {
-
-
-                            var a = document.createElement("a");
-                            a.setAttribute("href", data[0]);
-                            a.textContent = data[1];
-                            var aDelete = document.createElement("a");
-                            aDelete.setAttribute("href", data[2]);
-                            aDelete.textContent = "x";
-                            aDelete.setAttribute("class", "delete-doc");
-                            var newDoc = document.createElement("div");
-                            newDoc.setAttribute("class", "document");
-                            newDoc.appendChild(a);
-                            newDoc.appendChild(aDelete);
-                            var result = 'Url.Action("EditPallet")';
-                            /*var link ='<%:  Html.ActionLink( "x", "DeleteDocument", "articles", new { actionType = "edit", id =' + data[0] +', articleId = ' + data[1] + ' }, new { class = "delete-doc" } ) %>';
-                            newDoc.appendChild(link);*/
-                           
-                            document.getElementById("uploadedDocs").appendChild(newDoc);
-                           
-
-
-                        },
-                        error: function (xhr, status, p3) {
-                            alert(xhr.responseText);
-                        }
-                    });
-                } else {
-                    alert("Ваш браузер не поддерживает Html5!");
-                }
-            }
-        })
-    </script>
+<script type="text/javascript">
+    //Переводим на нажатие input
+    $('.documents-upload p').on('click', function () {
+        $('input[name="upload-doc"]').click();
+    });
+</script>
 }
