@@ -356,8 +356,11 @@ textarea .error {
     text-align:right;
 }
 
-.documents-upload p:hover {
+.documents-upload a:hover {
     text-decoration:underline;
+}
+.documents-upload a.upload {
+    color:black;
 }
 
 .documents-upload input {
@@ -365,6 +368,7 @@ textarea .error {
 }
 .delete-doc {
     color:darkgray;
+    margin-left:5px;
 }
 .delete-doc:hover {
     color:dimgray;

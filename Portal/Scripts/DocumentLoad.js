@@ -46,7 +46,7 @@
 function OnCreateDocumentLoad(url) {
     var $input;
 
-    $input = $("#DocUploadCreate");
+    $input = $('input[id^="DocUploadCreate"]:last');
     var files = $input.prop('files');
     if (files.length == 1) {
         if (window.FormData !== undefined) {
@@ -62,20 +62,25 @@ function OnCreateDocumentLoad(url) {
                 processData: false,
                 data: docData, //передаем файл на сервер
                 success: function (data) {
-                    var a = document.createElement("a");
-                    a.setAttribute("href", data[0]);
-                    a.textContent = data[1];
                     var aDelete = document.createElement("a");
-                    aDelete.setAttribute("href", "#");
-                    aDelete.setAttribute("onClick", "OnDelete(this)");
                     aDelete.textContent = "x";
                     aDelete.setAttribute("class", "delete-doc");
-                    var newDoc = document.createElement("div");
-                    newDoc.setAttribute("class", "document");
-                    newDoc.setAttribute("id", "document" + data[1]);
-                    newDoc.appendChild(a);
-                    newDoc.appendChild(aDelete);
-                    document.getElementById("Documents").appendChild(newDoc);
+
+                    var $div = $('div[id^="docUploader"]:last');
+                    var num = parseInt($div.prop("id").match(/\d+/g), 10) + 1;
+                    var newDiv = $div.clone().prop('id', 'docUploader' + num);
+                    newDiv.find("input").prop('id', 'DocUploadCreate' + num).prop('class', 'document');
+                    newDiv.insertAfter($div);
+                    var a = $div.find("a");
+                   
+                    newDiv.find("a").bind("click", function () { $(this).parent().find('input').click(); });
+                    a.text(data[1]);
+                    a.prop('href', data[0]);
+                    a.removeClass("upload");
+                    a.unbind("click");
+                    $(aDelete).bind("click", function () { $(aDelete).parent().remove(); });
+                    $(aDelete).insertAfter(a);
+
                 },
                 error: function (xhr, status, p3) {
                     alert(xhr.responseText);

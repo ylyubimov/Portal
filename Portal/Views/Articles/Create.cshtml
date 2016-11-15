@@ -23,15 +23,17 @@
                   @foreach( Document doc in @Model.Documents ) {
                     <div class="document">
                         <a href="@doc.URL">@doc.Name</a>
+                       
                         @Html.ActionLink( "x", "DeleteDocument", "articles", new { @actionType = "edit", @id = doc.Id, @articleId = Model.ID }, new { @class = "delete-doc" } )
                     </div>
                   }
                 </div>
 
-                <div class="documents-upload" id="Docs" style="cursor:pointer">
-                    <p>Прикрепить файлы</p>
-                    <input type="file" name="upload-doc" id=@("DocUploadCreate" ) onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "Articles")')" />
+                <div class="documents-upload" id="docUploader1" style="cursor:pointer">
+                    <a class="upload">Прикрепить файлы</a>
+                    <input type="file" name="upload-doc" id="DocUploadCreate1" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "Articles")')" />
                 </div>
+                
                 <input class="btn add-comment-button" type="submit" onclick="Send(this)" value="Создать" />
             </form>
         </div>
@@ -52,8 +54,8 @@
 
     <script type="text/javascript">
     //Переводим на нажатие input
-    $('.documents-upload p').on('click', function () {
-        $('input[name="upload-doc"]').click();
+        $('#docUploader1 a').on('click', function () {
+            $(this).parent().find('input').click();
     });
     </script>
 }

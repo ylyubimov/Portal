@@ -94,12 +94,20 @@ namespace Portal.Controllers
         [Route( "{blogId:int}/Create" )]
         public ActionResult Create( int blogId, Article articleEdit )
         {
-            string name = Request.Form["Name"];
+            string[] docs = Request.Form["upload-doc"].Split(',');
             articleEdit.Blogs = db.Blog.Where( p => p.ID == blogId ).ToArray();
             var um = new UserManager<Person>( new UserStore<Person>( db ) );
             var author = um.FindByName( User.Identity.Name );
             if( author == null )
                 return View( "Error", "Can't find your account in persons" );
+            
+            articleEdit.Documents = new List<Document>();
+            foreach( string docName in docs ) {
+                Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
+                if( doc != null ) {
+                    articleEdit.Documents.Add( doc );
+                }
+            }
             articleEdit.Author = author;
             articleEdit.Date_of_Creation = DateTime.Now;
             articleEdit.Likes_Count = 0;
