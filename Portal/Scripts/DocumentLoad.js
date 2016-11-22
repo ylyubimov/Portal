@@ -97,6 +97,11 @@ function OnDelete(elem) {
     $(elem).parent().remove();
 }
 
-function Send(elem) {
-    var data = $(elem).parent().serialize();
+function Send(id) {
+    var $input = $("input[name='" + id + "']");
+    $input.click();
+    var $href = $("a[id='" + id + "']");
+    $href.next().remove();
+    $href.remove();
+
 }

@@ -20,10 +20,12 @@
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "required add-comment-input",@name="articleText", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
                 <div class="symbolsCounter">@Model.Text.Length /4000 symbols</div>
                 <div class="documents" id="uploadedDocs">
-                        @foreach( Document doc in @Model.Documents ) {
+                        @foreach( Document doc in @Model.Documents) {
                             <div class="document" id=@doc.Name>
-                                <a href="@doc.URL">@doc.Name</a>
-                                @Html.ActionLink( "x", "DeleteDocument", "articles", new { @actionType = "edit", @id = doc.Id, @articleId=Model.ID  }, new { @class = "delete-doc" } )
+                                <a href="@doc.URL" id="@doc.Id">@doc.Name</a>
+                                
+                                <a onclick="Send(@doc.Id)" class="delete-doc">x</a>
+                                @Html.RadioButton( doc.Id.ToString(), @doc.Name, new { @class = "delete-radio-button" } )
                             </div>    
                         }
                 </div>

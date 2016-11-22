@@ -20,13 +20,7 @@
                 @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "h2 add-comment-input", @placeholder = "Enter article name" } } ) @Html.ValidationMessageFor( m => m.Name )<br />
                 @Html.EditorFor( m => m.Text, new { htmlAttributes = new { @class = "add-comment-input", @style = "height: 300px", @placeholder = "Enter article text" } } ) @Html.ValidationMessageFor( m => m.Text )<br />
                 <div class="documents" name="Documents" id="Documents">
-                  @foreach( Document doc in @Model.Documents ) {
-                    <div class="document">
-                        <a href="@doc.URL">@doc.Name</a>
-                       
-                        @Html.ActionLink( "x", "DeleteDocument", "articles", new { @actionType = "edit", @id = doc.Id, @articleId = Model.ID }, new { @class = "delete-doc" } )
-                    </div>
-                  }
+                 
                 </div>
 
                 <div class="documents-upload" id="docUploader1" style="cursor:pointer">
@@ -34,7 +28,7 @@
                     <input type="file" name="upload-doc" id="DocUploadCreate1" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "Articles")')" />
                 </div>
                 
-                <input class="btn add-comment-button" type="submit" onclick="Send(this)" value="Создать" />
+                <input class="btn add-comment-button" type="submit" onclick="Send(this, '@Url.Action( "UploadCreate", "Articles")')" value="Создать" />
             </form>
         </div>
     </div>

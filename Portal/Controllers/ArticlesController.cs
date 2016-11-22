@@ -53,6 +53,7 @@ namespace Portal.Controllers
         {
             string name = Request.Form["Name"];
 
+            string names = Request.Form["Likes_Count"];
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
             if( article != null ) {
                 if( article.Author.UserName == User.Identity.Name || User.IsInRole( "admin" ) ) {
@@ -355,22 +356,5 @@ namespace Portal.Controllers
             return RedirectToAction( actionType, "articles", new { id = articleId } );
         }
 
-        [HttpGet]
-        [Authorize( Roles = "editor, admin" )]
-        [Route( "DeleteDocumentOnCreate/{blogId:int}/{id:int}" )]
-        public ActionResult DeleteDocumentOnCreate( int id, int blogId)
-        {
-           
-            Document doc = db.Document.Where( d => d.Id == id ).FirstOrDefault();
-            if( doc == null )
-                return View( "error" );
-
-            //пользователь удалил документ из загруженных
-            if( doc.Person == null ) {
-                db.Document.Remove( doc );
-            }
-            db.SaveChanges();
-            return RedirectToAction( "create", "articles", new { blogId = blogId } );
-        }
     }
 }

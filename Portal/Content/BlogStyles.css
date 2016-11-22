@@ -369,6 +369,7 @@ textarea .error {
 .delete-doc {
     color:darkgray;
     margin-left:5px;
+    cursor: pointer;
 }
 .delete-doc:hover {
     color:dimgray;
@@ -377,4 +378,7 @@ textarea .error {
 .delete-doc:focus {
     color:dimgray;
     text-decoration:none;
+}
+.delete-radio-button {
+    display:none;
 }
