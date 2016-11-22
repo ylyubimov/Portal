@@ -98,7 +98,7 @@ function OnDelete(elem) {
 }
 
 function Send(id) {
-    var $input = $("input[name='" + id + "']");
+    var $input = $("input[id='" + id + "']");
     $input.click();
     var $href = $("a[id='" + id + "']");
     $href.next().remove();

@@ -53,7 +53,7 @@ namespace Portal.Controllers
         {
             string name = Request.Form["Name"];
 
-            string names = Request.Form["Likes_Count"];
+            string[] deletedDocs = Request.Form["deletedDocs"].Split(',');
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
             if( article != null ) {
                 if( article.Author.UserName == User.Identity.Name || User.IsInRole( "admin" ) ) {
@@ -63,6 +63,12 @@ namespace Portal.Controllers
                     ModelState["Author"].Errors.Clear();
                     if( !ModelState.IsValid ) {
                         return View( article );
+                    }
+                    foreach(string docName in deletedDocs) {
+                        Document doc = db.Document.Where( d => d.Name == docName ).FirstOrDefault();
+                        if( doc != null ) {
+                            article.Documents.Remove( doc );
+                        }
                     }
 
                     db.SaveChanges();
