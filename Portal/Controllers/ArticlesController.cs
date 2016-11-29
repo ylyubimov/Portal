@@ -52,8 +52,7 @@ namespace Portal.Controllers
         public ActionResult Edit( int id, Article articleEdit )
         {
             string name = Request.Form["Name"];
-
-            string[] deletedDocs = Request.Form["deletedDocs"].Split(',');
+            
             Article article = db.Article.Where( p => id == p.ID ).FirstOrDefault();
             if( article != null ) {
                 if( article.Author.UserName == User.Identity.Name || User.IsInRole( "admin" ) ) {
@@ -64,10 +63,24 @@ namespace Portal.Controllers
                     if( !ModelState.IsValid ) {
                         return View( article );
                     }
-                    foreach(string docName in deletedDocs) {
-                        Document doc = db.Document.Where( d => d.Name == docName ).FirstOrDefault();
-                        if( doc != null ) {
-                            article.Documents.Remove( doc );
+                    if( Request.Form.Get( "deletedDocs" ) != null ) {
+                        string[] deletedDocs = Request.Form["deletedDocs"].Split( ',' );
+
+                        foreach( string docName in deletedDocs ) {
+                            Document doc = db.Document.Where( d => d.Name == docName ).FirstOrDefault();
+                            if( doc != null ) {
+                                article.Documents.Remove( doc );
+                            }
+                        }
+                    }
+                    if( Request.Form.Get( "upload-doc" ) != null ) {
+                        string[] docs = Request.Form["upload-doc"].Split( ',' );
+                        article.Documents = new List<Document>();
+                        foreach( string docName in docs ) {
+                            Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
+                            if( doc != null ) {
+                                article.Documents.Add( doc );
+                            }
                         }
                     }
 

@@ -12,10 +12,39 @@
             @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Название" } } ) @Html.ValidationMessageFor( m => m.Name )
             @Html.EditorFor( m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Описание" } } ) @Html.ValidationMessageFor( m => m.Description )
             @Html.EditorFor( m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Ссылки" } } ) @Html.ValidationMessageFor( m => m.Links )
-        </div>
-        <div class="person-edit-buttons">
-            <input class="btn person-edit-button" type="submit" value="Сохранить" />
-            @Html.ActionLink( "Отменить", "course", new { @courseInstanceId = ViewBag.CourseInstanceId }, new { @class = "btn person-edit-cancel-button" } )
+
+            <div class="documents" id="uploadedDocs">
+
+                @for( int i = 0; i < @Model.Documents.Count; ++i ) {
+
+                    <div class="documents-upload" id="docUploader_@i" style="cursor:pointer">
+                        <a href="@Model.Documents.ElementAt(i).URL" id="@Model.Documents.ElementAt(i).Id">@Model.Documents.ElementAt( i ).Name</a><a onclick="Send(@Model.Documents.ElementAt(i).Id)" class="delete-doc">x</a>
+                        <input type="checkbox" class="delete-radio-button" name="deletedDocs" value="@Model.Documents.ElementAt(i).Name" id="@Model.Documents.ElementAt(i).Id" />
+                        <input type="file" name="upload-doc" id="DocUploadCreate_@i" onchange="OnCreateDocumentLoad('/courseInstances/UploadCreate')">
+                    </div>
+
+                }
+            </div>
+
+            <div class="documents-upload" id="docUploader_@Model.Documents.Count" style="cursor:pointer">
+                <a class="upload">Прикрепить файлы</a>
+                <input type="file" name="upload-doc" id="DocUploadCreate_@Model.Documents.Count" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "CourseInstances")')" />
+            </div>
+            <div class="person-edit-buttons">
+                <input class="btn person-edit-button" type="submit" value="Сохранить" />
+                @Html.ActionLink( "Отменить", "course", new { @courseInstanceId = ViewBag.CourseInstanceId }, new { @class = "btn person-edit-cancel-button" } )
+            </div>
         </div>
     }
 </div>
+@section scripts{
+    @Scripts.Render( "~/bundles/jqueryval" )
+    @Scripts.Render( "~/Scripts/documentLoad.js" )
+    <script type="text/javascript">
+    //Переводим на нажатие input
+
+    $('.documents-upload a.upload').on('click', function () {
+            $(this).parent().find('input').click();
+    });
+    </script>
+}

@@ -103,6 +103,15 @@ namespace Portal.Models
             modelBuilder.Entity<Course>()
             .HasMany( c => c.Blogs );
 
+            modelBuilder.Entity<Lesson>()
+                .HasMany( c => c.Documents )
+                .WithMany( p => p.Lessons )
+                .Map( m => {
+                    m.ToTable( "LessonsDocuments" );
+
+                    m.MapLeftKey( "LessonId" );
+                    m.MapRightKey( "DocumentId" );
+                } );
             modelBuilder.Entity<Program>()
             .HasMany( c => c.Students )
             .WithMany( p => p.Subscribed_Programs )

@@ -91,14 +91,11 @@
             </div>
 
             @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
-                using( Html.BeginForm( "AddLesson", "CourseInstances", new { @id = Model.ID }, FormMethod.Post ) ) {
-                    <div class="course-add-lesson">
-                        <h4>Добавить новый урок:</h4>
-                        <input class="course-add-lesson-input" type="text" placeholder="Название урока" name="Name" />
-                        <input class="course-add-lesson-input" type="text" placeholder="Описание" name="Description" />
-                        <input class="course-add-lesson-input" type="text" placeholder="Ссылка на материалы" name="Links" />
-                        <input class="btn add-comment-button" type="submit" value="Создать новый урок" />
-
+                using( Html.BeginForm( "CreateLesson", "CourseInstances", new { @courseId = Model.ID }, FormMethod.Get ) ) {
+                    <div class="course-add-lesson">                     
+                        <button type="submit" class="btn blog-create-button">
+                            Добавить урок
+                        </button>
                     </div>
                 }
             }

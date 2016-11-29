@@ -319,10 +319,12 @@
     <Content Include="Views\CourseInstances\CourseInstance.cshtml" />
     <Content Include="Views\CourseInstances\Edit.cshtml" />
     <Content Include="Views\CourseInstances\Create.cshtml" />
+    <Content Include="Views\CourseInstances\CreateLesson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\icons\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

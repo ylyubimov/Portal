@@ -40,6 +40,7 @@ namespace Portal.Models
         public DateTime? Date_Of_Uploading { get; set; }
         
         public virtual Person Person { get; set; }
+        public virtual ICollection<Lesson> Lessons { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
 
     }

@@ -14,5 +14,6 @@ namespace Portal.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Links { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

@@ -46,7 +46,7 @@
 function OnCreateDocumentLoad(url) {
     var $input;
 
-    $input = $('input[id^="DocUploadCreate"]:last');
+    $input = $('input[id^="DocUploadCreate_"]:last');
     var files = $input.prop('files');
     if (files.length == 1) {
         if (window.FormData !== undefined) {
@@ -66,10 +66,10 @@ function OnCreateDocumentLoad(url) {
                     aDelete.textContent = "x";
                     aDelete.setAttribute("class", "delete-doc");
 
-                    var $div = $('div[id^="docUploader"]:last');
+                    var $div = $('div[id^="docUploader_"]:last');
                     var num = parseInt($div.prop("id").match(/\d+/g), 10) + 1;
-                    var newDiv = $div.clone().prop('id', 'docUploader' + num);
-                    newDiv.find("input").prop('id', 'DocUploadCreate' + num).prop('class', 'document');
+                    var newDiv = $div.clone().prop('id', 'docUploader_' + num);
+                    newDiv.find("input").prop('id', 'DocUploadCreate_' + num).prop('class', 'document');
                     newDiv.insertAfter($div);
                     var a = $div.find("a");
                    

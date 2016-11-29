@@ -1,0 +1,32 @@
+﻿@model Portal.Models.Lesson
+
+@{
+    ViewBag.Title = "CreateLesson";
+}
+
+
+<div class="container course-wrap">
+    @using( Html.BeginForm( "CreateLesson", "CourseInstances", new { @courseInstanceId = ViewBag.CourseInstanceId}, FormMethod.Post ) ) {
+        <div class="course-add-lesson">
+            <h4>Новый урок:</h4>
+            @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Название" } } ) @Html.ValidationMessageFor( m => m.Name )
+            @Html.EditorFor( m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Описание" } } ) @Html.ValidationMessageFor( m => m.Description )
+            @Html.EditorFor( m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Ссылки" } } ) @Html.ValidationMessageFor( m => m.Links )
+            <div class="documents-upload" id="docUploader_0" style="cursor:pointer">
+                <a class="upload">Прикрепить файлы</a>
+                <input type="file" name="upload-doc" id="DocUploadCreate_0" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "CourseInstances")')" />
+            </div>
+            <input class="btn add-comment-button" type="submit" onclick="Send(this, '@Url.Action( "UploadCreate", "CourseInstances")')" value="Создать" />
+        </div>
+    }
+</div>
+@section scripts{
+    @Scripts.Render( "~/bundles/jqueryval" )
+    @Scripts.Render( "~/Scripts/documentLoad.js" )
+    <script type="text/javascript">
+    //Переводим на нажатие input
+        $('#docUploader_0 a').on('click', function () {
+            $(this).parent().find('input').click();
+    });
+    </script>
+}

@@ -24,18 +24,18 @@
                        
                         @for( int i = 0; i < @Model.Documents.Count; ++i  ) {
 
-                            <div class="documents-upload" id="docUploader\@i" style="cursor:pointer">
+                            <div class="documents-upload" id="docUploader_@i" style="cursor:pointer">
                                 <a href="@Model.Documents.ElementAt(i).URL" id="@Model.Documents.ElementAt(i).Id">@Model.Documents.ElementAt( i ).Name</a><a onclick="Send(@Model.Documents.ElementAt(i).Id)" class="delete-doc">x</a>
                                 <input type="checkbox" class="delete-radio-button" name="deletedDocs" value="@Model.Documents.ElementAt(i).Name" id="@Model.Documents.ElementAt(i).Id" />
-                                <input type="file" name="upload-doc" id="DocUploadCreate\@i" onchange="OnCreateDocumentLoad('/articles/UploadCreate')">
+                                <input type="file" name="upload-doc" id="DocUploadCreate_@i" onchange="OnCreateDocumentLoad('/articles/UploadCreate')">
                             </div>
     
                         }
                 </div>
                 
-                <div class="documents-upload" id="docUploader\@Model.Documents.Count" style="cursor:pointer">
-                    <a class="upload">Прикрепить файлы</a>
-                    <input type="file" name="upload-doc" id="DocUploadCreate\@Model.Documents.Count" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "Articles")')" />
+                <div class="documents-upload" id="docUploader_@Model.Documents.Count" style="cursor:pointer">
+                    <a class="upload" >Прикрепить файлы</a>
+                    <input type="file" name="upload-doc" id="DocUploadCreate_@Model.Documents.Count" onChange="OnCreateDocumentLoad('@Url.Action( "UploadCreate", "Articles")')" />
                 </div>               
                 <input class="btn add-comment-button" type="submit" value="Редактировать" />
             </form>
@@ -58,8 +58,9 @@
 
 <script type="text/javascript">
     //Переводим на нажатие input
-    $('.documents-upload p').on('click', function () {
-        $('input[name="upload-doc"]').click();
+   
+    $('.documents-upload a.upload').on('click', function () {
+            $(this).parent().find('input').click();
     });
 </script>
 }

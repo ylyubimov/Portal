@@ -198,23 +198,44 @@ namespace Portal.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route( "{courseId:int}/CreateLesson" )]
+        [Authorize( Roles = "editor, admin" )]
+        public ActionResult CreateLesson( int courseId )
+        {
+            return View( new Lesson() { Name = ""});
+        }
+
+        [Authorize]
         [HttpPost]
-        public ActionResult AddLesson( string Name, string Description, string Links, int id )
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "{courseInstanceId:int}/CreateLesson" )]
+        [Authorize( Roles = "editor, admin" )]
+        public ActionResult CreateLesson( string Name, string Description, string Links, int courseInstanceId )
         {
             if( Name == null || Name == "" ) {
                 Name = "Урок";
             }
-            CourseInstance courseInstance = db.CourseInstance.Where( p => id == p.ID ).FirstOrDefault();
+            CourseInstance courseInstance = db.CourseInstance.Where( p => courseInstanceId == p.ID ).FirstOrDefault();
             Person author = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
-            if( !courseInstance.BaseCourse.Teachers.Contains( author ) ) {
+            /*if( !courseInstance.BaseCourse.Teachers.Contains( author ) ) {
                 ViewBag.Message = "У вас нет прав на редактирование этих материалов";
                 return View( "Error" );
-            }
+            }*/
             var lesson = new Lesson() { Name = Name, Description = Description, Links = Links };
-            courseInstance.Lessons.Add( lesson );
+            
 
+            string[] docs = Request.Form["upload-doc"].Split( ',' );
+            lesson.Documents = new List<Document>();
+            foreach( string docName in docs ) {
+                Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
+                if( doc != null ) {
+                    lesson.Documents.Add( doc );
+                }
+            }
+            courseInstance.Lessons.Add( lesson );
             db.SaveChanges();
-            return RedirectToAction( "CourseInstance", new { id = id } );
+            return RedirectToAction( "CourseInstance", new { id = courseInstanceId } );
         }
 
         [HttpGet]
@@ -256,6 +277,26 @@ namespace Portal.Controllers
             lesson.Description = editedLesson.Description;
             lesson.Links = editedLesson.Links;
 
+            if (Request.Form.Get("deletedDocs") != null) { 
+                string[] deletedDocs = Request.Form["deletedDocs"].Split( ',' );
+                foreach( string docName in deletedDocs ) {
+                    Document doc = db.Document.Where( d => d.Name == docName ).FirstOrDefault();
+                    if( doc != null ) {
+                        lesson.Documents.Remove( doc );
+                    }
+                }
+            }
+            if( Request.Form.Get( "upload-doc" ) != null ) {
+                string[] docs = Request.Form["upload-doc"].Split( ',' );
+                lesson.Documents = new List<Document>();
+                foreach( string docName in docs ) {
+                    Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
+                    if( doc != null ) {
+                        lesson.Documents.Add( doc );
+                    }
+                }
+            }
+            db.SaveChanges();
             if( !ModelState.IsValid ) {
                 ViewBag.CourseId = courseInstanceId;
                 return View( lesson );
@@ -290,5 +331,42 @@ namespace Portal.Controllers
             return RedirectToAction( "CourseInstance", new { id = courseInstanceId } );
         }
 
+        [HttpPost]
+        [Authorize( Roles = "editor, admin" )]
+        [Route( "UploadCreate" )]
+        public JsonResult UploadCreate()
+        {
+            string numberDoc = Request.Form[0];
+            string docPath = null;
+            int? docId = null;
+            string docURL = null;
+
+            foreach( string file in Request.Files ) {
+                var upload = Request.Files[file];
+                if( upload != null ) {
+                    docPath = System.IO.Path.GetFileName( upload.FileName );
+                    upload.SaveAs( Server.MapPath( "~/documents/" + docPath ) );
+
+                    Person articleAuthor = db.Users.Where( p => User.Identity.Name == p.UserName ).FirstOrDefault();
+                    Document uploadedDoc = new Document() {
+                        Date_Of_Uploading = DateTime.Now,
+                        Name = docPath,
+                        Person = articleAuthor,
+                        URL = "/documents/" + docPath
+                    };
+                    docURL = uploadedDoc
+                        .URL;
+                    articleAuthor.Uploaded_Documents.Add( uploadedDoc );
+                }
+            }
+            db.SaveChanges();
+            docId = db.Document.Where( p => p.URL == docURL ).FirstOrDefault().Id;
+
+            string[] imageData = { "/documents/" + docPath, docPath };
+            return Json( imageData );
+        }
+
     }
+
+
 }
