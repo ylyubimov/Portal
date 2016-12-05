@@ -9,10 +9,11 @@
     @using( Html.BeginForm( "EditLesson", "CourseInstances", new { @courseInstanceId = ViewBag.CourseInstanceId, @id = Model.ID }, FormMethod.Post ) ) {
         <div class="course-add-lesson">
             <h4>Редактировать урок:</h4>
-            @Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Название" } } ) @Html.ValidationMessageFor( m => m.Name )
-            @Html.EditorFor( m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Описание" } } ) @Html.ValidationMessageFor( m => m.Description )
-            @Html.EditorFor( m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input", @placeholder = "Ссылки" } } ) @Html.ValidationMessageFor( m => m.Links )
-
+            <div class="course-lesson-description">
+                <div class="course-lesson-description-field">Название:</div>@Html.EditorFor( m => m.Name, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Name )
+                <div class="course-lesson-description-field">Описание:</div>@Html.EditorFor( m => m.Description, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Description )
+                <div class="course-lesson-description-field">Ссылки:</div>@Html.EditorFor( m => m.Links, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Links )
+            </div>
             <div class="documents" id="uploadedDocs">
 
                 @for( int i = 0; i < @Model.Documents.Count; ++i ) {

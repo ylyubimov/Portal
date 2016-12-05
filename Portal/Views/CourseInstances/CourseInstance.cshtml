@@ -69,7 +69,7 @@
                         <tr>
                             <th>Название</th>
                             <th>Описание</th>
-                            <th>Ссылка</th>
+                            <th>Файлы</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -79,7 +79,11 @@
                             <tr>
                                 <td style="word-break: break-word;">@lesson.Name</td>
                                 <td>@lesson.Description</td>
-                                <td style="word-break: break-word;"><a href="@lesson.Links">@lesson.Links</a></td>
+                                <td style="word-break: break-word;">  
+                                    @for( int i = 0; i < @lesson.Documents.Count; ++i ) {
+                                       <a class="course-file-attached-link" href="@lesson.Documents.ElementAt(i).URL" id="@lesson.Documents.ElementAt(i).Id">@lesson.Documents.ElementAt( i ).Name</a>
+                                    }  
+                                </td>
                                 @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
                                     <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
                                         <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>

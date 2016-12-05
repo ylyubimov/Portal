@@ -276,6 +276,7 @@ namespace Portal.Controllers
             lesson.Name = editedLesson.Name;
             lesson.Description = editedLesson.Description;
             lesson.Links = editedLesson.Links;
+            lesson.Documents = editedLesson.Documents;
 
             if (Request.Form.Get("deletedDocs") != null) { 
                 string[] deletedDocs = Request.Form["deletedDocs"].Split( ',' );
@@ -288,7 +289,7 @@ namespace Portal.Controllers
             }
             if( Request.Form.Get( "upload-doc" ) != null ) {
                 string[] docs = Request.Form["upload-doc"].Split( ',' );
-                lesson.Documents = new List<Document>();
+               
                 foreach( string docName in docs ) {
                     Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
                     if( doc != null ) {

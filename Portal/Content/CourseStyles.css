@@ -164,16 +164,32 @@
     background: white;
     padding: 15px;
 }
-
+.course-file-attached-link {
+    display:block;
+}
 .course-add-lesson {
     background: white;
     padding: 20px;
     margin-bottom: 15px;
 }
 
+.course-lesson-description {
+    margin-bottom: 15px;
+}
 .course-add-lesson-input {    
     width: 100%;
-    border: none;
+    border:1px solid lightgrey;
+}
+
+.course-add-lesson-input:focus {    
+    width: 100%;
+    border:1px solid lightsteelblue;
+}
+
+.course-lesson-description-field {
+    font-size: 16px;
+    margin-top: 18px;
+    margin-bottom: 8px;  
 }
 
 .course-menu-item {

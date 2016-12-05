@@ -58,6 +58,7 @@ namespace Portal.Controllers
                 if( article.Author.UserName == User.Identity.Name || User.IsInRole( "admin" ) ) {
                     article.Text = articleEdit.Text;
                     article.Name = articleEdit.Name;
+                    article.Documents = articleEdit.Documents;
                     //Какой-то неопознанный баг, пришлось костылить, простите меня(
                     ModelState["Author"].Errors.Clear();
                     if( !ModelState.IsValid ) {
@@ -75,7 +76,7 @@ namespace Portal.Controllers
                     }
                     if( Request.Form.Get( "upload-doc" ) != null ) {
                         string[] docs = Request.Form["upload-doc"].Split( ',' );
-                        article.Documents = new List<Document>();
+                        
                         foreach( string docName in docs ) {
                             Document doc = db.Document.Where( p => p.Name == docName ).FirstOrDefault();
                             if( doc != null ) {
