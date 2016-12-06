@@ -62,84 +62,106 @@
             <div class="course-description">
                 @Model.AdditionalDescription
             </div>
-
-            <div class="course-lesson-list">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Файлы</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach( Portal.Models.Lesson lesson in Model.Lessons ) {
+            <div class="course_section-title">
+                Материалы
+            </div>
+                <div class="course-lesson-list">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td style="word-break: break-word;">@lesson.Name</td>
-                                <td>@lesson.Description</td>
-                                <td style="word-break: break-word;">  
-                                    @for( int i = 0; i < @lesson.Documents.Count; ++i ) {
-                                       <a class="course-file-attached-link" href="@lesson.Documents.ElementAt(i).URL" id="@lesson.Documents.ElementAt(i).Id">@lesson.Documents.ElementAt( i ).Name</a>
-                                    }  
-                                </td>
-                                @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
-                                    <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
-                                        <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
-                                }
+                                <th>Название</th>
+                                <th>Описание</th>
+                                <th>Файлы</th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-
-            @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
-                using( Html.BeginForm( "CreateLesson", "CourseInstances", new { @courseId = Model.ID }, FormMethod.Get ) ) {
-                    <div class="course-add-lesson">                     
-                        <button type="submit" class="btn blog-create-button">
-                            Добавить урок
-                        </button>
-                    </div>
-                }
-            }
-            <div class="timetable">
-                <span>Расписание</span>
-                @foreach( Portal.Models.LessonShedule lesson in Model.Timetable.Lessons ) {
-                    <p>@lesson.Lesson_Type</p>
-                    <p>@lesson.Place</p>
-                    <p>@lesson.Start_Time</p>
-                    <p>@lesson.End_Time</p>
-                }
-            </div>
-
-            @if( Model.BaseCourse.Teachers.Where( c => c.UserName == User.Identity.Name ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
-                <div class="course-list-of-students">
-                    <input type="checkbox" id="hd" class="hide" />
-                    <label for="hd"><span>Список студентов</span> <span class="glyphicon glyphicon-chevron-down" style="font-size: 10px;"></span></label>
-                    <div class="course-students-table">
-                        <table class="table">
-                            <thead>
+                        </thead>
+                        <tbody>
+                            @foreach( Portal.Models.Lesson lesson in Model.Lessons ) {
                                 <tr>
-                                    <th>ФИО</th>
-                                    <th>Телефон</th>
-                                    <th>Email</th>
+                                    <td style="word-break: break-word;">@lesson.Name</td>
+                                    <td>@lesson.Description</td>
+                                    <td style="word-break: break-word;">
+                                        @for( int i = 0; i < @lesson.Documents.Count; ++i ) {
+                                            <a class="course-file-attached-link" href="@lesson.Documents.ElementAt(i).URL" id="@lesson.Documents.ElementAt(i).Id">@lesson.Documents.ElementAt( i ).Name</a>
+                                        }
+                                    </td>
+                                    @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
+                                        <td><a href=@Url.Action("editLesson", new { @id = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
+                                        <td><a href=@Url.Action("removeLesson", new { @lessonId = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-remove" style="color: black;"></span></a></td>
+                                    }
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( Person student in Model.Students ) {
-                                    <tr>
-                                        <td>@student.Second_Name @student.First_Name</td>
-                                        <td><a class="course-student-info-link" href="tel:@student.PhoneNumber">@student.PhoneNumber</a></td>
-                                        <td><a class="course-student-info-link" href="mailto:@student.Email">@student.Email</a></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                        <a href="mailto:@ViewBag.MailToAll" class="btn btn-default">Написать всем студентам</a>
-                    </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-            }
-            
-        </div>
+
+                @if( Model.BaseCourse.Teachers.Where( t => User.Identity.Name == t.UserName ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
+                using( Html.BeginForm( "CreateLesson", "CourseInstances", new { @courseId = Model.ID }, FormMethod.Get ) ) {
+
+                            <button type="submit" class="btn blog-create-button">
+                                Добавить урок
+                            </button>
+                        
+                    }
+                }
+            <div class="timetable">
+                <div class="course_section-title">Расписание</div>
+                <div class="course-lesson-list">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Тип</th>
+                                <th>Кабинет</th>
+                                <th>Время</th>
+                                <th>Комментарий</th>
+                                <th></th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach( Portal.Models.LessonShedule lesson in Model.Timetable.Lessons ) {
+                                <tr>
+                                    <td style="word-break: break-word;">@lesson.Lesson_Type</td>
+                                    <td>@lesson.Place</td>
+                                    <td>@lesson.Start_Time.ToString( @"MM.dd.yyyy HH:mm" ) - @lesson.End_Time.ToString( @"HH:mm" )</td>
+                                    <td>@lesson.Comment</td>
+                                    <td><a href=@Url.Action("editTimetable", new { @id = lesson.ID, courseInstanceId = Model.ID })><span class="glyphicon glyphicon-pencil" style="color: black;"></span></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+                @if( Model.BaseCourse.Teachers.Where( c => c.UserName == User.Identity.Name ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
+                    <div class="course-list-of-students">
+                        <input type="checkbox" id="hd" class="hide" />
+                        <label for="hd"><span>Список студентов</span> <span class="glyphicon glyphicon-chevron-down" style="font-size: 10px;"></span></label>
+                        <div class="course-students-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ФИО</th>
+                                        <th>Телефон</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach( Person student in Model.Students ) {
+                                        <tr>
+                                            <td>@student.Second_Name @student.First_Name</td>
+                                            <td><a class="course-student-info-link" href="tel:@student.PhoneNumber">@student.PhoneNumber</a></td>
+                                            <td><a class="course-student-info-link" href="mailto:@student.Email">@student.Email</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="mailto:@ViewBag.MailToAll" class="btn btn-default">Написать всем студентам</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
     </div>

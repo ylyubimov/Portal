@@ -23,5 +23,6 @@ namespace Portal.Models
         public DateTime Start_Time { get; set; }
         public DateTime End_Time { get; set; }
         public string Place { get; set; }
+        public string Comment { get; set; }
     }
 }

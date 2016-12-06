@@ -1,0 +1,25 @@
+﻿@model Portal.Models.LessonShedule
+
+@{
+    ViewBag.Title = "EditTimeTable";
+}
+
+<div class="container course-wrap">
+    @using( Html.BeginForm( "EditTimetable", "CourseInstances", new { @courseInstanceId = ViewBag.CourseInstanceId, @id = Model.ID }, FormMethod.Post ) ) {
+        <div class="course-add-lesson">
+            <h4>Редактировать урок:</h4>
+            <div class="course-lesson-description">
+                <div class="course-lesson-description-field">Тип урока:</div>@Html.EditorFor( m => m.Lesson_Type, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Lesson_Type )
+                <div class="course-lesson-description-field">Кабинет:</div>@Html.EditorFor( m => m.Place, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Place )
+                <div class="course-lesson-description-field">Начало:</div>@Html.EditorFor( m => m.Start_Time, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Start_Time )
+                <div class="course-lesson-description-field">Окончание:</div>@Html.EditorFor( m => m.End_Time, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.End_Time )
+                <div class="course-lesson-description-field">Комментарий:</div>@Html.EditorFor( m => m.Comment, new { htmlAttributes = new { @class = "course-add-lesson-input" } } ) @Html.ValidationMessageFor( m => m.Comment )
+            </div>
+            <div class="person-edit-buttons">
+                <input class="btn person-edit-button" type="submit" value="Сохранить" />
+            </div>
+         </div>
+        
+    }
+</div>
+
