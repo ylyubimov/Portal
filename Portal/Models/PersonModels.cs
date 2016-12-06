@@ -45,6 +45,7 @@ namespace Portal.Models
         public string Working_Place { get; set; }
         public virtual ICollection<Course> Taught_Courses { get; set; }
         public virtual ICollection<Program> Taught_Programs { get; set; }
+        public bool Is_Waiting_Approval { get; set; }
         //
         public static void DeleteUser( ApplicationDbContext db, string id )
         {
