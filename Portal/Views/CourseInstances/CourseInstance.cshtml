@@ -103,6 +103,16 @@
                     </div>
                 }
             }
+            <div class="timetable">
+                <span>Расписание</span>
+                @foreach( Portal.Models.LessonShedule lesson in Model.Timetable.Lessons ) {
+                    <p>@lesson.Lesson_Type</p>
+                    <p>@lesson.Place</p>
+                    <p>@lesson.Start_Time</p>
+                    <p>@lesson.End_Time</p>
+                }
+            </div>
+
             @if( Model.BaseCourse.Teachers.Where( c => c.UserName == User.Identity.Name ).FirstOrDefault() != null || User.IsInRole( "admin" ) ) {
                 <div class="course-list-of-students">
                     <input type="checkbox" id="hd" class="hide" />
@@ -130,5 +140,6 @@
                     </div>
                 </div>
             }
+            
         </div>
     </div>

@@ -15,9 +15,11 @@ namespace Portal.Models
         [Required]
         public virtual Course BaseCourse { get; set; }
         public string Place { get; set; }
+        public virtual Timetable Timetable { get; set; }
         public string AdditionalDescription { get; set; }
         public DateTime? Report_Date { get; set; }
         public virtual ICollection<Person> Students { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; }
+
     }
 }

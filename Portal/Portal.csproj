@@ -204,6 +204,7 @@
     <Compile Include="Models\PersonModels.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\StudyHierarchyModels.cs" />
+    <Compile Include="Models\Timetable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

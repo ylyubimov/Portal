@@ -190,11 +190,19 @@ namespace Portal.Models
 
             db.SaveChanges();
 
+
+            List<LessonShedule> lessonsShedule = new List<LessonShedule> 
+            {
+                db.LessonShedule.Add(new LessonShedule { Lesson_Type = "Лекция", Place = "7-01", Start_Time =  new DateTime(2015, 12, 10, 12, 30, 0), End_Time = new DateTime(2015, 12, 10, 15, 30, 0) } )
+            };
+            db.SaveChanges();
+            Timetable timetable = new Timetable { Lessons = lessonsShedule };
+            db.Timetable.Add( timetable );
             // Создание экземпляров курсов
             List<CourseInstance> ppsCourses = new List<CourseInstance>
             {
-                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses4.ToArray()[0], Lessons = lessons, Place = "7-01", Year = 2016, AdditionalDescription = "курс 2016 года", Report_Date = new DateTime(2016, 12, 5), Students = NewStudents } ),
-                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses4.ToArray()[0], Place = "7-01", Year = 2015, Report_Date = new DateTime(2015, 12, 10), Students = NewStudents })
+                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses4.ToArray()[0], Timetable = timetable, Lessons = lessons, Place = "7-01", Year = 2016, AdditionalDescription = "курс 2016 года", Report_Date = new DateTime(2016, 12, 5), Students = NewStudents } ),
+                db.CourseInstance.Add(new CourseInstance { BaseCourse = courses4.ToArray()[0], Timetable = timetable, Place = "7-01", Year = 2015, Report_Date = new DateTime(2015, 12, 10), Students = NewStudents })
             };
             db.SaveChanges();
 
