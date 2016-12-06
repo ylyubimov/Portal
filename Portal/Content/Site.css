@@ -244,3 +244,10 @@ textarea.input-validation-error {
     padding-top: 15px;
     margin-top: 15px;
 }
+
+.info-approval {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    height: 40px;
+}

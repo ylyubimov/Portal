@@ -1,4 +1,9 @@
-﻿<form action=@ViewBag.Action method="post" class="search-bar">
+﻿@using Portal.Models
+@{
+    Person currentUser = ApplicationDbContext.Create().Users.Where(p => p.UserName == User.Identity.Name).FirstOrDefault();
+}
+
+<form action=@ViewBag.Action method="post" class="search-bar">
     <div class="container search-wrap">
         <div class="search-general" style=@(ViewBag.ExtendType == "person" ? "width:60%" : "")>
             <div class="input-group search-input" style=@(ViewBag.ExtendType == "person" ? "width:100%" : "")>
@@ -34,3 +39,12 @@
         </div>
     </div>
 </form>
+
+@if (currentUser != null && currentUser.Is_Waiting_Approval)
+{
+    <div class="info-approval">
+        <span class="glyphicon glyphicon-info-sign"></span> 
+        Ваша роль учителя ожидает подтверждения администратором.<br />
+        Вы получите доступ к управлению курсами только после верификации.
+    </div>
+}

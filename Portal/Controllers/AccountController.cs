@@ -81,6 +81,11 @@ namespace Portal.Controllers
                     }
 
                     await SignInAsync( user, true );
+
+                    if( user.Person_Type == "Teacher" )
+                    {
+                        return RedirectToAction("Index", "Courses");
+                    }
                     return RedirectToLocal( returnUrl );
                 } else {
                     ModelState.AddModelError( "", "Invalid username or password." );
@@ -175,6 +180,7 @@ namespace Portal.Controllers
 
                     // Here mail admins if teacher needs to be approved
                     if( user.Person_Type == "Teacher" ) {
+                        pers.Is_Waiting_Approval = true;
                         pers.Person_Type = "Student"; // roll the status back before the confirmation
                         db.SaveChanges();
 
