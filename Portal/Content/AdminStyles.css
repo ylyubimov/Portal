@@ -20,6 +20,15 @@
     width: 150px;
 }
 
+.role-edit-button:active {
+    display: inline-block;
+    background: #FF8D8D;
+    border-radius: 30px;
+    margin-top: 10px;
+    color: #FF0F0F;
+    width: 150px;
+}
+
 .admin-form {
      display: inline;
      margin: 0px;
