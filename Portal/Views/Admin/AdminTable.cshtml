@@ -14,17 +14,21 @@
     <div class="person-part-name">@ViewBag.Title</div>
     @foreach( Portal.Models.Person person in Model ) {
         <div class="person-preview">
-            @if( person.Is_Waiting_Approval ) { 
-                <span class="glyphicon glyphicon-exclamation-sign" style="color:red" title="Пользователь ожидает подтверждения роли учителя"></span>
-            }
-
             @if( person.Person_Type == "Student" ) {
                 <div class="person-student-name">
                     @Html.ActionLink( person.Second_Name + ' ' + person.First_Name, "index", "admin", new { @id = person.Id }, new { @class = "person-student-name-text" } )
+                    @if (person.Is_Waiting_Approval)
+                    {
+                        <span class="glyphicon glyphicon-exclamation-sign" style="color:red" title="Пользователь ожидает подтверждения роли учителя"></span>
+                    }
                 </div>
             } else {
                 <a class="person-admin-name">
-                    @person.Second_Name @person.First_Name
+                    @person.Second_Name @person.First_Name 
+                    @if (person.Is_Waiting_Approval)
+                    {
+                        <span class="glyphicon glyphicon-exclamation-sign" style="color:red" title="Пользователь ожидает подтверждения роли учителя"></span>
+                    }
                 </a>
             }
 

@@ -31,7 +31,9 @@ namespace Portal.Models
     public class LoginViewModel
     {
         [Required]
+        [DataType( DataType.EmailAddress )]
         [Display( Name = "Email" )]
+        [EmailAddress( ErrorMessage = "E-mail address has incorrect format" )]
         public string UserName { get; set; }
 
         [Required]
@@ -46,7 +48,9 @@ namespace Portal.Models
     public class RegisterViewModel
     {
         [Required]
+        [DataType( DataType.EmailAddress )]
         [Display( Name = "Email" )]
+        [EmailAddress( ErrorMessage = "E-mail address has incorrect format" )]
         public string UserName { get; set; }
 
         [Required]
@@ -60,15 +64,23 @@ namespace Portal.Models
         [Compare( "Password", ErrorMessage = "The password and confirmation password do not match." )]
         public string ConfirmPassword { get; set; }
 
-        [Display( Name = "Имя" )]
+        [StringLength(20, ErrorMessage = "The {0} must be from {2} to {1} characters long", MinimumLength = 2)]
+        [Display( Name = "Name" )]
         public string First_Name { get; set; }
-        [Display( Name = "Фамилия" )]
+
+        [StringLength(20, ErrorMessage = "The {0} must be from {2} to {1} characters long", MinimumLength = 2)]
+        [Display( Name = "Surname" )]
         public string Second_Name { get; set; }
-        [Display( Name = "Отчество" )]
+
+        [StringLength(20, ErrorMessage = "The {0} cannot be more than {1} characters long.")]
+        [Display( Name = "Patronymic" )]
         public string Middle_Name { get; set; }
+
+        [DataType( DataType.PhoneNumber )]
         public string PhoneNumber { get; set; }
+
         [Required]
-        [Display( Name = "Ваш Статус" )]
+        [Display( Name = "User Status" )]
         public string Person_Type { get; set; }
         public virtual Picture Picture { get; set; }
     }
