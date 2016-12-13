@@ -12,9 +12,28 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Web.Security;
+using System.Web.Routing;
 
 namespace Portal.Controllers
 {
+    public class AnonymousOnly : AuthorizeAttribute
+    {
+        public override void OnAuthorization( AuthorizationContext filterContext )
+        {
+            base.OnAuthorization( filterContext );
+
+            if ( filterContext.HttpContext.User.Identity.IsAuthenticated )
+            {
+                filterContext.Result = new RedirectToRouteResult( new RouteValueDictionary(
+                    new { controller = "Home", action = "Index" } ) );
+            }
+            else
+            {
+
+            }
+        }
+    }
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -41,6 +60,7 @@ namespace Portal.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [AnonymousOnly]
         public ActionResult Login( string returnUrl )
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -51,6 +71,7 @@ namespace Portal.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
+        [AnonymousOnly]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login( LoginViewModel model, string returnUrl )
         {
@@ -99,6 +120,7 @@ namespace Portal.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [AnonymousOnly]
         public ActionResult Register()
         {
             return View();
@@ -153,6 +175,7 @@ namespace Portal.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [AnonymousOnly]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register( RegisterViewModel model )
         {
